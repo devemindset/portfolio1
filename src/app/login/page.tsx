@@ -1,3 +1,4 @@
+
 import AuthButton from "@/components/AuthButton";
 import type { NextPage } from "next";
 import Head from "next/head";
@@ -16,9 +17,9 @@ const Page: NextPage = () => {
 
           {/* Header */}
           <h2 className="text-3xl font-bold text-center">Welcome Back</h2>
-          <p className="text-gray-400 text-sm text-center mb-2">
+          {/* <p className="text-gray-400 text-sm text-center mb-2">
             Sign in to continue building projects and earning XP.
-          </p>
+          </p> */}
 
           {/* Auth Buttons */}
           <AuthButton

@@ -1,10 +1,14 @@
 // app/layout.tsx
 import './globals.css';
 import type { Metadata } from 'next';
-import { Inter } from "next/font/google";
+import { Roboto } from "next/font/google";
 import AuthProviderWrapper from './providers/AuthProviderWrapper';
 
-const inter = Inter({ subsets: ["latin"] });
+const roboto = Roboto({
+  subsets: ["latin"],       // You can also use ["latin", "cyrillic", etc.] if needed
+  weight: ["400", "700"],   // Load regular and bold weights
+  variable: "--font-roboto" // Optional: for CSS variable support
+});
 
 export const metadata: Metadata = {
   title: 'Track approve',
@@ -14,7 +18,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={roboto.className}>
         <AuthProviderWrapper>{children}</AuthProviderWrapper>
       </body>
     </html>
