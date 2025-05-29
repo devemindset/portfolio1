@@ -1,0 +1,269 @@
+import api, { userAction } from "@/lib/api";
+import {UserData} from "@/types";
+import { signIn, useSession } from "next-auth/react";
+import { useRouter } from "next/router";
+import { createContext, Dispatch, ReactNode,  SetStateAction,  useContext, useEffect, useState } from "react";
+
+interface AuthContextProps{
+    userData : UserData;
+    setUserData : Dispatch<SetStateAction<UserData>>;
+    // siteLogin : (email: string,password: string,redirect : string) => Promise<boolean>;
+    socialLogin : (auth: string,redirect : string) => Promise<void>;
+    getUserInfo : () => Promise<void>;
+    userAction : (action : string, object : string) => Promise<void>;
+
+    // logBackground: boolean;
+    // setLogBackground : Dispatch<SetStateAction<boolean>>;
+    // register : (email: string, username:string, password:string,redirect : string) => Promise<string>;
+    redirectPath : string;
+    // setRedirectPath : Dispatch<SetStateAction<string>>;
+    loginRegisterForm : boolean;
+    setLoginRegisterForm : Dispatch<SetStateAction<boolean>>;
+    status : string;
+    setStatus : Dispatch<SetStateAction<string>>;
+    logStatus : string;
+    setLogStatus : Dispatch<SetStateAction<string>>;
+    
+    
+    
+
+
+   
+}
+
+
+
+const AuthContext = createContext<AuthContextProps | undefined>(undefined);
+export default AuthContext;
+
+export const AuthProvider = ({ children } : { children : ReactNode}) => {
+    const [isInitialized,setIsInitialized] = useState(false);
+    const [userData,setUserData] = useState<UserData>(Object);
+   
+    const [logStatus,setLogStatus] = useState<string>("");
+    const [status,setStatus] = useState<string>("");
+    const [redirectPath, setRedirectPath] = useState<string>("");
+    // const [logBackground,setLogBackground] = useState<boolean>(false);
+    const [loginRegisterForm,setLoginRegisterForm] = useState(false);
+    const [isAuthenticated,setIsAuthenticated] = useState<boolean>(false);
+    const [isAuthAuthenticated,setIsAuthAuthenticated] =useState<boolean>(false);
+
+
+    const { data: session } = useSession();
+
+    
+
+    const router = useRouter();
+
+    // data initialization 
+    useEffect(() => {
+    if (typeof window !== "undefined" && !isInitialized) {
+      const redirectPathStorage = localStorage.getItem("redirect_user");
+      const isAuthenticated = localStorage.getItem("isGoogleAuthenticated");
+      const userAuthenticated = localStorage.getItem("isAuthenticated")
+
+      // Initialize redirectPath
+      if (redirectPathStorage) {
+        setRedirectPath(JSON.parse(redirectPathStorage));
+      } else {
+        setRedirectPath("");
+        localStorage.setItem("redirect_user", JSON.stringify(""));
+      }
+
+      // Initialize isAuthAuthenticated
+      if (isAuthenticated) {
+        setIsAuthAuthenticated(JSON.parse(isAuthenticated)); // Convert string to boolean
+      } else {
+        setIsAuthAuthenticated(false);
+        localStorage.setItem("isGoogleAuthenticated", JSON.stringify(false)); // Set default value
+      }
+      // initialize user authentication
+      if(userAuthenticated){
+        setIsAuthenticated(JSON.parse(userAuthenticated))
+      }else{
+        setIsAuthenticated(false)
+      }
+
+      setIsInitialized(true); // Mark as initialized
+    }
+    
+  }, []);
+
+
+useEffect(() => {
+        if (session) {
+          // Attendre 2 secondes avant de vérifier isGoogleAuthenticated
+          const timeoutId = setTimeout(async () => {
+            if (!isAuthAuthenticated) {
+              // Si isGoogleAuthenticated est false, envoyer une requête au backend
+              try {
+                const response = await api.post(`${process.env.NEXT_PUBLIC_API_URL}/user/google_auth/`, {
+                  email: session.user?.email,
+                  username: session.user?.name,
+                  social_id: session.socialId,
+                });
+      
+                if (response.status === 200) {
+                  console.log(response.data);
+                  localStorage.setItem("isGoogleAuthenticated", JSON.stringify(true)); // Marquer comme authentifié
+                  setIsAuthAuthenticated(true);
+                  router.push(`/dashboard`)
+                  setStatus("");
+                  authenticatedAndLocalStorage()
+
+                }
+              } catch (error) {
+                console.error("Error during Google authentication:", error);
+              }
+            } else {
+              console.log("User already authenticated via Google");
+            }
+          }, 2000); // Attendre 2 secondes
+      
+          // Nettoyer le timeout si le composant est démonté
+          return () => clearTimeout(timeoutId);
+        }
+      }, [session, isAuthAuthenticated]);
+
+
+  // get user info 
+  useEffect(() =>{
+      if(isAuthenticated){
+        getUserInfo(); // Fetch user info
+
+      }else{
+        console.log("user is not authenticated")
+      }
+
+    },[isAuthenticated])
+
+
+  
+
+
+// ------------function implementations---------------
+// register user function
+// const register = async (email: string, username: string,password:string,redirectPath : string) => {
+//   setLogStatus("En attente...");
+//   try{
+
+//       const response = await api.post("/user/register_user/", {
+//           username,
+//           email,
+//           password,
+//       });
+//       if(response.status === 201){  
+//          router.push(redirectPath == "/" || redirectPath == "" ? "/" : redirectPath);
+//          localStorage.removeItem("redirect_user");
+//          authenticatedAndLocalStorage()
+//          setLogStatus("SEND");
+//          return "success";
+        
+//       }else if(response.status === 409){
+//           return "email already exists"
+//       }else{
+//         return "error";
+//       }
+
+//   }catch(error){
+//       console.error("Registration failed",error)
+//       return "error"
+//   }
+// }
+
+// login user funtion 
+// const siteLogin = async (email: string,password: string,redirectPath : string) => {
+//   setLogStatus("En attente...");
+
+//    try{
+//       const response = await api.post("/user/login_user/",{ email, password 
+
+//       });
+      
+//       if(response){
+//         router.push(redirectPath == "/" || redirectPath == "" ? "/" : redirectPath);
+//           localStorage.removeItem("redirect_user");
+//           authenticatedAndLocalStorage()  
+//           setLogStatus("SEND");    
+//          return true;
+//       }else{
+//         setLogStatus("SEND");    
+            
+//         return false;
+        
+//       }
+//   }catch{
+//       return false
+//   }
+// }
+
+// social login 
+const socialLogin = async (auth: string, redirectPath?: string) => {
+  setStatus("Processing...");
+
+  try{
+      // Sign in with Google using NextAuth.js
+      await signIn(auth);
+      console.log(redirectPath)
+
+  }catch (error) {
+      console.error("Error during login:", error);
+      throw error;
+  }
+  
+};
+
+// user information 
+const getUserInfo = async () => {
+  try {
+      const response = await api.get<UserData>('/user/user_info/');
+      if(response.status === 200){
+          setUserData(response.data)
+          
+      }
+  } catch (error) {
+      console.error('Error fetching user info:', error);
+      
+  }
+}
+
+const authenticatedAndLocalStorage = () => {
+  setIsAuthenticated(true)
+  localStorage.setItem("isAuthenticated",JSON.stringify(true))
+}
+
+
+    return(
+        <AuthContext.Provider value={{ 
+        
+        // register,
+        // siteLogin,
+        socialLogin,
+        getUserInfo,
+        userData,
+        setUserData,
+        redirectPath,
+        // setRedirectPath,
+        status,
+        setStatus,
+        // setLogBackground,
+        setLoginRegisterForm,
+        logStatus,
+        setLogStatus,
+        loginRegisterForm,
+        userAction
+        
+        }} >
+            { children }
+        </AuthContext.Provider>
+    )
+}
+
+export const useAuthState = () => {
+    const context = useContext(AuthContext);
+
+    if(!context){
+        throw new Error("Use useAuthState must be used within a AuthContextProps ")
+    }
+    return context;
+}

@@ -3,7 +3,6 @@ import type { NextPage } from "next";
 const Page: NextPage = () => {
   return (
     <>
-    <p>im the home page</p>
     </>
   )
 }
