@@ -5,8 +5,7 @@ export interface UserData {
   auth_provider: "email" | "google";
   is_social_account: boolean;
   created_at: string;
-  profile: UserProfile;
-  username_slug : string;
+
 }
 
 export interface Domain {

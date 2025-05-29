@@ -1,5 +1,3 @@
-// pages/api/auth/[...nextauth].ts
-
 import NextAuth from "next-auth";
 import Google from "next-auth/providers/google";
 // import axios from "axios";
@@ -43,4 +41,6 @@ export const authOptions: NextAuthOptions = {
     },
   },
 };
-export default NextAuth(authOptions);
+
+const handler = NextAuth(authOptions); 
+export { handler as GET, handler as POST}

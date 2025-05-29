@@ -12,7 +12,7 @@ interface AuthButtonProps {
 const AuthButton: FC<AuthButtonProps> = ({ authImage, authName, authText }) => {
   const {
     socialLogin,
-    status,
+    btnstatus,
     redirectPath,
     setLoginRegisterForm,
     userAction,
@@ -25,7 +25,7 @@ const AuthButton: FC<AuthButtonProps> = ({ authImage, authName, authText }) => {
   };
 
   const baseStyle =
-    `flex items-center justify-center w-full sm:w-[320px] gap-2 rounded-lg py-2 px-4  text-black shadow hover:bg-gray-100 transition cursor-pointer ${status === "Processing..." ? "bg-green-700" : "bg-white"}`;
+    `flex items-center justify-center w-full sm:w-[320px] gap-2 rounded-lg py-2 px-4  text-black shadow hover:bg-gray-100 transition cursor-pointer ${btnstatus === "Processing..." ? "bg-green-700" : "bg-white"}`;
 
   const textStyle = 'text-sm font-medium';
 
@@ -46,7 +46,7 @@ const AuthButton: FC<AuthButtonProps> = ({ authImage, authName, authText }) => {
             />
           )}
           <span className={textStyle}>
-            {status === 'Processing...' ? status : authText}
+            {btnstatus === 'Processing...' ? status : authText}
           </span>
         </button>
       </div>

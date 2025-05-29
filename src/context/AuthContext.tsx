@@ -1,7 +1,9 @@
+"use client";
 import api, { userAction } from "@/lib/api";
 import {UserData} from "@/types";
 import { signIn, useSession } from "next-auth/react";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
+
 import { createContext, Dispatch, ReactNode,  SetStateAction,  useContext, useEffect, useState } from "react";
 
 interface AuthContextProps{
@@ -19,8 +21,8 @@ interface AuthContextProps{
     // setRedirectPath : Dispatch<SetStateAction<string>>;
     loginRegisterForm : boolean;
     setLoginRegisterForm : Dispatch<SetStateAction<boolean>>;
-    status : string;
-    setStatus : Dispatch<SetStateAction<string>>;
+    btnstatus : string;
+    setBtnStatus : Dispatch<SetStateAction<string>>;
     logStatus : string;
     setLogStatus : Dispatch<SetStateAction<string>>;
     
@@ -38,10 +40,10 @@ export default AuthContext;
 
 export const AuthProvider = ({ children } : { children : ReactNode}) => {
     const [isInitialized,setIsInitialized] = useState(false);
-    const [userData,setUserData] = useState<UserData>(Object);
+    const [userData,setUserData] = useState<UserData>({} as UserData);
    
     const [logStatus,setLogStatus] = useState<string>("");
-    const [status,setStatus] = useState<string>("");
+    const [btnstatus,setBtnStatus] = useState<string>("");
     const [redirectPath, setRedirectPath] = useState<string>("");
     // const [logBackground,setLogBackground] = useState<boolean>(false);
     const [loginRegisterForm,setLoginRegisterForm] = useState(false);
@@ -49,7 +51,7 @@ export const AuthProvider = ({ children } : { children : ReactNode}) => {
     const [isAuthAuthenticated,setIsAuthAuthenticated] =useState<boolean>(false);
 
 
-    const { data: session } = useSession();
+    const { data: session, status } = useSession();
 
     
 
@@ -91,7 +93,7 @@ export const AuthProvider = ({ children } : { children : ReactNode}) => {
 
 
 useEffect(() => {
-        if (session) {
+        if (session && status === "authenticated") {
           // Attendre 2 secondes avant de vérifier isGoogleAuthenticated
           const timeoutId = setTimeout(async () => {
             if (!isAuthAuthenticated) {
@@ -108,7 +110,7 @@ useEffect(() => {
                   localStorage.setItem("isGoogleAuthenticated", JSON.stringify(true)); // Marquer comme authentifié
                   setIsAuthAuthenticated(true);
                   router.push(`/dashboard`)
-                  setStatus("");
+                  setBtnStatus("");
                   authenticatedAndLocalStorage()
 
                 }
@@ -199,11 +201,11 @@ useEffect(() => {
 
 // social login 
 const socialLogin = async (auth: string, redirectPath?: string) => {
-  setStatus("Processing...");
+  setBtnStatus("Processing...");
 
   try{
       // Sign in with Google using NextAuth.js
-      await signIn(auth);
+      await signIn(auth,{ redirect : false});
       console.log(redirectPath)
 
   }catch (error) {
@@ -244,8 +246,8 @@ const authenticatedAndLocalStorage = () => {
         setUserData,
         redirectPath,
         // setRedirectPath,
-        status,
-        setStatus,
+        btnstatus,
+        setBtnStatus,
         // setLogBackground,
         setLoginRegisterForm,
         logStatus,
