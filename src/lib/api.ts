@@ -34,7 +34,7 @@ export default api;
 
 export const userAction = async (action : string, object : string ) =>{
 
-    const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/track/track-action/`, {
+    const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/user/track-action/`, {
                 action,object
     });
 
