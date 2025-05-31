@@ -15,3 +15,52 @@ export interface CreateTrack {
   all_receiver : string;
 
 }
+
+
+export interface RequestTrack {
+  id: number;
+  title: string;
+  description: string;
+  file_url: string;
+  token: string;
+  all_source: AllSource;
+  all_receiver: string;
+  deadline?: string;
+  validators: Validator[];
+};
+
+export interface Validator {
+  id: number;
+  email_or_name: string;
+  status: string;
+  source?: string;
+  comment : string;
+  responded_at: string
+
+
+};
+
+export interface AllSource {
+  general : string;
+  reddit : string;
+  facebook : string;
+  whatsapp : string;
+  email : string;
+  telegram : string;
+
+}
+
+export interface DataValidation {
+  request_id : number;
+  email_or_name : string;
+  source : string | undefined | string[];
+  comment : string;
+  status : string;
+}
+
+export interface RequestInTheTokenPage{
+  id : number;
+  title : string;
+  description : string;
+  file_url : string;
+}

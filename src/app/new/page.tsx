@@ -6,7 +6,7 @@ import api from "@/lib/api";
 import { useRouter } from "next/navigation";
 import { CreateTrack } from "@/types";
 
-const AVAILABLE_SOURCES = ["whatsapp", "reddit", "facebook", "telegram", "email"];
+const AVAILABLE_SOURCES = ["general","whatsapp", "reddit", "facebook", "telegram", "email"];
 
 const CreateTrackPage: NextPage = () => {
   const router = useRouter();
@@ -144,7 +144,11 @@ const CreateTrackPage: NextPage = () => {
           {loading ? "Creating..." : "Create Track"}
         </button>
       </form>
+      
     </div>
+    
+
+    
   );
 };
 
