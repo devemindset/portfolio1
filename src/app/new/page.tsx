@@ -6,7 +6,7 @@ import api from "@/lib/api";
 import { useRouter } from "next/navigation";
 import { CreateTrack } from "@/types";
 
-const AVAILABLE_SOURCES = ["whatsapp", "reddit", "facebook", "telegram", "email", "other"];
+const AVAILABLE_SOURCES = ["whatsapp", "reddit", "facebook", "telegram", "email"];
 
 const CreateTrackPage: NextPage = () => {
   const router = useRouter();
