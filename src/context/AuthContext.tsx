@@ -106,7 +106,6 @@ useEffect(() => {
                 });
       
                 if (response.status === 200) {
-                  console.log(response.data);
                   localStorage.setItem("isGoogleAuthenticated", JSON.stringify(true)); // Marquer comme authentifié
                   setIsAuthAuthenticated(true);
                   router.push(`/dashboard`)

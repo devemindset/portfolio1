@@ -3,6 +3,7 @@ import './globals.css';
 import type { Metadata } from 'next';
 import { Roboto } from "next/font/google";
 import AuthProviderWrapper from './providers/AuthProviderWrapper';
+import Header from '@/components/Header';
 
 const roboto = Roboto({
   subsets: ["latin"],       // You can also use ["latin", "cyrillic", etc.] if needed
@@ -11,7 +12,7 @@ const roboto = Roboto({
 });
 
 export const metadata: Metadata = {
-  title: 'Track approve',
+  title: 'Snap Validate',
   // description: '',
 };
 
@@ -19,7 +20,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body className={roboto.className}>
-        <AuthProviderWrapper>{children}</AuthProviderWrapper>
+        <AuthProviderWrapper>
+          <Header />
+          {children}
+          </AuthProviderWrapper>
       </body>
     </html>
   );
