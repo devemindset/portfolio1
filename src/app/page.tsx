@@ -1,3 +1,4 @@
+import FeaturesSection from "@/components/FeaturesSection";
 import HeroSection from "@/components/HeroSection";
 import HowItWorksSection from "@/components/HowItWorksSection";
 import ProblemSolutionSection from "@/components/ProblemSolutionSection";
@@ -11,6 +12,7 @@ const Page: NextPage = () => {
     <ProblemSolutionSection />
     <HowItWorksSection />
     <TestimonialsSection />
+    <FeaturesSection />
     </>
   )
 }

@@ -14,7 +14,7 @@ export default function Header() {
         {/* Logo + Nom */}
         <Link href="/" className="flex items-center">
           <div>
-            <Image src="/favicon_io/favicon-32x32.png" alt="SnapValidate" width={24} height={24} />
+            <Image src="/favicon_io/android-chrome-192x192.png" alt="SnapValidate" width={24} height={24} />
           </div>
           <span className="text-xl font-bold text-gray-900">
             Snap<span className="text-blue-600">Validate</span>
