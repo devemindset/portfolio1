@@ -4,6 +4,7 @@ import type { Metadata } from 'next';
 import { Roboto } from "next/font/google";
 import AuthProviderWrapper from './providers/AuthProviderWrapper';
 import Header from '@/components/Header';
+import Footer from '@/components/Footer';
 
 const roboto = Roboto({
   subsets: ["latin"],       // You can also use ["latin", "cyrillic", etc.] if needed
@@ -23,6 +24,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <AuthProviderWrapper>
           <Header />
           {children}
+          <Footer />
           </AuthProviderWrapper>
       </body>
     </html>

@@ -1,4 +1,6 @@
+import FAQSection from "@/components/FAQSection";
 import FeaturesSection from "@/components/FeaturesSection";
+import FinalCTASection from "@/components/FinalCTASection";
 import HeroSection from "@/components/HeroSection";
 import HowItWorksSection from "@/components/HowItWorksSection";
 import PricingSection from "@/components/PricingSection";
@@ -15,6 +17,8 @@ const Page: NextPage = () => {
     <TestimonialsSection />
     <FeaturesSection />
     < PricingSection />
+    <FAQSection />
+    <FinalCTASection />
     </>
   )
 }
