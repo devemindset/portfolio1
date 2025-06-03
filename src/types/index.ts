@@ -13,6 +13,7 @@ export interface CreateTrack {
   description : string;
   file_url : string;
   all_receiver : string;
+  collect : string;
 
 }
 

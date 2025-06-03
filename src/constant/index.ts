@@ -6,7 +6,7 @@ type PlatformIcon = {
 export const platforms: PlatformIcon[] = [
   { name: "WhatsApp", iconUrl: "https://cdn.simpleicons.org/whatsapp" },
   { name: "Telegram", iconUrl: "https://cdn.simpleicons.org/telegram" },
-  { name: "Messenger", iconUrl: "https://cdn.simpleicons.org/facebookmessenger" },
+  // { name: "Messenger", iconUrl: "https://cdn.simpleicons.org/facebookmessenger" },
   { name: "SMS", iconUrl: "https://cdn.simpleicons.org/signal" }, // Remplaçant générique
   { name: "Signal", iconUrl: "https://cdn.simpleicons.org/signal" },
   { name: "iMessage", iconUrl: "https://cdn.simpleicons.org/apple" },
@@ -15,19 +15,19 @@ export const platforms: PlatformIcon[] = [
   { name: "Facebook", iconUrl: "https://cdn.simpleicons.org/facebook" },
   { name: "Instagram", iconUrl: "https://cdn.simpleicons.org/instagram" },
   { name: "Twitter", iconUrl: "https://cdn.simpleicons.org/x" },
-  { name: "LinkedIn", iconUrl: "https://cdn.simpleicons.org/linkedin" },
+  // { name: "LinkedIn", iconUrl: "https://cdn.simpleicons.org/linkedin" },
   { name: "TikTok", iconUrl: "https://cdn.simpleicons.org/tiktok" },
   { name: "Threads", iconUrl: "https://cdn.simpleicons.org/threads" },
   { name: "Reddit", iconUrl: "https://cdn.simpleicons.org/reddit" },
 
   { name: "Gmail", iconUrl: "https://cdn.simpleicons.org/gmail" },
-  { name: "Outlook", iconUrl: "https://cdn.simpleicons.org/microsoftoutlook" },
-  { name: "Yahoo Mail", iconUrl: "https://cdn.simpleicons.org/yahoo" },
+  // { name: "Outlook", iconUrl: "https://cdn.simpleicons.org/microsoftoutlook" },
+  // { name: "Yahoo Mail", iconUrl: "https://cdn.simpleicons.org/yahoo" },
   { name: "Apple Mail", iconUrl: "https://cdn.simpleicons.org/apple" },
   { name: "ProtonMail", iconUrl: "https://cdn.simpleicons.org/protonmail" },
 
   { name: "Slack", iconUrl: "https://cdn.simpleicons.org/slack" },
-  { name: "Microsoft Teams", iconUrl: "https://cdn.simpleicons.org/microsoftteams" },
+  // { name: "Microsoft Teams", iconUrl: "https://cdn.simpleicons.org/microsoftteams" },
   { name: "Notion", iconUrl: "https://cdn.simpleicons.org/notion" },
   { name: "Google Docs", iconUrl: "https://cdn.simpleicons.org/googledocs" },
   { name: "Trello", iconUrl: "https://cdn.simpleicons.org/trello" },
@@ -39,5 +39,5 @@ export const platforms: PlatformIcon[] = [
   { name: "Dev.to", iconUrl: "https://cdn.simpleicons.org/devdotto" },
   { name: "IndieHackers", iconUrl: "https://cdn.simpleicons.org/indiehackers" },
 
-  { name: "Custom", iconUrl: "https://cdn.simpleicons.org/code" } // Icône générique
+  // { name: "Custom", iconUrl: "https://cdn.simpleicons.org/code" } // Icône générique
 ];
