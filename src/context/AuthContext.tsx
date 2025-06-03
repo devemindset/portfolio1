@@ -1,6 +1,6 @@
 "use client";
 import api, { userAction } from "@/lib/api";
-import {UserData} from "@/types";
+import {LimitBrowserPostData, UserData} from "@/types";
 import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
@@ -25,7 +25,9 @@ interface AuthContextProps{
     setBtnStatus : Dispatch<SetStateAction<string>>;
     logStatus : string;
     setLogStatus : Dispatch<SetStateAction<string>>;
-    
+    browserLimitValue : LimitBrowserPostData | null; 
+    setBrowserLimitValue : Dispatch<SetStateAction<LimitBrowserPostData | null>>;
+    isAuthenticated: boolean;
     
     
 
@@ -49,6 +51,8 @@ export const AuthProvider = ({ children } : { children : ReactNode}) => {
     const [loginRegisterForm,setLoginRegisterForm] = useState(false);
     const [isAuthenticated,setIsAuthenticated] = useState<boolean>(false);
     const [isAuthAuthenticated,setIsAuthAuthenticated] =useState<boolean>(false);
+    const [browserLimitValue, setBrowserLimitValue] = useState<LimitBrowserPostData | null>(null);
+    const todayDateWithoutTime = new Date().toISOString().split("T")[0];
 
 
     const { data: session, status } = useSession();
@@ -62,7 +66,17 @@ export const AuthProvider = ({ children } : { children : ReactNode}) => {
     if (typeof window !== "undefined" && !isInitialized) {
       const redirectPathStorage = localStorage.getItem("redirect_user");
       const isAuthenticated = localStorage.getItem("isGoogleAuthenticated");
-      const userAuthenticated = localStorage.getItem("isAuthenticated")
+      const userAuthenticated = localStorage.getItem("isAuthenticated");
+      const storedData = localStorage.getItem("limite_actions");
+
+      // Initialize browserLimitValue
+      if (storedData) {
+        setBrowserLimitValue(JSON.parse(storedData));
+      } else {
+        const defaultValue = { date: todayDateWithoutTime, contact: 0, newsletterSub: 0 };
+        setBrowserLimitValue(defaultValue);
+        localStorage.setItem("limite_actions", JSON.stringify(defaultValue));
+      }
 
       // Initialize redirectPath
       if (redirectPathStorage) {
@@ -236,7 +250,7 @@ const authenticatedAndLocalStorage = () => {
 
     return(
         <AuthContext.Provider value={{ 
-        
+        isAuthenticated,
         // register,
         // siteLogin,
         socialLogin,
@@ -252,7 +266,9 @@ const authenticatedAndLocalStorage = () => {
         logStatus,
         setLogStatus,
         loginRegisterForm,
-        userAction
+        userAction,
+        browserLimitValue, 
+        setBrowserLimitValue,
         
         }} >
             { children }

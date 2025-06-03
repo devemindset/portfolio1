@@ -5,6 +5,7 @@ import { useState } from "react";
 import api from "@/lib/api";
 import { useRouter } from "next/navigation";
 import { CreateTrack } from "@/types";
+import Image from "next/image";
 
 const AVAILABLE_SOURCES = ["general","whatsapp", "reddit", "facebook", "telegram", "email"];
 
@@ -123,7 +124,12 @@ const CreateTrackPage: NextPage = () => {
             ))}
           </div>
         </div>
-
+            <Image 
+              src="https://cdn.simpleicons.org/whatsapp"
+              alt="test"
+              width={20}
+              height={20}
+            />
         <input
           name="all_receiver"
           type="text"

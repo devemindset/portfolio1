@@ -64,3 +64,9 @@ export interface RequestInTheTokenPage{
   description : string;
   file_url : string;
 }
+
+export interface LimitBrowserPostData{
+    date : string;
+    contact : number;
+    newsletterSub : number;
+}

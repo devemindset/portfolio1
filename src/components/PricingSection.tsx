@@ -3,6 +3,7 @@
 import type { FC } from 'react';
 import { useState } from "react";
 import clsx from "clsx";
+
 // interface PricingSectionProps {}
 
 const PricingSection: FC = () => {
@@ -44,6 +45,7 @@ const PricingSection: FC = () => {
     ],
     note: "For professionals who validate often",
   };
+
         return (
     <section className="bg-white py-24 px-6">
       <div className="max-w-6xl mx-auto text-center">
