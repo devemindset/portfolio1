@@ -1,131 +1,105 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import type { NextPage } from "next";
-import api from "@/lib/api";
-import Link from "next/link";
 import { RequestTrack } from "@/types";
+import api from "@/lib/api";
+import { useRouter } from "next/navigation";
 
-const DashboardPage: NextPage = () => {
+const DashboardPage = () => {
   const [tracks, setTracks] = useState<RequestTrack[]>([]);
+  const [openTrackId, setOpenTrackId] = useState<number | null>(null);
   const [error, setError] = useState("");
+  const router = useRouter();
 
-  const APP_URL = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
+ 
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await api.get("/track_user/track_users_list");
-        setTracks(response.data);
-    
-      } catch (err: any) {
-        console.error("Error loading tracks", err);
-        setError("Échec de chargement des requêtes.");
-      }
-    };
-
-    fetchData();
+    api.get("/track_user/track_users_list")
+      .then(res => setTracks(res.data))
+      .catch(() => setError("Failed to load validations."));
   }, []);
 
-  const copyToClipboard = async (text: string) => {
-    try {
-      await navigator.clipboard.writeText(text);
-      alert("Lien copié !");
-    } catch (err) {
-      console.error("Échec de copie", err);
-    }
-  };
-
-  const formatDate = (dateStr: string): string => {
-    const date = new Date(dateStr);
-    return date.toLocaleDateString("fr-FR", {
-      day: "2-digit",
-      month: "2-digit",
-      year: "numeric",
-    });
+  const toggleTrack = (id: number) => {
+    setOpenTrackId((prev) => (prev === id ? null : id));
   };
 
   return (
-    <div className="max-w-4xl mx-auto p-6">
-      <h1 className="text-3xl font-bold mb-6">Dashboard</h1>
+    <div className="min-h-screen flex bg-gray-100">
+      {/* Sidebar */}
+      <aside className="w-64 bg-white shadow-md hidden md:flex flex-col justify-between">
+        <div className="p-6 space-y-4">
+          <h1 className="text-2xl font-bold text-blue-600">SnapValidate</h1>
+          <nav className="space-y-2 text-gray-700">
+            <button className="block w-full text-left">Dashboard</button>
+            <button className="block w-full text-left font-semibold">My Validations</button>
+            <button
+              onClick={() => router.push("/new")}
+              className="bg-blue-600 text-white px-4 py-2 rounded w-full text-center"
+            >
+              + Create New
+            </button>
+          </nav>
+        </div>
+        <div className="p-6 space-y-2">
+          <button className="block w-full text-left text-sm text-gray-500">Help</button>
+          <button className="block w-full text-left text-sm text-red-500">Logout</button>
+        </div>
+      </aside>
 
-      <Link href="/new" className="text-blue-600 hover:underline mb-4 block">
-        ➕ Créer une nouvelle track
-      </Link>
+      {/* Main Content */}
+      <main className="flex-1 p-6">
+        <div className="flex flex-col md:flex-row justify-between items-center mb-6 gap-2">
+          <h2 className="text-2xl font-bold">My Validations</h2>
+          <button
+            onClick={() => router.push("/new")}
+            className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+          >
+            + Create Validation
+          </button>
+        </div>
 
-      {error && <p className="text-red-500">{error}</p>}
+        {error && <p className="text-red-500">{error}</p>}
 
-      <div className="flex flex-col-reverse items-center ">
-      {tracks.map((track) => {
-        const sources = track.all_source;
+        <div className="space-y-4">
+          {tracks.map((track) => {
+            const sourceKeyMap = Object.entries(track.all_source).reduce<Record<string, string>>(
+              (acc, [name, key]) => {
+                acc[key] = name;
+                return acc;
+              }, {}
+            );
 
-        return (
-          
-            <div key={track.id} className="border p-4 mb-6 rounded shadow-sm">
-              <h2 className="text-xl font-semibold">{track.title}</h2>
-              <p className="text-gray-700">{track.description}</p>
+            return (
+              <div key={track.id} className="bg-white shadow rounded-md p-4">
+                <div className="flex justify-between items-center cursor-pointer" onClick={() => toggleTrack(track.id)}>
+                  <div>
+                    <h3 className="text-lg font-semibold">{track.title}</h3>
+                    <p className="text-gray-600 text-sm">{track.description}</p>
+                  </div>
+                  <span className="text-xl text-gray-400">{openTrackId === track.id ? "˅" : ">"}</span>
+                </div>
 
-              {track.file_url && (
-                <p className="text-sm text-blue-700">
-                  <a href={track.file_url} target="_blank" rel="noopener noreferrer">
-                    Voir le fichier
-                  </a>
-                </p>
-              )}
-
-              {track.deadline && (
-                <p className="text-sm text-gray-600">
-                  🗓️ Deadline : {formatDate(track.deadline)}
-                </p>
-              )}
-
-              <div className="mt-2 space-y-2">
-                {Object.entries(sources).map(([sourceName, key]) => (
-                  <button
-                    key={sourceName}
-                    onClick={() => copyToClipboard(`${APP_URL}/req/${track.token}${key}`)}
-                    className="text-sm text-blue-600 underline block"
-                  >
-                    Copier le lien {sourceName}
-                  </button>
-                ))}
-              </div>
-
-              {track.validators.length > 0 && (
-  <div className="mt-4">
-    <h3 className="font-medium mb-2">✅ Validations reçues :</h3>
-    <ul className="space-y-1 text-sm text-gray-700">
-      {track.validators.map((validator) => {
-        const sourceKeyMap = Object.entries(track.all_source).reduce<Record<string, string>>(
-          (acc, [name, key]) => {
-            acc[key] = name;
-            return acc;
-          },
-          {}
-        );
-
-        const readableSource = sourceKeyMap[validator.source] || "inconnue";
-
-        return (
-          <li key={validator.id} className="bg-gray-50 p-2 rounded border">
-            <p><span className="font-semibold">Nom/Email :</span> {validator.email_or_name || "—"}</p>
-            <p><span className="font-semibold">Statut :</span> {validator.status}</p>
-            <p><span className="font-semibold">Source :</span> {readableSource}</p>
-            {validator.comment && (
-              <p><span className="font-semibold">Commentaire :</span> {validator.comment}</p>
-            )}
-          </li>
-        );
-      })}
-    </ul>
-  </div>
+                {openTrackId === track.id && (
+                  <div className="mt-4 border-t pt-4 space-y-2">
+                    {track.validators.length > 0 ? (
+                      track.validators.map((v) => (
+                        <div key={v.id} className="bg-gray-50 p-3 rounded border text-sm">
+                          <p><strong>Name/Email:</strong> {v.email_or_name || "—"}</p>
+                          <p><strong>Status:</strong> {v.status}</p>
+                          <p><strong>Source:</strong> {sourceKeyMap[v.source] || "unknown"}</p>
+                          {v.comment && <p><strong>Comment:</strong> {v.comment}</p>}
+                        </div>
+                      ))
+                    ) : (
+                      <p className="text-gray-500 italic">No validations yet.</p>
+                    )}
+                  </div>
                 )}
-
-            </div>
-          
-        );
-      })}
-      </div>
+              </div>
+            );
+          })}
+        </div>
+      </main>
     </div>
   );
 };
