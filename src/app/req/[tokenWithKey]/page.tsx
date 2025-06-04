@@ -1,159 +1,228 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useParams} from "next/navigation"
+import { useParams } from "next/navigation";
 import type { NextPage } from "next";
 import { pubic_api } from "@/lib/api";
 import { DataValidation, RequestInTheTokenPage } from "@/types";
+import { useAuthState } from "@/context/AuthContext";
+import RequestHeader from "@/components/RequestHeader";
 
 const TOKEN_LENGTH = 12;
 
 const Page: NextPage = () => {
-   const { tokenWithKey } = useParams();
-//   const router = useRouter();
-
+  const { tokenWithKey } = useParams();
+  const {userData,viewRequest,setViewRequest} = useAuthState();
   const [track, setTrack] = useState<RequestInTheTokenPage | null>(null);
-//   const [source, setSource] = useState("");
-//   const [token, setToken] = useState("");
   const [requestId, setRequestId] = useState<number | null>(null);
-//   const [key, setKey] = useState("");
   const [comment, setComment] = useState("");
   const [emailOrName, setEmailOrName] = useState("");
   const [status, setStatus] = useState<"approved" | "rejected" | "">("");
-  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState("");
+  const [error, setError] = useState("");
+  const [view,setView] = useState(false);
+  const [collect,setCollect] = useState("anonymous");
+
+  const tokenKey = typeof tokenWithKey === "string" ? tokenWithKey : "";
+  const token = tokenKey.slice(0, TOKEN_LENGTH);
+  const sourceKey = tokenKey.slice(TOKEN_LENGTH);
 
   useEffect(() => {
-    if (typeof tokenWithKey !== "string" || tokenWithKey.length < TOKEN_LENGTH) {
-      setError("Lien invalide.");
+    if (!token || token.length < TOKEN_LENGTH) {
+      setError("Invalid link.");
       return;
     }
 
-    const _token = tokenWithKey.slice(0, TOKEN_LENGTH);
-    
-
-    
-    // 1. Récupérer la track
-    pubic_api.get(`/track_user/track_by_token/${_token}/`)
+   
+    pubic_api
+      .get(`/track_user/track_by_token/${token}/`)
       .then((res) => {
         setTrack(res.data);
         setRequestId(res.data.id);
-        // Source sera envoyée directement depuis le frontend — à deviner sur backend si nécessaire
-        
+        setCollect(res.data.collect);
+
       })
-      .catch(() => setError("Requête introuvable."));
-  }, [tokenWithKey]);
+      .catch(() => setError("Request not found."));
+  }, [token]);
 
+  useEffect(() =>{
+    const viewHandle = async () => {
+
+      if (!requestId) return;
+      const payload: DataValidation = {
+      request_id: requestId,
+      email_or_name: emailOrName,
+      source: sourceKey,
+      comment,
+      status : "viewed",
+    };
+    try {
+      const res = await pubic_api.post("/track_user/user_validation_view", payload);
+      if (res.status === 201) {
+        console.log("request view")
+        setViewRequest(true);
+        localStorage.setItem("view_request",JSON.stringify(true))
+      }
+    } catch {
+      console.log("Something went wrong.");
+    } 
+      }
+
+      if(view === false){
+        const timeoutId = setTimeout(async () => {
+        setView(true)
+      }, 4000)
+      return () => clearTimeout(timeoutId);
+
+      }
+      
+
+    if(requestId && !userData.username && view &&  !viewRequest){
+      viewHandle()
+      
+    }
+    
+    
+    
+    
+  },[requestId,userData,view])
+
+  // handle request 
   const handleSubmit = async () => {
-
-    const _key = tokenWithKey?.slice(TOKEN_LENGTH);
-
-    if (!requestId || !status || !tokenWithKey) return;
+    if (!requestId || !status) return;
 
     if (status === "approved" && !emailOrName.trim()) {
-      setError("Veuillez renseigner votre email ou nom pour valider.");
+      setError(`Please provide your ${collect} to approve.`);
       return;
     }
 
     const payload: DataValidation = {
       request_id: requestId,
       email_or_name: emailOrName,
-      source: _key,
-      comment: comment,
-      status: status,
+      source: sourceKey,
+      comment,
+      status,
     };
 
+    setLoading(true);
+    setError("");
     try {
       const res = await pubic_api.post("/track_user/user_validation_view", payload);
       if (res.status === 201) {
-        setSuccess("Votre réponse a bien été enregistrée.");
+        setSuccess("Your response has been saved successfully.");
       }
-    } catch (err) {
-      console.error(err);
-      setError("Erreur lors de l'envoi.");
+    } catch {
+      setError("Something went wrong.");
+    } finally {
+      setLoading(false);
     }
   };
 
-  if (error) {
-    return <div className="p-6 text-red-500">{error}</div>;
-  }
 
   if (!track) {
-    return <div className="p-6">Chargement...</div>;
+    return (
+      <main className="flex justify-center items-center h-screen bg-gray-100">
+        <p className="text-gray-600">Loading...</p>
+      </main>
+    );
   }
+
   return (
-    <div className="max-w-xl mx-auto p-6 border rounded shadow">
-      <h1 className="text-2xl font-bold mb-2">{track.title}</h1>
-      <p className="mb-2 text-gray-700">{track.description}</p>
+    <>
+      <RequestHeader />
+      <main className="flex justify-center items-center min-h-screen bg-gray-100 px-4 flex-col py-10">
 
-      {track.file_url && (
-        <p className="mb-4 text-blue-600 underline">
-          <a href={track.file_url} target="_blank" rel="noopener noreferrer">
-            Voir le fichier associé
-          </a>
-        </p>
-      )}
+        <p className="mb-4">(Validate anything in one click)</p>
+        <p className="mb-3">Someone needs your validation 👇</p>
+        <section className="bg-white py-10 px-6 md:px-10 rounded-lg max-w-3xl w-full shadow-md">
+          <h1 className="text-2xl font-bold text-center mb-4">{track.title}</h1>
+          <p className="text-gray-700 mb-2 text-center">{track.description}</p>
 
-      {!status && (
-        <div className="space-x-4 mt-4">
-          <button
-            onClick={() => setStatus("approved")}
-            className="bg-green-600 text-white px-4 py-2 rounded"
-          >
-            ✅ Valider
-          </button>
-          <button
-            onClick={() => setStatus("rejected")}
-            className="bg-red-600 text-white px-4 py-2 rounded"
-          >
-            ❌ Refuser
-          </button>
-        </div>
-      )}
-
-      {status && (
-        <div className="mt-6 space-y-4">
-          {status === "approved" && (
-            <input
-              type="text"
-              placeholder="Votre nom ou email (requis)"
-              className="w-full border p-2 rounded"
-              value={emailOrName}
-              onChange={(e) => setEmailOrName(e.target.value)}
-              required
-            />
+          {track.file_url && (
+            <p className="text-center mb-6">
+              <a
+                href={track.file_url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-600 underline"
+              >
+                Open attached file
+              </a>
+            </p>
           )}
 
-          <textarea
-            placeholder="Commentaire (optionnel)"
-            className="w-full border p-2 rounded"
-            value={comment}
-            onChange={(e) => setComment(e.target.value)}
-          />
+          {!status && (
+            <div className="flex justify-center gap-4 mb-6">
+              <button
+                onClick={() => setStatus("approved")}
+                className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md font-medium"
+              >
+                ✅ Approve
+              </button>
+              <button
+                onClick={() => setStatus("rejected")}
+                className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-md font-medium"
+              >
+                ❌ Reject
+              </button>
+            </div>
+          )}
 
-          <button
-            onClick={handleSubmit}
-            className="bg-blue-700 text-white px-4 py-2 rounded"
-          >
-            Envoyer
-          </button>
+          { status && !success && (
+            <div className="space-y-4">
+              
+                {collect !== "anonymous" && status === "approved" && (<input
+                  type="text"
+                  placeholder={`Your ${collect}`}
+                  value={emailOrName}
+                  onChange={(e) => setEmailOrName(e.target.value)}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  required
+                />)}
+            
 
-          <button
-            onClick={() => {
-              setStatus("");
-              setError("");
-              setSuccess("");
-            }}
-            className="text-sm text-gray-500 underline ml-2"
-          >
-            Annuler
-          </button>
-        </div>
-      )}
+              <textarea
+                placeholder="Comment (optional)"
+                value={comment}
+                onChange={(e) => setComment(e.target.value)}
+                rows={4}
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
 
-      {success && <p className="text-green-600 mt-4">{success}</p>}
-    </div>
+              <button
+                onClick={handleSubmit}
+                disabled={loading}
+                className={`${
+                  loading ? "bg-gray-400" : "bg-[#2A6DD2] hover:bg-[#1a4a9c]"
+                } transition-all duration-200 text-white px-6 py-2 rounded-md font-medium w-full`}
+              >
+                {loading ? "Sending..." : "Send"}
+              </button>
+
+              <button
+                onClick={() => {
+                  setStatus("");
+                  setError("");
+                  setSuccess("");
+                }}
+                className="text-sm text-gray-500 underline flex text-center "
+              >
+                Cancel
+              </button>
+              {error && <p className="text-red-600 text-sm mt-4 text-center">{error}</p>}
+            </div>
+
+            
+          
+          )}
+
+          {success && <p className="text-green-600 text-sm mt-4 text-center">{success}</p>}
+        </section>
+      
+      </main>
+    </>
   );
-}
+};
 
-export default Page
+export default Page;

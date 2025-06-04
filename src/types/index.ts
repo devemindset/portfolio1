@@ -24,9 +24,9 @@ export interface RequestTrack {
   description: string;
   file_url: string;
   token: string;
-  all_source: AllSource;
+  all_source: object[];
   all_receiver: string;
-  deadline?: string;
+  deadline?: string | undefined;
   validators: Validator[];
 };
 
@@ -41,15 +41,15 @@ export interface Validator {
 
 };
 
-export interface AllSource {
-  general : string;
-  reddit : string;
-  facebook : string;
-  whatsapp : string;
-  email : string;
-  telegram : string;
+// export interface AllSource {
+//   general : string;
+//   reddit : string;
+//   facebook : string;
+//   whatsapp : string;
+//   email : string;
+//   telegram : string;
 
-}
+// }
 
 export interface DataValidation {
   request_id : number;
@@ -64,6 +64,7 @@ export interface RequestInTheTokenPage{
   title : string;
   description : string;
   file_url : string;
+  collect : string;
 }
 
 export interface LimitBrowserPostData{
