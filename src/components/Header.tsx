@@ -27,7 +27,7 @@ export default function Header() {
           <a href="#how-it-works" className="hover:text-blue-600">How it works</a>
           <a href="#pricing" className="hover:text-blue-600">Pricing</a>
           <a href="#faq" className="hover:text-blue-600">FAQ</a>
-          <a href="#contact" className="hover:text-blue-600">Contact</a>
+          <a href="/contact" className="hover:text-blue-600">Contact</a>
         </nav>
 
         {/* CTA */}
@@ -56,11 +56,11 @@ export default function Header() {
           <a href="#how-it-works" className="block hover:text-blue-600">How it works</a>
           <a href="#pricing" className="block hover:text-blue-600">Pricing</a>
           <a href="#faq" className="block hover:text-blue-600">FAQ</a>
-          <a href="#contact" className="block hover:text-blue-600">Contact</a>
+          <a href="/contact" className="block hover:text-blue-600">Contact</a>
           <hr />
-          <Link href="/signin" className="block text-gray-700 hover:text-blue-600">Sign in</Link>
+          <Link href="/login" className="block text-gray-700 hover:text-blue-600">Sign in</Link>
           <Link
-            href="/start"
+            href="/register"
             className="block text-center bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700"
           >
             Start Free

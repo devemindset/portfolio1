@@ -18,7 +18,7 @@ const FEATURES = [
 
 const FeaturesSection: FC = () => {
         return (
-    <section className="bg-gray-50 py-24 px-6">
+    <section className="bg-gray-50 py-24 px-6" id='features'>
       <div className="max-w-6xl mx-auto text-center">
         {/* Titre */}
         <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-16">

@@ -1,0 +1,178 @@
+"use client";
+
+import { useState } from "react";
+import { useAuthState } from "@/context/AuthContext";
+import api from "@/lib/api";
+import { loadStripe } from "@stripe/stripe-js";
+
+const creditOptions = [
+  {
+    price: 5,
+    credits: 20,
+    label: "Starter",
+    popular: false,
+    features: ["20 credits", "Use any time", "Basic analytics", "Email support"],
+  },
+  {
+    price: 10,
+    credits: 50,
+    label: "Pro",
+    popular: true,
+    features: ["50 credits", "Priority link creation", "Advanced tracking", "Priority support"],
+  },
+  {
+    price: 25,
+    credits: 150,
+    label: "Max",
+    popular: false,
+    features: ["150 credits", "Custom branding", "Team sharing", "Full analytics"],
+  },
+];
+
+const subscriptionOptions = [
+  {
+    price: 9,
+    label: "Monthly",
+    description: "Unlimited usage billed monthly.",
+    popular: false,
+    features: ["Unlimited links", "Advanced tracking", "Priority support"],
+  },
+  {
+    price: 99,
+    label: "Annual",
+    description: "Save 15% with annual billing.",
+    popular: true,
+    features: ["Unlimited links", "Full analytics", "Team support", "Custom branding"],
+  },
+];
+
+const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!);
+
+const PricingComponent = () => {
+  const { userData } = useAuthState();
+  const [mode, setMode] = useState<"credits" | "subscription">("credits");
+  const [loading, setLoading] = useState(false);
+
+  const handleCheckout = async (price: number) => {
+    if (!userData.username) {
+      window.location.href = "/register";
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const response = await api.post("payment/create_checkout_session/", {
+        amount: price,
+        user_email: userData.email,
+        payment_place: "quickinspiro",
+      });
+
+      const { url } = response.data;
+      const stripe = await stripePromise;
+
+      if (stripe && url) {
+        window.location.href = url;
+      }
+    } catch (err) {
+      console.error("Checkout error", err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className="w-screen h-screen flex justify-center items-center bg-gray-50 px-4 " id="pricing">
+      <div className="max-w-6xl w-full">
+        {/* Title + Toggle */}
+        <div className="text-center mb-12">
+          <h1 className="text-4xl font-bold text-gray-800 mb-4">Choose Your Plan</h1>
+          <p className="text-gray-600 text-lg mb-6">
+            {mode === "credits"
+              ? "Buy credits to validate as you go."
+              : "Subscribe for unlimited access."}
+          </p>
+
+          <div className="inline-flex border border-gray-200 rounded-full overflow-hidden bg-gray-100">
+            <button
+              onClick={() => setMode("credits")}
+              className={`px-5 py-2 text-sm font-medium transition ${
+                mode === "credits"
+                  ? "bg-blue-600 text-white"
+                  : "text-gray-700 hover:bg-gray-200"
+              }`}
+            >
+              Credits
+            </button>
+            <button
+              onClick={() => setMode("subscription")}
+              className={`px-5 py-2 text-sm font-medium transition ${
+                mode === "subscription"
+                  ? "bg-blue-600 text-white"
+                  : "text-gray-700 hover:bg-gray-200"
+              }`}
+            >
+              Subscription
+            </button>
+          </div>
+        </div>
+
+        {/* Dynamic Plans */}
+        <div className={`grid ${mode === "credits" ? "md:grid-cols-3" : "md:grid-cols-2"} grid-cols-1 gap-6`}>
+          {(mode === "credits" ? creditOptions : subscriptionOptions).map(
+            ({ price, label, description, credits, features, popular }) => (
+              <div
+                key={label}
+                className={`rounded-lg shadow p-6 bg-white border-2 ${
+                  popular ? "border-blue-600" : "border-gray-200"
+                } flex flex-col justify-between`}
+              >
+                {popular && (
+                  <div className="text-sm text-white bg-blue-600 px-3 py-1 rounded-full w-fit mb-3 font-semibold">
+                    Most Popular
+                  </div>
+                )}
+                <div>
+                  <h3 className="text-2xl font-bold text-gray-800 mb-1">
+                    {label} {mode === "credits" ? "Plan" : "Subscription"}
+                  </h3>
+                  <p className="text-4xl font-extrabold text-blue-600 mb-2">${price}</p>
+                  {credits && (
+                    <p className="text-gray-600 mb-2">{credits} credits included</p>
+                  )}
+                  {description && (
+                    <p className="text-gray-600 mb-2">{description}</p>
+                  )}
+                  <ul className="mb-4 list-disc list-inside text-sm text-gray-700 space-y-1">
+                    {features?.map((f, i) => (
+                      <li key={i}>{f}</li>
+                    ))}
+                  </ul>
+                </div>
+                <button
+                  onClick={() => handleCheckout(price)}
+                  className="mt-4 bg-blue-600 hover:bg-blue-700 text-white text-center py-2 rounded transition cursor-pointer"
+                >
+                  {mode === "credits" ? "Buy Now" : "Subscribe"}
+                </button>
+              </div>
+            )
+          )}
+        </div>
+
+        <p className="text-center text-sm text-gray-500 mt-12">
+          {mode === "credits"
+            ? "Credits never expire. Use them whenever you need."
+            : "Subscriptions renew automatically and include unlimited usage."}
+        </p>
+
+        {loading && (
+          <div className="fixed inset-0 flex items-center justify-center bg-white/80 z-50">
+            <p className="text-blue-700 text-lg font-semibold">Redirecting to Stripe...</p>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default PricingComponent;

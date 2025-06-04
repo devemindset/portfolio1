@@ -39,7 +39,7 @@ const FAQSection: FC = () => {
   };
 
   return (
-    <section className="bg-gray-50 py-24 px-6">
+    <section className="bg-gray-50 py-24 px-6" id="faq">
       <div className="max-w-4xl mx-auto">
         <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-12">
           FAQ

@@ -18,7 +18,7 @@ const ProblemSolutionSection: FC = () => {
           {/* Image */}
           <div className="mb-6">
             <Image
-              src="/tst.jpg"
+              src="/unhappy.png"
               alt="Problem illustration"
               width={160}
               height={160}
@@ -27,9 +27,9 @@ const ProblemSolutionSection: FC = () => {
           </div>
           
           <ul className="space-y-3 text-gray-700 text-base leading-relaxed text-left">
-            <li>– Approvals happen over email, Slack, WhatsApp… and get lost.</li>
-            <li>– Nobody knows who said what, or when.</li>
-            <li>– You have to manually follow up. Everyone forgets.</li>
+            <li>✘ Approvals happen over email, Slack, WhatsApp… and get lost.</li>
+            <li>✘ Nobody knows who said what, or when.</li>
+            <li>✘ You have to manually follow up. Everyone forgets.</li>
           </ul>
           <p className="mt-6 text-sm text-red-600 font-semibold text-left">
             🔥 Result: wasted time, stress, and unclear decisions.
@@ -40,12 +40,12 @@ const ProblemSolutionSection: FC = () => {
         <div className="bg-white rounded-xl shadow-md p-8 text-center border border-blue-100">
             {/* Titre */}
           <h3 className="text-xl font-semibold text-gray-900 mb-4">
-             What SnapValidate solves for you:
+             What ValidationFlow solves for you:
           </h3>
           {/* Image */}
           <div className="mb-6">
             <Image
-              src="/tst.jpg"
+              src="/happy.png"
               alt="Solution illustration"
               width={160}
               height={160}

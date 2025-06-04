@@ -1,11 +1,14 @@
+"use client";
 import type { FC } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useAuthState } from '@/context/AuthContext';
 
 
 // interface FooterProps {}
 
 const Footer: FC = ({}) => {
+  const { userData } = useAuthState();
         return (
           <>
             <footer className="bg-white shadow-md mt-16">
@@ -29,6 +32,12 @@ const Footer: FC = ({}) => {
       
               {/* Center section: Legal Links */}
               <div className="flex gap-6 text-gray-500 text-sm">
+                {userData.username && <Link href="/logout">
+                  <span className="hover:text-[#2A6DD2] transition-colors cursor-pointer">Log out</span>
+                </Link>}
+                {!userData.username && <Link href="/login">
+                  <span className="hover:text-[#2A6DD2] transition-colors cursor-pointer">Login</span>
+                </Link>}
                 <Link href="/terms_of_service">
                   <span className="hover:text-[#2A6DD2] transition-colors cursor-pointer">Terms of Service</span>
                 </Link>

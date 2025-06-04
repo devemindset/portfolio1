@@ -7,7 +7,7 @@ import type { FC } from 'react';
 
 const HowItWorksSection: FC = () => {
         return (
-    <section className="bg-white py-24 px-6">
+    <section className="bg-white py-24 px-6" id="how-it-works">
       <div className="max-w-6xl mx-auto text-center">
         {/* Titre */}
         <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-16">
@@ -18,7 +18,7 @@ const HowItWorksSection: FC = () => {
         <div className="flex flex-col md:flex-row items-center justify-between gap-8 relative">
           {/* Étape 1 */}
           <div className="flex-1 bg-gray-50 rounded-xl p-6 shadow-md text-left">
-            <h3 className="text-lg font-semibold text-blue-600 mb-2">1. Create your validation link</h3>
+            <h3 className="text-lg text-center font-semibold text-blue-600 mb-2">1. Create your validation link</h3>
             <p className="text-gray-700">
               Add a title and a description for context.
             </p>
@@ -26,12 +26,12 @@ const HowItWorksSection: FC = () => {
 
           {/* Flèche 1 (desktop only) */}
           <div className="hidden md:block">
-            <Image src="/arrow-right.svg" alt="Arrow" width={40} height={40} />
+            <Image src="/arrow.png" alt="Arrow" width={40} height={40} />
           </div>
 
           {/* Étape 2 */}
           <div className="flex-1 bg-gray-50 rounded-xl p-6 shadow-md text-left">
-            <h3 className="text-lg font-semibold text-blue-600 mb-2">2. Share it wherever you want</h3>
+            <h3 className="text-lg font-semibold text-center text-blue-600 mb-2">2. Share it wherever you want</h3>
             <p className="text-gray-700">
               Email, Slack, WhatsApp – it’s up to you.
             </p>
@@ -39,12 +39,12 @@ const HowItWorksSection: FC = () => {
 
           {/* Flèche 2 (desktop only) */}
           <div className="hidden md:block">
-            <Image src="/arrow-right.svg" alt="Arrow" width={40} height={40} />
+            <Image src="/arrow.png" alt="Arrow" width={40} height={40} />
           </div>
 
           {/* Étape 3 */}
           <div className="flex-1 bg-gray-50 rounded-xl p-6 shadow-md text-left">
-            <h3 className="text-lg font-semibold text-blue-600 mb-2">3. Collect clear feedback</h3>
+            <h3 className="text-lg font-semibold text-center text-blue-600 mb-2">3. Collect clear feedback</h3>
             <p className="text-gray-700">
               Get yes/no/comments with timestamp – all in one place.
             </p>

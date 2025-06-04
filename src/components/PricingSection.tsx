@@ -1,13 +1,11 @@
 "use client";
 
-import type { FC } from 'react';
+import type { FC } from "react";
 import { useState } from "react";
 import clsx from "clsx";
 
-// interface PricingSectionProps {}
-
 const PricingSection: FC = () => {
-    const [mode, setMode] = useState<"credits" | "subscription">("credits");
+  const [mode, setMode] = useState<"credits" | "subscription">("credits");
 
   const creditPlans = [
     {
@@ -46,23 +44,23 @@ const PricingSection: FC = () => {
     note: "For professionals who validate often",
   };
 
-        return (
+  return (
     <section className="bg-white py-24 px-6">
       <div className="max-w-6xl mx-auto text-center">
-        {/* Titre */}
-        <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+        {/* Title */}
+        <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-10">
           Pricing
         </h2>
 
-        {/* Toggle */}
-        <div className="inline-flex items-center border rounded-md overflow-hidden text-sm mb-12">
+        {/* Improved Toggle */}
+        <div className="inline-flex border border-gray-200 rounded-full overflow-hidden bg-gray-100 mb-12">
           <button
             onClick={() => setMode("credits")}
             className={clsx(
-              "px-4 py-2 font-medium",
+              "px-6 py-2 text-sm font-medium transition-all duration-200",
               mode === "credits"
                 ? "bg-blue-600 text-white"
-                : "bg-white text-gray-600 hover:bg-gray-100"
+                : "text-gray-600 hover:bg-gray-200"
             )}
           >
             Credits
@@ -70,23 +68,23 @@ const PricingSection: FC = () => {
           <button
             onClick={() => setMode("subscription")}
             className={clsx(
-              "px-4 py-2 font-medium",
+              "px-6 py-2 text-sm font-medium transition-all duration-200",
               mode === "subscription"
                 ? "bg-blue-600 text-white"
-                : "bg-white text-gray-600 hover:bg-gray-100"
+                : "text-gray-600 hover:bg-gray-200"
             )}
           >
             Subscription
           </button>
         </div>
 
-        {/* Cards */}
+        {/* Pricing Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto text-left">
           {mode === "credits" &&
             creditPlans.map((plan, index) => (
               <div
                 key={index}
-                className="border border-gray-200 rounded-xl p-6 shadow-sm"
+                className="rounded-xl p-6 border border-gray-200 bg-gray-50 shadow hover:shadow-md transition"
               >
                 <p className="text-2xl font-bold text-blue-600 mb-2">
                   {plan.price}
@@ -94,7 +92,7 @@ const PricingSection: FC = () => {
                 <h3 className="text-lg font-semibold text-gray-900 mb-4">
                   {plan.title}
                 </h3>
-                <ul className="space-y-2 text-gray-700 text-sm">
+                <ul className="space-y-2 text-sm text-gray-700">
                   {plan.features.map((f, i) => (
                     <li key={i}>• {f}</li>
                   ))}
@@ -104,14 +102,14 @@ const PricingSection: FC = () => {
             ))}
 
           {mode === "subscription" && (
-            <div className="border border-gray-200 rounded-xl p-6 shadow-sm md:col-span-2 max-w-xl mx-auto">
+            <div className="md:col-span-2 max-w-xl mx-auto rounded-xl p-6 border border-gray-200 bg-gray-50 shadow hover:shadow-md transition">
               <p className="text-2xl font-bold text-blue-600 mb-2">
                 {subscriptionPlan.price}
               </p>
               <h3 className="text-lg font-semibold text-gray-900 mb-4">
                 {subscriptionPlan.title}
               </h3>
-              <ul className="space-y-2 text-gray-700 text-sm">
+              <ul className="space-y-2 text-sm text-gray-700">
                 {subscriptionPlan.features.map((f, i) => (
                   <li key={i}>• {f}</li>
                 ))}
@@ -125,6 +123,6 @@ const PricingSection: FC = () => {
       </div>
     </section>
   );
-  
-}
+};
+
 export default PricingSection;

@@ -18,10 +18,10 @@ const TestimonialsSection: FC = () => {
           <div className="bg-gray-50 p-6 rounded-xl shadow text-left">
             <div className="flex items-center gap-4 mb-4">
               <Image
-                src="/testimonials/julie.jpg"
+                src="/july.png"
                 alt="Julie"
-                width={48}
-                height={48}
+                width={200}
+                height={200}
                 className="rounded-full object-cover"
               />
               <div>
@@ -29,7 +29,7 @@ const TestimonialsSection: FC = () => {
                 <p className="text-sm text-gray-500">Product Manager</p>
               </div>
             </div>
-            <p className="text-gray-700 text-base leading-relaxed">
+            <p className="text-gray-700 text-base leading-relaxed italic">
               “We used to approve our designs over email. Now we use SnapValidate for every key step.”
             </p>
           </div>
@@ -38,10 +38,10 @@ const TestimonialsSection: FC = () => {
           <div className="bg-gray-50 p-6 rounded-xl shadow text-left">
             <div className="flex items-center gap-4 mb-4">
               <Image
-                src="/testimonials/freelance.jpg"
+                src="/freelancer.png"
                 alt="Freelancer"
-                width={48}
-                height={48}
+                width={200}
+                height={200}
                 className="rounded-full object-cover"
               />
               <div>
@@ -49,8 +49,27 @@ const TestimonialsSection: FC = () => {
                 <p className="text-sm text-gray-500">UI Designer</p>
               </div>
             </div>
-            <p className="text-gray-700 text-base leading-relaxed">
-              “I use SnapValidate to get my mockups approved by clients. It’s fast and clean. No more chasing people: one link, one approval, done.”
+            <p className="text-gray-700 text-base leading-relaxed italic">
+              “I use ValidationFlow to get my mockups approved by clients. It’s fast and clean. No more chasing people: one link, one approval, done.”
+            </p>
+          </div>
+          {/* Témoignage 3 */}
+          <div className="bg-gray-50 p-6 rounded-xl shadow text-left">
+            <div className="flex items-center gap-4 mb-4">
+              <Image
+                src="/indihacker.png"
+                alt="Alex"
+                width={200}
+                height={200}
+                className="rounded-full object-cover"
+              />
+              <div>
+                <p className="font-semibold text-gray-900">Alex</p>
+                <p className="text-sm text-gray-500">Indie Hacker</p>
+              </div>
+            </div>
+            <p className="text-gray-700 text-base leading-relaxed italic">
+              “As a solo founder, speed and clarity are everything. ValidationFlow helps me get user feedback and approvals without wasting time. It keeps my workflow clean and focused. just a single link and {"I'm"} moving forward.“
             </p>
           </div>
         </div>

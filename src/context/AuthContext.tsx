@@ -1,16 +1,18 @@
 "use client";
 import api, { userAction } from "@/lib/api";
 import {LimitBrowserPostData, UserData} from "@/types";
-import { signIn, useSession } from "next-auth/react";
+import { signIn, signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
 import { createContext, Dispatch, ReactNode,  SetStateAction,  useContext, useEffect, useState } from "react";
+import toast from "react-hot-toast";
 
 interface AuthContextProps{
     userData : UserData;
     setUserData : Dispatch<SetStateAction<UserData>>;
     // siteLogin : (email: string,password: string,redirect : string) => Promise<boolean>;
     socialLogin : (auth: string,redirect : string) => Promise<void>;
+    logout : () => Promise<void>;
     getUserInfo : () => Promise<void>;
     userAction : (action : string, object : string) => Promise<void>;
 
@@ -237,6 +239,46 @@ const socialLogin = async (auth: string, redirectPath?: string) => {
   
 };
 
+// logout 
+const logout = async () => {
+
+  try {
+      
+          // const response = await api.post(`${process.env.NEXT_PUBLIC_API_URL}/user/logout/`,{})
+          
+          // console.log(response.data);
+        
+            clearCookies();
+          setIsAuthenticated(false);
+          localStorage.removeItem("isAuthenticated")
+          
+            if(isAuthAuthenticated){
+            await signOut({ callbackUrl: '/login' });
+                  localStorage.removeItem("isGoogleAuthenticated"); // Reset Google authentication state
+                  setIsAuthAuthenticated(false);
+                  
+                }
+                toast.success("Successfully logged out")
+
+          
+
+          
+             
+         
+     
+      
+  }catch(error){
+      console.log("Error during logout", error);
+      toast.error("Logout error");
+      throw error; // Throw error for better error handling
+  }
+  
+  
+
+  
+  
+}
+
 // user information 
 const getUserInfo = async () => {
   try {
@@ -255,6 +297,12 @@ const authenticatedAndLocalStorage = () => {
   setIsAuthenticated(true)
   localStorage.setItem("isAuthenticated",JSON.stringify(true))
 }
+
+const clearCookies = () => {
+  // Supprimer les cookies sessionid et csrftoken
+  document.cookie = "sessionid=; path=/; max-age=0";
+  document.cookie = "csrftoken=; path=/; max-age=0";
+};
 
 
     return(
@@ -280,6 +328,7 @@ const authenticatedAndLocalStorage = () => {
         setBrowserLimitValue,
         viewRequest,
         setViewRequest,
+        logout
         
         }} >
             { children }

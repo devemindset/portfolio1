@@ -4,7 +4,7 @@ import FinalCTASection from "@/components/FinalCTASection";
 import Header from "@/components/Header";
 import HeroSection from "@/components/HeroSection";
 import HowItWorksSection from "@/components/HowItWorksSection";
-import PricingSection from "@/components/PricingSection";
+import PricingComponent from "@/components/PricingComponent";
 import ProblemSolutionSection from "@/components/ProblemSolutionSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import type { NextPage } from "next";
@@ -18,7 +18,7 @@ const Page: NextPage = () => {
     <HowItWorksSection />
     <TestimonialsSection />
     <FeaturesSection />
-    < PricingSection />
+    <PricingComponent />
     <FAQSection />
     <FinalCTASection />
     </>
