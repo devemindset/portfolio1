@@ -7,42 +7,65 @@ import { loadStripe } from "@stripe/stripe-js";
 
 const creditOptions = [
   {
-    price: 5,
-    credits: 20,
-    label: "Starter",
+    price: 0,
+    credits: 2,
+    label: "Free trial",
+    // title : "Free trial",
     popular: false,
-    features: ["20 credits", "Use any time", "Basic analytics", "Email support"],
+    features: ["2 free credits when you sign up",
+        "1 link = 1 credit",
+        "Custom tracking",
+        "Unlimited responses per link",
+        "Source tracking (WhatsApp, Email...)"],
+        note: "Perfect for testing quickly",
   },
   {
     price: 10,
-    credits: 50,
-    label: "Pro",
+    credits: 11,
+    // title :"10 credits (+1 bonus)",
+    label: "Starter",
     popular: true,
-    features: ["50 credits", "Priority link creation", "Advanced tracking", "Priority support"],
+    features: ["personalized link",
+        "Unlimited responses per link",
+        "Source tracking included",
+        "Custom tracking",],
+        note: "For one-off small validations",
   },
   {
     price: 25,
-    credits: 150,
-    label: "Max",
+    credits: 30,
+    label: "Pro",
     popular: false,
-    features: ["150 credits", "Custom branding", "Team sharing", "Full analytics"],
+    features: ["personalized link",
+        "Unlimited responses per link",
+        "Source tracking included",
+        "Custom tracking",],
+        note: "For advanced tracking",
   },
 ];
 
 const subscriptionOptions = [
   {
-    price: 9,
+    price: 12,
     label: "Monthly",
-    description: "Unlimited usage billed monthly.",
+    credit : 0,
+    // description: "Unlimited usage billed monthly.",
     popular: false,
-    features: ["Unlimited links", "Advanced tracking", "Priority support"],
+    features: ["Unlimited validation links",
+      "Custom tracking",
+      "Source tracking included",],
+      note: "For professionals who validate often",
   },
   {
-    price: 99,
+    price: 100,
     label: "Annual",
-    description: "Save 15% with annual billing.",
+    credit : 0,
+    // description: "Save 15% with annual billing.",
     popular: true,
-    features: ["Unlimited links", "Full analytics", "Team support", "Custom branding"],
+    features: ["Unlimited validation links",
+      "Custom tracking",
+      "Source tracking included",],
+       note: "For professionals who validate often",
   },
 ];
 
@@ -64,7 +87,7 @@ const PricingComponent = () => {
       const response = await api.post("payment/create_checkout_session/", {
         amount: price,
         user_email: userData.email,
-        payment_place: "quickinspiro",
+        payment_place: "validationFlow",
       });
 
       const { url } = response.data;
@@ -119,7 +142,7 @@ const PricingComponent = () => {
         {/* Dynamic Plans */}
         <div className={`grid ${mode === "credits" ? "md:grid-cols-3" : "md:grid-cols-2"} grid-cols-1 gap-6`}>
           {(mode === "credits" ? creditOptions : subscriptionOptions).map(
-            ({ price, label, description, credits, features, popular }) => (
+            ({ price, label, credits, features, popular }) => (
               <div
                 key={label}
                 className={`rounded-lg shadow p-6 bg-white border-2 ${
@@ -139,9 +162,9 @@ const PricingComponent = () => {
                   {credits && (
                     <p className="text-gray-600 mb-2">{credits} credits included</p>
                   )}
-                  {description && (
+                  {/* {description && (
                     <p className="text-gray-600 mb-2">{description}</p>
-                  )}
+                  )} */}
                   <ul className="mb-4 list-disc list-inside text-sm text-gray-700 space-y-1">
                     {features?.map((f, i) => (
                       <li key={i}>{f}</li>

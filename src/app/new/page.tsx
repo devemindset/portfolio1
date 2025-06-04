@@ -8,8 +8,10 @@ import Image from "next/image";
 import api from "@/lib/api";
 import { CreateTrack } from "@/types";
 import { platforms } from "@/constant";
+import { useAuthState } from "@/context/AuthContext";
 
 const CreateTrackPage: NextPage = () => {
+  const { userData } = useAuthState();
   const router = useRouter();
 
   const [form, setForm] = useState<CreateTrack>({
@@ -71,7 +73,7 @@ const CreateTrackPage: NextPage = () => {
         ? platforms.map((p) => p.name).concat(customPlatforms.filter(Boolean))
         : selectedPlatforms.concat(customPlatforms.filter(Boolean));
 
-    const dataToSubmit = { ...form, all_source: all_source.join(",") };
+    const dataToSubmit = { ...form, all_source: all_source.join(","),platformode : platformMode, method : userData.subscription?.method  };
 
     try {
       const response = await api.post("track_user/create_track_users", dataToSubmit);
