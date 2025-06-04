@@ -11,7 +11,7 @@ import { platforms } from "@/constant";
 import { useAuthState } from "@/context/AuthContext";
 
 const CreateTrackPage: NextPage = () => {
-  const { userData } = useAuthState();
+  const { getUserInfo } = useAuthState();
   const router = useRouter();
 
   const [form, setForm] = useState<CreateTrack>({
@@ -73,12 +73,17 @@ const CreateTrackPage: NextPage = () => {
         ? platforms.map((p) => p.name).concat(customPlatforms.filter(Boolean))
         : selectedPlatforms.concat(customPlatforms.filter(Boolean));
 
-    const dataToSubmit = { ...form, all_source: all_source.join(","),platformode : platformMode, method : userData.subscription?.method  };
+    const dataToSubmit = { ...form, all_source: all_source.join(","),platformode : platformMode  };
 
     try {
       const response = await api.post("track_user/create_track_users", dataToSubmit);
+      console.log(dataToSubmit);
       if (response.status === 201 || response.status === 200) {
         setCreationSuccess(true);
+        getUserInfo();
+      }
+      else if( response.data === 402){
+        setError("Not enough credits")
       }
     } catch (err: unknown) {
       if (typeof err === "object" && err !== null && "response" in err) {
@@ -250,7 +255,7 @@ const CreateTrackPage: NextPage = () => {
                 </div>
               )}
 
-              {error && <p className="text-red-500 text-sm">{error}</p>}
+              
 
               <button
                 type="submit"
@@ -281,6 +286,7 @@ const CreateTrackPage: NextPage = () => {
                   "Create validation link"
                 )}
               </button>
+              {error && <p className="text-red-500 text-sm text-center">{error}</p>}
             </form>
           </>
         ) : (
@@ -328,10 +334,12 @@ const CreateTrackPage: NextPage = () => {
               >
                 Confirm
               </button>
+             
             </div>
           </div>
         </div>
-        
+
+        // Lorem, ipsum dolor sit amet consectetur adipisicing elit. Molestias qui optio, aut assumenda error sint, sed laborum, temporibus in illum veritatis non incidunt. Vero vitae quasi delectus optio provident sit.
       )}
     </main>
   );
