@@ -9,6 +9,7 @@ import api from "@/lib/api";
 import { CreateTrack } from "@/types";
 import { platforms } from "@/constant";
 import { useAuthState } from "@/context/AuthContext";
+import Link from "next/link";
 
 const CreateTrackPage: NextPage = () => {
   const { getUserInfo } = useAuthState();
@@ -77,21 +78,33 @@ const CreateTrackPage: NextPage = () => {
 
     try {
       const response = await api.post("track_user/create_track_users", dataToSubmit);
-      console.log(dataToSubmit);
+      
       if (response.status === 201 || response.status === 200) {
         setCreationSuccess(true);
         getUserInfo();
       }
-      else if( response.data === 402){
-        setError("Not enough credits")
-      }
+     
     } catch (err: unknown) {
       if (typeof err === "object" && err !== null && "response" in err) {
-        const axiosError = err as { response?: { data?: { error?: string } } };
-        setError(axiosError.response?.data?.error || "Something went wrong.");
-      } else {
-        setError("Unexpected error occurred.");
-      }
+          const axiosError = err as {
+            response?: {
+              status?: number;
+              data?: { error?: string; detail?: string };
+            };
+          };
+
+          if (axiosError.response?.status === 402) {
+            setError("Not enough credits.");
+          } else {
+            setError(
+              axiosError.response?.data?.error ||
+              axiosError.response?.data?.detail ||
+              "Something went wrong."
+            );
+          }
+        }  else {
+              setError("Unexpected error occurred.");
+            }
     } finally {
       setLoading(false);
     }
@@ -287,6 +300,7 @@ const CreateTrackPage: NextPage = () => {
                 )}
               </button>
               {error && <p className="text-red-500 text-sm text-center">{error}</p>}
+              {error === "Not enough credits." && <Link href="/pricing" target="_blank" className="underline block text-center text-blue-700">Get more to continue.</Link>}
             </form>
           </>
         ) : (

@@ -171,12 +171,12 @@ const PricingComponent = () => {
                     ))}
                   </ul>
                 </div>
-                <button
+                {price !== 0 && <button
                   onClick={() => handleCheckout(price)}
                   className="mt-4 bg-blue-600 hover:bg-blue-700 text-white text-center py-2 rounded transition cursor-pointer"
                 >
                   {mode === "credits" ? "Buy Now" : "Subscribe"}
-                </button>
+                </button>}
               </div>
             )
           )}
