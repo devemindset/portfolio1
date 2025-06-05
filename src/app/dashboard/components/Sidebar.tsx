@@ -30,20 +30,20 @@ export default function Sidebar() {
 
 
 
-      <div className="hidden">
+      <div>
       <Link
         href="/contact"
-        className="text-gray-600 hover:text-gray-800 flex items-center gap-1 text-sm md:mt-auto mb-4"
+        className="text-gray-600 hover:text-gray-800 flex items-center gap-1 text-sm md:mt-auto mb-4 "
       >
-        <HelpCircle size={18} />
+        <HelpCircle size={18} className="hidden md:inline" />
         <span className="hidden md:inline">Help</span>
       </Link>
       <Link href="/pricing" className="text-gray-600 hover:text-gray-800 flex items-center gap-1 mb-4 text-sm md:mt-auto">
-          <CreditCard size={18} />
+          <CreditCard size={18} className="hidden md:inline" />
           <span className="hidden md:inline">Pricing</span>
       </Link>
       <Link href="/logout" className="text-gray-600 mb-4 hover:text-gray-800 flex items-center gap-1 text-sm md:mt-auto cursor-pointer" >
-          <LogOut size={18} />
+          <LogOut size={18} className="hidden md:inline" />
           <span className="hidden md:inline">Logout</span>
       </Link>
       </div>
