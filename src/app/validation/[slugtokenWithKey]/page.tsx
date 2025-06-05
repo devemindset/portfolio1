@@ -11,7 +11,7 @@ import RequestHeader from "@/components/RequestHeader";
 const TOKEN_LENGTH = 12;
 
 const Page: NextPage = () => {
-  const { tokenWithKey } = useParams();
+  const { slugtokenWithKey } = useParams();
   const {userData,browserLimitValue, setBrowserLimitValue} = useAuthState();
   const [track, setTrack] = useState<RequestInTheTokenPage | null>(null);
   const [requestId, setRequestId] = useState<number | null>(null);
@@ -24,9 +24,10 @@ const Page: NextPage = () => {
   const [view,setView] = useState(false);
   const [collect,setCollect] = useState("anonymous");
 
-  const tokenKey = typeof tokenWithKey === "string" ? tokenWithKey : "";
-  const token = tokenKey.slice(0, TOKEN_LENGTH);
-  const sourceKey = tokenKey.slice(TOKEN_LENGTH);
+  const raw = typeof slugtokenWithKey === "string" ? slugtokenWithKey : "";
+
+  const token = raw.slice(-TOKEN_LENGTH, raw.length);
+  const sourceKey = raw.slice(token.length + (raw.length - TOKEN_LENGTH));
 
   useEffect(() => {
     if (!token || token.length < TOKEN_LENGTH) {
@@ -34,6 +35,7 @@ const Page: NextPage = () => {
       return;
     }
 
+    // slugtokenWithKey
    
     pubic_api
       .get(`/track_user/track_by_token/${token}/`)

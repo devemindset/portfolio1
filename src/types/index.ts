@@ -22,6 +22,7 @@ export interface CreateTrack {
 export interface RequestTrack {
   id: number;
   title: string;
+  slug : string;
   description: string;
   file_url: string;
   token: string;

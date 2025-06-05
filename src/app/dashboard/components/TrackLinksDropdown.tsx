@@ -7,14 +7,15 @@ import toast from "react-hot-toast";
 type Props = {
   all_source: Record<string, string>;
   token: string;
+  slug : string;
   onClose: () => void;
 };
 
-export default function TrackLinksDropdown({ all_source, token,onClose }: Props) {
+export default function TrackLinksDropdown({ all_source, token,slug,onClose }: Props) {
   const handleCopy = async (key: string) => {
     
     try {
-      const url = `${process.env.NEXT_PUBLIC_APP_URL}/validation/${token}${key}`;
+      const url = `${process.env.NEXT_PUBLIC_APP_URL}/validation/${slug}-${token}${key}`;
       await navigator.clipboard.writeText(url);
       toast.success("✅ Link copied!");
       onClose(); // ferme après copie si tu veux
