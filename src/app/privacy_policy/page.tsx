@@ -8,7 +8,7 @@ export default function PrivacyPolicyPage() {
         </h1>
 
         <div className="space-y-6 text-gray-800 leading-relaxed text-sm sm:text-base">
-          <p><strong>Effective Date:</strong> [Insert Date]</p>
+          <p><strong>Effective Date:</strong> 01.01.025</p>
 
           <p>
             At ValidationFlow, we are committed to protecting your privacy and ensuring a transparent user experience.
