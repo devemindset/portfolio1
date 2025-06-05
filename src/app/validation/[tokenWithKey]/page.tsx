@@ -12,7 +12,7 @@ const TOKEN_LENGTH = 12;
 
 const Page: NextPage = () => {
   const { tokenWithKey } = useParams();
-  const {userData,viewRequest,setViewRequest} = useAuthState();
+  const {userData,browserLimitValue, setBrowserLimitValue} = useAuthState();
   const [track, setTrack] = useState<RequestInTheTokenPage | null>(null);
   const [requestId, setRequestId] = useState<number | null>(null);
   const [comment, setComment] = useState("");
@@ -60,9 +60,14 @@ const Page: NextPage = () => {
     try {
       const res = await pubic_api.post("/track_user/user_validation_view", payload);
       if (res.status === 201) {
-        console.log("request view")
-        setViewRequest(true);
-        localStorage.setItem("view_request",JSON.stringify(true))
+        setBrowserLimitValue((prevState) => {
+              const updateState = prevState
+                ? { ...prevState, view_request : true }
+                : { date: "", contact: 0, newsletterSub: 0, view_request : true };
+              localStorage.setItem("limite_actions", JSON.stringify(updateState));
+              return updateState;
+            });
+        
       }
     } catch {
       console.log("Something went wrong.");
@@ -72,13 +77,13 @@ const Page: NextPage = () => {
       if(view === false){
         const timeoutId = setTimeout(async () => {
         setView(true)
-      }, 4000)
+      }, 5000)
       return () => clearTimeout(timeoutId);
 
       }
       
 
-    if(requestId && !userData.username && view &&  !viewRequest){
+    if(requestId && !userData.username && view &&  browserLimitValue && !browserLimitValue.view_request){
       viewHandle()
       
     }

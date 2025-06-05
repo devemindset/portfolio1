@@ -30,8 +30,7 @@ interface AuthContextProps{
     browserLimitValue : LimitBrowserPostData | null; 
     setBrowserLimitValue : Dispatch<SetStateAction<LimitBrowserPostData | null>>;
     isAuthenticated: boolean;
-    viewRequest : boolean;
-    setViewRequest : Dispatch<SetStateAction<boolean>>;
+    
     
     
 
@@ -57,7 +56,7 @@ export const AuthProvider = ({ children } : { children : ReactNode}) => {
     const [isAuthAuthenticated,setIsAuthAuthenticated] =useState<boolean>(false);
     const [browserLimitValue, setBrowserLimitValue] = useState<LimitBrowserPostData | null>(null);
     const todayDateWithoutTime = new Date().toISOString().split("T")[0];
-    const [viewRequest,setViewRequest] = useState<boolean>(false);
+    
 
 
     const { data: session, status } = useSession();
@@ -73,22 +72,17 @@ export const AuthProvider = ({ children } : { children : ReactNode}) => {
       const isAuthenticated = localStorage.getItem("isGoogleAuthenticated");
       const userAuthenticated = localStorage.getItem("isAuthenticated");
       const storedData = localStorage.getItem("limite_actions");
-      const viewRequest = localStorage.getItem("view_request");
+      
 
       // Initialize browserLimitValue
       if (storedData) {
         setBrowserLimitValue(JSON.parse(storedData));
       } else {
-        const defaultValue = { date: todayDateWithoutTime, contact: 0, newsletterSub: 0 };
+        const defaultValue = { date: todayDateWithoutTime, contact: 0, newsletterSub: 0, view_request : false };
         setBrowserLimitValue(defaultValue);
         localStorage.setItem("limite_actions", JSON.stringify(defaultValue));
       }
-      if (viewRequest){
-        setViewRequest(JSON.parse(viewRequest))
-      }else{
-        setViewRequest(false);
-        localStorage.setItem("view_request",JSON.stringify(false))
-      }
+     
       // Initialize redirectPath
       if (redirectPathStorage) {
         setRedirectPath(JSON.parse(redirectPathStorage));
@@ -115,6 +109,23 @@ export const AuthProvider = ({ children } : { children : ReactNode}) => {
     }
     
   }, []);
+
+  //Update date if needed (after state is set)
+useEffect(() => {
+    if (!isInitialized || browserLimitValue === null) return;
+  
+    if (browserLimitValue.date !== todayDateWithoutTime) {
+      const updatedValue = {
+        ...browserLimitValue, 
+        date: todayDateWithoutTime,
+        contact: 0, // Reset for a new day
+        newsletterSub : 0, // Reset for a new day
+        view_request : false,
+      };
+      setBrowserLimitValue(updatedValue);
+      localStorage.setItem("limite_actions", JSON.stringify(updatedValue));
+    }
+  }, [browserLimitValue,isInitialized]); // This runs once after browserLimitValue is set
 
 
 useEffect(() => {
@@ -326,8 +337,6 @@ const clearCookies = () => {
         userAction,
         browserLimitValue, 
         setBrowserLimitValue,
-        viewRequest,
-        setViewRequest,
         logout
         
         }} >

@@ -29,14 +29,14 @@ export default function TermsPage() {
           <p>
             To use ValidationFlow, users can sign up via <strong>Google authentication</strong>. We do not store your password or login credentials.
           </p>
-          <ul>
+          <ul className="list-disc list-inside space-y-1" >
             <li className="font-semibold text-sm">You are responsible for all activity under your account.</li>
             <li className="font-semibold text-sm">You must notify us immediately of any unauthorized use.</li>
             <li className="font-semibold text-sm">One person or legal entity may not maintain more than one free account.</li>
           </ul>
 
           <h2 className="font-bold my-5">4. Services Description</h2>
-          <ul>
+          <ul className="list-disc list-inside space-y-1" >
             <li className="font-semibold text-sm">Create validation links to request approvals or feedback</li>
             <li className="font-semibold text-sm">Track interactions (approval status, timestamps, platform origin)</li>
             <li className="font-semibold text-sm">Share links across email, WhatsApp, LinkedIn, X (Twitter), and more</li>
@@ -45,7 +45,7 @@ export default function TermsPage() {
 
           <h2 className="font-bold my-5">5. Credits & Usage</h2>
           <p>We operate a <strong>credit-based system</strong>:</p>
-          <ul>
+          <ul className="list-disc list-inside space-y-1" >
             <li className="font-semibold text-sm">Every validation request or sub-link costs <strong>1 credit</strong></li>
             <li className="font-semibold text-sm">Free accounts receive a limited number of credits upon registration</li>
             <li className="font-semibold text-sm">Additional credits can be purchased at any time</li>
@@ -57,7 +57,7 @@ export default function TermsPage() {
           <p>
             We offer monthly and yearly <strong>subscription plans</strong> via <a href="https://stripe.com" target="_blank" className="text-blue-600">Stripe</a>.
           </p>
-          <ul>
+          <ul className="list-disc list-inside space-y-1" >
             <li className="font-semibold text-sm">We <strong>do not store any credit card or banking information</strong>.</li>
             <li className="font-semibold text-sm">Stripe handles all payments securely on our behalf.</li>
             <li className="font-semibold text-sm">Subscriptions renew automatically unless canceled prior to the renewal date.</li>
@@ -67,7 +67,7 @@ export default function TermsPage() {
 
           <h2 className="font-bold my-5">7. Refund Policy</h2>
           <p>ValidationFlow operates under a <strong>no-refund</strong> policy. We do not offer refunds for:</p>
-          <ul>
+          <ul className="list-disc list-inside space-y-1" >
             <li className="font-semibold text-sm">Unused credits</li>
             <li className="font-semibold text-sm">Partial months of service</li>
             <li className="font-semibold text-sm">Downgrades</li>
@@ -76,7 +76,7 @@ export default function TermsPage() {
 
           <h2 className="font-bold my-5">8. Acceptable Use</h2>
           <p>You agree not to:</p>
-          <ul>
+          <ul className="list-disc list-inside space-y-1" >
             <li className="font-semibold text-sm">Use the service for phishing, spamming, or malicious activities</li>
             <li className="font-semibold text-sm">Create misleading or deceptive validation requests</li>
             <li className="font-semibold text-sm">Attempt to reverse-engineer, hack, or disrupt the platform</li>
@@ -94,7 +94,7 @@ export default function TermsPage() {
 
           <h2 className="font-bold my-5">10. Third-Party Services</h2>
           <p>ValidationFlow uses:</p>
-          <ul>
+          <ul className="list-disc list-inside space-y-1" >
             <li className="font-semibold text-sm"><strong>Google Auth</strong> for user authentication</li>
             <li className="font-semibold text-sm"><strong>Stripe</strong> for secure payment processing</li>
           </ul>
@@ -104,7 +104,7 @@ export default function TermsPage() {
           <p>
             You may delete your account at any time from your dashboard. We reserve the right to suspend or terminate any account that violates these terms or abuses the service.
           </p>
-          <ul>
+          <ul className="list-disc list-inside space-y-1" >
             <li className="font-semibold text-sm">Access to your account and validation data will be revoked</li>
             <li className="font-semibold text-sm">Subscription plans will be canceled</li>
             <li className="font-semibold text-sm">No refunds will be issued</li>
@@ -117,7 +117,7 @@ export default function TermsPage() {
 
           <h2 className="font-bold my-5">13. Limitation of Liability</h2>
           <p>To the maximum extent permitted by law, ValidationFlow shall not be liable for:</p>
-          <ul>
+          <ul className="list-disc list-inside space-y-1" >
             <li className="font-semibold text-sm">Any indirect, incidental, or consequential damages</li>
             <li className="font-semibold text-sm">Loss of data, revenue, profits, or business</li>
             <li className="font-semibold text-sm">Any content shared through validation links</li>
@@ -131,7 +131,7 @@ export default function TermsPage() {
 
           <h2 className="font-bold my-5">15. Contact</h2>
           <p>If you have any questions or concerns about these terms, please contact us here:</p>
-          <ul>
+          <ul className="list-disc list-inside space-y-1" >
             <li className="font-semibold text-blue-700 text-sm">📧 <a href="/contact" >contact</a></li>
           </ul>
 

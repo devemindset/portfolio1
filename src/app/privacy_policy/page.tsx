@@ -100,7 +100,7 @@ export default function PrivacyPolicyPage() {
             <li>Request deletion of your account and data</li>
             <li>Withdraw consent at any time</li>
           </ul>
-          <p>Contact us at <a href="mailto:support@validationflow.com" className="text-blue-600 underline">support@validationflow.com</a> for any such requests.</p>
+          <p>Contact us : <a href="/contact" className="text-blue-600 underline">Contact</a> for any such requests.</p>
 
           <h2 className="text-xl font-semibold">9. Children’s Privacy</h2>
           <p>ValidationFlow is not intended for children under 13. We do not knowingly collect personal data from children. If we learn we have collected such data, we will delete it promptly.</p>
@@ -120,11 +120,11 @@ export default function PrivacyPolicyPage() {
             <li>Update the effective date at the top</li>
           </ul>
 
-          <h2 className="text-xl font-semibold">12. Contact</h2>
+          {/* <h2 className="text-xl font-semibold">12. Contact</h2>
           <ul className="list-disc list-inside space-y-1">
             <li><strong>Email:</strong> <a href="mailto:support@validationflow.com" className="text-blue-600 underline">support@validationflow.com</a></li>
             <li><strong>Website:</strong> <a href="https://validationflow.com" className="text-blue-600 underline">https://validationflow.com</a></li>
-          </ul>
+          </ul> */}
 
           <p className="pt-6 font-semibold">
             Thank you for trusting ValidationFlow. We are committed to providing you with a secure, transparent, and reliable experience.

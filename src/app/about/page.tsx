@@ -8,17 +8,17 @@ export default function AboutPage() {
         <div className="space-y-6 text-gray-800 leading-relaxed text-sm sm:text-base">
           <h2 className="text-xl font-semibold text-gray-800">Why We Exist</h2>
           <p>
-            Every day, people waste hours chasing approvals: "Hey, did you see my message?", "Can you confirm?", "Is this okay?" — over email, WhatsApp, Slack, and dozens of other platforms. 
-            Important decisions are scattered, delayed, or forgotten. Nobody really knows who approved what, when, and how. That’s where chaos begins.
+            {'Every day, people waste hours chasing approvals: "Hey, did you see my message?", "Can you confirm?", "Is this okay?" over email, WhatsApp, Slack, and dozens of other platforms. '}
+            {'Important decisions are scattered, delayed, or forgotten. Nobody really knows who approved what, when, and how. That’s where chaos begins.'}
           </p>
           <p>
-            We built ValidationFlow because we’ve lived that frustration. Whether you’re a freelancer trying to get client sign-off, a student validating a group project idea, or a creator testing a new campaign — one truth remains: getting a simple "yes" or "no" shouldn’t be this hard.
+            {'We built ValidationFlow because we’ve lived that frustration. Whether you’re a freelancer trying to get client sign-off, a student validating a group project idea, or a creator testing a new campaign, one truth remains: getting a simple "yes" or "no" shouldn’t be this hard.'}
           </p>
           <p>
             ValidationFlow is here to make validation as fast, clear, and organized as it should be.
           </p>
 
-          <h2 className="text-xl font-semibold text-gray-800 mt-8">The Problem We're Solving</h2>
+          <h2 className="text-xl font-semibold text-gray-800 mt-8">{"The Problem We're Solving"}</h2>
           <ul className="list-disc list-inside space-y-2">
             <li>Approvals are spread across too many platforms: Conversations happen over email, DMs, Slack threads, and nobody tracks the outcome.</li>
             <li>It’s unclear who approved what: You lose context or forget who said what — and when.</li>
@@ -79,7 +79,7 @@ export default function AboutPage() {
             It’s fast, smart, secure, and incredibly simple to use.
           </p>
           <p>
-            If you're tired of unclear approvals, missed responses, and scattered feedback, try ValidationFlow today.
+            If {"you're"} tired of unclear approvals, missed responses, and scattered feedback, try ValidationFlow today.
           </p>
           <p><strong>Let validation feel like flow — not friction.</strong></p>
 
