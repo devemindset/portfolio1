@@ -94,7 +94,7 @@ export default function TrackRow({
             <span className="text-xs bg-blue-600 text-white px-2 py-0.5 rounded-full">
               {track.validators.length}
             </span>
-            <button onClick={handleLinkClick} className="ml-2">
+            <button onClick={handleLinkClick} className="ml-2 cursor-pointer  hover:scale-150 hover:text-green-600">
               <Link size={18} />
             </button>
           </div>

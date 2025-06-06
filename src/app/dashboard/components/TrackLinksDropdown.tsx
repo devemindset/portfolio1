@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { Copy } from "lucide-react";
+import { Copy, Link } from "lucide-react";
 import { platforms } from "@/constant";
 import toast from "react-hot-toast";
 type Props = {
@@ -32,13 +32,14 @@ export default function TrackLinksDropdown({ all_source, token,slug,onClose }: P
     <div className="bg-white border shadow-lg p-4 rounded space-y-2 max-h-[80vh] overflow-y-auto animate-fade-in-up">
       {Object.entries(all_source).map(([label, key]) => {
         const icon =
-          platforms.find((p) => p.name.toLowerCase() === label.toLowerCase())?.iconUrl ??
-          "https://cdn.simpleicons.org/link";
-
+        platforms.find((p) => p.name.toLowerCase() === label.toLowerCase())?.iconUrl
+        
+       
         return (
           <div key={key} className="flex items-center justify-between gap-2">
             <div className="flex items-center gap-1 truncate">
-              <Image src={icon} alt={label} width={16} height={16} />
+              {icon !== undefined ? <Image src={icon} alt={label} width={16} height={16} /> : <Link size={16} />}
+              
               <span className="text-xs truncate">{label}</span>
             </div>
             <button onClick={() => handleCopy(key)}>
