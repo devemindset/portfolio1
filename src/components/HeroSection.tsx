@@ -12,7 +12,7 @@ const HeroSection: FC = () => {
     <section className="w-full min-h-screen flex flex-col md:flex-row items-center justify-center bg-white pt-24 px-6 gap-12 md:gap-6 overflow-hidden">
       {/* LEFT: Text section */}
       <motion.div
-        className="flex-1 max-w-3xl text-center md:text-left"
+        className="flex-1 max-w-3xl text-center md:text-left pl-10"
         initial={{ opacity: 0, x: -40 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 1.2, ease: "easeOut" }}
