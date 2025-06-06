@@ -30,7 +30,10 @@ interface AuthContextProps{
     browserLimitValue : LimitBrowserPostData | null; 
     setBrowserLimitValue : Dispatch<SetStateAction<LimitBrowserPostData | null>>;
     isAuthenticated: boolean;
-    
+    loadingBtn : boolean;
+    setLoadingBtn : Dispatch<SetStateAction<boolean>>;
+    loadingBackground : boolean;
+    setLoadingBackground : Dispatch<SetStateAction<boolean>>;
     
     
 
@@ -49,6 +52,8 @@ export const AuthProvider = ({ children } : { children : ReactNode}) => {
    
     const [logStatus,setLogStatus] = useState<string>("");
     const [btnstatus,setBtnStatus] = useState<string>("");
+    const [loadingBtn,setLoadingBtn] = useState<boolean>(false);
+    const [loadingBackground,setLoadingBackground] = useState<boolean>(false);
     const [redirectPath, setRedirectPath] = useState<string>("");
     // const [logBackground,setLogBackground] = useState<boolean>(false);
     const [loginRegisterForm,setLoginRegisterForm] = useState(false);
@@ -130,6 +135,8 @@ useEffect(() => {
 
 useEffect(() => {
         if (session && status === "authenticated") {
+          setLoadingBtn(false);
+          setLoadingBackground(true);
           // Attendre 2 secondes avant de vérifier isGoogleAuthenticated
           const timeoutId = setTimeout(async () => {
             if (!isAuthAuthenticated) {
@@ -236,7 +243,8 @@ useEffect(() => {
 
 // social login 
 const socialLogin = async (auth: string, redirectPath?: string) => {
-  setBtnStatus("Processing...");
+  
+  setLoadingBtn(true)
 
   try{
       // Sign in with Google using NextAuth.js
@@ -296,7 +304,7 @@ const getUserInfo = async () => {
       const response = await api.get<UserData>('/user/user_info/');
       if(response.status === 200){
           setUserData(response.data)
-          
+          setLoadingBackground(false)
       }
   } catch (error) {
       console.error('Error fetching user info:', error);
@@ -337,7 +345,11 @@ const clearCookies = () => {
         userAction,
         browserLimitValue, 
         setBrowserLimitValue,
-        logout
+        logout,
+        loadingBtn,
+        setLoadingBtn,
+        loadingBackground,
+        setLoadingBackground,
         
         }} >
             { children }

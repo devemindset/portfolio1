@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 // app/about/page.tsx
 export default function AboutPage() {
   return (
@@ -84,16 +86,16 @@ export default function AboutPage() {
           <p><strong>Let validation feel like flow — not friction.</strong></p>
 
           <div className="mt-6 space-y-2 text-center">
-            <a
-              href="/new"
+            <Link
+              href="/register"
               className="inline-block bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition"
             >
               ➡️ Get Started — no credit card needed
-            </a>
+            </Link>
             <br />
-            <a href="/how-it-works" className="text-blue-600 underline">
+            {/* <Link href="/how-it-works" className="text-blue-600 underline">
               ➡️ See how it works — short walkthrough
-            </a>
+            </Link> */}
           </div>
 
           <p className="text-center mt-6 text-sm text-gray-500">The ValidationFlow Team</p>

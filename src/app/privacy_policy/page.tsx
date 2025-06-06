@@ -57,7 +57,7 @@ export default function PrivacyPolicyPage() {
 
           <h2 className="text-xl font-semibold">3. Credit System and Subscription</h2>
           <ul className="list-disc list-inside space-y-1">
-            <li>Each user with a free account receives <strong>3 free credits</strong></li>
+            <li>Each user with a free account receives <strong>2 free credits</strong></li>
             <li>Additional credits can be purchased through Stripe</li>
             <li>One credit equals the tracking of one validation link or one variation (e.g., per platform like WhatsApp, Facebook, etc.)</li>
             <li>Subscriptions allow unlimited validation links</li>

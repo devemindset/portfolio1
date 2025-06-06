@@ -27,3 +27,19 @@ body {
 .group:hover .group-hover\:block {
   display: block;
 }
+
+@keyframes spinScale {
+  0% {
+    transform: rotate(0deg) scale(1);
+  }
+  50% {
+    transform: rotate(180deg) scale(1.2);
+  }
+  100% {
+    transform: rotate(360deg) scale(1);
+  }
+}
+
+.animate-spin-scale {
+  animation: spinScale 1.5s infinite ease-in-out;
+}

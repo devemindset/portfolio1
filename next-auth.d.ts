@@ -5,6 +5,7 @@ declare module "next-auth" {
     interface Session extends DefaultSession{
         accessToken?: string;
         socialId?: string;
+        
     }
 
     interface JWT extends DefaultJWT{

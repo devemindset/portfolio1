@@ -7,6 +7,8 @@ import { pubic_api } from "@/lib/api";
 import { DataValidation, RequestInTheTokenPage } from "@/types";
 import { useAuthState } from "@/context/AuthContext";
 import RequestHeader from "@/components/RequestHeader";
+import BackgroundLoader from "@/components/BackgroundLoader";
+import DescriptionBox from "@/components/DescriptionBox";
 
 
 
@@ -133,9 +135,7 @@ const sourceKey = combinedKey.slice(TOKEN_LENGTH);
 
   if (!track) {
     return (
-      <main className="flex justify-center items-center h-screen bg-gray-100">
-        <p className="text-gray-600">Loading...</p>
-      </main>
+      <BackgroundLoader />
     );
   }
 
@@ -148,7 +148,9 @@ const sourceKey = combinedKey.slice(TOKEN_LENGTH);
         <p className="mb-3">Someone needs your validation 👇</p>
         <section className="bg-white py-10 px-6 md:px-10 rounded-lg max-w-3xl w-full shadow-md">
           <h1 className="text-2xl font-bold text-center mb-4">{track.title}</h1>
-          <p className="text-gray-700 mb-2 text-center">{track.description}</p>
+          {track.description && (
+            <DescriptionBox content={track.description} />
+          )}
 
           {track.file_url && (
             <p className="text-center mb-6">
@@ -164,16 +166,16 @@ const sourceKey = combinedKey.slice(TOKEN_LENGTH);
           )}
 
           {!status && (
-            <div className="flex justify-center gap-4 mb-6">
+            <div className="flex justify-center gap-4 mb-6 pt-5">
               <button
                 onClick={() => setStatus("approved")}
-                className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md font-medium"
+                className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md font-medium cursor-pointer"
               >
                 ✅ Approve
               </button>
               <button
                 onClick={() => setStatus("rejected")}
-                className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-md font-medium"
+                className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-md font-medium cursor-pointer"
               >
                 ❌ Reject
               </button>
@@ -230,7 +232,26 @@ const sourceKey = combinedKey.slice(TOKEN_LENGTH);
 
           {success && <p className="text-green-600 text-sm mt-4 text-center">{success}</p>}
         </section>
-      
+          
+          {/* small text for visitors */}
+          <div className="mt-6 text-sm text-neutral-600 px-2 sm:px-0">
+            <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4 sm:p-5">
+              <p className="text-xs sm:text-sm leading-relaxed">
+                🔒 This page was generated via <span className="font-semibold">ValidationFlow</span>.  
+                It helps creators and teams get fast, authentic feedback.
+                <br />
+                No account required. Your answer is anonymous and private.
+                <br />
+                ValidationFlow is used by freelancers, founders, and teams to validate faster —
+                <span className="italic"> no spam, no pressure, just clarity.</span>
+              </p>
+
+              <div className="mt-3 flex flex-wrap gap-4 text-xs sm:text-sm text-blue-600 font-medium">
+                <a href="/about" className="hover:underline">Learn more</a>
+                <a href="/report" className="hover:underline">Report abuse</a>
+              </div>
+            </div>
+          </div>
       </main>
     </>
   );

@@ -1,3 +1,4 @@
+"use client";
 import FAQSection from "@/components/FAQSection";
 import FeaturesSection from "@/components/FeaturesSection";
 import FinalCTASection from "@/components/FinalCTASection";
@@ -7,7 +8,8 @@ import HowItWorksSection from "@/components/HowItWorksSection";
 import PricingComponent from "@/components/PricingComponent";
 import ProblemSolutionSection from "@/components/ProblemSolutionSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
-import type { NextPage } from "next";
+import type {  NextPage } from "next";
+
 
 const Page: NextPage = () => {
   return (
@@ -24,5 +26,7 @@ const Page: NextPage = () => {
     </>
   )
 }
+
+
 
 export default Page

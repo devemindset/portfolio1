@@ -1,7 +1,7 @@
 import NextAuth from "next-auth";
 import Google from "next-auth/providers/google";
-// import axios from "axios";
 import type { NextAuthOptions } from "next-auth";
+
 
 
 export const authOptions: NextAuthOptions = {
@@ -29,13 +29,7 @@ export const authOptions: NextAuthOptions = {
       session.socialId = token.socialId as string;
 
       // 👉 Appel à ton backend pour récupérer username_slug
-      // try {
-      //   const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/user/by-social/${token.socialId}`);
-      //   const user = response.data;
-      //   session.username_slug = user.username_slug;
-      // } catch (error) {
-      //   console.error("Erreur récupération username_slug", error);
-      // }
+      
 
       return session;
     },

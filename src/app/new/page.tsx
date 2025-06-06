@@ -11,9 +11,10 @@ import { platforms } from "@/constant";
 import { useAuthState } from "@/context/AuthContext";
 import Link from "next/link";
 import RequestHeader from "@/components/RequestHeader";
+import BackgroundLoader from "@/components/BackgroundLoader";
 
 const CreateTrackPage: NextPage = () => {
-  const { getUserInfo } = useAuthState();
+  const { getUserInfo,userData } = useAuthState();
   const router = useRouter();
 
   const [form, setForm] = useState<CreateTrack>({
@@ -157,7 +158,7 @@ const CreateTrackPage: NextPage = () => {
                   name="description"
                   value={form.description}
                   onChange={handleChange}
-                  rows={1}
+                  rows={6}
                   className="w-full border px-3 py-2 rounded-md resize-y max-h-48"
                   placeholder="Add details or context"
                 />
@@ -283,7 +284,7 @@ const CreateTrackPage: NextPage = () => {
               <button
                 type="submit"
                 disabled={loading}
-                className={`w-full ${loading ? "bg-gray-400" : "bg-blue-600 hover:bg-blue-700"} text-white py-3 rounded-md`}
+                className={`w-full ${loading ? "bg-gray-400" : "bg-blue-600 cursor-pointer hover:scale-105 hover:bg-blue-800"} text-white py-3 rounded-md`}
               >
                 {loading ? (
                   <span className="flex justify-center items-center gap-2">
@@ -319,13 +320,13 @@ const CreateTrackPage: NextPage = () => {
             <div className="flex flex-col items-center gap-2">
               <button
                 onClick={() => router.push("/dashboard")}
-                className="bg-blue-600 text-white px-5 py-2 rounded-md hover:bg-blue-700"
+                className="bg-blue-600 text-white px-5 py-2 rounded-md cursor-pointer hover:scale-110 hover:bg-blue-800"
               >
                 Go to dashboard
               </button>
               <button
                 onClick={resetForm}
-                className="text-blue-600 underline hover:text-blue-800 text-sm"
+                className="text-blue-600 underline hover:text-blue-800 text-sm "
               >
                 Create another link
               </button>
@@ -336,12 +337,15 @@ const CreateTrackPage: NextPage = () => {
 
       {/* Modal */}
       {showModal && (
-        <div className="fixed inset-0 bg-black/50 flex justify-center items-center z-50">
-          <div className="bg-white max-w-md w-full rounded-lg shadow-lg p-6">
+        <div className="fixed inset-0 bg-black/50 flex justify-center items-center z-50 px-4">
+          <div className="bg-white max-w-md w-full max-h-[90vh] overflow-y-auto rounded-lg shadow-lg p-6">
             <h3 className="text-xl font-semibold mb-4">Preview validation link</h3>
             <ul className="text-sm text-gray-700 space-y-2">
               <li><strong>Title:</strong> {form.title}</li>
-              <li><strong>Description:</strong> {form.description || "—"}</li>
+              <li>
+                <strong>Description:</strong>
+                <p className="whitespace-pre-wrap mt-1 text-sm text-gray-700">{form.description || "—"}</p>
+              </li>
               <li><strong>File URL:</strong> {form.file_url || "—"}</li>
               <li><strong>Collect:</strong> {form.collect}</li>
               <li><strong>Platforms:</strong> {selectedPlatforms.join(", ") || "All"}</li>
@@ -354,7 +358,7 @@ const CreateTrackPage: NextPage = () => {
               </button>
               <button
                 onClick={handleConfirm}
-                className="bg-blue-600 text-white px-4 py-2 rounded-md"
+                className="bg-blue-600 text-white px-4 py-2 rounded-md cursor-pointer hover:scale-110 hover:bg-blue-800"
               >
                 Confirm
               </button>
@@ -366,6 +370,7 @@ const CreateTrackPage: NextPage = () => {
         
       )}
     </main>
+    {!userData.username && <BackgroundLoader />}
     </>
   );
 };

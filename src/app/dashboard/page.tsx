@@ -6,11 +6,16 @@ import { RequestTrack, Validator } from "@/types";
 import Sidebar from "./components/Sidebar";
 import TrackTable from "./components/TrackTable";
 import RequestHeader from "@/components/RequestHeader";
+import Link from "next/link";
+import { useAuthState } from "@/context/AuthContext";
+import BackgroundLoader from "@/components/BackgroundLoader";
+
 
 export default function DashboardPage() {
   const [tracks, setTracks] = useState<RequestTrack[]>([]);
   const [expandedId, setExpandedId] = useState<number | null>(null);
   const [visibleLinkId, setVisibleLinkId] = useState<number | null>(null);
+  const {userData} = useAuthState();
 
   useEffect(() => {
     api
@@ -31,14 +36,16 @@ export default function DashboardPage() {
     <div className="flex min-h-screen flex-col md:flex-row">
       <Sidebar />
       <main className="flex-1 bg-gray-50 pt-20 md:pt-0 p-4 sm:p-6 md:p-10 overflow-x-auto">
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4 pt-10">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4 pt-10"
+         
+        >
           <h2 className="text-2xl font-semibold">My Validations</h2>
-          <a
+          <Link
             href="/new"
             className="bg-[#1E2A3A] text-white px-4 py-2 rounded hover:bg-blue-700 whitespace-nowrap"
           >
             + Create Track
-          </a>
+          </Link>
         </div>
 
         <TrackTable
@@ -51,6 +58,7 @@ export default function DashboardPage() {
         />
       </main>
     </div>
+    {!userData.username && <BackgroundLoader />}
     </>
   );
 }

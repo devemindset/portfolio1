@@ -4,6 +4,7 @@ import { useAuthState } from '@/context/AuthContext';
 import Image from 'next/image';
 import type { FC } from 'react';
 import Link from 'next/link';
+import BackgroundLoader from './BackgroundLoader';
 
 interface AuthButtonProps {
   authImage: string;
@@ -14,11 +15,14 @@ interface AuthButtonProps {
 const AuthButton: FC<AuthButtonProps> = ({ authImage, authName, authText }) => {
   const {
     socialLogin,
-    btnstatus,
+    loadingBtn,
     redirectPath,
     setLoginRegisterForm,
     userAction,
+    loadingBackground
   } = useAuthState();
+
+  
 
   const handleGoogle = () => {
     socialLogin("google", redirectPath);
@@ -27,10 +31,18 @@ const AuthButton: FC<AuthButtonProps> = ({ authImage, authName, authText }) => {
   };
 
   const baseStyle =
-    `flex items-center justify-center w-full sm:w-[320px] gap-2 rounded-lg py-2 px-4  text-black shadow hover:bg-gray-100 transition cursor-pointer ${btnstatus === "Processing..." ? "bg-green-700" : "bg-white"}`;
+    `flex items-center justify-center w-full sm:w-[320px] gap-2 rounded-lg py-2 px-4  text-black shadow hover:bg-gray-100 transition cursor-pointer ${loadingBtn ? "bg-green-700" : "bg-white"}`;
 
   const textStyle = 'text-sm font-medium';
 
+
+  if(loadingBackground){
+    return (
+      <>
+      <BackgroundLoader />
+      </>
+    )
+  }
   if (authName === 'google') {
     return (
       <div className="flex justify-center ">
@@ -47,9 +59,30 @@ const AuthButton: FC<AuthButtonProps> = ({ authImage, authName, authText }) => {
               className="inline-block"
             />
           )}
-          <span className={textStyle}>
-            {btnstatus === 'Processing...' ? status : authText}
-          </span>
+          
+          {loadingBtn ? (
+                  <span className="flex justify-center items-center gap-2 text-sm font-medium">
+                    <svg className="animate-spin h-5 w-5 text-white" viewBox="0 0 24 24">
+                      <circle
+                        className="opacity-25"
+                        cx="12"
+                        cy="12"
+                        r="10"
+                        stroke="currentColor"
+                        strokeWidth="4"
+                        fill="none"
+                      />
+                      <path
+                        className="opacity-75"
+                        fill="currentColor"
+                        d="M4 12a8 8 0 018-8v8H4z"
+                      />
+                    </svg>
+                   Processing...
+                  </span>
+                ) : (
+                  authText
+                )}
         </button>
       </div>
     );

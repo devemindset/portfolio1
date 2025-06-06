@@ -33,6 +33,11 @@ const RequestHeader: FC = ({}) => {
           </div>
         )
           }
+          {userData.username && (
+            <Link href="/dashboard" className="md:hidden bg-[#1E2A3A] text-white px-4 py-2 rounded hover:bg-blue-700 ml-5 text-sm whitespace-nowrap">
+                      Dashboard
+                    </Link>
+          )}
         </div>
       
     </header>
