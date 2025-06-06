@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
-import { Link2 } from "lucide-react";
+import { Link } from "lucide-react";
 import { ChevronDownIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 import { RequestTrack, Validator } from "@/types";
 import { formatDate } from "@/tools/utils";
@@ -95,7 +95,7 @@ export default function TrackRow({
               {track.validators.length}
             </span>
             <button onClick={handleLinkClick} className="ml-2">
-              <Link2 size={18} />
+              <Link size={18} />
             </button>
           </div>
           <div className="hidden md:flex justify-center items-center">
@@ -132,6 +132,7 @@ export default function TrackRow({
                 <TrackLinksDropdown
                   all_source={track.all_source}
                   token={track.token}
+                  slug={track.slug}
                   onClose={() => setVisibleLinkId(null)}
                 />
               </div>
@@ -151,6 +152,7 @@ export default function TrackRow({
                 <TrackLinksDropdown
                   all_source={track.all_source}
                   token={track.token}
+                  slug={track.slug}
                   onClose={() => setVisibleLinkId(null)}
                 />
               </div>

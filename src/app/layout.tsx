@@ -14,7 +14,7 @@ const roboto = Roboto({
 });
 
 export const metadata: Metadata = {
-  title: 'Snap Validate',
+  title: 'Validation Flow',
   // description: '',
 };
 

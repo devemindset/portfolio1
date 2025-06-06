@@ -8,7 +8,7 @@ import { DataValidation, RequestInTheTokenPage } from "@/types";
 import { useAuthState } from "@/context/AuthContext";
 import RequestHeader from "@/components/RequestHeader";
 
-const TOKEN_LENGTH = 12;
+
 
 const Page: NextPage = () => {
   const { slugtokenWithKey } = useParams();
@@ -25,9 +25,13 @@ const Page: NextPage = () => {
   const [collect,setCollect] = useState("anonymous");
 
   const raw = typeof slugtokenWithKey === "string" ? slugtokenWithKey : "";
+const TOKEN_LENGTH = 12;
 
-  const token = raw.slice(-TOKEN_LENGTH, raw.length);
-  const sourceKey = raw.slice(token.length + (raw.length - TOKEN_LENGTH));
+const lastDashIndex = raw.lastIndexOf("-");
+const combinedKey = raw.slice(lastDashIndex + 1); // token + sourceKey
+
+const token = combinedKey.slice(0, TOKEN_LENGTH);
+const sourceKey = combinedKey.slice(TOKEN_LENGTH);
 
   useEffect(() => {
     if (!token || token.length < TOKEN_LENGTH) {

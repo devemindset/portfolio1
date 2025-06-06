@@ -14,7 +14,7 @@ export default function DashboardPage() {
   useEffect(() => {
     api
       .get("/track_user/track_users_list")
-      .then((res) => setTracks(res.data))
+      .then((res) => {setTracks(res.data); console.log(res.data)})
       .catch((err) => console.error("Error:", err));
   }, []);
 

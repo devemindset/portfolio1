@@ -171,9 +171,12 @@ const CreateTrackPage: NextPage = () => {
               </div>
 
               <div>
-                <label className="block font-medium mb-2">Sharing platforms</label>
+                <span className="text-green-600">{" One link 👉 1 credit, Several links  👉 3 credits, All links  👉 4 credits"}</span>
+                <label className="block font-medium mb-2">Sharing platforms </label>
                 <div className="flex gap-4 mb-4">
                   {(["one", "multiple", "all"] as const).map((mode) => (
+                   
+                    
                     <button
                       key={mode}
                       type="button"
@@ -187,9 +190,12 @@ const CreateTrackPage: NextPage = () => {
                     >
                       {mode === "one" ? "One" : mode === "multiple" ? "Several" : "All"}
                     </button>
+                    
+                   
                   ))}
+                  
                 </div>
-
+                  
                 {(platformMode === "one" || platformMode === "multiple") && (
                   <div className="flex flex-wrap gap-3">
                     {platforms.map((p) => (
