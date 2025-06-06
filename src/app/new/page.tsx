@@ -12,6 +12,7 @@ import { useAuthState } from "@/context/AuthContext";
 import Link from "next/link";
 import RequestHeader from "@/components/RequestHeader";
 import BackgroundLoader from "@/components/BackgroundLoader";
+import DescriptionBox from "@/components/DescriptionBox";
 
 const CreateTrackPage: NextPage = () => {
   const { getUserInfo,userData } = useAuthState();
@@ -344,7 +345,7 @@ const CreateTrackPage: NextPage = () => {
               <li><strong>Title:</strong> {form.title}</li>
               <li>
                 <strong>Description:</strong>
-                <p className="whitespace-pre-wrap mt-1 text-sm text-gray-700">{form.description || "—"}</p>
+                <DescriptionBox content={form.description} maxHeight="max-h-40" />
               </li>
               <li><strong>File URL:</strong> {form.file_url || "—"}</li>
               <li><strong>Collect:</strong> {form.collect}</li>

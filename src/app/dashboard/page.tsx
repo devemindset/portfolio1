@@ -18,11 +18,14 @@ export default function DashboardPage() {
   const {userData} = useAuthState();
 
   useEffect(() => {
-    api
+    if(userData.username){
+      api
       .get("/track_user/track_users_list")
       .then((res) => {setTracks(res.data);})
       .catch((err) => console.error("Error:", err));
-  }, []);
+    }
+    
+  }, [userData]);
 
   const groupByStatus = (validators: Validator[]) => ({
     approved: validators.filter((v) => v.status === "approved"),

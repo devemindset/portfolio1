@@ -267,7 +267,7 @@ const logout = async () => {
           
           // console.log(response.data);
         
-            clearCookies();
+            
           setIsAuthenticated(false);
           localStorage.removeItem("isAuthenticated")
           
@@ -275,6 +275,7 @@ const logout = async () => {
             await signOut({ callbackUrl: '/login' });
                   localStorage.removeItem("isGoogleAuthenticated"); // Reset Google authentication state
                   setIsAuthAuthenticated(false);
+                  clearCookies();
                   
                 }
                 toast.success("Successfully logged out")
