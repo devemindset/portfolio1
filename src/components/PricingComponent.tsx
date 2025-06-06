@@ -49,7 +49,7 @@ const subscriptionOptions = [
   {
     price: 12,
     label: "Monthly",
-    credit : 0,
+    credits : 0,
     // description: "Unlimited usage billed monthly.",
     popular: false,
     features: ["Unlimited validation links",
@@ -60,7 +60,7 @@ const subscriptionOptions = [
   {
     price: 100,
     label: "Annual",
-    credit : 0,
+    credits : 0,
     // description: "Save 15% with annual billing.",
     popular: true,
     features: ["Unlimited validation links",
@@ -171,7 +171,7 @@ const PricingComponent = () => {
                     {label} {mode === "credits" ? "Plan" : "Subscription"}
                   </h3>
                   <p className="text-4xl font-extrabold text-blue-600 mb-2">${price}</p>
-                  {credits && (
+                  {credits !== 0 && (
                     <p className="text-gray-600 mb-2">{credits} credits included</p>
                   )}
                   {/* {description && (

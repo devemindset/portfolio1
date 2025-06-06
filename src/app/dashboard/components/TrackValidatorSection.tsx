@@ -67,7 +67,7 @@ const TrackValidatorSection: FC<TrackValidatorSectionProps> = ({
             <div className="space-y-2">
               {grouped.map((val) => {
                 const sourceLabel =
-                  Object.entries(all_source).find(([_, k]) => k === val.source)?.[0] || "—";
+                  Object.entries(all_source).find(([, k]) => k === val.source)?.[0] || "—";
 
                 return (
                   <div

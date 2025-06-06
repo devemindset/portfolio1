@@ -39,7 +39,7 @@ export default function TrackRow({
 
   const [portalRoot, setPortalRoot] = useState<HTMLElement | null>(null);
   const [anchorEl, setAnchorEl] = useState<DOMRect | null>(null);
-
+  console.log("tra",track)
   useEffect(() => {
     setPortalRoot(document.body);
 
@@ -88,7 +88,7 @@ export default function TrackRow({
           </div>
           <div className="truncate text-xs text-gray-500">
             <span className="md:hidden font-semibold text-gray-500">Date: </span>
-            {formatDate(track.deadline)}
+            {track.deadline ? formatDate(track.deadline) : "—"}
           </div>
           <div className="flex items-center justify-between md:justify-center">
             

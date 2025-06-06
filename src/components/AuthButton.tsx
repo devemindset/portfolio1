@@ -31,7 +31,7 @@ const AuthButton: FC<AuthButtonProps> = ({ authImage, authName, authText }) => {
   };
 
   const baseStyle =
-    `flex items-center justify-center w-full sm:w-[320px] gap-2 rounded-lg py-2 px-4  text-black shadow hover:bg-gray-100 transition cursor-pointer ${loadingBtn ? "bg-green-700" : "bg-white"}`;
+    `flex items-center justify-center w-full sm:w-[320px] gap-2 rounded-lg py-2 px-4  text-black shadow transition cursor-pointer ${loadingBtn ? "bg-green-700" : "bg-white hover:bg-gray-100 "}`;
 
   const textStyle = 'text-sm font-medium';
 
@@ -49,6 +49,7 @@ const AuthButton: FC<AuthButtonProps> = ({ authImage, authName, authText }) => {
         <button
           onClick={handleGoogle}
           className={baseStyle}
+          disabled={loadingBtn}
         >
           {authImage && (
             <Image

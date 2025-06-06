@@ -26,7 +26,7 @@ export interface RequestTrack {
   description: string;
   file_url: string;
   token: string;
-  all_source: object[];
+  all_source: Record<string, string>;
   all_receiver: string;
   deadline?: string | undefined;
   validators: Validator[];

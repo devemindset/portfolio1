@@ -17,7 +17,7 @@ const Feedback: FC = ({}) => {
             if(name !== "" && name.length <= 10 && message.length <= 1000 && message !== ""){
                 setLoading(true);
                 try{
-                    const response = await pubic_api.post('/track_user/feedback/',{
+                    const response = await pubic_api.post('/user/feedback/',{
                         name : name,
                         message : message
                     })
