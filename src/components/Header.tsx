@@ -17,7 +17,7 @@ export default function Header() {
             <Image src="/favicon_io/android-chrome-192x192.png" alt="SnapValidate" width={24} height={24} />
           </div>
           <span className="text-xl font-bold text-gray-900">
-            Snap<span className="text-blue-600">Validate</span>
+            Validation<span className="text-blue-600">Flow</span>
           </span>
         </Link>
 
