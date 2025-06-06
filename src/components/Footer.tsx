@@ -56,6 +56,9 @@ const Footer: FC = ({}) => {
                 <Link href="/about">
                   <span className="hover:text-[#2A6DD2] transition-colors cursor-pointer">About</span>
                 </Link>
+                <Link href="/feedback">
+                  <span className="hover:text-[#2A6DD2] transition-colors cursor-pointer">Feedback</span>
+                </Link>
                 <Link href="/contact">
                   <span className="hover:text-[#2A6DD2] transition-colors cursor-pointer">Contact</span>
                 </Link>

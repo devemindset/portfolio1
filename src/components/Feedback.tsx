@@ -1,3 +1,4 @@
+"use client";
 import { pubic_api } from '@/lib/api';
 import { useState, type FC } from 'react';
 

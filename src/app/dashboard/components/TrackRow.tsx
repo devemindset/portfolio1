@@ -39,7 +39,7 @@ export default function TrackRow({
 
   const [portalRoot, setPortalRoot] = useState<HTMLElement | null>(null);
   const [anchorEl, setAnchorEl] = useState<DOMRect | null>(null);
-  console.log("tra",track)
+
   useEffect(() => {
     setPortalRoot(document.body);
 
