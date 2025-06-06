@@ -21,8 +21,8 @@ const creditOptions = [
         note: "Perfect for testing quickly",
   },
   {
-    price: 10,
-    credits: 30,
+    price: 5,
+    credits: 15,
     // title :"10 credits (+1 bonus)",
     label: "Starter",
     popular: false,
@@ -33,8 +33,8 @@ const creditOptions = [
         note: "For one-off small validations",
   },
   {
-    price: 15,
-    credits: 50,
+    price: 10,
+    credits: 30,
     label: "Pro",
     popular: true,
     features: ["personalized link",

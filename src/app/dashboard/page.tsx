@@ -5,6 +5,7 @@ import api from "@/lib/api";
 import { RequestTrack, Validator } from "@/types";
 import Sidebar from "./components/Sidebar";
 import TrackTable from "./components/TrackTable";
+import RequestHeader from "@/components/RequestHeader";
 
 export default function DashboardPage() {
   const [tracks, setTracks] = useState<RequestTrack[]>([]);
@@ -14,7 +15,7 @@ export default function DashboardPage() {
   useEffect(() => {
     api
       .get("/track_user/track_users_list")
-      .then((res) => {setTracks(res.data); console.log(res.data)})
+      .then((res) => {setTracks(res.data);})
       .catch((err) => console.error("Error:", err));
   }, []);
 
@@ -25,10 +26,12 @@ export default function DashboardPage() {
   });
 
   return (
+    <>
+    <RequestHeader />
     <div className="flex min-h-screen flex-col md:flex-row">
       <Sidebar />
       <main className="flex-1 bg-gray-50 pt-20 md:pt-0 p-4 sm:p-6 md:p-10 overflow-x-auto">
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-4 pt-10">
           <h2 className="text-2xl font-semibold">My Validations</h2>
           <a
             href="/new"
@@ -48,5 +51,6 @@ export default function DashboardPage() {
         />
       </main>
     </div>
+    </>
   );
 }

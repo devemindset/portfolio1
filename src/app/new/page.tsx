@@ -10,6 +10,7 @@ import { CreateTrack } from "@/types";
 import { platforms } from "@/constant";
 import { useAuthState } from "@/context/AuthContext";
 import Link from "next/link";
+import RequestHeader from "@/components/RequestHeader";
 
 const CreateTrackPage: NextPage = () => {
   const { getUserInfo } = useAuthState();
@@ -125,6 +126,9 @@ const CreateTrackPage: NextPage = () => {
   };
 
   return (
+
+    <>
+    <RequestHeader />
     <main className="flex justify-center items-center bg-gray-100 min-h-screen py-12 px-4">
       <section className="bg-white py-10 px-6 md:px-10 rounded-lg max-w-3xl w-full shadow-md">
         {!creationSuccess ? (
@@ -359,9 +363,10 @@ const CreateTrackPage: NextPage = () => {
           </div>
         </div>
 
-        // Lorem, ipsum dolor sit amet consectetur adipisicing elit. Molestias qui optio, aut assumenda error sint, sed laborum, temporibus in illum veritatis non incidunt. Vero vitae quasi delectus optio provident sit.
+        
       )}
     </main>
+    </>
   );
 };
 

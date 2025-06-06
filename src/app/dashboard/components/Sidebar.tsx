@@ -4,12 +4,14 @@ import Link from "next/link";
 import { HelpCircle, Home,CreditCard,LogOut, Menu, X } from "lucide-react";
 
 import { useState } from "react";
+import { useAuthState } from "@/context/AuthContext";
 
 export default function Sidebar() {
+  const {userData} = useAuthState();
  
   const [open, setOpen] = useState(false);
   return (
-    <aside className="fixed top-0 left-0 md:relative w-full md:w-60 bg-white shadow-sm z-50 p-4 md:p-6 flex flex-row md:flex-col justify-between items-center md:items-start md:h-screen gap-4 md:gap-10">
+    <aside className="fixed top-0 left-0 md:relative w-full md:w-40 bg-white shadow-sm z-50 p-4 md:p-6 flex flex-row md:flex-col justify-between items-center md:items-start md:h-screen gap-4 md:gap-10">
       
       {/* Section logo + dashboard */}
       <div className="flex items-center gap-2 md:mb-4">
@@ -73,6 +75,20 @@ export default function Sidebar() {
       </Link>
         </div>
       )}
+
+      {userData?.subscription && (
+      <div className="md:hidden text-center text-xs text-blue-600 italic mt-4 absolute bottom-0 right-5">
+        {userData.subscription?.method === "year"
+          ? "Annual plan active (no credit limits)"
+          : userData.subscription?.method === "month"
+          ? "Monthly plan active (no credit limits)"
+          : userData.subscription?.method === "credit" &&
+            userData.subscription.credits !== 0 &&
+            userData.subscription.credits !== 1
+          ? `${userData.subscription.credits} credits left`
+          : `${userData.subscription?.credits} credit - top up soon`}
+      </div>
+)}
     </aside>
   );
 }
