@@ -1,11 +1,19 @@
+"use client" ;
 import type { FC } from 'react';
 import Link from "next/link";
+import { motion } from "framer-motion";
 
 // interface FinalCTASectionProps {}
 
 const FinalCTASection: FC = () => {
         return (
-    <section className="bg-white py-24 px-6 border-t border-gray-100">
+    <motion.section className="bg-white py-24 px-6 border-t border-gray-100"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          viewport={{ once: true }}
+    
+    >
       <div className="max-w-3xl mx-auto text-center">
         {/* Titre */}
         <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6">
@@ -28,7 +36,7 @@ const FinalCTASection: FC = () => {
           </Link>
         </div>
       </div>
-    </section>
+    </motion.section>
   );
   
 }

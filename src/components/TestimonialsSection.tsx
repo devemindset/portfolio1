@@ -9,7 +9,7 @@ const testimonials = [
     name: "Julie",
     role: "Product Manager",
     img: "/july.png",
-    text: "We used to approve our designs over email. Now we use SnapValidate for every key step.",
+    text: "We used to approve our designs over email. Now we use ValidationFlow for every key step.",
   },
   {
     name: "Freelancer",

@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useAuthState } from "@/context/AuthContext";
 import api from "@/lib/api";
 import { loadStripe } from "@stripe/stripe-js";
+import { motion } from "framer-motion";
 
 const creditOptions = [
   {
@@ -104,8 +105,14 @@ const PricingComponent = () => {
   };
 
   return (
-    <div className="w-screen h-screen flex justify-center items-center bg-gray-50 px-4 " id="pricing">
-      <div className="max-w-6xl w-full">
+    
+      <motion.div className="max-w-6xl w-full px-5"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          viewport={{ once: true }}
+      
+      >
         {/* Title + Toggle */}
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold text-gray-800 mb-4">Choose Your Plan</h1>
@@ -143,16 +150,21 @@ const PricingComponent = () => {
         <div className={`grid ${mode === "credits" ? "md:grid-cols-3" : "md:grid-cols-2"} grid-cols-1 gap-6`}>
           {(mode === "credits" ? creditOptions : subscriptionOptions).map(
             ({ price, label, credits, features, popular }) => (
-              <div
-                key={label}
-                className={`rounded-lg shadow p-6 bg-white border-2 ${
-                  popular ? "border-blue-600" : "border-gray-200"
-                } flex flex-col justify-between`}
-              >
+              <motion.div
+                  key={label}
+                  className={`rounded-lg shadow p-6 bg-white border-2 ${
+                    popular ? "border-blue-600" : "border-gray-200"
+                  } flex flex-col justify-between hover:shadow-md transition-all`}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.1 }}
+                  viewport={{ once: true }}
+                  whileHover={{ scale: 1.02 }}
+                >
                 {popular && (
-                  <div className="text-sm text-white bg-blue-600 px-3 py-1 rounded-full w-fit mb-3 font-semibold">
-                    Most Popular
-                  </div>
+                  <div className="text-xs uppercase bg-blue-600 text-white px-3 py-1 rounded-full w-fit mb-3 font-medium shadow">
+                  Most Popular
+                </div>
                 )}
                 <div>
                   <h3 className="text-2xl font-bold text-gray-800 mb-1">
@@ -177,7 +189,7 @@ const PricingComponent = () => {
                 >
                   {mode === "credits" ? "Buy Now" : "Subscribe"}
                 </button>}
-              </div>
+              </motion.div>
             )
           )}
         </div>
@@ -193,8 +205,8 @@ const PricingComponent = () => {
             <p className="text-blue-700 text-lg font-semibold">Redirecting to Stripe...</p>
           </div>
         )}
-      </div>
-    </div>
+      </motion.div>
+  
   );
 };
 
