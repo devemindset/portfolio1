@@ -1,3 +1,4 @@
+"use client";
 import AuthButton from "@/components/AuthButton";
 import { useAuthState } from "@/context/AuthContext";
 import type { NextPage } from "next";
