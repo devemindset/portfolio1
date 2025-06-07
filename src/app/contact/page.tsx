@@ -1,3 +1,4 @@
+"use client";
 import { useAuthState } from "@/context/AuthContext";
 import { pubic_api } from "@/lib/api";
 import { isValidEmail } from "@/tools/utils";

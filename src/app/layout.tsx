@@ -7,6 +7,7 @@ import AuthProviderWrapper from './providers/AuthProviderWrapper';
 import Footer from '@/components/Footer';
 import ParallaxProviderWrapper from './providers/ParallaxProviderWrapper';
 import { Toaster } from 'react-hot-toast';
+import RecaptchaProviderWrapper from './providers/RecaptchaProviderWrapper';
 
 const roboto = Roboto({
   subsets: ["latin"],       // You can also use ["latin", "cyrillic", etc.] if needed
@@ -16,7 +17,7 @@ const roboto = Roboto({
 
 export const metadata: Metadata = {
   title: 'Validation Flow',
-  // description: '',
+  description: 'Fast and easy validation link system',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -24,6 +25,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body className={roboto.className}>
+        <RecaptchaProviderWrapper>
         <AuthProviderWrapper>
         <ParallaxProviderWrapper>
 
@@ -39,6 +41,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           
         </ParallaxProviderWrapper>
       </AuthProviderWrapper>
+      </RecaptchaProviderWrapper>
       </body>
     </html>
   );
