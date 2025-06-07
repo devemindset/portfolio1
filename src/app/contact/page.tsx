@@ -64,7 +64,7 @@ const Page: NextPage = ({}) => {
             setBrowserLimitValue((prevState) => {
               const updateState = prevState
                 ? { ...prevState, contact: prevState.contact + 1 }
-                : { date: "", contact: 1, newsletterSub: 0 ,view_request : false};
+                : { date: "", contact: 1, newsletterSub: 0 ,view_request : false, send_feedback : false};
               localStorage.setItem("limite_actions", JSON.stringify(updateState));
               return updateState;
             });
