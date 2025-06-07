@@ -2,6 +2,7 @@
 import { useAuthState } from '@/context/AuthContext';
 import { pubic_api } from '@/lib/api';
 import { useEffect, useState, type FC } from 'react';
+import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 
 // interface FeedbackProps {}
 
@@ -14,6 +15,7 @@ const Feedback: FC = ({}) => {
         const [loading,setLoading] = useState(false);
 
 
+        const { executeRecaptcha } = useGoogleReCaptcha();
 
         useEffect(() => {
           userAction("visit","feebback page");
@@ -21,12 +23,26 @@ const Feedback: FC = ({}) => {
         const handleSubmit = async (e: React.FormEvent) => {
             e.preventDefault();
 
+            setStatus("Authenticating...");
+
+            if (!executeRecaptcha) {
+              setFeedbackState("error")
+              setStatus("Authentication issue.");
+
+              return;
+            }
             if(name !== "" && name.length <= 10 && message.length <= 1000 && message !== ""){
+              const recaptchaToken = await executeRecaptcha("feedback_form");
                 setLoading(true);
+
+                if (recaptchaToken){
+
+                  setStatus("Processing...");
                 try{
                     const response = await pubic_api.post('/user/feedback/',{
                         name : name,
-                        message : message
+                        message : message,
+                        recaptcha_token: recaptchaToken,
                     })
                     if(response.status === 201){
                         setStatus("Thank you for your feedback!");
@@ -46,7 +62,11 @@ const Feedback: FC = ({}) => {
                     setFeedbackState("error");
                     setLoading(false);
                 }
-                
+                  }else {
+                  setFeedbackState("error")
+                  setStatus("Authentication failed, please try again!");
+                  setStatus("Send");
+                }
 
 
             }else{
@@ -81,6 +101,7 @@ const Feedback: FC = ({}) => {
         ></textarea>
         <button
           type="submit"
+          disabled={loading}
           className={`${loading ? "bg-green-600" : "bg-[#2A6DD2]"} hover:bg-[#1a4a9c] transition-all duration-200 text-white px-6 py-2 rounded-md font-medium w-full cursor-pointer`}
         >
           {!loading ? "Send" : "sending..."}
@@ -90,6 +111,9 @@ const Feedback: FC = ({}) => {
         )}
         {feedbackState === "error" && (
             <p className="text-red-600 text-sm mt-2 text-center">{status}</p>
+        )}
+        {status === "Authenticating..." && (
+            <p className="text-green-700 text-sm mt-2 text-center">{status}</p>
         )}
       </form>
     </section>
