@@ -1,10 +1,9 @@
 import { Suspense } from "react";
-import dynamic from "next/dynamic";
 import BackgroundLoader from "@/components/BackgroundLoader";
+import SuccessClient from "./SuccessClient";
 
 
-// Dynamically import the client-only SuccessPage with SSR disabled
-const SuccessClient = dynamic(() => import("./SuccessClient"), { ssr: false });
+
 
 export default function Page() {
   return (
