@@ -1,6 +1,15 @@
 // app/terms/page.tsx
 "use client";
+
+import { useAuthState } from "@/context/AuthContext";
+import { useEffect } from "react";
+
 export default function TermsPage() {
+  const {userAction} = useAuthState();
+     
+    useEffect(() => {
+          userAction("visit","terms")
+        },[])
   return (
     <main className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto bg-white p-8 rounded-lg shadow-md">

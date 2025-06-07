@@ -14,7 +14,14 @@ import DescriptionBox from "@/components/DescriptionBox";
 
 const Page: NextPage = () => {
   const { slugtokenWithKey } = useParams();
-  const {userData,browserLimitValue, setBrowserLimitValue} = useAuthState();
+  const {userData,browserLimitValue, setBrowserLimitValue,userAction} = useAuthState();
+ 
+   
+  useEffect(() => {
+        userAction("visit","public")
+      },[])
+
+
   const [track, setTrack] = useState<RequestInTheTokenPage | null>(null);
   const [requestId, setRequestId] = useState<number | null>(null);
   const [comment, setComment] = useState("");

@@ -1,4 +1,12 @@
+import { useAuthState } from "@/context/AuthContext";
+import { useEffect } from "react";
+
 const PaymentFailed = () => {
+  const {userAction} = useAuthState();
+     
+    useEffect(() => {
+          userAction("visit"," payment success")
+        },[])
   return (
     <div className="min-h-screen flex items-center justify-center bg-red-100">
       <div className="bg-white p-6 rounded shadow text-center">

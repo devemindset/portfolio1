@@ -3,6 +3,7 @@
 import type { FC } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { useAuthState } from "@/context/AuthContext";
 
 const testimonials = [
   {
@@ -26,6 +27,11 @@ const testimonials = [
 ];
 
 const TestimonialsSection: FC = () => {
+  const {userAction} = useAuthState();
+
+  const handleAction = () => {
+    userAction("click","testimonial")
+  }
   return (
     <section className="bg-white py-24 px-6">
       <div className="max-w-5xl mx-auto text-center">
@@ -51,6 +57,8 @@ const TestimonialsSection: FC = () => {
               transition={{ delay: index * 0.15, duration: 0.6, ease: "easeOut" }}
               viewport={{ once: true }}
               whileHover={{ scale: 1.02 }}
+
+              onClick={handleAction}
             >
               <div className="flex items-center gap-4 mb-4">
                 <Image

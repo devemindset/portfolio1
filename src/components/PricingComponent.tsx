@@ -73,11 +73,12 @@ const subscriptionOptions = [
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!);
 
 const PricingComponent = () => {
-  const { userData } = useAuthState();
+  const { userData,userAction } = useAuthState();
   const [mode, setMode] = useState<"credits" | "subscription">("credits");
   const [loading, setLoading] = useState(false);
 
   const handleCheckout = async (price: number) => {
+    userAction("click","pay")
     if (!userData.username) {
       window.location.href = "/register";
       return;

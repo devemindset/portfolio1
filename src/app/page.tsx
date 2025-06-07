@@ -8,10 +8,18 @@ import HowItWorksSection from "@/components/HowItWorksSection";
 import PricingComponent from "@/components/PricingComponent";
 import ProblemSolutionSection from "@/components/ProblemSolutionSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
+import { useAuthState } from "@/context/AuthContext";
 import type {  NextPage } from "next";
+import { useEffect } from "react";
 
 
 const Page: NextPage = () => {
+  const {userAction} = useAuthState();
+       
+      useEffect(() => {
+            userAction("visit","home")
+          },[])
+
   return (
     <>
     <Header />

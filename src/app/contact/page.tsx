@@ -2,19 +2,23 @@ import { useAuthState } from "@/context/AuthContext";
 import { pubic_api } from "@/lib/api";
 import { isValidEmail } from "@/tools/utils";
 import type { NextPage } from "next";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 
 const Page: NextPage = ({}) => {
   const [message, setMessage] = useState<string>("");
   const [email, setEmail] = useState<string>("");
-  const { browserLimitValue, setBrowserLimitValue } = useAuthState();
+  const { browserLimitValue, setBrowserLimitValue,userAction } = useAuthState();
   const [status, setStatus] = useState("SEND");
   const [error,setError] = useState("");
   const [success,setSuccess] = useState("");
 
   const { executeRecaptcha } = useGoogleReCaptcha();
 
+
+  useEffect(() => {
+    userAction("visite","contact")
+  })
   const handleContactForm = async (e?: React.FormEvent) => {
     if (e) e.preventDefault();
 
@@ -59,7 +63,7 @@ const Page: NextPage = ({}) => {
             setBrowserLimitValue((prevState) => {
               const updateState = prevState
                 ? { ...prevState, contact: prevState.contact + 1 }
-                : { date: "", contact: 1, newsletterSub: 0 };
+                : { date: "", contact: 1, newsletterSub: 0 ,view_request : false};
               localStorage.setItem("limite_actions", JSON.stringify(updateState));
               return updateState;
             });

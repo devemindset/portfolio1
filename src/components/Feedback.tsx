@@ -1,17 +1,23 @@
 "use client";
+import { useAuthState } from '@/context/AuthContext';
 import { pubic_api } from '@/lib/api';
-import { useState, type FC } from 'react';
+import { useEffect, useState, type FC } from 'react';
 
 // interface FeedbackProps {}
 
 const Feedback: FC = ({}) => {
-
+        const {userAction} = useAuthState();
         const [name,setName] = useState("");
         const [message,setMessage] = useState("");
         const [feedbackState,setFeedbackState] = useState("");
         const [status,setStatus] = useState("");
         const [loading,setLoading] = useState(false);
 
+
+
+        useEffect(() => {
+          userAction("visit","feebback page");
+        },[])
         const handleSubmit = async (e: React.FormEvent) => {
             e.preventDefault();
 

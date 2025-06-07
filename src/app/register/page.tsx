@@ -1,9 +1,16 @@
 import AuthButton from "@/components/AuthButton";
+import { useAuthState } from "@/context/AuthContext";
 import type { NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
+import { useEffect } from "react";
 
 const Page: NextPage = () => {
+  const {userAction} = useAuthState();
+     
+    useEffect(() => {
+          userAction("visit","register")
+        },[])
   return (
     <>
       <Head>

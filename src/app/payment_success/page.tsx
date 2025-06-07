@@ -8,7 +8,7 @@ import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const SuccessPage: NextPage = () => {
-  const { getUserInfo } = useAuthState();
+  const { getUserInfo,userAction } = useAuthState();
   const searchParams = useSearchParams();
   const session_id = searchParams.get("session_id");
 
@@ -16,6 +16,9 @@ const SuccessPage: NextPage = () => {
   const [confirmed, setConfirmed] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  useEffect(() => {
+      userAction("visit","new payment success")
+    },[])
   useEffect(() => {
     const verifyPayment = async () => {
       if (!session_id) return;

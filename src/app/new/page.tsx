@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import type { NextPage } from "next";
 import type { ChangeEvent } from "react";
@@ -15,9 +15,13 @@ import BackgroundLoader from "@/components/BackgroundLoader";
 import DescriptionBox from "@/components/DescriptionBox";
 
 const CreateTrackPage: NextPage = () => {
-  const { getUserInfo,userData } = useAuthState();
+  const { getUserInfo,userData,userAction } = useAuthState();
   const router = useRouter();
 
+
+  useEffect(() => {
+    userAction("visit","new page")
+  },[])
   const [form, setForm] = useState<CreateTrack>({
     title: "",
     description: "",
