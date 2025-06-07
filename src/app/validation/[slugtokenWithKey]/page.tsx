@@ -269,7 +269,7 @@ const sourceKey = combinedKey.slice(TOKEN_LENGTH);
 
               <div className="mt-3 flex flex-wrap gap-4 text-xs sm:text-sm text-blue-600 font-medium">
                 <a href="/about" className="hover:underline">Learn more</a>
-                <a href="/report" className="hover:underline">Report abuse</a>
+                <a href="/contact" className="hover:underline">Report abuse</a>
               </div>
             </div>
           </div>
