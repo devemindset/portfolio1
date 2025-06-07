@@ -12,11 +12,9 @@ export const pubic_api = axios.create({
 });
 
 // Function to extract csrftoken from cookies
-const getCsrfToken = () => {
-    return document.cookie
-        .split('; ')
-        .find(row => row.startsWith('csrftoken='))
-        ?.split('=')[1];
+export const getCsrfToken = (): string | null => {
+  const match = document.cookie.match(/csrftoken=([^;]+)/);
+  return match ? match[1] : null;
 };
 
 

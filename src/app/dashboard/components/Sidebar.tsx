@@ -5,9 +5,15 @@ import { HelpCircle, Home,CreditCard,LogOut, Menu, X } from "lucide-react";
 
 import { useState } from "react";
 import { useAuthState } from "@/context/AuthContext";
+import LogoutUser from "@/app/logout/LogoutUser";
 
 export default function Sidebar() {
   const {userData} = useAuthState();
+  const [logout,setLogout] = useState<boolean>(false);
+
+  const logoutHandle =  () =>{
+    setLogout(true)
+  }
  
   const [open, setOpen] = useState(false);
   return (
@@ -44,10 +50,10 @@ export default function Sidebar() {
           <CreditCard size={18} className="hidden md:inline" />
           <span className="hidden md:inline">Pricing</span>
       </Link>
-      <Link href="/logout" className="text-gray-600 mb-4 hover:text-gray-800 flex items-center gap-1 text-sm md:mt-auto cursor-pointer" >
+      <div onClick={logoutHandle} className="text-gray-600 mb-4 hover:text-gray-800 flex items-center gap-1 text-sm md:mt-auto cursor-pointer" >
           <LogOut size={18} className="hidden md:inline" />
           <span className="hidden md:inline">Logout</span>
-      </Link>
+      </div>
       </div>
 
       {/* Mobile toggle */}
@@ -69,10 +75,10 @@ export default function Sidebar() {
           <CreditCard size={18} />
           <span className="hidden md:inline">Pricing</span>
       </Link>
-      <Link href="/logout" className="text-gray-600 mb-4 hover:text-gray-800 flex items-center gap-1 text-sm md:mt-auto cursor-pointer" >
+      <div onClick={logoutHandle} className="text-gray-600 mb-4 hover:text-gray-800 flex items-center gap-1 text-sm md:mt-auto cursor-pointer" >
           <LogOut size={18} />
           <span className="hidden md:inline">Logout</span>
-      </Link>
+      </div>
         </div>
       )}
 
@@ -89,6 +95,7 @@ export default function Sidebar() {
           : `${userData.subscription?.credits} credit - top up soon`}
       </div>
 )}
+    {logout && <LogoutUser />}
     </aside>
   );
 }

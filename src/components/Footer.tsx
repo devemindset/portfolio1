@@ -1,14 +1,22 @@
 "use client";
-import type { FC } from 'react';
+import { useState, type FC } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useAuthState } from '@/context/AuthContext';
 import { motion } from "framer-motion";
+import LogoutUser from '@/app/logout/LogoutUser';
 
 // interface FooterProps {}
 
 const Footer: FC = ({}) => {
   const { userData } = useAuthState();
+  const [logout,setLogout] = useState<boolean>(false);
+  
+    const logoutHandle =  () =>{
+      setLogout(true)
+    }
+
+
         return (
           <>
             <motion.footer className="bg-white shadow-md mt-16"
@@ -45,9 +53,9 @@ const Footer: FC = ({}) => {
                 <Link href="/">
                   <span className="hover:text-[#2A6DD2] transition-colors cursor-pointer">Home</span>
                 </Link>
-                {userData.username && <Link href="/logout">
+                {userData.username && <div onClick={logoutHandle}>
                   <span className="hover:text-[#2A6DD2] transition-colors cursor-pointer">Log out</span>
-                </Link>}
+                </div>}
                 {!userData.username && <Link href="/login">
                   <span className="hover:text-[#2A6DD2] transition-colors cursor-pointer">Login</span>
                 </Link>}
@@ -87,6 +95,7 @@ const Footer: FC = ({}) => {
               © 2025 ValidationFlow. All rights reserved.
             </div>
           </motion.footer> 
+          {logout && <LogoutUser />}
           </>
         );
 }
