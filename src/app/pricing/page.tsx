@@ -1,3 +1,4 @@
+"use client";
 import PricingComponent from "@/components/PricingComponent";
 import { useAuthState } from "@/context/AuthContext";
 import type { NextPage } from "next";

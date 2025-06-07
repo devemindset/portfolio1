@@ -1,3 +1,4 @@
+"use client";
 import { useAuthState } from "@/context/AuthContext";
 import { useEffect } from "react";
 
