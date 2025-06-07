@@ -249,7 +249,7 @@ const socialLogin = async (auth: string, redirectPath?: string) => {
 
   try{
       // Sign in with Google using NextAuth.js
-      await signIn(auth,{ redirect : false});
+      await signIn(auth, { callbackUrl: `${process.env.NEXT_PUBLIC_APP_URL}/dashboard` });
       console.log(redirectPath)
 
   }catch (error) {
