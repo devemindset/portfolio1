@@ -28,7 +28,7 @@ const Page: NextPage = () => {
     <HowItWorksSection />
     <TestimonialsSection />
     <FeaturesSection />
-    <div className="flex items-center justify-center py-5 bg-white">
+    <div className="flex items-center justify-center py-5 bg-white " id="pricing">
     <PricingComponent />
 
     </div>

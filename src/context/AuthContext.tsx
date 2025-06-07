@@ -264,29 +264,24 @@ const logout = async () => {
 
   try {
       
-          // const response = await api.post(`${process.env.NEXT_PUBLIC_API_URL}/user/logout/`,{})
-          
-          // console.log(response.data);
-        
+          // Déconnexion Django (session, csrftoken)
+            await api.post("/user/logout/");
+
+            // Supprime manuellement les cookies côté client (fallback)
+            clearCookies();
             
-          setIsAuthenticated(false);
-          localStorage.removeItem("isAuthenticated")
+              // Supprime l'état local
+            localStorage.removeItem("isGoogleAuthenticated"); // Reset Google authentication state
+              setIsAuthAuthenticated(false);
+              setIsAuthenticated(false);
+              localStorage.removeItem("isAuthenticated")
           
-            if(isAuthAuthenticated){
-            await signOut({ callbackUrl: '/login' });
-                  localStorage.removeItem("isGoogleAuthenticated"); // Reset Google authentication state
-                  setIsAuthAuthenticated(false);
-                  clearCookies();
-                  
-                }
-                toast.success("Successfully logged out")
+              // Déconnexion NextAuth (Google)
+              await signOut({ callbackUrl: "/login" });
 
-          
 
-          
-             
-         
-     
+               toast.success("Successfully logged out")
+
       
   }catch(error){
       console.log("Error during logout", error);

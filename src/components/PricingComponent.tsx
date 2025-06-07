@@ -5,6 +5,7 @@ import { useAuthState } from "@/context/AuthContext";
 import api from "@/lib/api";
 import { loadStripe } from "@stripe/stripe-js";
 import { motion } from "framer-motion";
+import BackgroundLoader from "./BackgroundLoader";
 
 const creditOptions = [
   {
@@ -100,9 +101,7 @@ const PricingComponent = () => {
       }
     } catch (err) {
       console.error("Checkout error", err);
-    } finally {
-      setLoading(false);
-    }
+    } 
   };
 
   return (
@@ -187,6 +186,7 @@ const PricingComponent = () => {
                 {price !== 0 && <button
                   onClick={() => handleCheckout(price)}
                   className="mt-4 bg-blue-600 hover:bg-blue-700 text-white text-center py-2 rounded transition cursor-pointer"
+                  disabled={loading}
                 >
                   {mode === "credits" ? "Buy Now" : "Subscribe"}
                 </button>}
@@ -202,9 +202,7 @@ const PricingComponent = () => {
         </p>
 
         {loading && (
-          <div className="fixed inset-0 flex items-center justify-center bg-white/80 z-50">
-            <p className="text-blue-700 text-lg font-semibold">Redirecting to Stripe...</p>
-          </div>
+          <BackgroundLoader />
         )}
       </motion.div>
   
