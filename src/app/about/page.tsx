@@ -1,3 +1,4 @@
+"use client";
 import { useAuthState } from "@/context/AuthContext";
 import Link from "next/link";
 import { useEffect } from "react";
