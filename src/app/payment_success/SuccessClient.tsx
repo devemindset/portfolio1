@@ -43,10 +43,10 @@ export default function SuccessClient() {
             setConfirmed(true);
           }
         } else {
-          setError("Paiement non confirmé");
+          setError("Payment not confirmed");
         }
       } catch {
-        setError("Erreur lors de la vérification");
+        setError("Error during verification");
       } finally {
         setLoading(false);
       }

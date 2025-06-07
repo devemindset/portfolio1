@@ -34,13 +34,17 @@ const Footer: FC = ({}) => {
                     
                 />
                 </div>
-                {/* <span className="text-gray-500 text-sm">
+                <span className="text-gray-500 text-sm">
                     Made with ❤️ by Mananga Raimundo group
-                </span> */}
+                </span>
                 </div>
       
               {/* Center section: Legal Links */}
+              
               <div className="flex gap-6 text-gray-500 text-xs">
+                <Link href="/">
+                  <span className="hover:text-[#2A6DD2] transition-colors cursor-pointer">Home</span>
+                </Link>
                 {userData.username && <Link href="/logout">
                   <span className="hover:text-[#2A6DD2] transition-colors cursor-pointer">Log out</span>
                 </Link>}

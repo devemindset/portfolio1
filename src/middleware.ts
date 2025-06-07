@@ -1,36 +1,45 @@
-import { NextResponse } from 'next/server'
-import type { NextRequest } from 'next/server'
-import { getToken } from 'next-auth/jwt'
+// src/middleware.ts
+import { NextRequest, NextResponse } from 'next/server';
 
-export async function middleware(req: NextRequest) {
-  const token = await getToken({
-    req,
-    secret: process.env.NEXTAUTH_SECRET,
-    secureCookie: false, // nécessaire en dev (http)
-  })
+export function middleware(request: NextRequest) {
+  const { pathname } = request.nextUrl;
 
-  const isAuthenticated = !!token
-  const { pathname } = req.nextUrl
+  // Vérifie si l'utilisateur est connecté (cookie de next-auth)
+  const isAuthenticated =
+    request.cookies.has('next-auth.session-token') ||
+    request.cookies.has('__Secure-next-auth.session-token');
 
-  // Rediriger les utilisateurs connectés loin de la landing
-  if ((pathname === '/' || pathname === "/login" || pathname === "/register") && isAuthenticated) {
-    const url = req.nextUrl.clone()
-    url.pathname = '/dashboard'
-    return NextResponse.redirect(url)
-  }
- 
+  // Pages publiques (visibles uniquement si NON connecté)
+  const publicPages = ['/', '/login', '/register'];
 
-  // Protéger certaines routes
-  const protectedRoutes = ['/dashboard', '/new', '/account']
-  if (!isAuthenticated && protectedRoutes.some(route => pathname.startsWith(route))) {
-    const url = req.nextUrl.clone()
-    url.pathname = '/login'
-    return NextResponse.redirect(url)
+  // Pages privées (accessibles uniquement SI connecté)
+  const protectedRoutes = ['/dashboard', '/new'];
+
+  const isPublicPage = publicPages.includes(pathname);
+  const isProtectedRoute = protectedRoutes.some((route) =>
+    pathname.startsWith(route)
+  );
+
+  // 🔒 Si connecté et essaie d’accéder à une page publique → redirige vers /dashboard
+  if (isAuthenticated && isPublicPage) {
+    return NextResponse.redirect(new URL('/dashboard', request.url));
   }
 
-  return NextResponse.next()
+  // 🔐 Si NON connecté et essaie d’accéder à une route protégée → redirige vers /login
+  if (!isAuthenticated && isProtectedRoute) {
+    return NextResponse.redirect(new URL('/login', request.url));
+  }
+
+  return NextResponse.next();
 }
 
+// Appliquer le middleware uniquement sur ces routes
 export const config = {
-  matcher: ['/', '/dashboard/:path*', '/new/:path*', '/account/:path*',"/login","/register"],
-}
+  matcher: [
+    '/',             // landing page
+    '/login',
+    '/register',
+    '/dashboard/:path*',
+    '/new/:path*',
+  ],
+};

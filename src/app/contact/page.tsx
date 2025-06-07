@@ -1,4 +1,5 @@
 "use client";
+import RequestHeader from "@/components/RequestHeader";
 import { useAuthState } from "@/context/AuthContext";
 import { pubic_api } from "@/lib/api";
 import { isValidEmail } from "@/tools/utils";
@@ -85,6 +86,9 @@ const Page: NextPage = ({}) => {
   };
 
   return (
+    <>
+    <RequestHeader />
+   
     <main className="flex justify-center items-center w-screen h-screen bg-gray-100">
       <section className="bg-gray-50 py-10 px-4 md:px-10 rounded-lg max-w-3xl mx-auto mt-10 shadow-md w-full">
         <h1 className="text-2xl font-semibold text-center mb-6">Contact Us</h1>
@@ -138,6 +142,7 @@ const Page: NextPage = ({}) => {
         </form>
       </section>
     </main>
+     </>
   );
 };
 

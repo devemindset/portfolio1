@@ -107,7 +107,7 @@ const PricingComponent = () => {
 
   return (
     
-      <motion.div className="max-w-6xl w-full px-5"
+      <motion.div className="max-w-6xl w-full px-5 "
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: "easeOut" }}
@@ -115,7 +115,7 @@ const PricingComponent = () => {
       
       >
         {/* Title + Toggle */}
-        <div className="text-center mb-12">
+        <div className="text-center mb-12 ">
           <h1 className="text-4xl font-bold text-gray-800 mb-4">Choose Your Plan</h1>
           <p className="text-gray-600 text-lg mb-6">
             {mode === "credits"
