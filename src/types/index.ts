@@ -74,6 +74,7 @@ export interface LimitBrowserPostData{
     contact : number;
     newsletterSub : number;
     view_request : boolean;
+    send_feedback : boolean;
 }
 
 export interface UserSubscription{

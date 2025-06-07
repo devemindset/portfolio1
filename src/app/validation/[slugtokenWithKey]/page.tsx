@@ -9,6 +9,7 @@ import { useAuthState } from "@/context/AuthContext";
 import RequestHeader from "@/components/RequestHeader";
 import BackgroundLoader from "@/components/BackgroundLoader";
 import DescriptionBox from "@/components/DescriptionBox";
+import Link from "next/link";
 
 
 
@@ -78,7 +79,7 @@ const sourceKey = combinedKey.slice(TOKEN_LENGTH);
         setBrowserLimitValue((prevState) => {
               const updateState = prevState
                 ? { ...prevState, view_request : true }
-                : { date: "", contact: 0, newsletterSub: 0, view_request : true };
+                : { date: "", contact: 0, newsletterSub: 0, view_request : true, send_feedback : false };
               localStorage.setItem("limite_actions", JSON.stringify(updateState));
               return updateState;
             });
@@ -112,8 +113,14 @@ const sourceKey = combinedKey.slice(TOKEN_LENGTH);
   const handleSubmit = async () => {
     if (!requestId || !status) return;
 
-    if (status === "approved" && !emailOrName.trim()) {
+    if (status === "approved" && !emailOrName.trim() && collect !== "anonymous") {
       setError(`Please provide your ${collect} to approve.`);
+      return;
+    }
+
+    if ((status === "approved" || status === "rejected") && browserLimitValue && browserLimitValue.send_feedback) {
+      setError("Response already recorded. You can try again tomorrow.");
+
       return;
     }
 
@@ -131,6 +138,13 @@ const sourceKey = combinedKey.slice(TOKEN_LENGTH);
       const res = await pubic_api.post("/track_user/user_validation_view", payload);
       if (res.status === 201) {
         setSuccess("Your response has been saved successfully.");
+        setBrowserLimitValue((prevState) => {
+              const updateState = prevState
+                ? { ...prevState, send_feedback : true }
+                : { date: "", contact: 0, newsletterSub: 0, view_request : false, send_feedback : true };
+              localStorage.setItem("limite_actions", JSON.stringify(updateState));
+              return updateState;
+            });
       }
     } catch {
       setError("Something went wrong.");
@@ -161,14 +175,14 @@ const sourceKey = combinedKey.slice(TOKEN_LENGTH);
 
           {track.file_url && (
             <p className="text-center mb-6">
-              <a
+              <Link
                 href={track.file_url}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-blue-600 underline"
               >
                 Open attached file
-              </a>
+              </Link>
             </p>
           )}
 
