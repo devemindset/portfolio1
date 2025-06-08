@@ -16,8 +16,8 @@ const roboto = Roboto({
 });
 
 export const metadata: Metadata = {
-  title: 'Validation Flow',
-  description: 'Fast and easy validation link system',
+  title: 'Validation Flow – Validate startup ideas in minutes',
+  description: 'ValidationFlow helps indie hackers, developers, and freelancers test and validate ideas fast. Share a smart link, get honest feedback and emails — no signup, no code.',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
