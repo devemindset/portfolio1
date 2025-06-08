@@ -3,11 +3,11 @@ import { useAuthState } from "@/context/AuthContext";
 import Link from "next/link";
 import { useEffect } from "react";
 
-export const metadata = {
-  title: 'About – Validation Flow',
-  description:
-    'Learn more about ValidationFlow, a tool built for indie hackers and freelancers to validate startup ideas quickly, without code or signups.',
-};
+// export const metadata = {
+//   title: 'About – Validation Flow',
+//   description:
+//     'Learn more about ValidationFlow, a tool built for indie hackers and freelancers to validate startup ideas quickly, without code or signups.',
+// };
 
 // app/about/page.tsx
 export default function AboutPage() {
