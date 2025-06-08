@@ -9,7 +9,7 @@ import { formatDate } from "@/tools/utils";
 import TrackLinksDropdown from "./TrackLinksDropdown";
 import TrackValidatorSection from "./TrackValidatorSection";
 import useIsMobile from "@/hook/useIsMobile";
-import TruncatedWithTooltip from "@/components/ui/TruncatedWithTooltip";
+import TooltipTruncate from "@/components/ui/TooltipTruncate"; // ✅ nouveau composant
 
 type Props = {
   track: RequestTrack;
@@ -68,37 +68,53 @@ export default function TrackRow({
         onClick={() => setExpandedId(isExpanded ? null : track.id)}
       >
         <div className="grid grid-cols-1 md:grid-cols-7 gap-2 md:gap-4 text-sm">
-          <TruncatedWithTooltip>
+          <TooltipTruncate>
             <span className="md:hidden font-semibold text-gray-500">Title: </span>
             {track.title}
-          </TruncatedWithTooltip>
-          <TruncatedWithTooltip>
+          </TooltipTruncate>
+
+          <TooltipTruncate>
             <span className="md:hidden font-semibold text-gray-500">Description: </span>
             {track.description}
-          </TruncatedWithTooltip>
-          <TruncatedWithTooltip className="text-blue-700">
+          </TooltipTruncate>
+
+          <TooltipTruncate className="text-blue-700">
             <span className="md:hidden font-semibold text-gray-500">File URL: </span>
             {track.file_url}
-          </TruncatedWithTooltip>
-          <TruncatedWithTooltip>
+          </TooltipTruncate>
+
+          <TooltipTruncate>
             <span className="md:hidden font-semibold text-gray-500">Sources: </span>
             {sourceList}
-          </TruncatedWithTooltip>
+          </TooltipTruncate>
+
           <div className="truncate text-xs text-gray-500">
             <span className="md:hidden font-semibold text-gray-500">Date: </span>
             {track.deadline ? formatDate(track.deadline) : "—"}
           </div>
-          <div className="flex items-center justify-between md:justify-center">
-            <button
-              onClick={handleLinkClick}
-              className="ml-2 cursor-pointer hover:scale-150 hover:text-green-600"
-            >
-              <Link size={18} />
-            </button>
-            <span className="text-xs bg-blue-600 text-white px-2 py-0.5 ml-5 rounded-full">
+
+          <div className="flex items-center justify-between md:justify-center relative">
+              {/* Tooltip on hover (desktop only) */}
+              <div className="hidden md:block absolute -bottom-8 left-0 z-20 px-2 py-1 text-xs bg-black text-white rounded opacity-0 group-hover:opacity-100 transition pointer-events-none">
+                Click to copy link
+              </div>
+
+              <button
+                onClick={handleLinkClick}
+                className="ml-2 cursor-pointer hover:scale-150 hover:text-green-600 group relative"
+              >
+                {/* Tooltip anchor moved here */}
+                <div className="hidden md:block absolute -bottom-8 left-1/2 -translate-x-1/2 z-20 px-2 py-1 text-xs bg-black text-white rounded opacity-0 group-hover:opacity-100 transition pointer-events-none whitespace-nowrap">
+                  Click to copy link
+                </div>
+
+                <Link size={18} />
+              </button>
+            </div>
+
+          <span className="text-xs bg-blue-600 text-white px-2 py-0.5 ml-5 rounded-full">
               {track.validators.length}
             </span>
-          </div>
           <div className="hidden md:flex justify-center items-center">
             {isExpanded ? (
               <ChevronDownIcon className="w-4 h-4 text-gray-600" />

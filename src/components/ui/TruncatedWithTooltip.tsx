@@ -2,6 +2,7 @@
 
 import { useRef, useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { createPortal } from "react-dom";
 import useIsMobile from "@/hook/useIsMobile";
 
 type Props = {
@@ -12,45 +13,54 @@ type Props = {
 export default function TruncatedWithTooltip({ children, className = "" }: Props) {
   const ref = useRef<HTMLDivElement>(null);
   const [show, setShow] = useState(false);
-  const [positionAbove, setPositionAbove] = useState(false);
+  const [coords, setCoords] = useState<{ top: number; left: number } | null>(null);
   const isMobile = useIsMobile();
 
   useEffect(() => {
-    if (!ref.current || isMobile) return;
+    if (!ref.current || isMobile || !show) return;
+
     const rect = ref.current.getBoundingClientRect();
-    const availableBelow = window.innerHeight - rect.bottom;
-    setPositionAbove(availableBelow < 60);
+    setCoords({
+      top: window.scrollY + rect.bottom + 6,
+      left: window.scrollX + rect.left,
+    });
   }, [show, isMobile]);
 
   return (
-    <div
-      ref={ref}
-      className={`relative truncate cursor-default ${className}`}
-      onMouseEnter={() => !isMobile && setShow(true)}
-      onMouseLeave={() => !isMobile && setShow(false)}
-    >
-      {children}
+    <>
+      <div
+        ref={ref}
+        className={`relative truncate ${className}`}
+        onMouseEnter={() => !isMobile && setShow(true)}
+        onMouseLeave={() => !isMobile && setShow(false)}
+      >
+        {children}
+      </div>
 
-      <AnimatePresence>
-        {show && (
-          <motion.div
-            initial={{ opacity: 0, y: positionAbove ? 8 : -8 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: positionAbove ? 8 : -8 }}
-            transition={{ duration: 0.15 }}
-            className={`absolute z-50 bg-gray-900 text-white text-xs px-2 py-1 rounded shadow-md max-w-xs w-max break-words whitespace-pre-wrap`}
-            style={{
-              top: positionAbove ? "auto" : "100%",
-              bottom: positionAbove ? "100%" : "auto",
-              left: 0,
-              marginTop: positionAbove ? undefined : 6,
-              marginBottom: positionAbove ? 6 : undefined,
-            }}
-          >
-            {typeof children === "string" ? children : ref.current?.innerText}
-          </motion.div>
+      {typeof window !== "undefined" &&
+        show &&
+        coords &&
+        createPortal(
+          <AnimatePresence>
+            <motion.div
+              key="tooltip"
+              initial={{ opacity: 0, y: -4 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -4 }}
+              transition={{ duration: 0.15 }}
+              className="fixed z-[9999] bg-black text-white text-xs px-2 py-1 rounded shadow-md max-w-xs w-max break-words whitespace-pre-wrap pointer-events-none"
+              style={{
+                top: coords.top,
+                left: coords.left,
+              }}
+            >
+              {typeof children === "string"
+                ? children
+                : ref.current?.textContent || ""}
+            </motion.div>
+          </AnimatePresence>,
+          document.body
         )}
-      </AnimatePresence>
-    </div>
+    </>
   );
 }

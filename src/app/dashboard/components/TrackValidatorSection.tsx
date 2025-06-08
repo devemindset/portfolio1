@@ -3,7 +3,7 @@
 import { Validator } from "@/types";
 import { formatDate } from "@/tools/utils";
 import type { FC } from "react";
-import TruncatedWithTooltip from "@/components/ui/TruncatedWithTooltip";
+import TooltipTruncate from "@/components/ui/TooltipTruncate";
 
 interface TrackValidatorSectionProps {
   validators: Validator[];
@@ -57,7 +57,7 @@ const TrackValidatorSection: FC<TrackValidatorSectionProps> = ({
               {statusLabel[status]} ({grouped.length})
             </h4>
 
-            {/* Header desktop */}
+            {/* Desktop header */}
             <div className="hidden md:flex font-semibold bg-white border px-4 py-2 rounded-md text-sm">
               <div className="w-48">Name / Email</div>
               <div className="w-40">Source</div>
@@ -65,7 +65,6 @@ const TrackValidatorSection: FC<TrackValidatorSectionProps> = ({
               <div className="w-32">Date</div>
             </div>
 
-            {/* Data rows */}
             <div className="space-y-2">
               {grouped.map((val) => {
                 const sourceLabel =
@@ -76,20 +75,20 @@ const TrackValidatorSection: FC<TrackValidatorSectionProps> = ({
                     key={val.id}
                     className="flex flex-col md:flex-row gap-2 md:gap-0 text-sm bg-white px-4 py-3 rounded-md"
                   >
-                    <TruncatedWithTooltip className="w-full md:w-48">
+                    <TooltipTruncate className="w-full md:w-48">
                       <span className="md:hidden font-semibold text-gray-500">Name / Email: </span>
                       {val.email_or_name || "—"}
-                    </TruncatedWithTooltip>
+                    </TooltipTruncate>
 
-                    <TruncatedWithTooltip className="w-full md:w-40 text-gray-600">
+                    <TooltipTruncate className="w-full md:w-40 text-gray-600">
                       <span className="md:hidden font-semibold text-gray-500">Source: </span>
                       {sourceLabel}
-                    </TruncatedWithTooltip>
+                    </TooltipTruncate>
 
-                    <TruncatedWithTooltip className="w-full md:w-80 text-gray-500">
+                    <TooltipTruncate className="w-full md:w-80 text-gray-500">
                       <span className="md:hidden font-semibold text-gray-500">Comment: </span>
                       {val.comment || "No comment"}
-                    </TruncatedWithTooltip>
+                    </TooltipTruncate>
 
                     <div className="w-full md:w-32 text-xs text-gray-400">
                       <span className="md:hidden font-semibold text-gray-500">Date: </span>
