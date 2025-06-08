@@ -47,6 +47,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
   return (
     <html lang="en">
+      <head>
+        <link rel="icon" href="/favicon.ico" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <meta property="og:image" content="/og-image.png" />
+        <meta name="twitter:image" content="/og-image.png" />
+      </head>
       <body className={roboto.className}>
         <RecaptchaProviderWrapper>
         <AuthProviderWrapper>
