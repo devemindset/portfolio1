@@ -11,6 +11,23 @@ const bulletVariants = {
 
 const ProblemSolutionSection: FC = () => {
   return (
+    <>
+    {/* Decorative top curve from HeroSection */}
+      <div className="relative w-full overflow-hidden leading-none pointer-events-none rotate-180">
+        <svg
+          className="block w-full h-[80px] md:h-[100px]"
+          xmlns="http://www.w3.org/2000/svg"
+          preserveAspectRatio="none"
+          viewBox="0 0 1200 120"
+          fill="currentColor"
+        >
+          <path
+            d="M0,0V46.29c47.52,22,103.52,29.05,158,20.81,70.18-11.13,136-38.41,206-45.66C436.48,11.94,504,25.61,571.5,37.27c54.29,9.32,108.57,18.63,162.86,9.32C802.67,34.9,858.05,3.77,912,1.08c55.85-2.81,113,17.84,168,35.45V0Z"
+            className="text-white"
+          ></path>
+        </svg>
+      </div>
+    
     <section className="relative bg-gray-50 py-24 px-6 overflow-hidden">
       {/* Background SVG */}
       <div className="absolute inset-0 -z-10">
@@ -109,6 +126,7 @@ const ProblemSolutionSection: FC = () => {
         </motion.div>
       </div>
     </section>
+    </>
   );
 };
 

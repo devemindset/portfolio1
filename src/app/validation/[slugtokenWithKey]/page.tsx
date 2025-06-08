@@ -15,7 +15,7 @@ import Link from "next/link";
 
 const Page: NextPage = () => {
   const { slugtokenWithKey } = useParams();
-  const {userData,browserLimitValue, setBrowserLimitValue,userAction} = useAuthState();
+  const {userData,browserLimitValue, setBrowserLimitValue,userAction,tempToken,setTempToken} = useAuthState();
  
    
   useEffect(() => {
@@ -72,10 +72,11 @@ const sourceKey = combinedKey.slice(TOKEN_LENGTH);
       source: sourceKey,
       comment,
       status : "viewed",
+      temp_token : tempToken,
     };
     try {
       const res = await pubic_api.post("/track_user/user_validation_view", payload);
-      if (res.status === 201) {
+      if (res.status === 200) {
         setBrowserLimitValue((prevState) => {
               const updateState = prevState
                 ? { ...prevState, view_request : true }
@@ -83,6 +84,8 @@ const sourceKey = combinedKey.slice(TOKEN_LENGTH);
               localStorage.setItem("limite_actions", JSON.stringify(updateState));
               return updateState;
             });
+            setTempToken(res.data.temp_token);
+            localStorage.setItem("temp_token",JSON.stringify(res.data.temp_token))
         
       }
     } catch {
@@ -130,6 +133,7 @@ const sourceKey = combinedKey.slice(TOKEN_LENGTH);
       source: sourceKey,
       comment,
       status,
+      temp_token : tempToken
     };
 
     setLoading(true);
@@ -145,6 +149,8 @@ const sourceKey = combinedKey.slice(TOKEN_LENGTH);
               localStorage.setItem("limite_actions", JSON.stringify(updateState));
               return updateState;
             });
+            setTempToken("");
+            localStorage.setItem("temp_token",JSON.stringify(""))
       }
     } catch {
       setError("Something went wrong.");

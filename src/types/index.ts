@@ -59,6 +59,7 @@ export interface DataValidation {
   source : string | undefined | string[];
   comment : string;
   status : string;
+  temp_token : string;
 }
 
 export interface RequestInTheTokenPage{

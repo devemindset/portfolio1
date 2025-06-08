@@ -34,7 +34,8 @@ interface AuthContextProps{
     setLoadingBtn : Dispatch<SetStateAction<boolean>>;
     loadingBackground : boolean;
     setLoadingBackground : Dispatch<SetStateAction<boolean>>;
-    
+    tempToken : string;
+    setTempToken : Dispatch<SetStateAction<string>>;
     
 
 
@@ -60,6 +61,7 @@ export const AuthProvider = ({ children } : { children : ReactNode}) => {
     const [isAuthenticated,setIsAuthenticated] = useState<boolean>(false);
     const [isAuthAuthenticated,setIsAuthAuthenticated] =useState<boolean>(false);
     const [browserLimitValue, setBrowserLimitValue] = useState<LimitBrowserPostData | null>(null);
+    const [tempToken,setTempToken] = useState<string>("");
     const todayDateWithoutTime = new Date().toISOString().split("T")[0];
     
 
@@ -77,6 +79,7 @@ export const AuthProvider = ({ children } : { children : ReactNode}) => {
       const isAuthenticated = localStorage.getItem("isGoogleAuthenticated");
       const userAuthenticated = localStorage.getItem("isAuthenticated");
       const storedData = localStorage.getItem("limite_actions");
+      const temp_token = localStorage.getItem("temp_token");
       
 
       // Initialize browserLimitValue
@@ -108,6 +111,14 @@ export const AuthProvider = ({ children } : { children : ReactNode}) => {
         setIsAuthenticated(JSON.parse(userAuthenticated))
       }else{
         setIsAuthenticated(false)
+        localStorage.setItem("isAuthenticated",JSON.stringify(false))
+      }
+      // token_temp
+      if(temp_token){
+        setTempToken(JSON.parse(temp_token))
+      }else{
+        setTempToken("")
+        localStorage.setItem("temp_token",JSON.stringify(""))
       }
 
       setIsInitialized(true); // Mark as initialized
@@ -347,6 +358,8 @@ const clearCookies = () => {
         setLoadingBtn,
         loadingBackground,
         setLoadingBackground,
+        tempToken,
+        setTempToken,
         
         }} >
             { children }

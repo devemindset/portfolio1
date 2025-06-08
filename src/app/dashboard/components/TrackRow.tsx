@@ -9,7 +9,7 @@ import { formatDate } from "@/tools/utils";
 import TrackLinksDropdown from "./TrackLinksDropdown";
 import TrackValidatorSection from "./TrackValidatorSection";
 import useIsMobile from "@/hook/useIsMobile";
-
+import TruncatedWithTooltip from "@/components/ui/TruncatedWithTooltip";
 
 type Props = {
   track: RequestTrack;
@@ -42,7 +42,6 @@ export default function TrackRow({
 
   useEffect(() => {
     setPortalRoot(document.body);
-
     const handleClickOutside = (e: MouseEvent) => {
       if (
         linkVisible &&
@@ -51,7 +50,6 @@ export default function TrackRow({
         setVisibleLinkId(null);
       }
     };
-
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [linkVisible, track.id]);
@@ -70,32 +68,34 @@ export default function TrackRow({
         onClick={() => setExpandedId(isExpanded ? null : track.id)}
       >
         <div className="grid grid-cols-1 md:grid-cols-7 gap-2 md:gap-4 text-sm">
-          <div className="truncate">
+          <TruncatedWithTooltip>
             <span className="md:hidden font-semibold text-gray-500">Title: </span>
             {track.title}
-          </div>
-          <div className="truncate">
+          </TruncatedWithTooltip>
+          <TruncatedWithTooltip>
             <span className="md:hidden font-semibold text-gray-500">Description: </span>
             {track.description}
-          </div>
-          <div className="truncate text-blue-700">
+          </TruncatedWithTooltip>
+          <TruncatedWithTooltip className="text-blue-700">
             <span className="md:hidden font-semibold text-gray-500">File URL: </span>
             {track.file_url}
-          </div>
-          <div className="truncate">
+          </TruncatedWithTooltip>
+          <TruncatedWithTooltip>
             <span className="md:hidden font-semibold text-gray-500">Sources: </span>
             {sourceList}
-          </div>
+          </TruncatedWithTooltip>
           <div className="truncate text-xs text-gray-500">
             <span className="md:hidden font-semibold text-gray-500">Date: </span>
             {track.deadline ? formatDate(track.deadline) : "—"}
           </div>
           <div className="flex items-center justify-between md:justify-center">
-            
-            <button onClick={handleLinkClick} className="ml-2 cursor-pointer  hover:scale-150 hover:text-green-600">
+            <button
+              onClick={handleLinkClick}
+              className="ml-2 cursor-pointer hover:scale-150 hover:text-green-600"
+            >
               <Link size={18} />
             </button>
-            <span className="text-xs bg-blue-600 text-white px-2 py-0.5 ml-5 rounded-full ">
+            <span className="text-xs bg-blue-600 text-white px-2 py-0.5 ml-5 rounded-full">
               {track.validators.length}
             </span>
           </div>
