@@ -8,6 +8,7 @@ import HowItWorksSection from "@/components/HowItWorksSection";
 import PricingComponent from "@/components/PricingComponent";
 import ProblemSolutionSection from "@/components/ProblemSolutionSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
+import VideoDemoSection from "@/components/VideoDemoSection";
 import { useAuthState } from "@/context/AuthContext";
 import type {  NextPage } from "next";
 import { useEffect } from "react";
@@ -26,6 +27,7 @@ const Page: NextPage = () => {
     <HeroSection />
     <ProblemSolutionSection />
     <HowItWorksSection />
+    <VideoDemoSection />
     <TestimonialsSection />
     <FeaturesSection />
     <div className="flex items-center justify-center py-5 bg-white " id="pricing">

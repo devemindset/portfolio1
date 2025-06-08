@@ -6,9 +6,9 @@ import { RequestTrack, Validator } from "@/types";
 import Sidebar from "./components/Sidebar";
 import TrackTable from "./components/TrackTable";
 import RequestHeader from "@/components/RequestHeader";
-import Link from "next/link";
 import { useAuthState } from "@/context/AuthContext";
 import BackgroundLoader from "@/components/BackgroundLoader";
+import { useRouter } from "next/navigation";
 
 
 export default function DashboardPage() {
@@ -16,7 +16,13 @@ export default function DashboardPage() {
   const [expandedId, setExpandedId] = useState<number | null>(null);
   const [visibleLinkId, setVisibleLinkId] = useState<number | null>(null);
   const {userData} = useAuthState();
+  
+  const router = useRouter();
 
+  const handlNewPath = () => {
+
+    router.push("/new")
+  }
   useEffect(() => {
     if(userData.username){
       api
@@ -43,12 +49,12 @@ export default function DashboardPage() {
          
         >
           <h2 className="text-2xl font-semibold">My Validations</h2>
-          <Link
-            href="/new"
-            className="bg-[#1E2A3A] text-white px-4 py-2 rounded hover:bg-blue-700 whitespace-nowrap"
+          <div
+            onClick={handlNewPath}
+            className="bg-[#1E2A3A] text-white px-4 py-2 rounded hover:bg-blue-700 whitespace-nowrap cursor-pointer"
           >
             + Create Track
-          </Link>
+          </div>
         </div>
 
         <TrackTable
