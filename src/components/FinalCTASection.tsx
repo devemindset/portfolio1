@@ -29,7 +29,7 @@ const FinalCTASection: FC = () => {
             Create my first validation link
           </Link>
           <Link
-            href="/demo"
+            href="#demo"
             className="text-blue-600 hover:underline text-sm md:text-base font-medium"
           >
             See an example

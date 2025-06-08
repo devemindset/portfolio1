@@ -20,7 +20,7 @@ const VideoDemoSection: FC = () => {
   }
 };
   return (
-    <section className="bg-white py-24 px-6">
+    <section className="bg-white py-24 px-6" id="demo">
       <div className="max-w-4xl mx-auto text-center">
         {/* Title with fade-in */}
         <motion.h2
