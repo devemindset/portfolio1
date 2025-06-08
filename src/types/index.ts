@@ -84,3 +84,8 @@ export interface UserSubscription{
     method : string | undefined | null;
     created_at : string ;
 }
+
+export interface InSimple {
+  title : string;
+  description : string;
+}

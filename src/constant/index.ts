@@ -1,3 +1,5 @@
+import { InSimple } from "@/types";
+
 type PlatformIcon = {
   name: string;
   iconUrl: string;
@@ -40,4 +42,57 @@ export const platforms: PlatformIcon[] = [
   { name: "IndieHackers", iconUrl: "https://cdn.simpleicons.org/indiehackers" },
 
   // { name: "Custom", iconUrl: "https://cdn.simpleicons.org/code" } // Icône générique
+];
+
+
+export const howItWorksSimple : InSimple[] = [
+  {
+    title: "1. Create a validation link",
+    description:
+      "Write down your idea, proposal or decision. Give it a title, add context, then click “Generate Link”.",
+  },
+  {
+    title: "2. Share it in one click",
+    description:
+      "Send the link to your team, users or stakeholders. No login required for them to respond.",
+  },
+  {
+    title: "3. Get clear feedback",
+    description:
+      "See who approves, who rejects, and why. Every response is tracked and centralized.",
+  },
+];
+export const whyUseValidFlow : InSimple[] = [
+  {
+    title: "⚡ Fast ",
+    description:
+      "Generate a validation link in seconds. Save time on every decision.",
+  },
+  {
+    title: "🔒 Frictionless",
+    description:
+      "No accounts. Just one click to validate, for anyone you share it with.",
+  },
+  {
+    title: "📊 Transparent",
+    description:
+      "Track every response. Know exactly who said what, and when",
+  },
+];
+export const realUseCase : InSimple[] = [
+  {
+    title: " Startups",
+    description:
+      "Test your product ideas or feature requests with real users, before you start building.",
+  },
+  {
+    title: "Teams",
+    description:
+      "Make fast, clear decisions as a team: features, designs, priorities, and more.",
+  },
+  {
+    title: " Freelancers / Creators",
+    description:
+      "Share drafts, concepts, or proposals with clients and get clear, timestamped feedback.",
+  },
 ];

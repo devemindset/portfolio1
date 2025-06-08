@@ -16,6 +16,7 @@ const roboto = Roboto({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://validationflow.com'),
   title: 'Validation Flow — Validate your ideas, fast',
   description: 'Create a validation link in seconds. Modern, minimal, and frictionless way to get feedback or approval on your ideas.',
   openGraph: {
