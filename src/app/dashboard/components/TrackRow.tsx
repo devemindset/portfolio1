@@ -40,6 +40,7 @@ export default function TrackRow({
   const [portalRoot, setPortalRoot] = useState<HTMLElement | null>(null);
   const [anchorEl, setAnchorEl] = useState<DOMRect | null>(null);
 
+  console.log(track.validators)
   useEffect(() => {
     setPortalRoot(document.body);
     const handleClickOutside = (e: MouseEvent) => {
@@ -111,10 +112,24 @@ export default function TrackRow({
                 <Link size={18} />
               </button>
             </div>
-
-          <span className="text-xs bg-blue-600 text-white px-2 py-0.5 ml-5 rounded-full">
-              {track.validators.length}
-            </span>
+              {/* status container  */}
+            <div className=" flex bg-white flex-col">
+                  {/* Total */}
+                  <span className="text-xs bg-blue-600 text-white px-2 py-0.5 rounded-full">
+                    {track.validators.length < 100 ?"Viewed :" : ""} {track.validators.length}
+                  
+                  </span>
+                  {/* Approved */}
+                  <span className="text-xs bg-green-100 text-green-700 px-2 py-0.5 rounded-full">
+                     {groupByStatus(track.validators).approved.length < 100 ? "Approved:" : ""} {groupByStatus(track.validators).approved.length}
+                
+                  </span>
+                  {/* Rejected */}
+                  <span className="text-xs bg-red-100 text-red-700 px-2 py-0.5 rounded-full">
+                    {groupByStatus(track.validators).rejected.length < 100 ? "Rejected:" : ""} {groupByStatus(track.validators).rejected.length}
+                
+                  </span>
+            </div>
           <div className="hidden md:flex justify-center items-center">
             {isExpanded ? (
               <ChevronDownIcon className="w-4 h-4 text-gray-600" />

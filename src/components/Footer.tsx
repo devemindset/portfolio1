@@ -86,6 +86,7 @@ const Footer: FC = () => {
       </motion.footer>
 
       {logout && <LogoutUser />}
+      
     </>
   );
 };

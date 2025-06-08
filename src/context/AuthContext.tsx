@@ -86,7 +86,7 @@ export const AuthProvider = ({ children } : { children : ReactNode}) => {
       if (storedData) {
         setBrowserLimitValue(JSON.parse(storedData));
       } else {
-        const defaultValue = { date: todayDateWithoutTime, contact: 0, newsletterSub: 0, view_request : false, send_feedback : false };
+        const defaultValue = { date: todayDateWithoutTime, contact: 0, newsletterSub: 0, view_request : false, requestId : 0 };
         setBrowserLimitValue(defaultValue);
         localStorage.setItem("limite_actions", JSON.stringify(defaultValue));
       }
@@ -137,7 +137,7 @@ useEffect(() => {
         contact: 0, // Reset for a new day
         newsletterSub : 0, // Reset for a new day
         view_request : false,
-        send_feedback : false,
+        requestId : 0,
       };
       setBrowserLimitValue(updatedValue);
       localStorage.setItem("limite_actions", JSON.stringify(updatedValue));

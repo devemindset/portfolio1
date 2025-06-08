@@ -75,12 +75,13 @@ const sourceKey = combinedKey.slice(TOKEN_LENGTH);
       temp_token : tempToken,
     };
     try {
+      
       const res = await pubic_api.post("/track_user/user_validation_view", payload);
       if (res.status === 201) {
         setBrowserLimitValue((prevState) => {
               const updateState = prevState
                 ? { ...prevState, view_request : true }
-                : { date: "", contact: 0, newsletterSub: 0, view_request : true, send_feedback : false };
+                : { date: "", contact: 0, newsletterSub: 0, view_request : true, requestId : 0 };
               localStorage.setItem("limite_actions", JSON.stringify(updateState));
               return updateState;
             });
@@ -94,7 +95,7 @@ const sourceKey = combinedKey.slice(TOKEN_LENGTH);
     } 
       }
 
-      if(view === false){
+      if(view === false ){
         const timeoutId = setTimeout(async () => {
         setView(true)
       }, 5000)
@@ -103,7 +104,7 @@ const sourceKey = combinedKey.slice(TOKEN_LENGTH);
       }
       
 
-    if(requestId && !userData.username && view &&  browserLimitValue && !browserLimitValue.view_request){
+    if(requestId && !userData.username && view &&  browserLimitValue && browserLimitValue?.requestId !== requestId && !browserLimitValue.view_request){
       viewHandle()
       
     }
@@ -122,7 +123,7 @@ const sourceKey = combinedKey.slice(TOKEN_LENGTH);
       return;
     }
 
-    if ((status === "approved" || status === "rejected") && browserLimitValue && browserLimitValue.send_feedback) {
+    if ((status === "approved" || status === "rejected") && browserLimitValue && browserLimitValue.requestId === requestId) {
       setError("Response already recorded. You can try again tomorrow.");
 
       return;
@@ -140,13 +141,14 @@ const sourceKey = combinedKey.slice(TOKEN_LENGTH);
     setLoading(true);
     setError("");
     try {
+     
       const res = await pubic_api.post("/track_user/user_validation_view", payload);
       if (res.status === 200) {
         setSuccess("Your response has been saved successfully.");
         setBrowserLimitValue((prevState) => {
               const updateState = prevState
-                ? { ...prevState, send_feedback : true }
-                : { date: "", contact: 0, newsletterSub: 0, view_request : false, send_feedback : true };
+                ? { ...prevState, requestId : requestId, view_request : false }
+                : { date: "", contact: 0, newsletterSub: 0, view_request : false, requestId : requestId };
               localStorage.setItem("limite_actions", JSON.stringify(updateState));
               return updateState;
             });
@@ -155,6 +157,7 @@ const sourceKey = combinedKey.slice(TOKEN_LENGTH);
       }
     } catch {
       setError("Something went wrong.");
+     
     } finally {
       setLoading(false);
     }
