@@ -16,9 +16,32 @@ const roboto = Roboto({
 });
 
 export const metadata: Metadata = {
-  title: 'Validation Flow – Validate startup ideas in minutes',
-  description: 'ValidationFlow helps indie hackers, developers, and freelancers test and validate ideas fast. Share a smart link, get honest feedback and emails — no signup, no code.',
+  title: 'Validation Flow — Validate your ideas, fast',
+  description: 'Create a validation link in seconds. Modern, minimal, and frictionless way to get feedback or approval on your ideas.',
+  openGraph: {
+    title: 'Validation Flow — Validate your ideas, fast',
+    description: 'Create a validation link in seconds. Modern, minimal, and frictionless way to get feedback or approval on your ideas.',
+    url: 'https://validationflow.com',
+    siteName: 'Validation Flow',
+    images: [
+      {
+        url: '/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'Validation Flow — Fast Idea Validation',
+      },
+    ],
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Validation Flow — Validate your ideas, fast',
+    description: 'Create a validation link in seconds. Modern, minimal, and frictionless way to get feedback or approval on your ideas.',
+    images: ['/og-image.png'],
+  },
 };
+
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
 
