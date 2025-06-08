@@ -76,7 +76,7 @@ const sourceKey = combinedKey.slice(TOKEN_LENGTH);
     };
     try {
       const res = await pubic_api.post("/track_user/user_validation_view", payload);
-      if (res.status === 200) {
+      if (res.status === 201) {
         setBrowserLimitValue((prevState) => {
               const updateState = prevState
                 ? { ...prevState, view_request : true }
@@ -86,6 +86,7 @@ const sourceKey = combinedKey.slice(TOKEN_LENGTH);
             });
             setTempToken(res.data.temp_token);
             localStorage.setItem("temp_token",JSON.stringify(res.data.temp_token))
+            
         
       }
     } catch {
@@ -140,7 +141,7 @@ const sourceKey = combinedKey.slice(TOKEN_LENGTH);
     setError("");
     try {
       const res = await pubic_api.post("/track_user/user_validation_view", payload);
-      if (res.status === 201) {
+      if (res.status === 200) {
         setSuccess("Your response has been saved successfully.");
         setBrowserLimitValue((prevState) => {
               const updateState = prevState
