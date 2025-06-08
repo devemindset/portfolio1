@@ -57,7 +57,7 @@ const ProblemSolutionSection: FC = () => {
             ❌ Why validation sucks today:
           </h3>
           <div className="mb-6">
-            <Image src="/unhappy.png" alt="Problem" width={160} height={160} className="mx-auto" />
+            <Image src="/problm_solution/unhappy.png" alt="Problem" width={160} height={160} className="mx-auto" />
           </div>
           <ul className="space-y-3 text-gray-700 text-base leading-relaxed text-left">
             {[
@@ -97,7 +97,7 @@ const ProblemSolutionSection: FC = () => {
             ✅ What ValidationFlow solves for you:
           </h3>
           <div className="mb-6">
-            <Image src="/happy.png" alt="Solution" width={160} height={160} className="mx-auto" />
+            <Image src="/problm_solution/happy.png" alt="Solution" width={160} height={160} className="mx-auto" />
           </div>
           <ul className="space-y-3 text-gray-700 text-base leading-relaxed text-left">
             {[

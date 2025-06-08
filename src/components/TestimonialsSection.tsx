@@ -9,19 +9,19 @@ const testimonials = [
   {
     name: "Julie",
     role: "Product Manager",
-    img: "/july.png",
+    img: "/testimonials/july.png",
     text: "We used to approve our designs over email. Now we use ValidationFlow for every key step.",
   },
   {
     name: "Freelancer",
     role: "UI Designer",
-    img: "/freelancer.png",
+    img: "/testimonials/freelancer.png",
     text: "I use ValidationFlow to get my mockups approved by clients. It’s fast and clean. No more chasing people: one link, one approval, done.",
   },
   {
     name: "Alex",
     role: "Indie Hacker",
-    img: "/indihacker.png",
+    img: "/testimonials/indihacker.png",
     text: "As a solo founder, speed and clarity are everything. ValidationFlow helps me get user feedback and approvals without wasting time. It keeps my workflow clean and focused. Just a single link and I'm moving forward.",
   },
 ];

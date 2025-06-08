@@ -23,12 +23,13 @@ const HeroSection: FC = () => {
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-gray-900 leading-tight">
             <TypeAnimation
               sequence={[
+                "Share a link. Get feedback. Move fast.",
+                3000,
                 "Validate anything in one click.",
                 3000,
                 "One link. One answer. One audit trail.",
                 3000,
-                "Validate in seconds, no login.",
-                3000,
+                
               ]}
               wrapper="span"
               speed={60}
@@ -88,7 +89,7 @@ const HeroSection: FC = () => {
           <Parallax speed={-10}>
             <motion.div whileHover={{ scale: 1.03 }} transition={{ duration: 0.3 }}>
               <Image
-                src="/illustrate_1.png"
+                src="/illustrate/illustrate_1.png"
                 width={250}
                 height={250}
                 alt="illustrate 1"
@@ -100,7 +101,7 @@ const HeroSection: FC = () => {
           <Parallax speed={-15}>
             <motion.div whileHover={{ scale: 1.03 }} transition={{ duration: 0.3 }}>
               <Image
-                src="/illustrate_2.png"
+                src="/illustrate/illustrate_2.png"
                 width={150}
                 height={150}
                 alt="illustrate 2"
@@ -114,7 +115,7 @@ const HeroSection: FC = () => {
           <Parallax speed={10}>
             <motion.div whileHover={{ scale: 1.03 }} transition={{ duration: 0.3 }}>
               <Image
-                src="/illustrate_3.png"
+                src="/illustrate/illustrate_3.png"
                 width={150}
                 height={150}
                 alt="illustrate 3"
@@ -125,7 +126,7 @@ const HeroSection: FC = () => {
           <Parallax speed={15}>
             <motion.div whileHover={{ scale: 1.03 }} transition={{ duration: 0.3 }}>
               <Image
-                src="/illustrate_4.png"
+                src="/illustrate/illustrate_4.png"
                 width={150}
                 height={150}
                 alt="illustrate 4"

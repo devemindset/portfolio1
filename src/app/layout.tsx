@@ -50,18 +50,18 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         {/* Favicon classique */}
         <link rel="icon" href="/favicon.ico" />
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png" />
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png" />
 
         {/* iOS / Apple */}
-        <link rel="apple-touch-icon" sizes="180x180" href="/favicon_io/apple-touch-icon.png" />
+        <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
 
         {/* android */}
-        <link rel="icon" type="image/png" sizes="192x192" href="/favicon_io/android-chrome-192x192.png" />
-        <link rel="icon" type="image/png" sizes="512x512" href="/favicon_io/android-chrome-512x512.png" />
+        <link rel="icon" type="image/png" sizes="192x192" href="android-chrome-192x192.png" />
+        <link rel="icon" type="image/png" sizes="512x512" href="android-chrome-512x512.png" />
 
         {/* Web App Manifest */}
-        <link rel="manifest" href="/favicon_io/site.webmanifest" />
+        <link rel="manifest" href="/site.webmanifest" />
 
         <meta property="og:image" content="/og-image.png" />
         <meta name="twitter:image" content="/og-image.png" />
