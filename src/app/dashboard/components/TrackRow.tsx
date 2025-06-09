@@ -68,7 +68,7 @@ export default function TrackRow({
         className="p-4 cursor-pointer relative hover:bg-gray-50 transition"
         onClick={() => setExpandedId(isExpanded ? null : track.id)}
       >
-        <div className="w-full overflow-x-auto">
+        <div className="w-full overflow-x-auto overflow-y-hidden">
           <div className="min-w-[700px] flex flex-wrap md:flex-nowrap items-center justify-between gap-4 text-sm">
               <TooltipTruncate className="flex-1 min-w-[120px]">
                 <span className="md:hidden font-semibold text-gray-500">Title: </span>

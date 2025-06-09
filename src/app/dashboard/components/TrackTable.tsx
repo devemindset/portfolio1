@@ -29,7 +29,7 @@ const TrackTable: FC<TrackTableProps> = ({
         return (
     <div className="flex flex-col">
       {/* Header - visible only on desktop */}
-      {/* <div className="hidden md:grid grid-cols-7 gap-4 text-xs font-semibold bg-[#1E2A3A] text-white py-3 px-4 rounded-t-md min-w-[900px]">
+      <div className="hidden md:grid grid-cols-7 gap-4 text-xs font-semibold bg-[#1E2A3A] text-white py-3 px-4 rounded-t-md min-w-[900px]">
         <div>Title</div>
         <div>Description</div>
         <div>File URL</div>
@@ -37,7 +37,7 @@ const TrackTable: FC<TrackTableProps> = ({
         <div>Date</div>
         <div>Links</div>
         <div>Count</div>
-      </div> */}
+      </div>
 
       {/* Data rows */}
       <div className="flex flex-col-reverse">
