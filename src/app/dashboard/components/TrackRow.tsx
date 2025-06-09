@@ -69,67 +69,67 @@ export default function TrackRow({
         onClick={() => setExpandedId(isExpanded ? null : track.id)}
       >
         <div className="w-full overflow-x-auto overflow-y-hidden">
-          <div className="min-w-[700px] flex flex-wrap md:flex-nowrap items-center justify-between gap-4 text-sm">
-              <TooltipTruncate className="flex-1 min-w-[120px]">
-                <span className="md:hidden font-semibold text-gray-500">Title: </span>
-                {track.title}
-              </TooltipTruncate>
+        <div className="flex flex-wrap md:flex-nowrap items-center justify-between gap-4 text-sm">
+            <TooltipTruncate className="flex-1 min-w-[120px]">
+              <span className="md:hidden font-semibold text-gray-500">Title: </span>
+              {track.title}
+            </TooltipTruncate>
 
-              <TooltipTruncate className="flex-1 min-w-[120px]">
-                <span className="md:hidden font-semibold text-gray-500">Description: </span>
-                {track.description}
-              </TooltipTruncate>
+            <TooltipTruncate className="flex-1 min-w-[120px]">
+              <span className="md:hidden font-semibold text-gray-500">Description: </span>
+              {track.description}
+            </TooltipTruncate>
 
-              <TooltipTruncate className="flex-1 min-w-[120px] text-blue-700">
-                <span className="md:hidden font-semibold text-gray-500">File URL: </span>
-                {track.file_url}
-              </TooltipTruncate>
+            <TooltipTruncate className="flex-1 min-w-[120px] text-blue-700">
+              <span className="md:hidden font-semibold text-gray-500">File URL: </span>
+              {track.file_url}
+            </TooltipTruncate>
 
-              <TooltipTruncate className="flex-1 min-w-[120px]">
-                <span className="md:hidden font-semibold text-gray-500">Sources: </span>
-                {sourceList}
-              </TooltipTruncate>
+            <TooltipTruncate className="flex-1 min-w-[120px]">
+              <span className="md:hidden font-semibold text-gray-500">Sources: </span>
+              {sourceList}
+            </TooltipTruncate>
 
-              <div className="flex-1 min-w-[100px] truncate text-xs text-gray-500">
-                <span className="md:hidden font-semibold text-gray-500">Date: </span>
-                {track.deadline ? formatDate(track.deadline) : "—"}
-              </div>
-
-              {/* Link + Tooltip */}
-              <div className="flex items-center justify-center relative">
-                <button
-                  onClick={handleLinkClick}
-                  className="ml-2 cursor-pointer hover:scale-150 hover:text-green-600 group relative"
-                >
-                  <div className="hidden md:block absolute -bottom-8 left-1/2 -translate-x-1/2 z-20 px-2 py-1 text-xs bg-black text-white rounded opacity-0 group-hover:opacity-100 transition pointer-events-none whitespace-nowrap">
-                    Click to copy link
-                  </div>
-                  <Link size={18} />
-                </button>
-              </div>
-
-              {/* Status badges */}
-              <div className="flex flex-col items-center space-y-1 text-xs">
-                <span className="bg-blue-600 text-white px-2 py-0.5 rounded-full">
-                  Viewed: {track.validators.length}
-                </span>
-                <span className="bg-green-100 text-green-700 px-2 py-0.5 rounded-full">
-                  Approved: {groupByStatus(track.validators).approved.length}
-                </span>
-                <span className="bg-red-100 text-red-700 px-2 py-0.5 rounded-full">
-                  Rejected: {groupByStatus(track.validators).rejected.length}
-                </span>
-              </div>
-
-              {/* Chevron toggle */}
-              <div className="flex items-center justify-center">
-                {isExpanded ? (
-                  <ChevronDownIcon className="w-4 h-4 text-gray-600" />
-                ) : (
-                  <ChevronRightIcon className="w-4 h-4 text-gray-600" />
-                )}
-              </div>
+            <div className="flex-1 min-w-[100px] truncate text-xs text-gray-500">
+              <span className="md:hidden font-semibold text-gray-500">Date: </span>
+              {track.deadline ? formatDate(track.deadline) : "—"}
             </div>
+
+            {/* Link + Tooltip */}
+            <div className="flex items-center justify-center relative">
+              <button
+                onClick={handleLinkClick}
+                className="ml-2 cursor-pointer hover:scale-150 hover:text-green-600 group relative"
+              >
+                <div className="hidden md:block absolute -bottom-8 left-1/2 -translate-x-1/2 z-20 px-2 py-1 text-xs bg-black text-white rounded opacity-0 group-hover:opacity-100 transition pointer-events-none whitespace-nowrap">
+                  Click to copy link
+                </div>
+                <Link size={18} />
+              </button>
+            </div>
+
+            {/* Status badges */}
+            <div className="flex flex-col items-center space-y-1 text-xs">
+              <span className="bg-blue-600 text-white px-2 py-0.5 rounded-full">
+                Viewed: {track.validators.length}
+              </span>
+              <span className="bg-green-100 text-green-700 px-2 py-0.5 rounded-full">
+                Approved: {groupByStatus(track.validators).approved.length}
+              </span>
+              <span className="bg-red-100 text-red-700 px-2 py-0.5 rounded-full">
+                Rejected: {groupByStatus(track.validators).rejected.length}
+              </span>
+            </div>
+
+            {/* Chevron toggle */}
+            <div className="flex items-center justify-center">
+              {isExpanded ? (
+                <ChevronDownIcon className="w-4 h-4 text-gray-600" />
+              ) : (
+                <ChevronRightIcon className="w-4 h-4 text-gray-600" />
+              )}
+            </div>
+          </div>
         </div>
       </div>
 
