@@ -96,16 +96,16 @@ const sourceKey = combinedKey.slice(TOKEN_LENGTH);
       }
 
       if(view === false ){
-        const timeoutId = setTimeout(async () => {
+       
         setView(true)
-      }, 5000)
-      return () => clearTimeout(timeoutId);
+      console.log("view set")
 
       }
       
 
     if(requestId && !userData.username && view &&  browserLimitValue && browserLimitValue?.requestId !== requestId && !browserLimitValue.view_request){
       viewHandle()
+      console.log("view fonction")
       
     }
     
@@ -164,7 +164,7 @@ const sourceKey = combinedKey.slice(TOKEN_LENGTH);
   };
 
 
-  if (!track) {
+  if (!track && !requestId && !view) {
     return (
       <BackgroundLoader />
     );
@@ -178,7 +178,10 @@ const sourceKey = combinedKey.slice(TOKEN_LENGTH);
         <p className="mb-4">(Validate anything in one click)</p>
         <p className="mb-3">Someone needs your validation 👇</p>
         <section className="bg-white py-10 px-6 md:px-10 rounded-lg max-w-3xl w-full shadow-md">
-          <h1 className="text-2xl font-bold text-center mb-4">{track.title}</h1>
+          {track && (
+          <>
+            <h1 className="text-2xl font-bold text-center mb-4">{track.title}</h1>
+
           {track.description && (
             <DescriptionBox content={track.description} />
           )}
@@ -195,6 +198,8 @@ const sourceKey = combinedKey.slice(TOKEN_LENGTH);
               </Link>
             </p>
           )}
+        </>
+      )}
 
           {!status && (
             <div className="flex justify-center gap-4 mb-6 pt-5">

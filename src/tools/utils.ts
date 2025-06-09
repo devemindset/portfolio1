@@ -12,3 +12,7 @@ export const formatDate = (dateStr: string): string => {
     year: "numeric",
   });
 };
+
+export function cn(...classes: (string | false | null | undefined)[]) {
+  return classes.filter(Boolean).join(" ");
+}

@@ -63,7 +63,7 @@ export default function TrackRow({
     setAnchorEl(rect);
     setVisibleLinkId(linkVisible ? null : track.id);
   };
-
+  
   return (
     <div className="bg-white shadow-sm rounded-md mb-4">
       <div
@@ -74,7 +74,7 @@ export default function TrackRow({
           
           {/* Status */}
           <div className="flex flex-col gap-1">
-            <span className="text-gray-500 font-semibold md:mb-1">Status</span>
+            <span className="text-gray-500 font-semibold md:mb-1 border-1/2">Status</span>
             <div className="flex flex-col text-xs items-start space-y-1">
               <span className="bg-blue-600 text-white px-2 py-0.5 rounded-full">Viewed: {viewed}</span>
               <span className="bg-green-100 text-green-700 px-2 py-0.5 rounded-full">Approved: {approved.length}</span>
@@ -84,45 +84,60 @@ export default function TrackRow({
 
           {/* Link */}
           <div className="flex flex-col gap-1">
-            <span className="text-gray-500 font-semibold md:mb-1">Link</span>
-            <button
-              onClick={handleLinkClick}
-              className="text-blue-600 hover:text-green-600 hover:scale-125 transition-transform group relative"
-            >
-              <LinkIcon size={18} />
-              <span className="absolute z-50 bottom-[-1.8rem] left-1/2 -translate-x-1/2 px-2 py-1 bg-black text-white text-xs rounded opacity-0 group-hover:opacity-100 transition">
-                Copy Link
-              </span>
-            </button>
-          </div>
+  <span className="text-gray-500 font-semibold md:mb-1">Link</span>
+
+  <button onClick={handleLinkClick} className="relative text-start">
+    <span className="group inline-block relative">
+      <LinkIcon
+        size={18}
+        className="text-blue-600 group-hover:text-green-600 group-hover:scale-125 transition-transform cursor-pointer"
+      />
+
+      <span className="absolute z-50 bottom-[-1.8rem] left-1/2 -translate-x-1/2 px-2 py-1 bg-black text-white text-xs rounded opacity-0 group-hover:opacity-100 transition whitespace-nowrap pointer-events-none">
+        Copy Link
+      </span>
+    </span>
+  </button>
+</div>
+
+
+
 
           {/* Title */}
-          <TooltipTruncate className="flex flex-col">
-            <span className="text-gray-500 font-semibold md:mb-1">Title</span>
+          <div>
+          <TooltipTruncate className="flex flex-col text-sm font-medium">
+            <span className="text-gray-500 font-semibold md:mb-1">Title : </span>
             {track.title}
           </TooltipTruncate>
-
+            {track.title !== "" && <span className="text-md font-black">...</span>}
+          </div>
           {/* Description */}
-          <TooltipTruncate className="flex flex-col">
-            <span className="text-gray-500 font-semibold md:mb-1">Description</span>
+          <div>
+          <TooltipTruncate className="flex flex-col text-sm font-medium ">
+            <span className="text-gray-500 font-semibold md:mb-1">Description :  </span>
             {track.description}
           </TooltipTruncate>
-
+            {track.description !== "" && <span className="text-md font-black">...</span>}
+            </div>
           {/* File URL */}
+          <div>
           <TooltipTruncate className="flex flex-col text-blue-700">
-            <span className="text-gray-500 font-semibold md:mb-1">File URL</span>
+            <span className="text-gray-500 font-semibold md:mb-1">File URL :  </span>
             {track.file_url}
           </TooltipTruncate>
-
+            {track.file_url !== "" && <span className="text-md font-black">...</span>}
+          </div>
           {/* Sources */}
+          <div>
           <TooltipTruncate className="flex flex-col">
-            <span className="text-gray-500 font-semibold md:mb-1">Sources</span>
+            <span className="text-gray-500 font-semibold md:mb-1">Sources : </span>
             {sourceList}
           </TooltipTruncate>
-
+            { <span className="text-md font-black">...</span>}
+          </div>
           {/* Deadline */}
           <div className="flex flex-col text-xs text-gray-600">
-            <span className="text-gray-500 font-semibold md:mb-1">Date</span>
+            <span className="text-gray-500 font-semibold md:mb-1">Date : </span>
             {track.deadline ? formatDate(track.deadline) : "—"}
           </div>
         </div>

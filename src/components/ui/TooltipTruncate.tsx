@@ -16,24 +16,16 @@ export default function TooltipTruncate({ children, className = "" }: Props) {
   const [coords, setCoords] = useState<{ top: number; left: number } | null>(null);
   const isMobile = useIsMobile();
 
-  // Handle outside click for mobile
   useEffect(() => {
-    const handleClick = (e: MouseEvent) => {
-      if (!ref.current?.contains(e.target as Node)) {
-        setShow(false);
-      }
+    const close = (e: MouseEvent) => {
+      if (!ref.current?.contains(e.target as Node)) setShow(false);
     };
-
-    if (isMobile && show) {
-      document.addEventListener("mousedown", handleClick);
+    if (show && isMobile) {
+      document.addEventListener("mousedown", close);
     }
+    return () => document.removeEventListener("mousedown", close);
+  }, [show, isMobile]);
 
-    return () => {
-      document.removeEventListener("mousedown", handleClick);
-    };
-  }, [isMobile, show]);
-
-  // Tooltip positioning for desktop
   useEffect(() => {
     if (!ref.current || !show || isMobile) return;
     const rect = ref.current.getBoundingClientRect();
@@ -43,17 +35,16 @@ export default function TooltipTruncate({ children, className = "" }: Props) {
     });
   }, [show, isMobile]);
 
-  // Extract plain text for tooltip
   const content =
-    typeof children === "string"
-      ? children
-      : ref.current?.textContent || "";
+    typeof children === "string" ? children : ref.current?.textContent || "";
 
   return (
     <>
       <div
         ref={ref}
-        className={`relative truncate overflow-hidden text-ellipsis max-w-full ${className} ${isMobile ? "cursor-pointer" : ""}`}
+        className={`relative truncate text-ellipsis overflow-hidden whitespace-nowrap max-w-[180px] ${className} ${
+          isMobile ? "cursor-pointer" : ""
+        }`}
         onMouseEnter={() => !isMobile && setShow(true)}
         onMouseLeave={() => !isMobile && setShow(false)}
         onClick={() => isMobile && setShow(true)}
@@ -61,14 +52,15 @@ export default function TooltipTruncate({ children, className = "" }: Props) {
         {children}
       </div>
 
-      {/* Tooltip for desktop */}
+      {/* Tooltip (desktop) */}
       {!isMobile &&
+        typeof window !== "undefined" &&
         show &&
         coords &&
         createPortal(
           <AnimatePresence>
             <motion.div
-              key="desktop-tooltip"
+              key="tooltip"
               initial={{ opacity: 0, y: -4 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -4 }}
@@ -85,9 +77,10 @@ export default function TooltipTruncate({ children, className = "" }: Props) {
           document.body
         )}
 
-      {/* Modal popup for mobile */}
+      {/* Popup (mobile) */}
       {isMobile &&
         show &&
+        typeof window !== "undefined" &&
         createPortal(
           <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/50 px-4 py-8">
             <div
