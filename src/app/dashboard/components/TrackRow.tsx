@@ -69,7 +69,7 @@ export default function TrackRow({
         onClick={() => setExpandedId(isExpanded ? null : track.id)}
       >
         <div className="w-full overflow-x-auto">
-          <div className="flex flex-wrap md:flex-nowrap items-center justify-between gap-4 text-sm">
+          <div className="min-w-[700px] flex flex-wrap md:flex-nowrap items-center justify-between gap-4 text-sm">
               <TooltipTruncate className="flex-1 min-w-[120px]">
                 <span className="md:hidden font-semibold text-gray-500">Title: </span>
                 {track.title}
