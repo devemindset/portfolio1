@@ -9,7 +9,7 @@ import { formatDate } from "@/tools/utils";
 import TrackLinksDropdown from "./TrackLinksDropdown";
 import TrackValidatorSection from "./TrackValidatorSection";
 import useIsMobile from "@/hook/useIsMobile";
-import TooltipTruncate from "@/components/ui/TooltipTruncate"; // ✅ nouveau composant
+import TooltipTruncate from "@/components/ui/TooltipTruncate";
 
 type Props = {
   track: RequestTrack;
@@ -40,7 +40,6 @@ export default function TrackRow({
   const [portalRoot, setPortalRoot] = useState<HTMLElement | null>(null);
   const [anchorEl, setAnchorEl] = useState<DOMRect | null>(null);
 
-  console.log(track.validators)
   useEffect(() => {
     setPortalRoot(document.body);
     const handleClickOutside = (e: MouseEvent) => {
@@ -63,76 +62,90 @@ export default function TrackRow({
   };
 
   return (
-    <div className="bg-white shadow-sm rounded-md mb-4 ">
+    <div className="bg-white shadow-sm rounded-md mb-4 p-4">
+      {/* Desktop layout */}
       <div
-        className="p-4 cursor-pointer relative hover:bg-gray-50 transition"
+        className="hidden md:grid grid-cols-7 gap-4 items-center text-sm cursor-pointer"
         onClick={() => setExpandedId(isExpanded ? null : track.id)}
       >
-        <div className="w-full overflow-x-auto overflow-y-hidden">
-        <div className="flex flex-wrap md:flex-nowrap items-center justify-between gap-4 text-sm">
-            <TooltipTruncate className="flex-1 min-w-[120px]">
-              <span className="md:hidden font-semibold text-gray-500">Title: </span>
-              {track.title}
-            </TooltipTruncate>
-
-            <TooltipTruncate className="flex-1 min-w-[120px]">
-              <span className="md:hidden font-semibold text-gray-500">Description: </span>
-              {track.description}
-            </TooltipTruncate>
-
-            <TooltipTruncate className="flex-1 min-w-[120px] text-blue-700">
-              <span className="md:hidden font-semibold text-gray-500">File URL: </span>
-              {track.file_url}
-            </TooltipTruncate>
-
-            <TooltipTruncate className="flex-1 min-w-[120px]">
-              <span className="md:hidden font-semibold text-gray-500">Sources: </span>
-              {sourceList}
-            </TooltipTruncate>
-
-            <div className="flex-1 min-w-[100px] truncate text-xs text-gray-500">
-              <span className="md:hidden font-semibold text-gray-500">Date: </span>
-              {track.deadline ? formatDate(track.deadline) : "—"}
+        <TooltipTruncate>{track.title}</TooltipTruncate>
+        <TooltipTruncate>{track.description}</TooltipTruncate>
+        <TooltipTruncate className="text-blue-700">{track.file_url}</TooltipTruncate>
+        <TooltipTruncate>{sourceList}</TooltipTruncate>
+        <div className="text-xs text-gray-500">
+          {track.deadline ? formatDate(track.deadline) : "—"}
+        </div>
+        <div className="flex justify-center relative">
+          <button
+            onClick={handleLinkClick}
+            className="cursor-pointer hover:scale-150 hover:text-green-600 group relative"
+          >
+            <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 z-20 px-2 py-1 text-xs bg-black text-white rounded opacity-0 group-hover:opacity-100 transition pointer-events-none whitespace-nowrap">
+              Click to copy link
             </div>
-
-            {/* Link + Tooltip */}
-            <div className="flex items-center justify-center relative">
-              <button
-                onClick={handleLinkClick}
-                className="ml-2 cursor-pointer hover:scale-150 hover:text-green-600 group relative"
-              >
-                <div className="hidden md:block absolute -bottom-8 left-1/2 -translate-x-1/2 z-20 px-2 py-1 text-xs bg-black text-white rounded opacity-0 group-hover:opacity-100 transition pointer-events-none whitespace-nowrap">
-                  Click to copy link
-                </div>
-                <Link size={18} />
-              </button>
-            </div>
-
-            {/* Status badges */}
-            <div className="flex flex-col items-center space-y-1 text-xs">
-              <span className="bg-blue-600 text-white px-2 py-0.5 rounded-full">
-                Viewed: {track.validators.length}
-              </span>
-              <span className="bg-green-100 text-green-700 px-2 py-0.5 rounded-full">
-                Approved: {groupByStatus(track.validators).approved.length}
-              </span>
-              <span className="bg-red-100 text-red-700 px-2 py-0.5 rounded-full">
-                Rejected: {groupByStatus(track.validators).rejected.length}
-              </span>
-            </div>
-
-            {/* Chevron toggle */}
-            <div className="flex items-center justify-center">
-              {isExpanded ? (
-                <ChevronDownIcon className="w-4 h-4 text-gray-600" />
-              ) : (
-                <ChevronRightIcon className="w-4 h-4 text-gray-600" />
-              )}
-            </div>
-          </div>
+            <Link size={18} />
+          </button>
+        </div>
+        <div className="flex flex-col items-center space-y-1 text-xs">
+          <span className="bg-blue-600 text-white px-2 py-0.5 rounded-full">
+            Viewed: {track.validators.length}
+          </span>
+          <span className="bg-green-100 text-green-700 px-2 py-0.5 rounded-full">
+            Approved: {groupByStatus(track.validators).approved.length}
+          </span>
+          <span className="bg-red-100 text-red-700 px-2 py-0.5 rounded-full">
+            Rejected: {groupByStatus(track.validators).rejected.length}
+          </span>
         </div>
       </div>
 
+      {/* Mobile layout */}
+      <div className="md:hidden space-y-2 text-sm" onClick={() => setExpandedId(isExpanded ? null : track.id)}>
+        <div>
+          <span className="font-semibold text-gray-500">Title: </span>{track.title}
+        </div>
+        <div>
+          <span className="font-semibold text-gray-500">Description: </span>{track.description}
+        </div>
+        <div className="text-blue-700">
+          <span className="font-semibold text-gray-500">File URL: </span>{track.file_url}
+        </div>
+        <div>
+          <span className="font-semibold text-gray-500">Sources: </span>{sourceList}
+        </div>
+        <div className="text-xs text-gray-500">
+          <span className="font-semibold text-gray-500">Date: </span>
+          {track.deadline ? formatDate(track.deadline) : "—"}
+        </div>
+        <div className="flex items-center gap-2">
+          <span className="text-gray-500 text-xs">Link:</span>
+          <button onClick={handleLinkClick} className="text-green-600 hover:scale-150">
+            <Link size={18} />
+          </button>
+        </div>
+        <div className="flex flex-col space-y-1 text-xs">
+          <span className="bg-blue-600 text-white px-2 py-0.5 rounded-full">
+            Viewed: {track.validators.length}
+          </span>
+          <span className="bg-green-100 text-green-700 px-2 py-0.5 rounded-full">
+            Approved: {groupByStatus(track.validators).approved.length}
+          </span>
+          <span className="bg-red-100 text-red-700 px-2 py-0.5 rounded-full">
+            Rejected: {groupByStatus(track.validators).rejected.length}
+          </span>
+        </div>
+      </div>
+
+      {/* Chevron */}
+      <div className="flex justify-end mt-2 md:mt-1">
+        {isExpanded ? (
+          <ChevronDownIcon className="w-4 h-4 text-gray-600" />
+        ) : (
+          <ChevronRightIcon className="w-4 h-4 text-gray-600" />
+        )}
+      </div>
+
+      {/* Expanded details */}
       {isExpanded && (
         <TrackValidatorSection
           validators={track.validators}
@@ -141,6 +154,7 @@ export default function TrackRow({
         />
       )}
 
+      {/* Portal for link dropdown */}
       {portalRoot &&
         linkVisible &&
         createPortal(
