@@ -40,6 +40,9 @@ export default function TrackRow({
   const [portalRoot, setPortalRoot] = useState<HTMLElement | null>(null);
   const [anchorEl, setAnchorEl] = useState<DOMRect | null>(null);
 
+  const { approved, rejected } = groupByStatus(track.validators);
+  const viewed = track.validators.length;
+
   useEffect(() => {
     setPortalRoot(document.body);
     const handleClickOutside = (e: MouseEvent) => {
@@ -61,71 +64,69 @@ export default function TrackRow({
     setVisibleLinkId(linkVisible ? null : track.id);
   };
 
-  const { approved, rejected } = groupByStatus(track.validators);
-  const viewed = track.validators.length;
-
   return (
     <div className="bg-white shadow-sm rounded-md mb-4">
       <div
         className="p-4 cursor-pointer relative hover:bg-gray-50 transition"
         onClick={() => setExpandedId(isExpanded ? null : track.id)}
       >
-        <div className="w-full overflow-x-auto overflow-y-hidden">
-          <div className="min-w-[900px] grid grid-cols-7 gap-4 text-sm items-center">
-            <TooltipTruncate>
-              <span className="md:hidden font-semibold text-gray-500">Title: </span>
-              {track.title}
-            </TooltipTruncate>
-
-            <TooltipTruncate>
-              <span className="md:hidden font-semibold text-gray-500">Description: </span>
-              {track.description}
-            </TooltipTruncate>
-
-            <TooltipTruncate className="text-blue-700">
-              <span className="md:hidden font-semibold text-gray-500">File URL: </span>
-              {track.file_url}
-            </TooltipTruncate>
-
-            <TooltipTruncate>
-              <span className="md:hidden font-semibold text-gray-500">Sources: </span>
-              {sourceList}
-            </TooltipTruncate>
-
-            <div className="text-xs text-gray-500 truncate">
-              <span className="md:hidden font-semibold text-gray-500">Date: </span>
-              {track.deadline ? formatDate(track.deadline) : "—"}
+        <div className="w-full space-y-3 md:space-y-0 md:grid md:grid-cols-[140px_100px_150px_150px_120px_80px_180px] items-start text-sm gap-x-4 overflow-x-auto">
+          
+          {/* Status */}
+          <div className="flex flex-col gap-1">
+            <span className="text-gray-500 font-semibold md:mb-1">Status</span>
+            <div className="flex flex-col text-xs items-start space-y-1">
+              <span className="bg-blue-600 text-white px-2 py-0.5 rounded-full">Viewed: {viewed}</span>
+              <span className="bg-green-100 text-green-700 px-2 py-0.5 rounded-full">Approved: {approved.length}</span>
+              <span className="bg-red-100 text-red-700 px-2 py-0.5 rounded-full">Rejected: {rejected.length}</span>
             </div>
+          </div>
 
-            {/* Link + Tooltip */}
-            <div className="relative flex justify-center">
-              <button
-                onClick={handleLinkClick}
-                className="cursor-pointer hover:scale-125 hover:text-green-600 group relative"
-              >
-                <div className="hidden md:block absolute -bottom-8 left-1/2 -translate-x-1/2 z-20 px-2 py-1 text-xs bg-black text-white rounded opacity-0 group-hover:opacity-100 transition pointer-events-none whitespace-nowrap">
-                  Click to copy link
-                </div>
-                <LinkIcon size={18} />
-              </button>
-            </div>
+          {/* Link */}
+          <div className="flex flex-col gap-1">
+            <span className="text-gray-500 font-semibold md:mb-1">Link</span>
+            <button
+              onClick={handleLinkClick}
+              className="text-blue-600 hover:text-green-600 hover:scale-125 transition-transform group relative"
+            >
+              <LinkIcon size={18} />
+              <span className="absolute z-50 bottom-[-1.8rem] left-1/2 -translate-x-1/2 px-2 py-1 bg-black text-white text-xs rounded opacity-0 group-hover:opacity-100 transition">
+                Copy Link
+              </span>
+            </button>
+          </div>
 
-            {/* Status badges */}
-            <div className="flex flex-col items-center space-y-1 text-xs">
-              <span className="bg-blue-600 text-white px-2 py-0.5 rounded-full">
-                Viewed: {viewed}
-              </span>
-              <span className="bg-green-100 text-green-700 px-2 py-0.5 rounded-full">
-                Approved: {approved.length}
-              </span>
-              <span className="bg-red-100 text-red-700 px-2 py-0.5 rounded-full">
-                Rejected: {rejected.length}
-              </span>
-            </div>
+          {/* Title */}
+          <TooltipTruncate className="flex flex-col">
+            <span className="text-gray-500 font-semibold md:mb-1">Title</span>
+            {track.title}
+          </TooltipTruncate>
+
+          {/* Description */}
+          <TooltipTruncate className="flex flex-col">
+            <span className="text-gray-500 font-semibold md:mb-1">Description</span>
+            {track.description}
+          </TooltipTruncate>
+
+          {/* File URL */}
+          <TooltipTruncate className="flex flex-col text-blue-700">
+            <span className="text-gray-500 font-semibold md:mb-1">File URL</span>
+            {track.file_url}
+          </TooltipTruncate>
+
+          {/* Sources */}
+          <TooltipTruncate className="flex flex-col">
+            <span className="text-gray-500 font-semibold md:mb-1">Sources</span>
+            {sourceList}
+          </TooltipTruncate>
+
+          {/* Deadline */}
+          <div className="flex flex-col text-xs text-gray-600">
+            <span className="text-gray-500 font-semibold md:mb-1">Date</span>
+            {track.deadline ? formatDate(track.deadline) : "—"}
           </div>
         </div>
 
-        {/* Toggle icon */}
         <div className="absolute right-4 top-4">
           {isExpanded ? (
             <ChevronDownIcon className="w-4 h-4 text-gray-600" />

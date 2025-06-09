@@ -27,19 +27,19 @@ const TrackTable: FC<TrackTableProps> = ({
 }) => {
   return (
     <div className="flex flex-col w-full overflow-x-auto">
-      {/* Desktop header (hidden on mobile) */}
-      {/* <div className="hidden md:grid grid-cols-7 gap-4 text-xs font-semibold bg-[#1E2A3A] text-white py-3 px-4 rounded-t-md min-w-[900px]">
-        <div>Title</div>
-        <div>Description</div>
-        <div>File URL</div>
-        <div>Sources</div>
-        <div>Date</div>
-        <div>Links</div>
-        <div>Status</div>
+      {/* Header - only for md and up */}
+      {/* <div className="hidden md:flex bg-[#1E2A3A] text-white font-semibold text-xs py-3 px-4 rounded-t-md min-w-[900px]">
+        <div style={{ width: "150px" }}>Status</div>
+        <div style={{ width: "80px" }}>Link</div>
+        <div style={{ width: "150px" }}>Title</div>
+        <div style={{ width: "180px" }}>Description</div>
+        <div style={{ width: "140px" }}>File URL</div>
+        <div style={{ width: "120px" }}>Sources</div>
+        <div style={{ width: "100px" }}>Date</div>
       </div> */}
 
       {/* Data rows */}
-      <div className="flex flex-col-reverse w-full">
+      <div className="flex flex-col-reverse">
         {tracks.map((track) => (
           <TrackRow
             key={track.id}

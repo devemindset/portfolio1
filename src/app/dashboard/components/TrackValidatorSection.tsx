@@ -42,29 +42,31 @@ const TrackValidatorSection: FC<TrackValidatorSectionProps> = ({
   }
 
   return (
-    <div className="bg-gray-50 p-4 space-y-2">
-      <p className="text-sm font-semibold mb-2">Validators</p>
+    <div className="bg-gray-50 p-4 space-y-4 overflow-x-auto">
+      <p className="text-sm font-semibold">Validators</p>
 
       {(["approved", "rejected", "viewed"] as const).map((status) => {
         const grouped = groupByStatus(validators)[status];
         if (grouped.length === 0) return null;
 
         return (
-          <div key={status}>
+          <div key={status} className="space-y-2 min-w-[700px]">
+            {/* Label */}
             <h4
-              className={`text-xs font-medium mb-2 inline-block px-3 py-1 rounded-full ${statusColor[status]}`}
+              className={`text-xs font-medium inline-block px-3 py-1 rounded-full ${statusColor[status]}`}
             >
               {statusLabel[status]} ({grouped.length})
             </h4>
 
-            {/* Desktop header */}
+            {/* Table Header (only on desktop) */}
             <div className="hidden md:flex font-semibold bg-white border px-4 py-2 rounded-md text-sm">
-              <div className="w-48">Name / Email</div>
-              <div className="w-40">Source</div>
-              <div className="w-80">Comment</div>
-              <div className="w-32">Date</div>
+              <div style={{ width: "140px" }}>Name / Email</div>
+              <div style={{ width: "100px" }}>Source</div>
+              <div style={{ width: "300px" }}>Comment</div>
+              <div style={{ width: "120px" }}>Date</div>
             </div>
 
+            {/* Validators list */}
             <div className="space-y-2">
               {grouped.map((val) => {
                 const sourceLabel =
@@ -73,25 +75,33 @@ const TrackValidatorSection: FC<TrackValidatorSectionProps> = ({
                 return (
                   <div
                     key={val.id}
-                    className="flex flex-col md:flex-row gap-2 md:gap-0 text-sm bg-white px-4 py-3 rounded-md"
+                    className="flex flex-col md:flex-row bg-white px-4 py-3 rounded-md text-sm gap-2 md:gap-0"
                   >
-                    <TooltipTruncate className="w-full md:w-48">
-                      <span className="md:hidden font-semibold text-gray-500">Name / Email: </span>
+                    <TooltipTruncate className="w-full md:w-[140px]">
+                      <span className="md:hidden font-semibold text-gray-500">
+                        Name / Email:{" "}
+                      </span>
                       {val.email_or_name || "—"}
                     </TooltipTruncate>
 
-                    <TooltipTruncate className="w-full md:w-40 text-gray-600">
-                      <span className="md:hidden font-semibold text-gray-500">Source: </span>
+                    <TooltipTruncate className="w-full md:w-[100px] text-gray-600">
+                      <span className="md:hidden font-semibold text-gray-500">
+                        Source:{" "}
+                      </span>
                       {sourceLabel}
                     </TooltipTruncate>
 
-                    <TooltipTruncate className="w-full md:w-80 text-gray-500">
-                      <span className="md:hidden font-semibold text-gray-500">Comment: </span>
+                    <TooltipTruncate className="w-full md:w-[300px] text-gray-500">
+                      <span className="md:hidden font-semibold text-gray-500">
+                        Comment:{" "}
+                      </span>
                       {val.comment || "No comment"}
                     </TooltipTruncate>
 
-                    <div className="w-full md:w-32 text-xs text-gray-400">
-                      <span className="md:hidden font-semibold text-gray-500">Date: </span>
+                    <div className="w-full md:w-[120px] text-xs text-gray-400">
+                      <span className="md:hidden font-semibold text-gray-500">
+                        Date:{" "}
+                      </span>
                       {formatDate(val.responded_at)}
                     </div>
                   </div>

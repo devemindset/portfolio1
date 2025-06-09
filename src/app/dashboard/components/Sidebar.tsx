@@ -51,7 +51,7 @@ export default function Sidebar() {
         className="bg-[#1E2A3A] text-white px-4 py-2 rounded hover:bg-blue-700 text-sm whitespace-nowrap flex items-center"
       >
         <Plus size={18} />
-        {!collapsed && <span className="ml-2">Create new</span>}
+        {!collapsed && <span className="ml-2">Create</span>}
       </Link>
 
       {/* Desktop nav */}
