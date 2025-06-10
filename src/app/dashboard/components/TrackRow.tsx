@@ -10,6 +10,7 @@ import TrackLinksDropdown from "./TrackLinksDropdown";
 import TrackValidatorSection from "./TrackValidatorSection";
 import useIsMobile from "@/hook/useIsMobile";
 import TooltipTruncate from "@/components/ui/TooltipTruncate";
+import { motion } from "framer-motion";
 
 type Props = {
   track: RequestTrack;
@@ -66,9 +67,14 @@ export default function TrackRow({
   
   return (
     <div className="bg-white shadow-sm rounded-md mb-4">
-      <div
+      <motion.div
         className="p-4 cursor-pointer relative hover:bg-gray-50 transition"
         onClick={() => setExpandedId(isExpanded ? null : track.id)}
+
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        viewport={{ once: true }}
       >
         <div className="w-full space-y-3 md:space-y-0 md:grid md:grid-cols-[140px_100px_150px_150px_120px_80px_180px] items-start text-sm gap-x-4 overflow-x-auto">
           
@@ -149,7 +155,7 @@ export default function TrackRow({
             <ChevronRightIcon className="w-4 h-4 text-gray-600" />
           )}
         </div>
-      </div>
+      </motion.div>
 
       {isExpanded && (
         <TrackValidatorSection

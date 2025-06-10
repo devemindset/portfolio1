@@ -9,6 +9,7 @@ import RequestHeader from "@/components/RequestHeader";
 import { useAuthState } from "@/context/AuthContext";
 import BackgroundLoader from "@/components/BackgroundLoader";
 import { useRouter } from "next/navigation";
+import TrackTableSkeleton from "./components/TrackTableSkeleton";
 
 
 export default function DashboardPage() {
@@ -16,6 +17,7 @@ export default function DashboardPage() {
   const [expandedId, setExpandedId] = useState<number | null>(null);
   const [visibleLinkId, setVisibleLinkId] = useState<number | null>(null);
   const {userData} = useAuthState();
+  const [isLoading, setIsLoading] = useState(true);
   
   const router = useRouter();
 
@@ -25,10 +27,12 @@ export default function DashboardPage() {
   }
   useEffect(() => {
     if(userData.username){
+      setIsLoading(true);
       api
       .get("/track_user/track_users_list")
       .then((res) => {setTracks(res.data);})
-      .catch((err) => console.error("Error:", err));
+      .catch((err) => console.error("Error:", err))
+      .finally(() => setIsLoading(false));
     }
     
   }, [userData]);
@@ -57,14 +61,18 @@ export default function DashboardPage() {
           </div>
         </div>
 
-        <TrackTable
-          tracks={tracks}
-          expandedId={expandedId}
-          setExpandedId={setExpandedId}
-          visibleLinkId={visibleLinkId}
-          setVisibleLinkId={setVisibleLinkId}
-          groupByStatus={groupByStatus}
-        />
+        {isLoading ? (
+            <TrackTableSkeleton />
+          ) : (
+            <TrackTable
+              tracks={tracks}
+              expandedId={expandedId}
+              setExpandedId={setExpandedId}
+              visibleLinkId={visibleLinkId}
+              setVisibleLinkId={setVisibleLinkId}
+              groupByStatus={groupByStatus}
+            />
+          )}
       </main>
     </div>
     {!userData.username && <BackgroundLoader />}

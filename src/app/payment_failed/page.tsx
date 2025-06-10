@@ -6,7 +6,7 @@ const PaymentFailed = () => {
   const {userAction} = useAuthState();
      
     useEffect(() => {
-          userAction("visit"," payment success")
+          userAction("visit"," payment failed")
         },[])
   return (
     <div className="min-h-screen flex items-center justify-center bg-red-100">
