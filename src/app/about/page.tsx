@@ -1,7 +1,8 @@
-"use client";
-import { useAuthState } from "@/context/AuthContext";
+
+
+import SiteUserActionComponent from "@/components/SiteUserActionComponent";
 import Link from "next/link";
-import { useEffect } from "react";
+
 
 // export const metadata = {
 //   title: 'About – Validation Flow',
@@ -11,12 +12,9 @@ import { useEffect } from "react";
 
 // app/about/page.tsx
 export default function AboutPage() {
-  const {userAction} = useAuthState();
-       
-      useEffect(() => {
-            userAction("visit","about")
-          },[])
+
   return (
+    <>
     <main className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto bg-white p-8 rounded-lg shadow-md">
         <h1 className="text-3xl font-bold text-gray-900 mb-6 text-center">About Us | ValidationFlow</h1>
@@ -115,6 +113,10 @@ export default function AboutPage() {
           <p className="text-center mt-6 text-sm text-gray-500">The ValidationFlow Team</p>
         </div>
       </div>
+
     </main>
+
+    <SiteUserActionComponent action="visit" object="about"/>
+    </>
   );
 }

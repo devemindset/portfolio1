@@ -10,6 +10,7 @@ import { useAuthState } from "@/context/AuthContext";
 import BackgroundLoader from "@/components/BackgroundLoader";
 import { useRouter } from "next/navigation";
 import TrackTableSkeleton from "./components/TrackTableSkeleton";
+import Head from "next/head";
 
 
 export default function DashboardPage() {
@@ -45,6 +46,9 @@ export default function DashboardPage() {
 
   return (
     <>
+    <Head>
+        <title>dashboard | Validation Flow</title>
+    </Head>
     <RequestHeader />
     <div className="flex min-h-screen flex-col md:flex-row">
       <Sidebar />

@@ -1,21 +1,17 @@
-"use client";
+
 import AuthButton from "@/components/AuthButton";
-import { useAuthState } from "@/context/AuthContext";
+import SiteUserActionComponent from "@/components/SiteUserActionComponent";
 import type { NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
-import { useEffect } from "react";
+
 
 const Page: NextPage = () => {
-  const {userAction} = useAuthState();
-     
-    useEffect(() => {
-          userAction("visit","register")
-        },[])
+  
   return (
     <>
       <Head>
-        <title>Sign Up | CodeUpChallenge</title>
+        <title>Sign Up | Validation Flow</title>
       </Head>
 
       <div className="flex items-center justify-center min-h-screen bg-black px-4 text-white">
@@ -75,6 +71,7 @@ const Page: NextPage = () => {
           </div>
         </div>
       </div>
+      <SiteUserActionComponent action="visit" object="register" />
     </>
   );
 }

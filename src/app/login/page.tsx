@@ -9,7 +9,7 @@ const Page: NextPage = () => {
   return (
     <>
       <Head>
-        <title>Login | CodeUpChallenge</title>
+        <title>Login | Validation Flow</title>
       </Head>
 
       <div className="flex items-center justify-center min-h-screen bg-black px-4 text-white">

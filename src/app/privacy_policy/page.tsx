@@ -1,15 +1,16 @@
-"use client";
-import { useAuthState } from "@/context/AuthContext";
-import { useEffect } from "react";
+import SiteUserActionComponent from "@/components/SiteUserActionComponent";
+import Head from "next/head";
+
 
 // app/privacy/page.tsx
 export default function PrivacyPolicyPage() {
-  const {userAction} = useAuthState();
-     
-    useEffect(() => {
-          userAction("visit","privacy")
-        },[])
+  
   return (
+    <>
+    <Head>
+        <title>Privacy | Validation Flow</title>
+    </Head>
+    
     <main className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto bg-white p-8 rounded-lg shadow-md">
         <h1 className="text-3xl font-bold text-gray-900 mb-6 text-center">
@@ -141,5 +142,7 @@ export default function PrivacyPolicyPage() {
         </div>
       </div>
     </main>
+    <SiteUserActionComponent action="visite" object="privacy" />
+    </>
   );
 }

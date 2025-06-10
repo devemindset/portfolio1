@@ -1,16 +1,14 @@
-// app/terms/page.tsx
-"use client";
+import SiteUserActionComponent from "@/components/SiteUserActionComponent";
+import Head from "next/head";
 
-import { useAuthState } from "@/context/AuthContext";
-import { useEffect } from "react";
 
 export default function TermsPage() {
-  const {userAction} = useAuthState();
-     
-    useEffect(() => {
-          userAction("visit","terms")
-        },[])
+ 
   return (
+    <>
+      <Head>
+        <title>Terms | Validation Flow</title>
+      </Head>
     <main className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto bg-white p-8 rounded-lg shadow-md">
         <h1 className="text-3xl font-bold text-center text-gray-900 mb-6">
@@ -147,6 +145,8 @@ export default function TermsPage() {
           <p><strong>Thank you for using ValidationFlow — built to help you move fast and make decisions with confidence. 🚀</strong></p>
         </div>
       </div>
+      <SiteUserActionComponent action="visit" object="terms"/>
     </main>
+    </>
   );
 }

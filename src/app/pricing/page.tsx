@@ -1,24 +1,25 @@
 "use client";
 import PricingComponent from "@/components/PricingComponent";
 import RequestHeader from "@/components/RequestHeader";
-import { useAuthState } from "@/context/AuthContext";
+import SiteUserActionComponent from "@/components/SiteUserActionComponent";
 import type { NextPage } from "next";
-import { useEffect } from "react";
+import Head from "next/head";
+
 
 const Page: NextPage = () => {
-   const {userAction} = useAuthState();
-
-  useEffect(() => {
-        userAction("visit","price")
-      },[])
+   
   return (
     <>
+    <Head>
+        <title>Pricing | Validation Flow</title>
+    </Head>
     <RequestHeader />
     <div className="w-screen  flex justify-center  items-center pt-10 bg-gray-50 ">
 
       <PricingComponent />
 
     </div>
+    <SiteUserActionComponent action="visit" object="pricing" />
     </>
   )
   

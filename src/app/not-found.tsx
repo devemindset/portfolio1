@@ -1,6 +1,7 @@
 "use client";
 import { useAuthState } from "@/context/AuthContext";
 import type { NextPage } from "next";
+import Head from "next/head";
 import Link from "next/link";
 import { useEffect } from "react";
 
@@ -12,6 +13,10 @@ const NotFoundPage : NextPage = () => {
   },[])
 
   return (
+    <>
+      <Head>
+        <title>Public | Validation Flow</title>
+      </Head>
 <div className="min-h-screen flex flex-col items-center justify-center bg-white text-center px-4">
       <h1 className="text-6xl font-bold text-blue-600">404</h1>
       <p className="text-2xl mt-4 font-semibold text-gray-800">
@@ -24,6 +29,7 @@ const NotFoundPage : NextPage = () => {
           Go Home
       </Link>
       </div>
+      </>
   )
 }
 

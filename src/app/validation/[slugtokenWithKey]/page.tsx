@@ -10,17 +10,17 @@ import RequestHeader from "@/components/RequestHeader";
 import BackgroundLoader from "@/components/BackgroundLoader";
 import DescriptionBox from "@/components/DescriptionBox";
 import Link from "next/link";
+import SiteUserActionComponent from "@/components/SiteUserActionComponent";
+import Head from "next/head";
 
 
 
 const Page: NextPage = () => {
   const { slugtokenWithKey } = useParams();
-  const {userData,browserLimitValue, setBrowserLimitValue,userAction,tempToken,setTempToken} = useAuthState();
+  const {userData,browserLimitValue, setBrowserLimitValue,tempToken,setTempToken} = useAuthState();
  
    
-  useEffect(() => {
-        userAction("visit","public")
-      },[])
+  
 
 
   const [track, setTrack] = useState<RequestInTheTokenPage | null>(null);
@@ -173,6 +173,9 @@ const sourceKey = combinedKey.slice(TOKEN_LENGTH);
 
   return (
     <>
+      <Head>
+        <title>Public | Validation Flow</title>
+      </Head>
       <RequestHeader />
       <main className="flex justify-center items-center min-h-screen bg-gray-100 px-4 flex-col py-10">
 
@@ -290,6 +293,7 @@ const sourceKey = combinedKey.slice(TOKEN_LENGTH);
             </div>
           </div>
       </main>
+      <SiteUserActionComponent action="visit" object="public" />
     </>
   );
 };
