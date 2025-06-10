@@ -1,30 +1,30 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import useIsMobile from "@/hook/useIsMobile";
 
 type Props = {
-  children: React.ReactNode;
+  children: string;
   className?: string;
+  maxChars?: number;
+  label?: string; // ✅ le label pour mobile (ex: "Description:")
 };
 
-export default function TooltipTruncate({ children, className = "" }: Props) {
+export default function TooltipTruncate({
+  children,
+  className = "",
+  maxChars = 50,
+  label,
+}: Props) {
   const ref = useRef<HTMLDivElement>(null);
   const [show, setShow] = useState(false);
   const [coords, setCoords] = useState<{ top: number; left: number } | null>(null);
   const isMobile = useIsMobile();
 
-  useEffect(() => {
-    const close = (e: MouseEvent) => {
-      if (!ref.current?.contains(e.target as Node)) setShow(false);
-    };
-    if (show && isMobile) {
-      document.addEventListener("mousedown", close);
-    }
-    return () => document.removeEventListener("mousedown", close);
-  }, [show, isMobile]);
+  const isTruncated = children.length > maxChars;
+  const visibleText = isTruncated ? children.slice(0, maxChars) + "…" : children;
 
   useEffect(() => {
     if (!ref.current || !show || isMobile) return;
@@ -35,59 +35,54 @@ export default function TooltipTruncate({ children, className = "" }: Props) {
     });
   }, [show, isMobile]);
 
-  const content =
-    typeof children === "string" ? children : ref.current?.textContent || "";
-
   return (
     <>
       <div
         ref={ref}
-        className={`relative truncate text-ellipsis overflow-hidden whitespace-nowrap max-w-[180px] ${className} ${
-          isMobile ? "cursor-pointer" : ""
-        }`}
-        onMouseEnter={() => !isMobile && setShow(true)}
+        className={`relative truncate ${className} ${isTruncated ? "cursor-pointer" : ""}`}
+        onMouseEnter={() => !isMobile && isTruncated && setShow(true)}
         onMouseLeave={() => !isMobile && setShow(false)}
-        onClick={() => isMobile && setShow(true)}
+        onClick={() => isMobile && isTruncated && setShow(true)}
       >
-        {children}
+        {label && isMobile && (
+          <span className="block text-gray-500 font-semibold mb-1">{label}</span>
+        )}
+        {visibleText}
       </div>
 
       {/* Tooltip (desktop) */}
-      {!isMobile &&
-        typeof window !== "undefined" &&
-        show &&
-        coords &&
+      {!isMobile && show && coords &&
         createPortal(
           <AnimatePresence>
             <motion.div
-              key="tooltip"
-              initial={{ opacity: 0, y: -4 }}
+              initial={{ opacity: 0, y: -5 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -4 }}
-              transition={{ duration: 0.15 }}
-              className="fixed z-[9999] bg-black text-white text-xs px-2 py-1 rounded shadow max-w-xs w-max break-words whitespace-pre-wrap pointer-events-none"
+              exit={{ opacity: 0, y: -5 }}
+              transition={{ duration: 0.2 }}
+              className="fixed z-[9999] bg-black text-white text-xs px-2 py-1 rounded shadow max-w-xs break-words pointer-events-none"
               style={{
                 top: coords.top,
                 left: coords.left,
               }}
             >
-              {content}
+              {children}
             </motion.div>
           </AnimatePresence>,
           document.body
         )}
 
-      {/* Popup (mobile) */}
-      {isMobile &&
-        show &&
-        typeof window !== "undefined" &&
+      {/* Tooltip (mobile) */}
+      {isMobile && show &&
         createPortal(
-          <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/50 px-4 py-8">
+          <div
+            className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/60 px-4"
+            onClick={() => setShow(false)}
+          >
             <div
-              className="bg-white max-h-[80vh] overflow-y-auto rounded-lg shadow-lg p-6 text-sm text-gray-800 w-full max-w-sm"
+              className="bg-white rounded shadow-lg p-6 max-w-sm w-full text-sm text-gray-900"
               onClick={(e) => e.stopPropagation()}
             >
-              <div className="whitespace-pre-wrap break-words">{content}</div>
+              {children}
             </div>
           </div>,
           document.body

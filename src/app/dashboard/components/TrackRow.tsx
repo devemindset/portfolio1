@@ -111,35 +111,34 @@ export default function TrackRow({
 
           {/* Title */}
           <div>
-          <TooltipTruncate className="flex flex-col text-sm font-medium">
             <span className="text-gray-500 font-semibold md:mb-1">Title : </span>
+          <TooltipTruncate maxChars={20} className="flex flex-col text-sm font-medium">
+            
             {track.title}
           </TooltipTruncate>
-            {track.title !== "" && <span className="text-md font-black">...</span>}
           </div>
           {/* Description */}
           <div>
-          <TooltipTruncate className="flex flex-col text-sm font-medium ">
             <span className="text-gray-500 font-semibold md:mb-1">Description :  </span>
+          <TooltipTruncate maxChars={20} className="flex flex-col text-sm font-medium ">
+            
             {track.description}
           </TooltipTruncate>
-            {track.description !== "" && <span className="text-md font-black">...</span>}
             </div>
           {/* File URL */}
           <div>
-          <TooltipTruncate className="flex flex-col text-blue-700">
             <span className="text-gray-500 font-semibold md:mb-1">File URL :  </span>
+          <TooltipTruncate maxChars={15} className="flex flex-col text-blue-700">
+            
             {track.file_url}
           </TooltipTruncate>
-            {track.file_url !== "" && <span className="text-md font-black">...</span>}
           </div>
           {/* Sources */}
           <div>
-          <TooltipTruncate className="flex flex-col">
             <span className="text-gray-500 font-semibold md:mb-1">Sources : </span>
+          <TooltipTruncate className="flex flex-col" maxChars={10}>            
             {sourceList}
           </TooltipTruncate>
-            { <span className="text-md font-black">...</span>}
           </div>
           {/* Deadline */}
           <div className="flex flex-col text-xs text-gray-600">

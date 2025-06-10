@@ -20,7 +20,7 @@ const CreateTrackPage: NextPage = () => {
 
 
   useEffect(() => {
-    userAction("visit","new page")
+    userAction("visit","create new link page")
   },[])
   const [form, setForm] = useState<CreateTrack>({
     title: "",
