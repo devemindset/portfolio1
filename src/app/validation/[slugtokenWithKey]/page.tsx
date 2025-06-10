@@ -165,7 +165,7 @@ const sourceKey = combinedKey.slice(TOKEN_LENGTH);
   };
 
 
-  if (!track && !requestId && !view) {
+  if (!track?.title && !requestId && !view) {
     return (
       <BackgroundLoader />
     );
