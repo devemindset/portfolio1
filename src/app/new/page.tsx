@@ -83,6 +83,14 @@ const CreateTrackPage: NextPage = () => {
 
     const dataToSubmit = { ...form, all_source: all_source.join(","),platformode : platformMode  };
 
+    if(form.title.length > 150){
+      setError("The title cannot exceed 150 characters.");
+      return;
+    }
+    if(form.description.length > 1000){
+      setError("The description cannot exceed 1000 characters.");
+      return;
+    }
     try {
       const response = await api.post("track_user/create_track_users", dataToSubmit);
       
