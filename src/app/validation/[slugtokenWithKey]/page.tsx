@@ -92,13 +92,14 @@ const sourceKey = combinedKey.slice(TOKEN_LENGTH);
       }
     } catch {
       console.log("Something went wrong.");
+      setView(false);
     } 
       }
 
       if(view === false ){
        
         setView(true)
-      console.log("view set")
+     
 
       }
       
