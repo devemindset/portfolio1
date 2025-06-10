@@ -3,7 +3,7 @@
 import { Validator } from "@/types";
 import { formatDate } from "@/tools/utils";
 import type { FC } from "react";
-import TooltipTruncate from "@/components/ui/TooltipTruncate";
+
 
 interface TrackValidatorSectionProps {
   validators: Validator[];
@@ -77,26 +77,36 @@ const TrackValidatorSection: FC<TrackValidatorSectionProps> = ({
                     key={val.id}
                     className="flex flex-col md:flex-row bg-white px-4 py-3 rounded-md text-sm gap-2 md:gap-0"
                   >
-                    <TooltipTruncate className="w-full md:w-[140px]">
+                    <div>
                       <span className="md:hidden font-semibold text-gray-500">
                         Name / Email:{" "}
                       </span>
+                      <div className="w-full md:w-[140px]" >
+                      
                       {val.email_or_name || "—"}
-                    </TooltipTruncate>
-
-                    <TooltipTruncate className="w-full md:w-[100px] text-gray-600">
+                    </div>
+                    </div>
+                    
+                    <div>
                       <span className="md:hidden font-semibold text-gray-500">
                         Source:{" "}
                       </span>
-                      {sourceLabel}
-                    </TooltipTruncate>
+                      <div className="w-full md:w-[100px] text-gray-600" >
 
-                    <TooltipTruncate className="w-full md:w-[300px] text-gray-500">
+                      {sourceLabel}
+                    </div>
+                    </div>
+                    
+                    <div>
                       <span className="md:hidden font-semibold text-gray-500">
                         Comment:{" "}
                       </span>
+                      <div className="w-full md:w-[300px] text-gray-500" >
+                      
                       {val.comment || "No comment"}
-                    </TooltipTruncate>
+                    </div>
+                    </div>
+                    
 
                     <div className="w-full md:w-[120px] text-xs text-gray-400">
                       <span className="md:hidden font-semibold text-gray-500">

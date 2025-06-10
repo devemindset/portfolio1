@@ -9,14 +9,12 @@ type Props = {
   children: string;
   className?: string;
   maxChars?: number;
-  label?: string; // ✅ le label pour mobile (ex: "Description:")
 };
 
 export default function TooltipTruncate({
   children,
   className = "",
   maxChars = 50,
-  label,
 }: Props) {
   const ref = useRef<HTMLDivElement>(null);
   const [show, setShow] = useState(false);
@@ -44,9 +42,6 @@ export default function TooltipTruncate({
         onMouseLeave={() => !isMobile && setShow(false)}
         onClick={() => isMobile && isTruncated && setShow(true)}
       >
-        {label && isMobile && (
-          <span className="block text-gray-500 font-semibold mb-1">{label}</span>
-        )}
         {visibleText}
       </div>
 
