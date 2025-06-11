@@ -40,6 +40,3 @@ body {
   }
 }
 
-.animate-spin-scale {
-  animation: spinScale 1.5s infinite ease-in-out;
-}

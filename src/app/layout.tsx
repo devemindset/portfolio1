@@ -1,7 +1,6 @@
 
 // app/layout.tsx
 import './globals.css';
-import type { Metadata } from 'next';
 import { Roboto } from "next/font/google";
 import AuthProviderWrapper from './providers/AuthProviderWrapper';
 import Footer from '@/components/Footer';
@@ -15,51 +14,6 @@ const roboto = Roboto({
   variable: "--font-roboto" // Optional: for CSS variable support
 });
 
-export const metadata: Metadata = {
-  // 👇 Obligatoire pour les URLs absolues (ex: og:image, og:url)
-  metadataBase: new URL('https://validationflow.com'),
-
-  // 🧠 Titre global SEO (max ~70 caractères)
-  title: 'Validation Flow — Validate your ideas, fast',
-
-  // ✍️ Description courte pour Google (~160 caractères)
-  description:
-    'Create a validation link in seconds. Modern, minimal, and frictionless way to get feedback or approval on your ideas from real users.',
-
-  // 🌐 Open Graph (Facebook, LinkedIn, Slack...)
-  openGraph: {
-    title: 'Validation Flow — Validate your ideas, fast',
-    description:
-      'Test multiple ideas and get real feedback or emails from true users — freelancers, indie hackers, or startup founders.',
-    url: 'https://validationflow.com',
-    siteName: 'Validation Flow',
-    images: [
-      {
-        url: '/og-image.png', // ✅ fichier généré et placé en production
-        width: 1200,
-        height: 630,
-        alt: 'Validation Flow — Fast Idea Validation',
-      },
-    ],
-    locale: 'en_US',
-    type: 'website',
-  },
-
-  // 🐦 Twitter Card
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Validation Flow — Validate your ideas, fast',
-    description:
-      'Create a validation link in seconds. Collect feedback or emails from your real audience. No signups. No fluff.',
-    images: ['/og-image.png'],
-  },
-
-  // 🧩 Favicon et icônes
-  icons: {
-    icon: '/favicon.ico',
-    apple: '/apple-touch-icon.png',
-  },
-};
 
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

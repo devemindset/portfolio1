@@ -16,11 +16,8 @@ interface AuthContextProps{
     getUserInfo : () => Promise<void>;
     userAction : (action : string, object : string) => Promise<void>;
 
-    // logBackground: boolean;
-    // setLogBackground : Dispatch<SetStateAction<boolean>>;
-    // register : (email: string, username:string, password:string,redirect : string) => Promise<string>;
+    
     redirectPath : string;
-    // setRedirectPath : Dispatch<SetStateAction<string>>;
     loginRegisterForm : boolean;
     setLoginRegisterForm : Dispatch<SetStateAction<boolean>>;
     btnstatus : string;
@@ -34,8 +31,6 @@ interface AuthContextProps{
     setLoadingBtn : Dispatch<SetStateAction<boolean>>;
     loadingBackground : boolean;
     setLoadingBackground : Dispatch<SetStateAction<boolean>>;
-    tempToken : string;
-    setTempToken : Dispatch<SetStateAction<string>>;
     
 
 
@@ -56,12 +51,11 @@ export const AuthProvider = ({ children } : { children : ReactNode}) => {
     const [loadingBtn,setLoadingBtn] = useState<boolean>(false);
     const [loadingBackground,setLoadingBackground] = useState<boolean>(false);
     const [redirectPath, setRedirectPath] = useState<string>("");
-    // const [logBackground,setLogBackground] = useState<boolean>(false);
+    
     const [loginRegisterForm,setLoginRegisterForm] = useState(false);
     const [isAuthenticated,setIsAuthenticated] = useState<boolean>(false);
     const [isAuthAuthenticated,setIsAuthAuthenticated] =useState<boolean>(false);
     const [browserLimitValue, setBrowserLimitValue] = useState<LimitBrowserPostData | null>(null);
-    const [tempToken,setTempToken] = useState<string>("");
     const todayDateWithoutTime = new Date().toISOString().split("T")[0];
     
 
@@ -79,14 +73,13 @@ export const AuthProvider = ({ children } : { children : ReactNode}) => {
       const isAuthenticated = localStorage.getItem("isGoogleAuthenticated");
       const userAuthenticated = localStorage.getItem("isAuthenticated");
       const storedData = localStorage.getItem("limite_actions");
-      const temp_token = localStorage.getItem("temp_token");
       
 
       // Initialize browserLimitValue
       if (storedData) {
         setBrowserLimitValue(JSON.parse(storedData));
       } else {
-        const defaultValue = { date: todayDateWithoutTime, contact: 0, newsletterSub: 0, view_request : false, requestId : 0 };
+        const defaultValue = { date: todayDateWithoutTime, contact: 0, newsletterSub: 0};
         setBrowserLimitValue(defaultValue);
         localStorage.setItem("limite_actions", JSON.stringify(defaultValue));
       }
@@ -113,13 +106,7 @@ export const AuthProvider = ({ children } : { children : ReactNode}) => {
         setIsAuthenticated(false)
         localStorage.setItem("isAuthenticated",JSON.stringify(false))
       }
-      // token_temp
-      if(temp_token){
-        setTempToken(JSON.parse(temp_token))
-      }else{
-        setTempToken("")
-        localStorage.setItem("temp_token",JSON.stringify(""))
-      }
+      
 
       setIsInitialized(true); // Mark as initialized
     }
@@ -136,8 +123,7 @@ useEffect(() => {
         date: todayDateWithoutTime,
         contact: 0, // Reset for a new day
         newsletterSub : 0, // Reset for a new day
-        view_request : false,
-        requestId : 0,
+        
       };
       setBrowserLimitValue(updatedValue);
       localStorage.setItem("limite_actions", JSON.stringify(updatedValue));
@@ -156,7 +142,7 @@ useEffect(() => {
               try {
                 const response = await api.post(`${process.env.NEXT_PUBLIC_API_URL}/user/google_auth/`, {
                   email: session.user?.email,
-                  username: session.user?.name,
+                  full_name: session.user?.name,
                   social_id: session.socialId,
                 });
       
@@ -358,8 +344,6 @@ const clearCookies = () => {
         setLoadingBtn,
         loadingBackground,
         setLoadingBackground,
-        tempToken,
-        setTempToken,
         
         }} >
             { children }

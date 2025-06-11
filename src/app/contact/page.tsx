@@ -1,5 +1,5 @@
 
-import RequestHeader from "@/components/RequestHeader";
+
 import SiteUserActionComponent from "@/components/SiteUserActionComponent";
 
 import type { NextPage } from "next";
@@ -15,7 +15,7 @@ const Page: NextPage = ({}) => {
 
   return (
     <>
-    <RequestHeader />
+   
     <Contact />
     
     <SiteUserActionComponent action="visit" object="contact"/>

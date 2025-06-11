@@ -45,7 +45,7 @@ const Footer: FC = () => {
             <Link href="/">
               <span className="hover:text-[#2A6DD2] transition-colors cursor-pointer">Home</span>
             </Link>
-            {userData.username ? (
+            {userData.full_name ? (
               <span
                 onClick={logoutHandle}
                 className="hover:text-[#2A6DD2] transition-colors cursor-pointer"
@@ -81,7 +81,7 @@ const Footer: FC = () => {
 
         {/* Bottom copyright */}
         <div className="border-t border-gray-200 text-center text-gray-400 text-xs py-4">
-          © 2025 ValidationFlow. All rights reserved.
+          © 2025 TimeTallyApp. All rights reserved.
         </div>
       </motion.footer>
 

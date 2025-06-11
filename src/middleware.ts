@@ -13,7 +13,7 @@ export function middleware(request: NextRequest) {
   const publicPages = ['/', '/login', '/register'];
 
   // Pages privées (accessibles uniquement SI connecté)
-  const protectedRoutes = ['/dashboard', '/new',"/payment_failed","/payment_success"];
+  const protectedRoutes = ['/dashboard', '/account',"/payment_failed","/payment_success","/projects","/clients","/reports","/time-entries"];
 
   const isPublicPage = publicPages.includes(pathname);
   const isProtectedRoute = protectedRoutes.some((route) =>
@@ -40,8 +40,12 @@ export const config = {
     '/login',
     '/register',
     '/dashboard/:path*',
-    '/new/:path*',
+    '/account/:path*',
     "/payment_failed",
     "/payment_success"
+    ,"/projects/:path*",
+    "/clients/:path*",
+    "/reports/:path*",
+    "/time-entries/:path*",
   ],
 };
