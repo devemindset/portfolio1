@@ -1,61 +1,51 @@
 "use client"
 import api from '@/lib/api';
-import { isValidEmail } from '@/tools/utils';
+import { Client } from '@/types';
 import Link from 'next/link';
-import React, { useState, type FC } from 'react';
-
-// interface NewClientFormProps {}
-
-const NewClientForm: FC = ({}) => {
-    const [name,setname] = useState("");
-    const [email,setEmail] = useState("");
-    const [company,setCompany] = useState("");
-    const [phone,setPhone] = useState("");
-    const [notes,setNotes] = useState("");
-    const [btnStatus,setBtnStatus] = useState(false);
-    const [error, setError] = useState("");
-    const [success,setSuccess] = useState("");
+import { useEffect, useState, type FC } from 'react';
 
 
-    
 
-    const handleCreateClient = async (e: React.FormEvent) => {
+const NewProjectForm: FC = ({}) => {
+        const [client, setClient] = useState<Client>({} as Client)
+        const [name, setName] = useState("");
+        const [description,setDescription] = useState("");
+        const [btnStatus,setBtnStatus] = useState(false);
+        const [error, setError] = useState("");
+        const [success,setSuccess] = useState("");
+
+
+        useEffect(() => {
+
+        },[])
+        const handleCreateProject = async (e: React.FormEvent) => {
         setBtnStatus(true)
         e.preventDefault();
         setError("");
 
-        if(!isValidEmail(email)){
-            setError("Please enter a valid email address.")
-            setBtnStatus(false)
-            return;
-        }
-        if(name.length > 20){
-            setError("Username cannot exceed 20 characters.");
-            setBtnStatus(false)
-            return;
-        }
+    
         if(name === ""){
-            setError("Clent name is required.");
+            setError("Project name is required.");
             setBtnStatus(false)
             return;
+        }
+        if(!client.id){
+            setError("Please select a Client for this project")
         }
         try {
-                const response = await api.post("clients/create_client/",{
+                const response = await api.post("projects/create_project/",{
                     name,
-                    email,
-                    company,
-                    phone,
-                    notes,
+                    client_id : client.id,
+                    description
 
                 })
                 if(response.status === 201){
-                    setSuccess("Client Created Successfully");
+                    setSuccess("Project Created Successfully");
                     setBtnStatus(false)
                     setError("");
-                    setNotes("")
-                    setCompany("")
-                    setname("")
-                    setEmail("")
+                    setName("")
+                    setDescription("")
+
                 }
         }catch (err: unknown) {
       if (typeof err === "object" && err !== null && "response" in err) {
@@ -99,50 +89,24 @@ const NewClientForm: FC = ({}) => {
 
     }
         return (
-            <form onSubmit={handleCreateClient} className="space-y-4">
-
+            <form onSubmit={handleCreateProject} className='space-y-4'>
                 <input
-              type="text"
-              placeholder="name"
-              className="w-full p-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              value={name}
-              onChange={(e) => setname(e.target.value)}
-              required
-            />
-            <input
-              type="email"
-              placeholder="Email"
-              className="w-full p-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-                <input
-              type="text"
-              placeholder="Company name (optional)"
-              className="w-full p-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              value={company}
-              onChange={(e) => setCompany(e.target.value)}
-            />
-                <input
-              type="text"
-              placeholder="Phone Number (optional)"
-              className="w-full p-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
-            />
-
-            
-                <textarea
+                    type="text"
+                    placeholder="name"
+                    className="w-full p-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    required
+                    />
+                    <textarea
               
                   name="description"
-                  value={notes}
-                  onChange={(e) => setNotes(e.target.value)}
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
                   rows={3}
                   className="w-full border px-3 py-2 rounded-md resize-y max-h-48 border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
                   placeholder="Description (optional)"
                 />
-             
 
                 {!btnStatus ? (
               <button
@@ -172,11 +136,10 @@ const NewClientForm: FC = ({}) => {
                    Processing...
                   </span>
             )}
-
                 {error && <p className="text-red-500 text-sm text-center">{error}</p>}
                 {success && <p className="text-green-600 text-sm text-center">{success}</p>}
                 {success && <Link href="/dashboard" className="text-blue-500 underline block italic text-sm text-center mt-5">go to the dashboard</Link>}
             </form>
         );
 }
-export default NewClientForm;
+export default NewProjectForm;
