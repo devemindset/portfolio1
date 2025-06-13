@@ -1,31 +1,23 @@
-// src/middleware.ts
 import { NextRequest, NextResponse } from 'next/server';
 
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  // Vérifie si l'utilisateur est connecté (cookie de next-auth)
-  const isAuthenticated =
-    request.cookies.has('next-auth.session-token') ||
-    request.cookies.has('__Secure-next-auth.session-token');
+  // 👇 Lire le cookie non-HttpOnly "auth_status"
+  const isAuthenticated = request.cookies.get("auth_status")?.value === "true";
 
-  // Pages publiques (visibles uniquement si NON connecté)
   const publicPages = ['/', '/login', '/register'];
-
-  // Pages privées (accessibles uniquement SI connecté)
-  const protectedRoutes = ['/dashboard', '/account',"/payment_failed","/payment_success","/projects","/clients","/reports","/time-entries"];
+  const protectedRoutes = ['/dashboard', '/new', '/payment_failed', '/payment_success'];
 
   const isPublicPage = publicPages.includes(pathname);
   const isProtectedRoute = protectedRoutes.some((route) =>
     pathname.startsWith(route)
   );
 
-  // 🔒 Si connecté et essaie d’accéder à une page publique → redirige vers /dashboard
   if (isAuthenticated && isPublicPage) {
     return NextResponse.redirect(new URL('/dashboard', request.url));
   }
 
-  // 🔐 Si NON connecté et essaie d’accéder à une route protégée → redirige vers /login
   if (!isAuthenticated && isProtectedRoute) {
     return NextResponse.redirect(new URL('/login', request.url));
   }
@@ -33,19 +25,10 @@ export function middleware(request: NextRequest) {
   return NextResponse.next();
 }
 
-// Appliquer le middleware uniquement sur ces routes
 export const config = {
   matcher: [
-    '/',             // landing page
-    '/login',
-    '/register',
-    '/dashboard/:path*',
-    '/account/:path*',
-    "/payment_failed",
-    "/payment_success"
-    ,"/projects/:path*",
-    "/clients/:path*",
-    "/reports/:path*",
-    "/time-entries/:path*",
+    '/', '/login', '/register',
+    '/dashboard/:path*', '/new/:path*',
+    '/payment_failed', '/payment_success',
   ],
 };

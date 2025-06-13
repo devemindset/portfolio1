@@ -3,13 +3,14 @@ import AuthButton from "@/components/AuthButton";
 import type { NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
+import LoginComponent from "./LoginComponent";
 
 const Page: NextPage = () => {
 
   return (
     <>
       <Head>
-        <title>Login |</title>
+        <title>Login | Validation Flow</title>
       </Head>
 
       <div className="flex items-center justify-center min-h-screen bg-black px-4 text-white">
@@ -22,16 +23,18 @@ const Page: NextPage = () => {
           </p> */}
 
           {/* Auth Buttons */}
+          <LoginComponent />
+          <AuthButton
+            authImage=""
+            authName="email"
+            authText="Continue with Email"
+          />
           <AuthButton
             authImage="/google-color-icon.svg"
             authName="google"
             authText="Continue with Google"
           />
-          {/* <AuthButton
-            authImage=""
-            authName="email"
-            authText="Continue with Email"
-          /> */}
+          
 
           {/* Divider */}
           <div className="w-full border-t border-gray-800 my-2" />

@@ -1,9 +1,10 @@
-
+"use client"
 import AuthButton from "@/components/AuthButton";
 import SiteUserActionComponent from "@/components/SiteUserActionComponent";
 import type { NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
+import RegisterComponent from "./RegisterComponent";
 
 
 const Page: NextPage = () => {
@@ -21,6 +22,12 @@ const Page: NextPage = () => {
           {/* <p className="text-gray-400 text-sm text-center">
             Join the challenge and start building real-world projects.
           </p> */}
+          <RegisterComponent />
+          <AuthButton
+            authImage=""
+            authName="email"
+            authText="Continue with Email"
+          />
 
           {/* Social auth */}
           <AuthButton
@@ -29,11 +36,7 @@ const Page: NextPage = () => {
             authText="Continue with Google"
           />
 
-          {/* <AuthButton
-            authImage=""
-            authName="email"
-            authText="Continue with Email"
-          /> */}
+          
 
           {/* Divider */}
           <div className="w-full border-t border-gray-800 my-2" />

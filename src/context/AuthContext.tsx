@@ -10,12 +10,12 @@ import toast from "react-hot-toast";
 interface AuthContextProps{
     userData : UserData;
     setUserData : Dispatch<SetStateAction<UserData>>;
-    // siteLogin : (email: string,password: string,redirect : string) => Promise<boolean>;
+    siteLogin : (email: string,password: string) => Promise<boolean>;
     socialLogin : (auth: string,redirect : string) => Promise<void>;
     logout : () => Promise<void>;
     getUserInfo : () => Promise<void>;
     userAction : (action : string, object : string) => Promise<void>;
-
+    register : (email: string, username:string, password:string) => Promise<string | boolean | undefined>;
     
     redirectPath : string;
     loginRegisterForm : boolean;
@@ -142,8 +142,9 @@ useEffect(() => {
               try {
                 const response = await api.post(`${process.env.NEXT_PUBLIC_API_URL}/user/google_auth/`, {
                   email: session.user?.email,
-                  full_name: session.user?.name,
+                  username: session.user?.name,
                   social_id: session.socialId,
+                  social_image : session.user?.image,
                 });
       
                 if (response.status === 200) {
@@ -167,7 +168,6 @@ useEffect(() => {
         }
       }, [session, isAuthAuthenticated]);
 
-
   // get user info 
   useEffect(() =>{
       if(isAuthenticated){
@@ -185,59 +185,87 @@ useEffect(() => {
 
 // ------------function implementations---------------
 // register user function
-// const register = async (email: string, username: string,password:string,redirectPath : string) => {
-//   setLogStatus("En attente...");
-//   try{
+const register = async (email: string, full_name: string,password:string) => {
+  
+  try{
 
-//       const response = await api.post("/user/register_user/", {
-//           username,
-//           email,
-//           password,
-//       });
-//       if(response.status === 201){  
-//          router.push(redirectPath == "/" || redirectPath == "" ? "/" : redirectPath);
-//          localStorage.removeItem("redirect_user");
-//          authenticatedAndLocalStorage()
-//          setLogStatus("SEND");
-//          return "success";
-        
-//       }else if(response.status === 409){
-//           return "email already exists"
-//       }else{
-//         return "error";
-//       }
+      const response = await api.post("/user/register_user/", {
+          full_name,
+          email,
+          password,
+      });
+      if (response.status === 200) {
 
-//   }catch(error){
-//       console.error("Registration failed",error)
-//       return "error"
-//   }
-// }
+        authenticatedAndLocalStorage()
+          
+          setBtnStatus("");
+          return true
+
+        }
+
+  }catch (err: unknown) {
+      if (typeof err === "object" && err !== null && "response" in err) {
+        const axiosError = err as {
+          response?: {
+            status?: number;
+            data?: {
+              error?: string;
+              detail?: string;
+              errors?: Record<string, string[]>;
+            };
+          };
+        };
+
+        const data = axiosError.response?.data;
+
+        // Check for known custom error
+        if (axiosError.response?.status === 409) {
+          return "Email is already in use";
+        }
+
+        // ✅ Check serializer validation errors
+        if (data?.errors) {
+          if (data.errors.email?.[0]?.includes("already exists")) {
+            return "Email is already in use";
+          }
+          if (data.errors.username?.[0]?.includes("already exists")) {
+            return "Username is already in use";
+          }
+
+          // Optional: combine all validation errors
+          const errorMessages = Object.values(data.errors).flat().join(", ");
+          return errorMessages || "Validation failed.";
+        }
+
+        // Default fallback
+        return data?.error || data?.detail || "Something went wrong.";
+      }
+          } 
+      
+}
 
 // login user funtion 
-// const siteLogin = async (email: string,password: string,redirectPath : string) => {
-//   setLogStatus("En attente...");
+const siteLogin = async (email: string,password: string) => {
+  setLogStatus("Processing...");
 
-//    try{
-//       const response = await api.post("/user/login_user/",{ email, password 
+   try{
+      const response = await api.post("/user/login_user/",{ email, password 
 
-//       });
+      });
       
-//       if(response){
-//         router.push(redirectPath == "/" || redirectPath == "" ? "/" : redirectPath);
-//           localStorage.removeItem("redirect_user");
-//           authenticatedAndLocalStorage()  
-//           setLogStatus("SEND");    
-//          return true;
-//       }else{
-//         setLogStatus("SEND");    
+      if (response.status === 200) {
+        authenticatedAndLocalStorage()
+          
+          return true
+        }else{  
             
-//         return false;
+        return false;
         
-//       }
-//   }catch{
-//       return false
-//   }
-// }
+      }
+  }catch{
+      return false
+  }
+}
 
 // social login 
 const socialLogin = async (auth: string, redirectPath?: string) => {
@@ -262,22 +290,27 @@ const logout = async () => {
   try {
       
           // Déconnexion Django (session, csrftoken)
-            await api.post("/user/logout/");
+            const response = await api.post("/user/logout/");
 
-            // Supprime manuellement les cookies côté client (fallback)
-            clearCookies();
-            
+            if(response.status === 200){
+
+              document.cookie = "auth_status=; path=/; max-age=0";
               // Supprime l'état local
-            localStorage.removeItem("isGoogleAuthenticated"); // Reset Google authentication state
-              setIsAuthAuthenticated(false);
-              setIsAuthenticated(false);
               localStorage.removeItem("isAuthenticated")
+              setIsAuthenticated(false);
           
               // Déconnexion NextAuth (Google)
-              await signOut({ callbackUrl: "/login" });
+              if(isAuthAuthenticated === true){
+                localStorage.removeItem("isGoogleAuthenticated"); // Reset Google authentication state
+              setIsAuthAuthenticated(false);
+                await signOut({ callbackUrl: "/login" });
+              }
 
 
                toast.success("Successfully logged out")
+               router.push("/login")
+            }
+            
 
       
   }catch(error){
@@ -311,18 +344,14 @@ const authenticatedAndLocalStorage = () => {
   localStorage.setItem("isAuthenticated",JSON.stringify(true))
 }
 
-const clearCookies = () => {
-  // Supprimer les cookies sessionid et csrftoken
-  document.cookie = "sessionid=; path=/; max-age=0";
-  document.cookie = "csrftoken=; path=/; max-age=0";
-};
+
 
 
     return(
         <AuthContext.Provider value={{ 
         isAuthenticated,
-        // register,
-        // siteLogin,
+        register,
+        siteLogin,
         socialLogin,
         getUserInfo,
         userData,
