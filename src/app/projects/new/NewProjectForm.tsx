@@ -1,13 +1,16 @@
 "use client"
+import { useAuthState } from '@/context/AuthContext';
 import api from '@/lib/api';
 import { Client } from '@/types';
 import Link from 'next/link';
-import { useEffect, useState, type FC } from 'react';
+import {  useState, type FC } from 'react';
+import { User } from "lucide-react";
 
 
 
 const NewProjectForm: FC = ({}) => {
-        const [client, setClient] = useState<Client>({} as Client)
+        const {userData} = useAuthState();
+        const [client,setClient] = useState<Client>({} as Client)
         const [name, setName] = useState("");
         const [description,setDescription] = useState("");
         const [btnStatus,setBtnStatus] = useState(false);
@@ -15,9 +18,7 @@ const NewProjectForm: FC = ({}) => {
         const [success,setSuccess] = useState("");
 
 
-        useEffect(() => {
-
-        },[])
+        
         const handleCreateProject = async (e: React.FormEvent) => {
         setBtnStatus(true)
         e.preventDefault();
@@ -31,6 +32,8 @@ const NewProjectForm: FC = ({}) => {
         }
         if(!client.id){
             setError("Please select a Client for this project")
+             setBtnStatus(false)
+            return;
         }
         try {
                 const response = await api.post("projects/create_project/",{
@@ -64,7 +67,8 @@ const NewProjectForm: FC = ({}) => {
 
         // Check for known custom error
         if (axiosError.response?.status === 400) {
-          return "Something went wrong. Try again";
+          setBtnStatus(false);
+          return setError("Something went wrong. Try again");
         }
 
         // ✅ Check serializer validation errors
@@ -107,7 +111,25 @@ const NewProjectForm: FC = ({}) => {
                   className="w-full border px-3 py-2 rounded-md resize-y max-h-48 border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
                   placeholder="Description (optional)"
                 />
-
+                  <div className="relative">
+                  <User className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+                  <select
+                    value={client?.id || ""}
+                    onChange={(e) => {
+                      const selectedId = parseInt(e.target.value);
+                      const selectedClient = userData.clients?.find((c) => c.id === selectedId);
+                      if (selectedClient) setClient(selectedClient);
+                    }}
+                    className="w-full pl-10 pr-3 py-3 rounded-md border border-gray-300 bg-white text-gray-800 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  >
+                    <option value="" className="text-gray-400">Select a client</option>
+                    {userData.clients?.map((client) => (
+                      <option key={client.id} value={client.id}>
+                        {client.name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
                 {!btnStatus ? (
               <button
                 type="submit"
