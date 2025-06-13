@@ -6,6 +6,10 @@ export interface UserData {
   is_social_account: boolean;
   created_at: string;
   subscription : UserSubscription | undefined | null;
+  clients : Client[] | null | undefined;
+  projects : Project[] | null | undefined;
+  reports : Report [] | null | undefined;
+  time_entries : TimeEntry[] | null | undefined;
 
 }
 export interface LimitBrowserPostData{
@@ -55,4 +59,12 @@ export interface Report {
   end_date : string;
   total_hours : number;
   created_at : number;
+}
+
+export interface TimeEntry {
+  project : Project;
+  date : string;
+  hours : string;
+  note : string;
+  created_at : string;
 }
