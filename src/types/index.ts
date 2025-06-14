@@ -43,6 +43,7 @@ export interface Client {
 export interface Project {
   id : number;
   client : Client;
+  time_entries : TimeEntry;
   name : string;
   description : string;
   is_archived : boolean;

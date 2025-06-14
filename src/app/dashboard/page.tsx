@@ -1,11 +1,16 @@
 "use client";
 import Link from 'next/link';
-import type { FC } from 'react';
+
+import { NextPage } from 'next';
 import ProjectCard from './components/ProjectCard';
+import { useAuthState } from '@/context/AuthContext';
 
-interface pageProps {}
 
-const page: FC<pageProps> = ({}) => {
+
+const Page: NextPage = () => {
+
+  const {userData} = useAuthState();
+ 
     return (
       <>
       <section className='flex flex-col text-blue-600'>
@@ -15,7 +20,11 @@ const page: FC<pageProps> = ({}) => {
       {/* -----------my project section----------- */}
       <div>
           <h3>My projects</h3>
-          <ProjectCard />
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {userData.projects?.map((project) => (
+              <ProjectCard key={project.id} project={project} />
+            ))}
+          </div>
       </div>
       
       
@@ -25,4 +34,4 @@ const page: FC<pageProps> = ({}) => {
       </>
     );
 }
-export default page;
+export default Page;
