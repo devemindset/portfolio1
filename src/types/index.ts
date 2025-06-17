@@ -10,6 +10,12 @@ export interface UserData {
   projects : Project[] | null | undefined;
   reports : Report [] | null | undefined;
   time_entries : TimeEntry[] | null | undefined;
+  image : string;
+  social_image : string;
+  branding_image : string;
+  branding_background : string;
+  branding_description : string;
+  branding_name : string;
 
 }
 export interface LimitBrowserPostData{
@@ -20,6 +26,7 @@ export interface LimitBrowserPostData{
 }
 
 export interface UserSubscription{
+    credits : number | undefined | null;
     paid : boolean | undefined | null;
     method : string | undefined | null;
     created_at : string ;
@@ -43,7 +50,8 @@ export interface Client {
 export interface Project {
   id : number;
   client : Client;
-  time_entries : TimeEntry;
+  time_entries : TimeEntry[];
+  reports : Report[];
   name : string;
   description : string;
   is_archived : boolean;
@@ -54,18 +62,34 @@ export interface Project {
 }
 
 export interface Report {
-  client : Client;
-  project : Project;
+   client : string;
+   created_at : string;
+   project : string;
+   start_date : string;
+   end_date : string;
+   total_hours : string;
+  
+}
+export interface ReportPreview{
+  report_project : FullProject;
   start_date: string;
-  end_date : string;
-  total_hours : number;
-  created_at : number;
+  end_date: string;
+  total_hours: number;
+  created_at : string;
 }
 
 export interface TimeEntry {
-  project : Project;
-  date : string;
-  hours : string;
-  note : string;
-  created_at : string;
+  id: number;
+  project: { id: number; name: string }; // ← simple pour éviter les cycles
+  date: string;
+  hours: string;
+  note: string;
+  created_at: string;
+}
+
+export interface FullProject {
+  id: number;
+  name: string;
+  client: Client;
+  time_entries: TimeEntry[];
 }

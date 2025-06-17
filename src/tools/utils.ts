@@ -13,6 +13,9 @@ export const formatDate = (dateStr: string): string => {
   });
 };
 
+export function extractDate(timestamp: string): string{
+  return timestamp.split("T")[0];
+}
 export function cn(...classes: (string | false | null | undefined)[]) {
   return classes.filter(Boolean).join(" ");
 }

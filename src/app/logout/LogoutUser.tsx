@@ -1,4 +1,5 @@
 "use client"
+
 import BackgroundLoader from '@/components/BackgroundLoader';
 import { useAuthState } from '@/context/AuthContext';
 import { useEffect, type FC } from 'react';

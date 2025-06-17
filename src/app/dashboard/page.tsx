@@ -1,31 +1,56 @@
 "use client";
-import Link from 'next/link';
+
 
 import { NextPage } from 'next';
-import ProjectCard from './components/ProjectCard';
+import ProjectCard from './components/project/ProjectCard';
 import { useAuthState } from '@/context/AuthContext';
+import Head from 'next/head';
+import MainHeader from './components/MainHeader';
+import Sidebar from './components/Sidebar';
+import LinkButton from '@/components/LinkButton';
+import AddSession from './components/session/AddSession';
+import CreateReport from './components/CreateReport';
+import ProjectMap from './components/project/ProjectMap';
+import SessionMap from './components/session/SessionMap';
+import ClientMap from './components/client/ClientMap';
+import MapReport from './components/report/MapReport';
+
 
 
 
 const Page: NextPage = () => {
 
   const {userData} = useAuthState();
- 
+  console.log(userData)
     return (
       <>
-      <section className='flex flex-col text-blue-600'>
-        <Link href="/clients/new">1. add new client</Link>
-        <Link href="/projects/new">2. add new project(lié à un client)</Link>
+      <Head>
+        <title>Dashboard | TimeTallyApp</title>
+      </Head>
+      <MainHeader />
+      {/* <Sidebar /> */}
+      <main className='mt-25 ml-25'>
+
+      {/* ----Choice----- */}  
+      <section className='flex'>
+        <LinkButton name='+ Add new client' path='clients/new' />
+        <LinkButton name='+ Add new project' path='projects/new' />
+        <AddSession />
+        <CreateReport />
+        
       </section>
       {/* -----------my project section----------- */}
-      <div>
-          <h3>My projects</h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {userData.projects?.map((project) => (
-              <ProjectCard key={project.id} project={project} />
-            ))}
-          </div>
-      </div>
+        <ProjectMap />
+
+        {/* ------------my session------ */}
+        <SessionMap />
+
+        {/* clients section  */}
+        <ClientMap />
+
+        {/* report section  */}
+        <MapReport />
+      </main>
       
       
       

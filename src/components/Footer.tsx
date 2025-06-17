@@ -35,9 +35,9 @@ const Footer: FC = () => {
                 height={48}
               />
             </div>
-            <span className="text-gray-500 text-sm">
+            {/* <span className="text-gray-500 text-sm">
               Made with ❤️ by Mananga Raimundo group
-            </span>
+            </span> */}
           </div>
 
           {/* Center section: Links */}
@@ -81,7 +81,7 @@ const Footer: FC = () => {
 
         {/* Bottom copyright */}
         <div className="border-t border-gray-200 text-center text-gray-400 text-xs py-4">
-          © 2025 TimeTallyApp. All rights reserved.
+          © 2025 ValidationFlow. All rights reserved.
         </div>
       </motion.footer>
 

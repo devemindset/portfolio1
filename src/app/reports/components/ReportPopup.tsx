@@ -1,80 +1,60 @@
 "use client";
-import { useState, type FC } from "react";
-import { X } from "lucide-react";
+
+import { useRouter } from "next/navigation";
+import { FC } from "react";
 import { Project, TimeEntry } from "@/types";
-import api from "@/lib/api";
+import { X } from "lucide-react";
 
 interface ReportPopupProps {
-  project: Project;
   onClose: () => void;
+  project: Project & { time_entries: TimeEntry[] };
 }
 
-const ReportPopup: FC<ReportPopupProps> = ({ project, onClose }) => {
-  const [startDate, setStartDate] = useState("");
-  const [endDate, setEndDate] = useState("");
-  const [entries, setEntries] = useState<TimeEntry[]>([]);
-  const [totalHours, setTotalHours] = useState(0);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
-
-  const generateReport = async () => {
-    if (!startDate || !endDate) {
-      setError("Please select both start and end dates.");
-      return;
-    }
-
-    setLoading(true);
-    setError("");
-
-    try {
-      const res = await api.get(`/projects/project_report/${project.id}/`, {
-        params: { start_date: startDate, end_date: endDate },
-      });
-
-      setEntries(res.data.entries);
-      const total = res.data.entries.reduce((sum: number, e: TimeEntry) => sum + parseFloat(e.hours), 0);
-      setTotalHours(total);
-    } catch {
-      setError("Failed to fetch report.");
-    } finally {
-      setLoading(false);
-    }
-  };
+const ReportPopup: FC<ReportPopupProps> = ({ onClose, project }) => {
+  const router = useRouter();
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-60 backdrop-blur-sm flex justify-center items-center z-50">
-      <div className="relative bg-white w-full max-w-lg mx-auto rounded-xl p-6 shadow-lg">
-        <button onClick={onClose} className="absolute top-3 right-3 text-gray-500 hover:text-gray-800">
-          <X className="w-5 h-5" />
+      <div className="bg-white w-full max-w-lg rounded-xl p-6 relative space-y-6 shadow-lg">
+        <button className="absolute top-3 right-3" onClick={onClose}>
+          <X className="w-5 h-5 text-gray-600" />
         </button>
 
-        <h2 className="text-xl font-bold mb-4 text-center">Time Report: {project.name}</h2>
+        <h2 className="text-xl font-semibold">Sessions for {project.name}</h2>
 
-        <div className="flex gap-4 mb-4">
-          <input type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)} className="flex-1 p-2 border rounded" />
-          <input type="date" value={endDate} onChange={(e) => setEndDate(e.target.value)} className="flex-1 p-2 border rounded" />
+        <ul className="space-y-2 max-h-60 overflow-y-auto">
+          {project.time_entries.map((entry) => (
+            <li key={entry.id} className="border p-3 rounded-md text-sm text-gray-800">
+              <p><strong>Date:</strong> {entry.date}</p>
+              <p><strong>Hours:</strong> {entry.hours}</p>
+              <p><strong>Note:</strong> {entry.note || "No note"}</p>
+            </li>
+          ))}
+        </ul>
+
+        <div className="flex flex-wrap justify-between gap-2">
+          <button
+            onClick={() => router.push(`/reports/new?project_id=${project.id}`)}
+            className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700"
+          >
+            Create Report
+          </button>
+
+          <button className="border border-gray-300 px-4 py-2 rounded-md hover:bg-gray-100">
+            Generate PDF
+          </button>
+
+          <button className="border border-gray-300 px-4 py-2 rounded-md hover:bg-gray-100">
+            Send via Email
+          </button>
+
+          <button
+            onClick={() => router.push("/dashboard")}
+            className="text-sm text-blue-600 underline mt-2"
+          >
+            Go to dashboard
+          </button>
         </div>
-
-        <button
-          onClick={generateReport}
-          className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition"
-        >
-          {loading ? "Generating..." : "Generate Report"}
-        </button>
-
-        {error && <p className="text-red-500 text-sm mt-2 text-center">{error}</p>}
-
-        {entries.length > 0 && (
-          <div className="mt-6 max-h-60 overflow-y-auto border-t pt-4">
-            {entries.map((entry, index) => (
-              <div key={index} className="border-b py-2 text-sm">
-                <p className="font-semibold">{entry.date}</p>
-                <p>{entry.hours}h — {entry.note}</p>
-              </div>
-            ))}
-            <p className="mt-4 text-right font-bold">Total: {totalHours}h</p>
-          </div>
-        )}
       </div>
     </div>
   );

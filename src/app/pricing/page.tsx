@@ -1,9 +1,10 @@
 "use client";
-import PricingComponent from "@/components/PricingComponent";
-import RequestHeader from "@/components/RequestHeader";
+
 import SiteUserActionComponent from "@/components/SiteUserActionComponent";
 import type { NextPage } from "next";
 import Head from "next/head";
+import PricingComponent from "./components/PricingComponent";
+import MainHeader from "../dashboard/components/MainHeader";
 
 
 const Page: NextPage = () => {
@@ -11,10 +12,10 @@ const Page: NextPage = () => {
   return (
     <>
     <Head>
-        <title>Pricing | Validation Flow</title>
+        <title>Pricing</title>
     </Head>
-    <RequestHeader />
-    <div className="w-screen  flex justify-center  items-center pt-10 bg-gray-50 ">
+    <MainHeader />
+    <div className="w-screen  flex justify-center  items-center pt-10  ">
 
       <PricingComponent />
 
