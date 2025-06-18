@@ -3,12 +3,12 @@
 import { useAuthState } from '@/context/AuthContext';
 import { useState, type FC } from 'react';
 import SessionCard from './SessionCard';
-import { useTimeEntry } from '@/hook/useTimeEntry';
+// import { useTimeEntry } from '@/hook/useTimeEntry';
 
 const SessionMap: FC = () => {
   const { userData } = useAuthState();
   const [selectedProjectId, setSelectedProjectId] = useState("");
-  const { sessions } = useTimeEntry();
+//   const { sessions } = useTimeEntry();
 
   const selectedProject = userData?.projects?.find(
     (p) => p.id.toString() === selectedProjectId
@@ -27,7 +27,7 @@ const SessionMap: FC = () => {
           className="bg-[var(--btn-bg)] text-white px-4 py-2 rounded-md border border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 mr-5"
         >
           <option value="">
-            {sessions && userData?.projects?.[0]?.name || "Select a project"}
+            Select a project
           </option>
           {userData?.projects?.map((project) => (
             <option key={project.id} value={project.id.toString()}>
@@ -37,7 +37,7 @@ const SessionMap: FC = () => {
         </select>
 
         <div className="flex gap-6 overflow-x-scroll p-5">
-          {selectedProject?.time_entries?.map((session, index) => (
+          {selectedProject?.time_entries.length ? (selectedProject?.time_entries?.map((session, index) => (
             <div key={index}>
               <SessionCard
                 sessionDate={session.date}
@@ -45,7 +45,11 @@ const SessionMap: FC = () => {
                 sessionNote={session.note}
               />
             </div>
-          ))}
+          )) ) :
+           (
+            <p className="text-gray-500 italic">{selectedProject?.name ? `No sessions available for ${selectedProject?.name}` : "Select a project"}</p>
+          )
+          }
         </div>
       </div>
     </div>

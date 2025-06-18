@@ -23,7 +23,7 @@ const MapReport: FC = () => {
           className="bg-[var(--btn-bg)] text-white px-4 py-2 rounded-md border border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 mr-5"
         >
           <option value="">
-            {userData?.projects?.[0]?.name || "Select a project"}
+            Select a project
           </option>
           {userData?.projects?.map((project) => (
             <option key={project.id} value={project.id.toString()}>
@@ -40,7 +40,7 @@ const MapReport: FC = () => {
               </div>
             ))
           ) : (
-            <p className="text-gray-500 italic">No reports available</p>
+            <p className="text-gray-500 italic">{selectedProject?.name ? `No reports available for ${selectedProject?.name}` : "Select a project"}</p>
           )}
         </div>
       </div>
