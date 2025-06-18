@@ -1,5 +1,5 @@
 "use client";
-import RequestHeader from "@/components/RequestHeader";
+
 import { useAuthState } from "@/context/AuthContext";
 import type { NextPage } from "next";
 import Avatar from "../components/Avatar";
@@ -7,6 +7,7 @@ import { useState } from "react";
 import api from "@/lib/api";
 import toast from "react-hot-toast";
 import { AxiosError } from "axios";
+import MainHeader from "@/app/dashboard/components/MainHeader";
 
 type UpdateUserErrorResponse = {
   username?: string[];
@@ -15,7 +16,7 @@ type UpdateUserErrorResponse = {
 
 const Page: NextPage = () => {
   const { userData,getUserInfo } = useAuthState(); // ← Refresh après update si tu as ça
-  const [username, setUsername] = useState(userData.username);
+  const [fullName, setFullName] = useState(userData.full_name);
   const [previewImage, setPreviewImage] = useState<string | null>(null);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [btnStatus, setBtnStatus] = useState(false);
@@ -50,12 +51,17 @@ const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setBtnStatus(true);
     setError("");
 
+    if(fullName.length > 20){
+      setUsernameError("Max 20 characters.")
+      return;
+    }
+
     try {
       const formData = new FormData();
       if (selectedFile) {
         formData.append("image", selectedFile);
       }
-      formData.append("username", username);
+      formData.append("full_name", fullName);
 
       const response = await api.patch("/user/user_update/", formData, {
         headers: {
@@ -92,7 +98,7 @@ const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 
   return (
     <>
-      <RequestHeader />
+      <MainHeader />
       <main className="flex justify-center pt-25 h-screen">
         <div className="w-full max-w-md bg-white rounded-xl shadow-md p-8 space-y-6 flex flex-col items-center">
           <form
@@ -108,7 +114,7 @@ const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
               <div className="relative ml-4">
                 <button
                   type="button"
-                  className="bg-blue-600 text-white rounded-md hover:bg-blue-700 transition cursor-pointer px-3 py-2 text-sm"
+                  className="bg-[var(--btn-bg)] text-white rounded-md hover:bg-[var(--btn-hover)] transition cursor-pointer px-3 py-2 text-sm"
                 >
                   Update image
                 </button>
@@ -123,10 +129,10 @@ const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 
             <input
               type="text"
-              placeholder="Username"
-              className="w-full p-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              placeholder="Full name"
+              className="w-full p-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[var(--btn-bg)]"
+              value={fullName}
+              onChange={(e) => setFullName(e.target.value)}
             />
 
             {error && (
@@ -139,7 +145,7 @@ const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
             {!btnStatus ? (
               <button
                 type="submit"
-                className="w-full bg-blue-600 text-white py-3 rounded-md hover:bg-blue-700 transition cursor-pointer"
+                className="w-full bg-[var(--btn-bg)] text-white py-3 rounded-md hover:bg-[var(--btn-hover)] transition cursor-pointer"
               >
                 Update
               </button>

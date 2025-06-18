@@ -24,8 +24,8 @@ const ProjectCard: FC<ProjectCardProps> = ({ project }) => {
 
 
   return (
-    <section className="relative">
-      <div className="bg-white shadow-lg rounded-xl p-6 border border-gray-200 flex flex-col justify-between space-y-4">
+    <section className="relative w-72 text-center">
+      <div className="bg-white shadow-lg rounded-xl p-6 border border-gray-200 flex flex-col justify-between  space-y-4 w-72 text-center">
         {/* Header */}
         <div>
           <p className="text-lg font-semibold text-gray-800">{project.name}</p>
@@ -37,7 +37,7 @@ const ProjectCard: FC<ProjectCardProps> = ({ project }) => {
         <div className="flex justify-end gap-3 mt-4">
           <button
             onClick={() => setShowSessionForm(true)}
-            className="flex items-center gap-1 px-4 py-2 bg-blue-600 text-white text-sm rounded-md hover:bg-blue-700 transition"
+            className="flex items-center gap-1 px-4 py-2 bg-[var(--btn-bg)] text-white text-sm rounded-md hover:bg-[var(--btn-hover)] transition cursor-pointer"
           >
             <PlusCircle className="w-4 h-4" />
             Add a session

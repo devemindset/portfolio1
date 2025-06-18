@@ -32,7 +32,7 @@ const MapReport: FC = () => {
           ))}
         </select>
 
-        <div className="flex gap-6 overflow-x-scroll p-5">
+        <div className="flex gap-6 overflow-x-auto p-5 ">
           {selectedProject?.reports?.length ? (
             selectedProject.reports.map((report, index) => (
               <div key={index}>

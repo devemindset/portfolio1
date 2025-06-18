@@ -55,19 +55,7 @@ const Page: NextPage = () => {
         
       </section>
       
-      {/* -----------my project section----------- */}
-       {userData?.projects.length !== 0 && <ProjectMap />}
-
-        {/* ------------my session------ */}
-        {sessions?.length !== 0 && <SessionMap />}
-
-        {/* clients section  */}
-        {userData.clients?.length !== 0 && <ClientMap />}
-
-        {/* report section  */}
-        {reports?.length !== 0 && <MapReport />}
-
-        {/* ----------------for new user--------------- */}
+      {/* ----------------for new user--------------- */}
         {userData.clients?.length === 0 && (
           <section className="text-center mt-20">
           <h3 className="font-semibold text-2xl italic  ">Add your first client</h3>
@@ -102,6 +90,20 @@ const Page: NextPage = () => {
           </div>
         </section>
         )}
+        
+      {/* -----------my project section----------- */}
+       {userData?.projects.length !== 0 && <ProjectMap />}
+
+        {/* ------------my session------ */}
+        {sessions?.length !== 0 && <SessionMap />}
+
+        {/* clients section  */}
+        {userData.clients?.length !== 0 && <ClientMap />}
+
+        {/* report section  */}
+        {reports?.length !== 0 && <MapReport />}
+
+        
 
       </main>
       {/* <BackgroundPopup title='Message' description='Please create a session first!' cancel='Ok' action='' path='' /> */}

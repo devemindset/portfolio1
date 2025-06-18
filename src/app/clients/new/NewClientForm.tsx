@@ -1,4 +1,5 @@
 "use client"
+import { useAuthState } from '@/context/AuthContext';
 import api from '@/lib/api';
 import { isValidEmail } from '@/tools/utils';
 import Link from 'next/link';
@@ -15,6 +16,7 @@ const NewClientForm: FC = ({}) => {
     const [btnStatus,setBtnStatus] = useState(false);
     const [error, setError] = useState("");
     const [success,setSuccess] = useState("");
+    const {getUserInfo} = useAuthState();
 
 
     
@@ -56,6 +58,7 @@ const NewClientForm: FC = ({}) => {
                     setCompany("")
                     setname("")
                     setEmail("")
+                    getUserInfo()
                 }
         }catch (err: unknown) {
       if (typeof err === "object" && err !== null && "response" in err) {

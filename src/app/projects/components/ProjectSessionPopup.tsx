@@ -59,12 +59,12 @@ const ProjectSessionsPopup: FC<Props> = ({ onClose, project }) => {
           >
             Create Report
           </button>
-          <button
+          {/* <button
             onClick={() => window.print()}
             className="px-5 py-2 bg-gray-200 text-gray-800 rounded-md hover:bg-[var(--btn-hover)] transition cursor-pointer hover:text-white"
           >
             Print
-          </button>
+          </button> */}
         </div>
       </div>
     </div>

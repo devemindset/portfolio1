@@ -16,6 +16,8 @@ const NewProjectForm: FC = ({}) => {
         const [btnStatus,setBtnStatus] = useState(false);
         const [error, setError] = useState("");
         const [success,setSuccess] = useState("");
+        const {getUserInfo} = useAuthState();
+        
 
 
         
@@ -48,6 +50,7 @@ const NewProjectForm: FC = ({}) => {
                     setError("");
                     setName("")
                     setDescription("")
+                    getUserInfo()
 
                 }
         }catch (err: unknown) {

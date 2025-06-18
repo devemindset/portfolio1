@@ -36,7 +36,7 @@ const SessionMap: FC = () => {
           ))}
         </select>
 
-        <div className="flex gap-6 overflow-x-scroll p-5">
+        <div className="flex gap-6 overflow-x-auto  p-5">
           {selectedProject?.time_entries.length ? (selectedProject?.time_entries?.map((session, index) => (
             <div key={index}>
               <SessionCard

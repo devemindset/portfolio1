@@ -1,26 +1,24 @@
-"use client";
-
 import { useState, type FC } from "react";
-import {  Project } from "@/types";
+import { Project } from "@/types";
 import api from "@/lib/api";
-
 import { X } from "lucide-react";
 import { useAuthState } from "@/context/AuthContext";
+import DatePicker from "react-datepicker";
+import { format } from "date-fns";
 
 interface SessionFormProps {
   onClose: () => void;
-  project : Project | null | undefined;
+  project: Project | null | undefined;
 }
 
-const SessionForm: FC<SessionFormProps> = ({ onClose,project }) => {
+const SessionForm: FC<SessionFormProps> = ({ onClose, project }) => {
   const { getUserInfo } = useAuthState();
-  const [date, setDate] = useState("");
+  const [date, setDate] = useState<Date | null>(null);
   const [hours, setHours] = useState("");
   const [note, setNote] = useState("");
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState("");
   const [error, setError] = useState("");
-
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -28,8 +26,8 @@ const SessionForm: FC<SessionFormProps> = ({ onClose,project }) => {
     setError("");
     setSuccess("");
 
-    if (!project) {
-      setError("Please select a project.");
+    if (!project || !date) {
+      setError("Please select a date and project.");
       setLoading(false);
       return;
     }
@@ -37,17 +35,17 @@ const SessionForm: FC<SessionFormProps> = ({ onClose,project }) => {
     try {
       const response = await api.post("/time_tracking/create_project_time_tracking/", {
         project_id: project.id,
-        date,
+        date: format(date, "yyyy-MM-dd"),
         hours,
         note,
       });
 
       if (response.status === 201) {
         setSuccess("Session created successfully!");
-        setDate("");
+        setDate(null);
         setHours("");
         setNote("");
-        getUserInfo()
+        getUserInfo();
       }
     } catch {
       setError("An error occurred while creating the session.");
@@ -57,43 +55,48 @@ const SessionForm: FC<SessionFormProps> = ({ onClose,project }) => {
   };
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-60 backdrop-blur-sm flex justify-center items-center z-50">
-      <div className="relative bg-white w-full max-w-md mx-auto rounded-xl p-6 shadow-lg">
+    <div className="fixed inset-0 bg-gradient-to-br from-[var(--btn-bg)]/70 to-slate-900/70 backdrop-blur-sm z-50 flex justify-center items-center px-4">
+      <div className="relative bg-white w-full max-w-md mx-auto rounded-xl shadow-2xl p-8 animate-fade-in">
         <button
-          className="absolute top-3 right-3 text-gray-500 hover:text-gray-800"
+          className="absolute top-4 right-4 text-gray-500 hover:text-gray-800 cursor-pointer"
           onClick={onClose}
         >
-          <X className="w-5 h-5" />
+          <X className="w-6 h-6" />
         </button>
 
-        <h2 className="text-xl font-bold mb-4 text-center">Add a Session</h2>
+        <div className="text-center mb-6">
+          <h2 className="text-2xl font-bold text-slate-800">Add a Work Session</h2>
+          <p className="text-sm text-gray-500 italic mt-1">
+            Project: <span className="font-semibold text-slate-700">{project?.name}</span>
+          </p>
+        </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">
-          <div className="text-center font-bold italic">
-           <p>{project?.name}</p>
-          </div>
-
-          <input
-            type="date"
-            className="w-full p-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            value={date}
-            onChange={(e) => setDate(e.target.value)}
+          <label className="block text-sm text-slate-700 font-medium">Date</label>
+          <DatePicker
+            selected={date}
+            onChange={(date) => setDate(date)}
+            dateFormat="yyyy-MM-dd"
+            placeholderText="Select a date"
+            className="w-full p-3 rounded-md border border-slate-300 focus:outline-none focus:ring-2 focus:ring-[var(--btn-bg)] bg-slate-50"
             required
           />
 
+          <label className="block text-sm text-slate-700 font-medium">Hours</label>
           <input
             type="number"
             step="0.01"
-            placeholder="Hours (e.g. 2.5)"
-            className="w-full p-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            placeholder="e.g. 2.5"
+            className="w-full p-3 rounded-md border border-slate-300 focus:outline-none focus:ring-2 focus:ring-[var(--btn-bg)] bg-slate-50"
             value={hours}
             onChange={(e) => setHours(e.target.value)}
             required
           />
 
+          <label className="block text-sm text-slate-700 font-medium">Note (optional)</label>
           <textarea
-            placeholder="Note (optional)"
-            className="w-full p-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 resize-y max-h-40"
+            placeholder="Describe your session..."
+            className="w-full p-3 rounded-md border border-slate-300 focus:outline-none focus:ring-2 focus:ring-[var(--btn-bg)] bg-slate-50 resize-y max-h-40"
             rows={3}
             value={note}
             onChange={(e) => setNote(e.target.value)}
@@ -101,7 +104,7 @@ const SessionForm: FC<SessionFormProps> = ({ onClose,project }) => {
 
           <button
             type="submit"
-            className="w-full bg-blue-600 text-white py-3 rounded-md hover:bg-blue-700 transition"
+            className="w-full bg-[var(--btn-bg)] text-white py-3 rounded-md hover:bg-[var(--btn-hover)] transition cursor-pointer"
             disabled={loading}
           >
             {loading ? "Processing..." : "Create Session"}

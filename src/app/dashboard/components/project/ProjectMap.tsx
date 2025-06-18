@@ -10,7 +10,8 @@ const ProjectMap: FC = ({}) => {
         return (
             <div className='mt-10'>
           <h3 className='text-center my-5 font-bold text-2xl'>Projects</h3>
-          <div className=" flex gap-6 overflow-x-scroll p-5">
+          
+          <div className="flex  gap-6 overflow-x-auto scrollbar-thin scrollbar-thumb-blue-500 scrollbar-track-gray-200 p-5 scrollbar-hide">
             {userData.projects?.map((project) => (
               <ProjectCard key={project.id} project={project} />
             ))}

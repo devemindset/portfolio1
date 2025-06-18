@@ -1,5 +1,5 @@
 "use client";
-import RequestHeader from "@/components/RequestHeader";
+
 import type { NextPage } from "next";
 import BrandingAvatar from "../components/BrandingAvatar";
 import { useAuthState } from "@/context/AuthContext";
@@ -8,6 +8,7 @@ import { useState } from "react";
 import type { AxiosError } from "axios";
 import api from "@/lib/api";
 import toast from "react-hot-toast";
+import MainHeader from "@/app/dashboard/components/MainHeader";
 
 type UpdateBrandingErrorResponse = {
   branding_name?: string[];
@@ -62,13 +63,20 @@ const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setBrandNameError(null);
     setDescriptionError(null);
     setImageError(null);
-
+    if (description.length > 50){
+      setDescription("Max 60 characters for branding description.")
+       return;
+    } 
+    else if(brandName.length > 20){
+      setBrandNameError("Max 20 characters for branding name.")
+      return;
+    }
     try {
       const formData = new FormData();
       formData.append("branding_name", brandName);
       formData.append("branding_description", description);
       if (image) formData.append("branding_image", image);
-
+      
       const response = await api.patch("/user/user_update/", formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
@@ -100,7 +108,7 @@ const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 
   return (
     <>
-      <RequestHeader />
+     <MainHeader />
       <main className="flex justify-center pt-25 h-screen">
         <div className="w-full max-w-md bg-white rounded-xl shadow-md p-8 space-y-6 flex flex-col items-center">
           <form
@@ -116,7 +124,7 @@ const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
               <div className="relative ml-4">
                 <button
                   type="button"
-                  className="bg-blue-600 text-white rounded-md hover:bg-blue-700 transition cursor-pointer px-3 py-2 text-sm"
+                  className="bg-[var(--btn-bg)] text-white rounded-md hover:bg-[var(--btn-hover)] transition cursor-pointer px-3 py-2 text-sm"
                 >
                   Update image
                 </button>
@@ -136,7 +144,7 @@ const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
               placeholder="Branding name"
               className={`w-full p-3 rounded-md border ${
                 brandNameError ? "border-red-500" : "border-gray-300"
-              } focus:outline-none focus:ring-2 focus:ring-blue-500`}
+              } focus:outline-none focus:ring-2 focus:ring-[var(--btn-bg)]`}
               value={brandName}
               onChange={(e) => setBrandName(e.target.value)}
             />
@@ -144,13 +152,13 @@ const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 
             {/* Bio */}
             <textarea
-              placeholder="Bio"
+              placeholder="Enter a short branding message to include in the report (50 characters max)."
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               rows={4}
               className={`w-full px-4 py-2 border ${
                 descriptionError ? "border-red-500" : "border-gray-300"
-              } rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500`}
+              } rounded-md focus:outline-none focus:ring-2 focus:ring-[var(--btn-bg)]`}
               required
             />
             {descriptionError && <p className="text-red-600 text-sm">{descriptionError}</p>}
@@ -162,7 +170,7 @@ const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
             {!btnStatus ? (
               <button
                 type="submit"
-                className="w-full bg-blue-600 text-white py-3 rounded-md hover:bg-blue-700 transition cursor-pointer"
+                className="w-full bg-[var(--btn-bg)] text-white py-3 rounded-md hover:bg-[var(--btn-hover)] transition cursor-pointer"
               >
                 Update
               </button>
