@@ -1,28 +1,31 @@
-"use client"
+'use client'
+
 import { useAuthState } from '@/context/AuthContext';
 import { useRouter } from 'next/navigation';
 import { useState, type FC } from 'react';
 
-
-
 const CreateReport: FC = () => {
-        const { userData } = useAuthState();
-        const router = useRouter();
-          
-          const [selectedProjectId, setSelectedProjectId] = useState("");
-        
-          const handleReport = (projectId: string) => {
-            const selectedProject = userData?.projects?.find(p => p.id.toString() === projectId);
-            if (selectedProject) {
-             router.push(`reports/new?project_id=${projectId}`)
-                
-              
-            }
-          };
-        
-  
-        return(
-            <select
+  const { userData, setBackgroundPopup } = useAuthState();
+  const router = useRouter();
+  const [selectedProjectId, setSelectedProjectId] = useState("");
+
+  const handleReport = (projectId: string) => {
+    const selectedProject = userData?.projects?.find(p => p.id.toString() === projectId);
+    if (selectedProject && selectedProject.time_entries.length > 0) {
+      router.push(`reports/new?project_id=${projectId}`);
+    } else {
+      setBackgroundPopup(true);
+    }
+  };
+
+  // Filtrer uniquement les projets qui ont au moins une session
+  const projectsWithSessions = userData?.projects?.filter(
+    (project) => project.time_entries && project.time_entries.length > 0
+  );
+
+  return (
+    <>
+      <select
         value={selectedProjectId}
         onChange={(e) => {
           const id = e.target.value;
@@ -32,14 +35,14 @@ const CreateReport: FC = () => {
         className="bg-[var(--btn-bg)] text-white px-4 py-2 rounded-md border border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
       >
         <option value="">+ Create report</option>
-        {userData?.projects?.map((project, index) => (
-          <option key={index} value={project.id.toString()}>
+        {projectsWithSessions?.map((project) => (
+          <option key={project.id} value={project.id.toString()}>
             {project.name}
           </option>
         ))}
       </select>
-        
-        )
-          
-}
+    </>
+  );
+};
+
 export default CreateReport;

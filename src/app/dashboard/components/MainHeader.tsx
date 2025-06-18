@@ -6,6 +6,7 @@ import { useAuthState } from '@/context/AuthContext';
 import AvatarMini from '@/app/account/components/AvatarMini';
 import PopupUserInfo from '@/app/account/components/PopupUserInfo';
 import LinkButton from '@/components/LinkButton';
+import Image from 'next/image';
 
 
 const MainHeader: FC = () => {
@@ -14,13 +15,13 @@ const MainHeader: FC = () => {
         
 
         return (
-    <header className="w-full px-6 py-4 bg-[var(--background-element)] fixed top-0 z-[998]">
+    <header className="w-full px-6 py-4 bg-[var(--background-element)] fixed top-0 z-[800]">
       <div className="flex items-center justify-between  ">
         {/* Logo + Nom */}
         <Link href="/" className="flex items-center">
-          {/* <div>
+          <div>
             <Image src="/android-chrome-192x192.png" alt="validation flow" width={24} height={24} />
-          </div> */}
+          </div>
           <span className="text-xl font-bold text-gray-900">
             TimeTally<span className="text-[var(--text-span)]">App</span>
           </span>
@@ -28,7 +29,7 @@ const MainHeader: FC = () => {
           <div className=' flex items-center'>
         {userData?.subscription && (
           <div className='hidden md:flex items-center'>
-            <span className='text-blue-600 italic text-xs'>{userData.subscription?.method === "year" ? "Annual plan Active(no credit limits)" : userData.subscription?.method === "month" ? "Monthly plan active(no credit limits)" : userData.subscription?.method === "credit" && userData.subscription.credits !== 0 && userData.subscription.credits !== 1 ? `${userData.subscription.credits} credits left` : `${userData.subscription?.credits} credit left - top up soon`}</span>
+            <span className='text-blue-600 italic text-xs mr-5'>{userData.subscription?.method === "year" ? "Annual plan Active(no credit limits)" : userData.subscription?.method === "month" ? "Monthly plan active(no credit limits)" : userData.subscription?.method === "credit" && userData.subscription.credits !== 0 && userData.subscription.credits !== 1 ? `${userData.subscription.credits} credits left` : `${userData.subscription?.credits} credit left - top up soon`}</span>
         
                     <LinkButton name='Dashboard' path='dashboard' />
            

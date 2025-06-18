@@ -9,7 +9,7 @@ interface LinkButtonProps {
 const LinkButton: FC<LinkButtonProps> = ({name,path}) => {
         return (
             <>
-            <Link href={`/${path}`} className=" bg-[var(--btn-bg)] text-white px-4 py-2 rounded hover:bg-[var(--btn-hover)] ml-5 text-sm whitespace-nowrap mr-5">
+            <Link href={`/${path}`} className=" bg-[var(--btn-bg)] text-white px-4 py-2 rounded hover:bg-[var(--btn-hover)]  text-sm whitespace-nowrap mr-5">
                       {name}
             </Link>
             </>

@@ -31,6 +31,8 @@ interface AuthContextProps{
     setLoadingBtn : Dispatch<SetStateAction<boolean>>;
     loadingBackground : boolean;
     setLoadingBackground : Dispatch<SetStateAction<boolean>>;
+    backgroundPopup : boolean;
+    setBackgroundPopup : Dispatch<SetStateAction<boolean>>;
     
 
 
@@ -56,6 +58,7 @@ export const AuthProvider = ({ children } : { children : ReactNode}) => {
     const [isAuthenticated,setIsAuthenticated] = useState<boolean>(false);
     const [isAuthAuthenticated,setIsAuthAuthenticated] =useState<boolean>(false);
     const [browserLimitValue, setBrowserLimitValue] = useState<LimitBrowserPostData | null>(null);
+    const [backgroundPopup,setBackgroundPopup] = useState(false);
     const todayDateWithoutTime = new Date().toISOString().split("T")[0];
     
 
@@ -373,6 +376,8 @@ const authenticatedAndLocalStorage = () => {
         setLoadingBtn,
         loadingBackground,
         setLoadingBackground,
+        backgroundPopup,
+        setBackgroundPopup,
         
         }} >
             { children }

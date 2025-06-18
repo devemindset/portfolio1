@@ -19,3 +19,19 @@ export function useReport(reportId: string | null | undefined ){
 
   return { report, loading };
 }
+
+export function useReports() {
+  const [reports,setReports] = useState<Report[] | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    
+      api.get(`/reports/report_list/`)
+        .then(res => setReports(res.data))
+        .catch(() => setReports(null))
+        .finally(() => setLoading(false));
+    
+  }, []);
+
+  return { reports, loading };
+}

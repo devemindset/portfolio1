@@ -13,7 +13,7 @@ const PopupUserInfo: FC = ({}) => {
       const Linkstyle = "flex items-center gap-2 hover:text-blue-600 cursor-pointer"
 
         return (
-            <section className='fixed right-0 text-white top-14 bg-[#1d2125] space-y-3 py-5 px-10 rounded-2xl z-[999]'>
+            <section className='fixed right-0 text-black top-14 bg-[var(--background-element)] space-y-3 py-5 px-10 rounded-2xl z-[999]'>
                 <Link className={Linkstyle} href="/account">
                 <User size={18} />
                 <span>Account</span>
