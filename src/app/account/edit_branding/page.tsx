@@ -65,10 +65,13 @@ const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setImageError(null);
     if (description.length > 50){
       setDescription("Max 60 characters for branding description.")
+      setBtnStatus(false);
        return;
     } 
     else if(brandName.length > 20){
       setBrandNameError("Max 20 characters for branding name.")
+      setBtnStatus(false);
+
       return;
     }
     try {
@@ -83,9 +86,10 @@ const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 
       if (response.status === 200) {
         getUserInfo()
-        alert("Branding updated successfully");
+        toast.success("Branding updated successfully")
         setImage(null);
         setPreviewImage(null);
+        
       } else {
         setError("Failed to update branding.");
       }

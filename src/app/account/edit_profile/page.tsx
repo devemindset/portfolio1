@@ -53,6 +53,7 @@ const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 
     if(fullName.length > 20){
       setUsernameError("Max 20 characters.")
+       setBtnStatus(false);
       return;
     }
 

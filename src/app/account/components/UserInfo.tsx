@@ -17,7 +17,7 @@ const UserInfo: FC<UserInfoProps> = ({ userData }) => {
                 <div className=' my-5 text-center'>
 
                 
-                {userData.subscription?.method === "credit"  && (userData.subscription.credits === 1 || userData.subscription.credits === 0) && <Link href="/pricing" className="bg-[#1E2A3A] text-white px-4 py-2 rounded hover:bg-blue-700 ml-5 text-sm whitespace-nowrap mt-5">
+                {userData.subscription?.method === "credit"  && (userData.subscription.credits === 1 || userData.subscription.credits === 0) && <Link href="/pricing" className="bg-[var(--btn-bg)] text-white px-4 py-2 rounded hover:bg-[var(--btn-hover)] ml-5 text-sm whitespace-nowrap mt-5">
                       Upgrade Plan
                     </Link>}
                 </div>
