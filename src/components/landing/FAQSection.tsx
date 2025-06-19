@@ -3,85 +3,10 @@ import type { FC } from 'react';
 import { useState } from "react";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { motion } from "framer-motion";
+import { faqs } from '@/constant';
 
-const faqs = [
-  {
-    question: "Why use TimeTallyApp instead of Excel or manual tracking?",
-    answer: `💣 1. Because manual tracking wastes your time.
 
-When you track hours manually:
-- You forget to log sessions.
-- You lose notes or screenshots.
-- You spend 2 hours formatting a PDF for your client.
-- You feel overwhelmed every time you need to report your work.
-
-✅ With TimeTallyApp, you just log your sessions and click "Generate Report".
-Get a beautiful PDF ready to send — in seconds, not hours.
-
-🧠 2. Because ugly reports hurt your credibility.
-
-When your report looks like a spreadsheet from 2005:
-- Clients doubt your professionalism.
-- You look disorganized, even if you worked hard.
-- You spend hours trying to make it “look clean”.
-
-✅ TimeTallyApp gives you premium, branded reports.
-Your work looks polished. Your value is clear. No stress.
-
-⏳ 3. Because your time should go into your work — not admin.
-
-You don’t want to:
-- Build reports from scratch.
-- Chase details at the last minute.
-- Waste energy formatting things manually.
-
-✅ TimeTallyApp handles the structure. You focus on your work.
-
-🔗 4. Because you can simply copy a shareable report link.
-
-Want to send your report?
-- Copy the link.
-- Paste it in an email, Slack, or WhatsApp.
-- The client can view it online or download it.
-
-✅ No attachments. No headaches. Just share.
-
-🛠 5. Because it's made *for* freelancers and remote workers.
-
-- Log your sessions in seconds.
-- Track by task or project.
-- Generate and share professional PDFs.
-
-✅ Save time.  
-✅ Look pro.  
-✅ Get paid faster.`,
-  },
-  {
-    question: "Do I need an account to create reports?",
-    answer: "Yes. Creating reports requires an account so we can store your sessions and generate PDFs.",
-  },
-  {
-    question: "Can I use it without installing anything?",
-    answer: "Absolutely. It's a web app — no installation needed.",
-  },
-  {
-    question: "Is my data secure?",
-    answer: "Yes. All your sessions and reports are stored securely. You’re always in control.",
-  },
-  {
-    question: "Can I brand the reports with my logo?",
-    answer: "Yes. Upload your branding and we’ll apply it to every report automatically.",
-  },
-  {
-    question: "Can I export or download my report?",
-    answer: "Yes. You can generate a PDF or copy the link to share it.",
-  },
-  {
-    question: "Who is TimeTallyApp for?",
-    answer: "Freelancers, remote developers, designers, consultants — anyone who wants to track and present their work cleanly.",
-  },
-];
-
+ 
 
 const FAQSection: FC = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);

@@ -9,6 +9,10 @@ import TestimonialsSection from "@/components/landing/TestimonialsSection";
 import type {  NextPage } from "next";
 import PricingComponent from "./pricing/components/PricingComponent";
 import FAQSection from "@/components/landing/FAQSection";
+import WhyTimeTallyMatters from "@/components/landing/WhyTimeTallyMatters";
+import HowItWorksSimple from "@/components/landing/HowItWorksSimple";
+import { howItWorksSimple, realUseCase, whyUseTimeTally } from "@/constant";
+import FinalCTASection from "@/components/landing/FinalCTASection";
 
 
 // const steps = [
@@ -48,13 +52,13 @@ const Page: NextPage = () => {
 
     </div>
     <FAQSection />
-    {/* <WhyValidationMatters /> */}
-    {/* <FinalCTASection /> */}
-    {/* <HowItWorksSimple InSimples={howItWorksSimple} title="How it works. in 3 simple steps"/> */}
-    {/* <HowItWorksSimple InSimples={whyUseValidFlow} title="Why use Validation Flow?"/> */}
-    {/* <HowItWorksSimple InSimples={realUseCase} title="Real Use Cases */}
+    <WhyTimeTallyMatters />
+    <FinalCTASection />
+    <HowItWorksSimple InSimples={howItWorksSimple} title="How it works. in 3 simple steps"/>
+    <HowItWorksSimple InSimples={whyUseTimeTally} title="Why use TameTally App?"/>
+    <HowItWorksSimple InSimples={realUseCase} title="Real Use Cases" /> 
 
-    {/* <FinalCTASection /> */}
+    <FinalCTASection />
    </>
   )
 }

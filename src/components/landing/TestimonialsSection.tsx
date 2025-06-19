@@ -4,27 +4,9 @@ import type { FC } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { useAuthState } from "@/context/AuthContext";
+import { testimonials } from "@/constant";
 
-const testimonials = [
-  {
-    name: "Marion",
-    role: "Freelance Designer",
-    img: "/testimonials/mario.png",
-    text: "Before, creating a report used to take me 2 hours… Now, I generate a professional PDF in 10 seconds. My client loves it, and so do I.",
-  },
-  {
-    name: "Rose",
-    role: "Remote Developer",
-    img: "/testimonials/david.png",
-    text: "I log my sessions as soon as I complete a task. At the end of the week, I hit 'generate' and it's ready to send.",
-  },
-  {
-    name: "Claire",
-    role: "Project Manager",
-    img: "/testimonials/claire.png",
-    text: "With TimeTally, I get a clear view of the time spent on each project. The reports are clean, professional, and super easy to share.",
-  },
-];
+
 
 
 const TestimonialsSection: FC = () => {

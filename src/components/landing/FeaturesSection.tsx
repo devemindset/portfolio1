@@ -3,17 +3,9 @@
 import type { FC } from "react";
 import { CheckCircle } from "lucide-react";
 import { motion } from "framer-motion";
+import { FEATURES } from "@/constant";
 
-const FEATURES = [
-  " Simple Time Tracking",
-  "Smart Reports in One Click",
-  "Professional Design, Always",
-  "Shareable Report Links",
-  "Branded With Your Identity",
-  "Built for Freelancers",
-  "Generate a Profesionnal PDF Report",
-  "Manual Tracking Only - No AI Overcomplacation",
-];
+
 
 const FeaturesSection: FC = () => {
   return (

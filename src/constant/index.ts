@@ -3,165 +3,169 @@ import { InSimple } from "@/types";
 
 
 
-export const howItWorksSimple : InSimple[] = [
+export const howItWorksSimple: InSimple[] = [
   {
-    title: "1. Create a validation link",
+    title: "1. Track your work sessions",
     description:
-      "Write down your idea, proposal or decision. Give it a title, add context, then click “Generate Link”.",
+      "Log your time every time you complete a task or start a session — it only takes a few seconds.",
   },
   {
-    title: "2. Share it in one click",
+    title: "2. Generate a clean report",
     description:
-      "Send the link to your team, users or stakeholders. No login required for them to respond.",
+      "Pick a date range, click 'Generate', and instantly get a PDF-quality report ready to send.",
   },
   {
-    title: "3. Get clear feedback",
+    title: "3. Share it your way",
     description:
-      "See who approves, who rejects, and why. Every response is tracked and centralized.",
-  },
-];
-export const whyUseValidFlow : InSimple[] = [
-  {
-    title: "⚡ Fast ",
-    description:
-      "Generate a validation link in seconds. Save time on every decision.",
-  },
-  {
-    title: "🔒 Frictionless",
-    description:
-      "No accounts. Just one click to validate, for anyone you share it with.",
-  },
-  {
-    title: "📊 Transparent",
-    description:
-      "Track every response. Know exactly who said what, and when",
-  },
-];
-export const realUseCase : InSimple[] = [
-  {
-    title: " Startups",
-    description:
-      "Test your product ideas or feature requests with real users, before you start building.",
-  },
-  {
-    title: "Teams",
-    description:
-      "Make fast, clear decisions as a team: features, designs, priorities, and more.",
-  },
-  {
-    title: " Freelancers / Creators",
-    description:
-      "Share drafts, concepts, or proposals with clients and get clear, timestamped feedback.",
+      "Send the report via email or share the unique link — impress clients without the hassle.",
   },
 ];
 
+export const whyUseTimeTally: InSimple[] = [
+  {
+    title: "⚡ Lightning-Fast",
+    description:
+      "Create polished reports in seconds — no templates, no copy-paste, just click and go.",
+  },
+  {
+    title: "💼 Professional",
+    description:
+      "Your reports reflect your value. Branded, styled, and client-ready — no more Excel files.",
+  },
+  {
+    title: "🔗 Shareable & Flexible",
+    description:
+      "Copy the link, send it however you want. No login needed to view your report.",
+  },
+];
+
+export const realUseCase: InSimple[] = [
+  {
+    title: "Freelancers",
+    description:
+      "Track your time, justify your work, and get paid faster with stunning reports clients love.",
+  },
+  {
+    title: "Remote Teams",
+    description:
+      "See how much time is spent per project. Generate grouped reports and keep accountability simple.",
+  },
+  {
+    title: "Agencies & Consultants",
+    description:
+      "Deliver transparent, branded reports to clients — without hours of formatting or admin.",
+  },
+];
+
+
 export const FEATURES = [
-  "No account required",
-  "Secure link with optional expiration",
-  "Email notifications",
-  "Validation history",
-  "Customizable message",
-  "Multiple validators",
-  "Real-time dashboard",
-  "Branded validation link",
-  "Mobile-friendly",
-  "Quick setup (under 30 seconds)",
-  "Comments supported with each response",
+  " Simple Time Tracking",
+  "Smart Reports in One Click",
+  "Professional Design, Always",
+  "Shareable Report Links",
+  "Branded With Your Identity",
+  "Built for Freelancers",
+  "Generate a Profesionnal PDF Report",
+  "Manual Tracking Only - No AI Overcomplacation",
 ];
 
 
 export const testimonials = [
   {
-    name: "Sam",
-    role: "Web Developer",
-    img: "/testimonials/freelancer.png",
-    text: "Before spending hours on proposals, I use ValidationFlow to confirm client interest. I get fast feedback and close faster.",
+    name: "Marion",
+    role: "Freelance Designer",
+    img: "/testimonials/mario.png",
+    text: "Before, creating a report used to take me 2 hours… Now, I generate a professional PDF in 10 seconds. My client loves it, and so do I.",
   },
   {
-    name: "Amara",
-    role: "UX Designer",
-    img: "/testimonials/july.png",
-    text: "Instead of guessing what clients want, I send a quick link with my idea. It saves me time — and looks super professional.",
+    name: "Rose",
+    role: "Remote Developer",
+    img: "/testimonials/david.png",
+    text: "I log my sessions as soon as I complete a task. At the end of the week, I hit 'generate' and it's ready to send.",
   },
   {
-    name: "Leo",
-    role: "Freelance Marketer",
-    img: "/testimonials/indihacker.png",
-    text: "ValidationFlow helped me pitch a new offer to my past clients. 15 of them responded, and I landed 4 deals in a week.",
+    name: "Claire",
+    role: "Project Manager",
+    img: "/testimonials/claire.png",
+    text: "With TimeTally, I get a clear view of the time spent on each project. The reports are clean, professional, and super easy to share.",
   },
 ];
 
 export const faqs = [
   {
-    question: "Why use ValidationFlow instead of just emailing the client?",
-    answer: `💣 1. Because email approvals get lost or ignored.
+    question: "Why use TimeTallyApp instead of Excel or manual tracking?",
+    answer: `💣 1. Because manual tracking wastes your time.
 
-When you email:
-- Clients delay responding.
-- You don't know if they actually saw it.
-- You forget who said what and when.
-- You follow up manually.
+When you track hours manually:
+- You forget to log sessions.
+- You lose notes or screenshots.
+- You spend 2 hours formatting a PDF for your client.
+- You feel overwhelmed every time you need to report your work.
 
-✅ ValidationFlow gives you a single decision link.
-Send it. Track approval. Follow-up automatically.
+✅ With TimeTallyApp, you just log your sessions and click "Generate Report".
+Get a beautiful PDF ready to send — in seconds, not hours.
 
-🧠 2. Because clients give more honest responses in a private flow.
+🧠 2. Because ugly reports hurt your credibility.
 
-- No pressure.
-- Simple Yes/No or feedback.
-- Easy email collection for records.
+When your report looks like a spreadsheet from 2005:
+- Clients doubt your professionalism.
+- You look disorganized, even if you worked hard.
+- You spend hours trying to make it “look clean”.
 
-✅ It’s faster, more transparent, and less awkward.
+✅ TimeTallyApp gives you premium, branded reports.
+Your work looks polished. Your value is clear. No stress.
 
-⏳ 3. Because you want to validate offers — not wait for weeks.
+⏳ 3. Because your time should go into your work — not admin.
 
-- Don’t chase down feedback.
-- Don’t wait in uncertainty.
-- Don’t start work without clarity.
+You don’t want to:
+- Build reports from scratch.
+- Chase details at the last minute.
+- Waste energy formatting things manually.
 
-✅ ValidationFlow gives you real answers, fast.
+✅ TimeTallyApp handles the structure. You focus on your work.
 
-🛠 4. Because it's built for freelancers.
+🔗 4. Because you can simply copy a shareable report link.
 
-✅ Propose.
-✅ Track approvals.
-✅ Save time.
+Want to send your report?
+- Copy the link.
+- Paste it in an email, Slack, or WhatsApp.
+- The client can view it online or download it.
 
-🔍 5. Because a clean branded link builds trust.
+✅ No attachments. No headaches. Just share.
 
-✅ Example:
-https://validationflow.com/validation/web-redesign-offer
+🛠 5. Because it's made *for* freelancers and remote workers.
 
-Clients see:
-- A clear proposal.
-- A simple way to approve or decline.
-- Space for comments or questions.
+- Log your sessions in seconds.
+- Track by task or project.
+- Generate and share professional PDFs.
 
-🎯 ValidationFlow helps you close deals faster and with confidence.`,
+✅ Save time.  
+✅ Look pro.  
+✅ Get paid faster.`,
   },
   {
-    question: "Do clients need an account to validate?",
-    answer: "No. Anyone can reply without signing up.",
+    question: "Do I need an account to create reports?",
+    answer: "Yes. Creating reports requires an account so we can store your sessions and generate PDFs.",
   },
   {
-    question: "Can I see who said yes?",
-    answer: "Yes. You’ll see names/emails and when they replied.",
+    question: "Can I use it without installing anything?",
+    answer: "Absolutely. It's a web app — no installation needed.",
   },
   {
-    question: "Is it secure?",
-    answer: "Yes. Each link uses a unique, unguessable token.",
+    question: "Is my data secure?",
+    answer: "Yes. All your sessions and reports are stored securely. You’re always in control.",
   },
   {
-    question: "Who is this for?",
-    answer: "Freelancers, consultants, solo agencies — anyone who wants to validate interest before working.",
+    question: "Can I brand the reports with my logo?",
+    answer: "Yes. Upload your branding and we’ll apply it to every report automatically.",
   },
   {
-    question: "Can I view past validations?",
-    answer: "Yes. Every response is logged and accessible.",
+    question: "Can I export or download my report?",
+    answer: "Yes. You can generate a PDF or copy the link to share it.",
   },
   {
-    question: "Can I delete a link after sharing?",
-    answer: "Yes. You can disable it anytime from your dashboard.",
+    question: "Who is TimeTallyApp for?",
+    answer: "Freelancers, remote developers, designers, consultants — anyone who wants to track and present their work cleanly.",
   },
 ];
 
