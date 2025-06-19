@@ -10,7 +10,7 @@ export default function Page() {
   return (
     <>
     <Head>
-        <title>Success | Validation Flow</title>
+        <title>Success | TimeTally App</title>
     </Head>
     <Suspense fallback={<BackgroundLoader />}>
       <SuccessClient />
