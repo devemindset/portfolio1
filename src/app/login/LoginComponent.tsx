@@ -1,4 +1,5 @@
 "use client"
+import BackgroundLoader from '@/components/BackgroundLoader';
 import { useAuthState } from '@/context/AuthContext';
 import { useRouter } from 'next/navigation';
 import { useState, type FC } from 'react';
@@ -9,6 +10,8 @@ const LoginComponent: FC = ({}) => {
     const {
     siteLogin,
     loginRegisterForm,
+    setBackgroundPopup,
+    backgroundPopup
   } = useAuthState();
 
   const [email, setEmail] = useState("");
@@ -27,6 +30,7 @@ const LoginComponent: FC = ({}) => {
       if(state === true){
         router.push(`/dashboard`)
         setBtnStatus(false)
+        setBackgroundPopup(true)
       }
       if (state === false) {
         setError("Invalid email or password.");
@@ -48,7 +52,7 @@ const LoginComponent: FC = ({}) => {
                 <input
                   type="email"
                   placeholder="Email address"
-                  className="w-full p-4 rounded-lg bg-gray-100 text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full p-4 rounded-lg bg-gray-100 text-gray-800 focus:outline-none focus:ring-2 focus:ring-[var(--btn-bg)]"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
@@ -59,7 +63,7 @@ const LoginComponent: FC = ({}) => {
                 <input
                   type="password"
                   placeholder="Password"
-                  className="w-full p-4 rounded-lg bg-gray-100 text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full p-4 rounded-lg bg-gray-100 text-gray-800 focus:outline-none focus:ring-2 focus:ring-[var(--btn-bg)]"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
@@ -71,7 +75,7 @@ const LoginComponent: FC = ({}) => {
               {!btnStatus ? (
               <button
                 type="submit"
-                className="w-full bg-blue-600 text-white py-3 rounded-md hover:bg-blue-700 transition cursor-pointer"
+                className="w-full bg-[var(--btn-bg)] text-white py-3 rounded-md hover:bg-[var(--btn-hover)] transition cursor-pointer"
               >
                 Login 
               </button>
@@ -101,6 +105,7 @@ const LoginComponent: FC = ({}) => {
                 <p className="text-sm mt-3 text-center text-red-500">{error}</p>
               )}
             </form>}
+              {backgroundPopup && <BackgroundLoader />}
             </>
         );
 }

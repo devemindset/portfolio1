@@ -5,6 +5,7 @@ import { X } from "lucide-react";
 import { useAuthState } from "@/context/AuthContext";
 import DatePicker from "react-datepicker";
 import { format } from "date-fns";
+import Link from "next/link";
 
 interface SessionFormProps {
   onClose: () => void;
@@ -12,7 +13,7 @@ interface SessionFormProps {
 }
 
 const SessionForm: FC<SessionFormProps> = ({ onClose, project }) => {
-  const { getUserInfo } = useAuthState();
+  const { getUserInfo,userData } = useAuthState();
   const [date, setDate] = useState<Date | null>(null);
   const [hours, setHours] = useState("");
   const [note, setNote] = useState("");
@@ -31,7 +32,10 @@ const SessionForm: FC<SessionFormProps> = ({ onClose, project }) => {
       setLoading(false);
       return;
     }
-
+    if(userData.subscription?.method === "credits" && userData.subscription?.credits === 0){
+      setError("Insufficient credit. Please upgrade!")
+      return;
+    }
     try {
       const response = await api.post("/time_tracking/create_project_time_tracking/", {
         project_id: project.id,
@@ -110,7 +114,13 @@ const SessionForm: FC<SessionFormProps> = ({ onClose, project }) => {
             {loading ? "Processing..." : "Create Session"}
           </button>
 
-          {error && <p className="text-red-500 text-sm text-center">{error}</p>}
+          {}
+          {error === "Insufficient credit. Please upgrade!" ? (
+            <>
+            <p className="text-red-500 text-sm text-center">{error}</p>
+            <Link href="/pricing" className="text-sm text-center text-blue-600 underline">Upgrade plan</Link>
+            </>
+          ) : error && <p className="text-red-500 text-sm text-center">{error}</p>}
           {success && <p className="text-green-600 text-sm text-center">{success}</p>}
         </form>
       </div>

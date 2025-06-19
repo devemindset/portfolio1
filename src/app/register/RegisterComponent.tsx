@@ -4,11 +4,13 @@ import { useState } from "react";
 import { useAuthState } from "@/context/AuthContext";
 import { isValidEmail } from '@/tools/utils';
 import { useRouter } from 'next/navigation';
+import BackgroundLoader from '@/components/BackgroundLoader';
 
 
 
 const RegisterComponent: FC = ({}) => {
-        const { register,loginRegisterForm } = useAuthState();
+        const { register,loginRegisterForm,setBackgroundPopup,
+    backgroundPopup } = useAuthState();
         const [email,setEmail] = useState("");
         const [fullname,setFullname] = useState("");
         const [password,setPassword] = useState("");
@@ -52,6 +54,7 @@ const RegisterComponent: FC = ({}) => {
         setBtnStatus(false)
         setError("");
         setSuccess("Successfully registered!");
+        setBackgroundPopup(true)
         router.push(`/dashboard`)
       } else if (response === "Email is already in use") {
         setError("Email is already in use.");
@@ -146,6 +149,8 @@ const RegisterComponent: FC = ({}) => {
             {error && <p className="text-red-500 text-sm text-center">{error}</p>}
             {success && <p className="text-green-600 text-sm text-center">{success}</p>}
           </form> }
+
+          {backgroundPopup && <BackgroundLoader />}
             </>
         );
 }

@@ -1,7 +1,6 @@
 
 // app/layout.tsx
 import './globals.css';
-import "./nprogress.css";
 import { Roboto } from "next/font/google";
 import "react-datepicker/dist/react-datepicker.css";
 import AuthProviderWrapper from './providers/AuthProviderWrapper';
