@@ -1,8 +1,8 @@
 import type { FC } from 'react';
 
-interface RecentActivityProps {}
 
-const RecentActivity: FC<RecentActivityProps> = ({}) => {
+
+const RecentActivity: FC= ({}) => {
         return (
             <>
             <section>
