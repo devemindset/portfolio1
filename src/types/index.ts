@@ -62,6 +62,7 @@ export interface Project {
 }
 
 export interface Report {
+  id : string
    client : string;
    created_at : string;
    project : string;

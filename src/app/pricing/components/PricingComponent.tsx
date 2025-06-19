@@ -136,7 +136,7 @@ const PricingComponent = () => {
           <h1 className="text-4xl font-bold text-gray-800 mb-4">Choose Your Plan</h1>
           <p className="text-gray-600 text-lg mb-6">
             {mode === "credits"
-              ? "Buy credits to validate as you go."
+              ? "Buy credits to create sessions anytime."
               : "Subscribe for unlimited access."}
           </p>
 
@@ -145,7 +145,7 @@ const PricingComponent = () => {
               onClick={() => setMode("credits")}
               className={`px-5 py-2 text-sm font-medium transition ${
                 mode === "credits"
-                  ? "bg-blue-600 text-white"
+                  ? "bg-[var(--btn-bg)] text-white"
                   : "text-gray-700 hover:bg-gray-200"
               }`}
             >
@@ -155,7 +155,7 @@ const PricingComponent = () => {
               onClick={() => setMode("subscription")}
               className={`px-5 py-2 text-sm font-medium transition ${
                 mode === "subscription"
-                  ? "bg-blue-600 text-white"
+                  ? "bg-[var(--btn-bg)] text-white"
                   : "text-gray-700 hover:bg-gray-200"
               }`}
             >
@@ -171,7 +171,7 @@ const PricingComponent = () => {
               <motion.div
                   key={label}
                   className={`rounded-lg shadow p-6 bg-white border-2 ${
-                    popular ? "border-blue-600" : "border-gray-200"
+                    popular ? "border-[var(--btn-bg)]" : "border-gray-200"
                   } flex flex-col justify-between hover:shadow-md transition-all`}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
@@ -180,7 +180,7 @@ const PricingComponent = () => {
                   whileHover={{ scale: 1.02 }}
                 >
                 {popular && (
-                  <div className="text-xs uppercase bg-blue-600 text-white px-3 py-1 rounded-full w-fit mb-3 font-medium shadow">
+                  <div className="text-xs uppercase bg-[var(--btn-bg)] text-white px-3 py-1 rounded-full w-fit mb-3 font-medium shadow">
                   Most Popular
                 </div>
                 )}
@@ -188,7 +188,7 @@ const PricingComponent = () => {
                   <h3 className="text-2xl font-bold text-gray-800 mb-1">
                     {label} {mode === "credits" ? "Plan" : "Subscription"}
                   </h3>
-                  <p className="text-4xl font-extrabold text-blue-600 mb-2">${price}</p>
+                  <p className="text-4xl font-extrabold text-[var(--btn-bg)] mb-2">${price}</p>
                   {credits !== 0 && (
                     <p className="text-gray-600 mb-2">{credits} credits included</p>
                   )}
@@ -203,7 +203,7 @@ const PricingComponent = () => {
                 </div>
                 {price !== 0 && <button
                   onClick={() => handleCheckout(price)}
-                  className="mt-4 bg-blue-600 hover:bg-blue-700 text-white text-center py-2 rounded transition cursor-pointer"
+                  className="mt-4 bg-[var(--btn-bg)] hover:bg-[var(--btn-hover)] text-white text-center py-2 rounded transition cursor-pointer"
                   disabled={loading}
                 >
                   {mode === "credits" ? "Buy Now" : "Subscribe"}

@@ -17,7 +17,10 @@ const roboto = Roboto({
   variable: "--font-roboto" // Optional: for CSS variable support
 });
 
-
+export const metadata = {
+  title: "TimeTally",
+  description: "Simple time tracking for freelancers",
+};
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
 

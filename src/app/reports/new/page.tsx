@@ -10,6 +10,8 @@ import { format } from "date-fns";
 import api from "@/lib/api";
 import { useProject } from "@/hook/useProject";
 import { useAuthState } from "@/context/AuthContext";
+import toast from "react-hot-toast";
+import MainHeader from "@/app/dashboard/components/MainHeader";
 
 export default function CreateReportPage() {
   const {getUserInfo} = useAuthState();
@@ -52,7 +54,24 @@ export default function CreateReportPage() {
     }
   };
 
+
+  const handleCopy = async () => {
+    
+    try {
+      const url = `${process.env.NEXT_PUBLIC_API_URL}/reports/report/${reportId}/preview_template/`;
+      await navigator.clipboard.writeText(url);
+      toast.success("✅ Link copied!");
+      // ferme après copie si tu veux
+    } catch (err) {
+      console.error("Copy failed:", err);
+    }
+  };
+
+ 
   return (
+
+    <>
+    <MainHeader />
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white px-4 py-35 ">
       <div className="max-w-3xl mx-auto bg-white shadow-xl rounded-xl p-8">
         <h1 className="text-3xl font-bold text-center text-gray-800 mb-6">📝 Create a Project Report</h1>
@@ -128,10 +147,17 @@ export default function CreateReportPage() {
               >
                 Preview Report
               </button>
+              <button
+                onClick={handleCopy}
+                className="bg-[var(--btn-bg)] text-white px-4 py-2 rounded hover:bg-[var(--btn-hover)] transition cursor-pointer"
+              >
+                Copy report link
+              </button>
             </div>
           </div>
         )}
       </div>
     </div>
+    </>
   );
 }
