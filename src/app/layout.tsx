@@ -1,6 +1,7 @@
 
 // app/layout.tsx
 import './globals.css';
+import "./nprogress.css";
 import { Roboto } from "next/font/google";
 import "react-datepicker/dist/react-datepicker.css";
 import AuthProviderWrapper from './providers/AuthProviderWrapper';
@@ -9,6 +10,7 @@ import ParallaxProviderWrapper from './providers/ParallaxProviderWrapper';
 import { Toaster } from 'react-hot-toast';
 import RecaptchaProviderWrapper from './providers/RecaptchaProviderWrapper';
 import Footer from '@/components/Footer';
+import ProgressBar from '@/components/ui/ProgressBar';
 
 const roboto = Roboto({
   subsets: ["latin"],       // You can also use ["latin", "cyrillic", etc.] if needed
@@ -53,6 +55,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           duration: 5000,
         }}
       />
+      <ProgressBar />
           {children}
           <Footer />
           
