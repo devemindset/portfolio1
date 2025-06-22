@@ -36,16 +36,14 @@ const EditProjectForm: FC<EditProjectFormProps> = ({project}) => {
         }
         try {
                 const response = await api.patch(`projects/project/${project!.id}/update_project_view/`,{
-                    client,
+                    client : client.id,
                     name,
                     description
                 })
-                if(response.status === 201){
-                    setSuccess("Project updated Successfully");
+                if(response.status === 200){
+                    setSuccess(response.data.message || "Project updated successfully!");
                     setBtnStatus(false)
                     setError("");
-                    setName("")
-                    setDescription("")
                     getUserInfo()
 
                 }

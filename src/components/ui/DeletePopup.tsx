@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 import { Dispatch, SetStateAction, useState, type FC } from 'react';
 
 interface DeletePopupProps {
-    path : string;
+    path : string | undefined;
     message : string;
     deletePop : Dispatch<SetStateAction<boolean>>;
     source : string;
@@ -14,6 +14,7 @@ interface DeletePopupProps {
 
 const DeletePopup: FC<DeletePopupProps> = ({path,message,deletePop,source}) => {
     const {getUserInfo,setIsAuthAuthenticated,isAuthAuthenticated,setIsAuthenticated} = useAuthState();
+    
 
     const router = useRouter();
 
@@ -25,7 +26,7 @@ const DeletePopup: FC<DeletePopupProps> = ({path,message,deletePop,source}) => {
         setLoading(true);
         try{
             const res = await api.delete(`${path}`)
-            console.log(res)
+          
             if(res.status === 204 && source === "user"){
                 document.cookie = "auth_status=; path=/; max-age=0";
                               // Supprime l'état local
@@ -42,9 +43,12 @@ const DeletePopup: FC<DeletePopupProps> = ({path,message,deletePop,source}) => {
                 setLoading(false)
                
             }else if(res.status === 204){
-                deletePop(false)
+                if(source === "project"){
+                    getUserInfo()
+                }
             }
             
+            deletePop(false)
 
         }catch{
             console.log("error")
