@@ -44,7 +44,7 @@ const VideoDemoSection: FC = () => {
           transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
           viewport={{ once: true }}
         >
-          A quick walkthrough of how you can validate anything in just seconds.
+          A quick walkthrough of how you can generate report in just seconds.
         </motion.p>
 
         <motion.div

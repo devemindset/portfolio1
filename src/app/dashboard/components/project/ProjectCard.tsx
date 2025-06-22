@@ -5,6 +5,7 @@ import { Project, TimeEntry } from "@/types";
 import SessionForm from "../session/SessionForm";
 import { PlusCircle, FileText } from "lucide-react";
 import ProjectSessionsPopup from "@/app/projects/components/ProjectSessionPopup";
+import KebabMenu from "@/components/ui/KebabMenu";
 
 
 interface ProjectCardProps {
@@ -59,6 +60,7 @@ const ProjectCard: FC<ProjectCardProps> = ({ project }) => {
       {showReportPop && (
         <ProjectSessionsPopup onClose={() => setShowReportPop(false)} project={project} />
       )}
+      <KebabMenu />
     </section>
   );
 };

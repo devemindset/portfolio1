@@ -15,7 +15,7 @@ const MapReport: FC = () => {
 
   return (
     <section className="mt-10">
-      <h3 className="text-center my-5 font-bold text-2xl">Report</h3>
+      <h3 className="text-center my-5 font-bold text-2xl b border-b border-gray-300 bg-[var(--title-bg)] text-white py-1 rounded-b-2xl">Reports</h3>
       <div>
         <select
           value={selectedProjectId}

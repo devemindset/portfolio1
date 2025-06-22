@@ -11,44 +11,42 @@ import BackgroundLoader from "@/components/BackgroundLoader";
 const creditOptions = [ 
   {
     price: 0,
-    credits: 3,
+    credits: 5,
     label: "Free",
     popular: false,
     features: [
       "1 client, 1 project",
-      "1 PDF export",
-      "3 free session entries",
-      "Unlimited tracking time",
+      "1 PDF report + shareable link",
+      "5 free credits (1 report = 5 credits)",
+      "Unlimited time tracking & sessions",
     ],
     note: "Perfect for testing the tool",
   },
   {
-    price: 5,
-    credits: 30,
+    price: 9,
+    credits: 50,
     label: "Starter",
     popular: false,
     features: [
-      "Session entries based on credits",
+      "Generate up to 10 reports (1 report = 5 credits)",
       "Unlimited clients and projects",
-      "PDF exports without TimeTally branding",
+      "No TimeTally branding",
     ],
-    note: "For occasional tracking needs",
+    note: "For occasional freelancers",
   },
   {
-    price: 15,
-    credits: 100,
+    price: 19,
+    credits: 120,
     label: "Pro",
     popular: true,
     features: [
-      "Session entries based on credits",
+      "Generate up to 24 reports (1 report = 5 credits)",
       "Unlimited clients and projects",
-      "PDF exports without TimeTally branding",
+      "No TimeTally branding",
     ],
-    note: "Best for consistent time tracking",
+    note: "Best for regular time tracking needs",
   },
 ];
-
-
 const subscriptionOptions = [
   {
     price: 0,
@@ -57,34 +55,35 @@ const subscriptionOptions = [
     popular: false,
     features: [
       "1 client, 1 project",
-      "1 PDF export",
-      "3 free session entries",
+      "1 PDF report + shareable link",
+      "5 free credits (1 report = 5 credits)",
     ],
-    note: "Great to explore the platform",
+    note: "Explore the platform for free",
   },
   {
-    price: 10,
+    price: 9,
     credits: 0,
     label: "Monthly",
     popular: false,
     features: [
-      "Unlimited session entries",
-      "Unlimited clients and projects",
-      "PDF exports without TimeTally branding",
+      "Unlimited reports (no credits needed)",
+      "Unlimited clients & projects",
+      "No TimeTally branding",
     ],
-    note: "For active freelancers and builders",
+    note: "Ideal for frequent users",
   },
   {
-    price: 95,
+    price: 90,
     credits: 0,
     label: "Annual",
     popular: true,
     features: [
-      "Unlimited session entries",
-      "Unlimited clients and projects",
-      "PDF exports without TimeTally branding",
+      "Unlimited reports (no credits needed)",
+      "Unlimited clients & projects",
+      "Priority support",
+      "No TimeTally branding",
     ],
-    note: "Save 20% with annual billing",
+    note: "Save 20% with yearly billing",
   },
 ];
 

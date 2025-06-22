@@ -9,9 +9,9 @@ import { useState, type FC } from 'react';
 const LoginComponent: FC = ({}) => {
     const {
     siteLogin,
-    loginRegisterForm,
-    setBackgroundPopup,
-    backgroundPopup
+    loadingBackground,
+    setLoadingBackground,
+  
   } = useAuthState();
 
   const [email, setEmail] = useState("");
@@ -30,7 +30,7 @@ const LoginComponent: FC = ({}) => {
       if(state === true){
         router.push(`/dashboard`)
         setBtnStatus(false)
-        setBackgroundPopup(true)
+        setLoadingBackground(true)
       }
       if (state === false) {
         setError("Invalid email or password.");
@@ -43,7 +43,7 @@ const LoginComponent: FC = ({}) => {
   };
         return (
             <>
-          {loginRegisterForm && 
+         
             <form
               onSubmit={handleLogin}
               className="bg-white p-8 rounded-lg shadow-lg w-full max-w-lg"
@@ -104,8 +104,8 @@ const LoginComponent: FC = ({}) => {
               {error && (
                 <p className="text-sm mt-3 text-center text-red-500">{error}</p>
               )}
-            </form>}
-              {backgroundPopup && <BackgroundLoader />}
+            </form>
+              {loadingBackground && <BackgroundLoader />}
             </>
         );
 }

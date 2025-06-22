@@ -6,6 +6,7 @@ import { useAuthState } from "@/context/AuthContext";
 import DatePicker from "react-datepicker";
 import { format } from "date-fns";
 import Link from "next/link";
+import { useTimeEntry } from "@/hook/useTimeEntry";
 
 interface SessionFormProps {
   onClose: () => void;
@@ -20,6 +21,7 @@ const SessionForm: FC<SessionFormProps> = ({ onClose, project }) => {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState("");
   const [error, setError] = useState("");
+  const { refreshSessions } = useTimeEntry();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -50,6 +52,7 @@ const SessionForm: FC<SessionFormProps> = ({ onClose, project }) => {
         setHours("");
         setNote("");
         getUserInfo();
+        refreshSessions();
       }
     } catch {
       setError("An error occurred while creating the session.");
@@ -59,8 +62,8 @@ const SessionForm: FC<SessionFormProps> = ({ onClose, project }) => {
   };
 
   return (
-    <div className="fixed inset-0 bg-gradient-to-br from-[var(--btn-bg)]/70 to-slate-900/70 backdrop-blur-sm z-50 flex justify-center items-center px-4">
-      <div className="relative bg-white w-full max-w-md mx-auto rounded-xl shadow-2xl p-8 animate-fade-in">
+    <div className="fixed inset-0 bg-gradient-to-br from-[var(--btn-bg)]/70 to-slate-900/70 backdrop-blur-sm flex justify-center items-center px-4 w-screen h-auto z-[997]">
+      <div className="relative bg-white w-full max-w-md mx-auto rounded-xl shadow-2xl p-8 animate-fade-in overflow-y-auto">
         <button
           className="absolute top-4 right-4 text-gray-500 hover:text-gray-800 cursor-pointer"
           onClick={onClose}

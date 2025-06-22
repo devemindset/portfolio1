@@ -33,14 +33,14 @@ const Sidebar: FC = () => {
       {/* Overlay */}
       {isOpen && (
         <div
-          className="fixed inset-0 ml-64 bg-black/40 z-[1000]"
+          className="hidden lg:block fixed inset-0 ml-64 bg-black/40 z-[800]"
            onClick={toggleSidebar}
         ></div>
       )}
 
       {/* Sidebar */}
       <aside
-       className={`fixed top-15 left-0 h-full w-64 bg-white shadow-lg z-[100] transform ${
+       className={`fixed top-15 left-0 h-screen w-64 bg-white shadow-lg z-[100] transform ${
           isOpen ? "translate-x-0" : "-translate-x-full"
         } transition-transform duration-300 flex flex-col justify-between px-6 py-15`}
       >
@@ -58,7 +58,7 @@ const Sidebar: FC = () => {
             </div>
 
             {/* Creation Buttons - Desktop Only */}
-            <div className="hidden md:flex flex-col space-y-6">
+            <div className="flex flex-col space-y-6">
               <div className="flex flex-col space-y-2">
                 <LinkButton name='+ Add new client' path='clients/new' />
                 {userData.clients?.length !== 0 && <LinkButton name='+ Add new project' path='projects/new' />}

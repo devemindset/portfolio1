@@ -24,11 +24,11 @@ const Page: NextPage = () => {
 
           {/* Auth Buttons */}
           <LoginComponent />
-          <AuthButton
+          {/* <AuthButton
             authImage=""
             authName="email"
             authText="Continue with Email"
-          />
+          /> */}
           <AuthButton
             authImage="/google-color-icon.svg"
             authName="google"

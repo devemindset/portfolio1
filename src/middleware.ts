@@ -7,7 +7,7 @@ export function middleware(request: NextRequest) {
   const isAuthenticated = request.cookies.get("auth_status")?.value === "true";
 
   const publicPages = ['/', '/login', '/register'];
-  const protectedRoutes = ['/dashboard', '/new', '/payment_failed', '/payment_success'];
+  const protectedRoutes = ['/dashboard', '/account', '/payment_failed', '/payment_success',"/projects","/clients","/reports"];
 
   const isPublicPage = publicPages.includes(pathname);
   const isProtectedRoute = protectedRoutes.some((route) =>
@@ -28,7 +28,8 @@ export function middleware(request: NextRequest) {
 export const config = {
   matcher: [
     '/', '/login', '/register',
-    '/dashboard/:path*', '/new/:path*',
-    '/payment_failed', '/payment_success',
+    '/dashboard/:path*', '/account/:path*',
+    '/payment_failed', '/payment_success',"/clients/:path*",
+    "/reports/:path*","/projects/:path*",
   ],
 };

@@ -3,6 +3,8 @@ import type { NextPage } from "next";
 import Profile from "./components/Profile";
 import Branding from "./components/Branding";
 import { useAuthState } from "@/context/AuthContext";
+import DeleteAccount from "./components/DeleteAccount";
+
 
 const Page: NextPage = () => {
   const {userData} = useAuthState();
@@ -13,6 +15,8 @@ const Page: NextPage = () => {
             
             <Profile />
             <Branding userData={userData} />
+            <DeleteAccount />
+            
     </div>
     </>
   )

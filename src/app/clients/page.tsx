@@ -1,11 +1,5 @@
-import type { NextPage } from "next";
+import { redirect } from "next/navigation";
 
-const Page: NextPage = () => {
-  return (
-    <>
-    <p>pg</p>
-    </>
-  )
+export default function Page() {
+  redirect("/dashboard");
 }
-
-export default Page

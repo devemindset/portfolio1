@@ -24,11 +24,11 @@ export default function Header() {
 
         {/* Desktop Nav */}
         <nav className="hidden md:flex gap-6 text-sm font-medium text-gray-700">
-          <a href="#features" className="hover:text-blue-600">Features</a>
-          <a href="#how-it-works" className="hover:text-blue-600">How it works</a>
-          <a href="#pricing" className="hover:text-blue-600">Pricing</a>
-          <a href="#faq" className="hover:text-blue-600">FAQ</a>
-          <a href="/contact" className="hover:text-blue-600">Contact</a>
+          <a href="#features" className="hover:text-[var(--text-hover)]">Features</a>
+          <a href="#how-it-works" className="hover:text-[var(--text-hover)]">How it works</a>
+          <a href="#pricing" className="hover:text-[var(--text-hover)]">Pricing</a>
+          <a href="#faq" className="hover:text-[var(--text-hover)]">FAQ</a>
+          <a href="/contact" className="hover:text-[var(--text-hover)]">Contact</a>
         </nav>
 
         {/* CTA */}
@@ -48,16 +48,16 @@ export default function Header() {
       {/* Mobile Nav */}
       {open && (
         <div className="md:hidden bg-white mt-2 rounded-lg shadow px-4 py-3 text-sm text-gray-700 space-y-2">
-          <a href="#features" className="block hover:text-blue-600">Features</a>
-          <a href="#how-it-works" className="block hover:text-blue-600">How it works</a>
-          <a href="#pricing" className="block hover:text-blue-600">Pricing</a>
-          <a href="#faq" className="block hover:text-blue-600">FAQ</a>
-          <a href="/contact" className="block hover:text-blue-600">Contact</a>
+          <a href="#features" className="block hover:text-[var(--text-hover)]">Features</a>
+          <a href="#how-it-works" className="block hover:text-[var(--text-hover)]">How it works</a>
+          <a href="#pricing" className="block hover:text-[var(--text-hover)]">Pricing</a>
+          <a href="#faq" className="block hover:text-[var(--text-hover)]">FAQ</a>
+          <a href="/contact" className="block hover:text-[var(--text-hover)]">Contact</a>
           <hr />
-          <Link href="/login" className="block text-gray-700 hover:text-blue-600">Sign in</Link>
+          <Link href="/login" className="block text-gray-700 hover:text-[var(--text-hover)]">Sign in</Link>
           <Link
             href="/register"
-            className="block text-center bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700"
+            className="block text-center bg-[var(--text-hover)] text-white px-4 py-2 rounded-md hover:bg-[var(--btn-hover)]"
           >
             Start Free
           </Link>

@@ -5,6 +5,7 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
 import RegisterComponent from "./RegisterComponent";
+import { motion } from "framer-motion";
 
 
 const Page: NextPage = () => {
@@ -15,19 +16,30 @@ const Page: NextPage = () => {
         <title>Sign Up | Validation Flow</title>
       </Head>
 
-      <div className="flex items-center justify-center min-h-screen bg-black px-4 text-white">
-        <div className="w-full max-w-md bg-[#111111] rounded-xl shadow-md p-8 space-y-6">
+      <div className="flex items-center justify-center min-h-screen  px-4 text-white">
+        <motion.div
+        initial={{ opacity: 0, y: 40 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1, delay: 0.3 }}
+        className="absolute inset-0 bg-cover bg-center z-[-10]"
+        style={{
+          backgroundImage: "url('/background/hero_image.png')", // <-- ton image ici
+        }}
+      >
+        <div className="absolute inset-0 bg-black/70" />
+      </motion.div>
+        <div className="w-full max-w-md bg-[#111111]/55 rounded-xl shadow-md p-8 space-y-6">
           {/* Title */}
           <h2 className="text-3xl font-bold text-center">Create your account</h2>
           {/* <p className="text-gray-400 text-sm text-center">
             Join the challenge and start building real-world projects.
           </p> */}
           <RegisterComponent />
-          <AuthButton
+          {/* <AuthButton
             authImage=""
             authName="email"
             authText="Continue with Email"
-          />
+          /> */}
 
           {/* Social auth */}
           <AuthButton

@@ -13,6 +13,8 @@ import WhyTimeTallyMatters from "@/components/landing/WhyTimeTallyMatters";
 import HowItWorksSimple from "@/components/landing/HowItWorksSimple";
 import { howItWorksSimple, realUseCase, whyUseTimeTally } from "@/constant";
 import FinalCTASection from "@/components/landing/FinalCTASection";
+import VideoDemoSection from "@/components/landing/VideoDemoSection";
+import ScreenShortPreview from "@/components/landing/ScreenShortPreview";
 
 
 // const steps = [
@@ -44,19 +46,23 @@ const Page: NextPage = () => {
     <HeroSection />
     <ProblemSolutionSection />
     <HowItWorksSection />
-    {/* <VideoDemoSection /> */}
+    <VideoDemoSection />
+    <ScreenShortPreview />
     <TestimonialsSection />
     <FeaturesSection />
+    <HowItWorksSimple InSimples={howItWorksSimple} title="How it works. in 3 simple steps"/>
+    <HowItWorksSimple InSimples={whyUseTimeTally} title="Why use TameTally App?"/>
+    <HowItWorksSimple InSimples={realUseCase} title="Real Use Cases" /> 
+    <FAQSection />
+     <FinalCTASection />
     <div className="flex items-center justify-center py-5 bg-white " id="pricing">
     <PricingComponent />
 
     </div>
-    <FAQSection />
     <WhyTimeTallyMatters />
-    <FinalCTASection />
-    <HowItWorksSimple InSimples={howItWorksSimple} title="How it works. in 3 simple steps"/>
-    <HowItWorksSimple InSimples={whyUseTimeTally} title="Why use TameTally App?"/>
-    <HowItWorksSimple InSimples={realUseCase} title="Real Use Cases" /> 
+
+   
+    
 
     <FinalCTASection />
    </>

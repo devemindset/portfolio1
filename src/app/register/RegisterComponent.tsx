@@ -9,7 +9,7 @@ import BackgroundLoader from '@/components/BackgroundLoader';
 
 
 const RegisterComponent: FC = ({}) => {
-        const { register,loginRegisterForm,setBackgroundPopup,
+        const { register,setBackgroundPopup,
     backgroundPopup } = useAuthState();
         const [email,setEmail] = useState("");
         const [fullname,setFullname] = useState("");
@@ -74,7 +74,7 @@ const RegisterComponent: FC = ({}) => {
   };
         return (
             <>
-            {loginRegisterForm && <form
+            <form
             className="space-y-4"
             onSubmit={(e) => {
               e.preventDefault();
@@ -84,7 +84,7 @@ const RegisterComponent: FC = ({}) => {
             <input
               type="text"
               placeholder="Full name"
-              className="w-full p-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full p-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[var(--btn-bg)]"
               value={fullname}
               onChange={(e) => setFullname(e.target.value)}
               required
@@ -93,7 +93,7 @@ const RegisterComponent: FC = ({}) => {
             <input
               type="email"
               placeholder="Email"
-              className="w-full p-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full p-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[var(--btn-bg)]"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
@@ -102,7 +102,7 @@ const RegisterComponent: FC = ({}) => {
             <input
               type="password"
               placeholder="Password"
-              className="w-full p-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full p-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[var(--btn-bg)]"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
@@ -111,7 +111,7 @@ const RegisterComponent: FC = ({}) => {
             <input
               type="password"
               placeholder="Confirm Password"
-              className="w-full p-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full p-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[var(--btn-bg)]"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
               required
@@ -120,7 +120,7 @@ const RegisterComponent: FC = ({}) => {
             {!btnStatus ? (
               <button
                 type="submit"
-                className="w-full bg-blue-600 text-white py-3 rounded-md hover:bg-blue-700 transition cursor-pointer"
+                className="w-full bg-[var(--btn-bg)] text-white py-3 rounded-md hover:bg-[var(--btn-hover)] transition cursor-pointer"
               >
                 Send
               </button>
@@ -148,7 +148,7 @@ const RegisterComponent: FC = ({}) => {
 
             {error && <p className="text-red-500 text-sm text-center">{error}</p>}
             {success && <p className="text-green-600 text-sm text-center">{success}</p>}
-          </form> }
+          </form> 
 
           {backgroundPopup && <BackgroundLoader />}
             </>

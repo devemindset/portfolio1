@@ -67,6 +67,8 @@ export const FEATURES = [
   "Built for Freelancers",
   "Generate a Profesionnal PDF Report",
   "Manual Tracking Only - No AI Overcomplacation",
+  "Offline & No Login Mode (coming soon)",
+  "Send by Email (coming soon)",
 ];
 
 

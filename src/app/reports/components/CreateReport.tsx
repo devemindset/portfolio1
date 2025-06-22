@@ -2,7 +2,7 @@
 import type { FC } from 'react';
 import { useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { CalendarDays } from "lucide-react";
+import { CalendarDays, Link } from "lucide-react";
 import DatePicker from "react-datepicker";
 import { format } from "date-fns";
 
@@ -11,10 +11,11 @@ import { useProject } from "@/hook/useProject";
 import { useAuthState } from "@/context/AuthContext";
 import toast from "react-hot-toast";
 import MainHeader from "@/app/dashboard/components/MainHeader";
+import { useReports } from '@/hook/useReport';
 
 
 const CreateReport: FC = ({}) => {
-        const {getUserInfo} = useAuthState();
+        const {getUserInfo,userData} = useAuthState();
   const [startDate, setStartDate] = useState<Date | null>(null);
   const [endDate, setEndDate] = useState<Date | null>(null);
   const [success, setSuccess] = useState(false);
@@ -26,6 +27,7 @@ const CreateReport: FC = ({}) => {
   const projectId = searchParams.get("project_id");
 
   const { project } = useProject(projectId);
+  const { fetchReports } = useReports()
 
   const handleCreateReport = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -34,6 +36,10 @@ const CreateReport: FC = ({}) => {
 
     if (!project || !startDate || !endDate) return;
 
+     if(userData.subscription?.method === "credits" && userData.subscription?.credits === 0){
+      setError("Insufficient credit. Please upgrade!")
+      return;
+     }
     try {
       const response = await api.post("/reports/create_report/", {
         client_id: project.client.id,
@@ -48,6 +54,7 @@ const CreateReport: FC = ({}) => {
         setStartDate(null)
         setEndDate(null)
         getUserInfo()
+        fetchReports()
       }
     } catch {
       setError("Failed to create report.");
@@ -125,7 +132,12 @@ const CreateReport: FC = ({}) => {
         </form>
 
         {/* Feedback messages */}
-        {error && <p className="text-red-500 text-sm mt-4 text-center">{error}</p>}
+        {error === "Insufficient credit. Please upgrade!" ? (
+            <>
+            <p className="text-red-500 text-sm text-center">{error}</p>
+            <Link href="/pricing" className="text-sm text-center text-blue-600 underline">Upgrade plan</Link>
+            </>
+          ) : error && <p className="text-red-500 text-sm text-center">{error}</p>}
         {success && (
           <div className="mt-6 text-center space-y-4">
             <p className="text-green-600 text-sm font-semibold">✅ Report created successfully!</p>

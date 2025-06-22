@@ -24,14 +24,22 @@ export function useReports() {
   const [reports,setReports] = useState<Report[] | null>(null);
   const [loading, setLoading] = useState(true);
 
+  const fetchReports = async () => {
+        setLoading(true);
+        try{
+          const res = await  api.get(`/reports/report_list/`);
+          setReports(res.data)
+        }catch{
+          setReports(null)
+        }finally{
+          setLoading(false)
+        }
+      };
+
   useEffect(() => {
     
-      api.get(`/reports/report_list/`)
-        .then(res => setReports(res.data))
-        .catch(() => setReports(null))
-        .finally(() => setLoading(false));
-    
+     fetchReports();
   }, []);
 
-  return { reports, loading };
+  return { reports, loading,fetchReports };
 }

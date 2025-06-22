@@ -107,7 +107,7 @@ const NewClientForm: FC = ({}) => {
                 <input
               type="text"
               placeholder="name"
-              className="w-full p-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full p-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[var(--btn-bg)]"
               value={name}
               onChange={(e) => setname(e.target.value)}
               required
@@ -115,7 +115,7 @@ const NewClientForm: FC = ({}) => {
             <input
               type="email"
               placeholder="Email"
-              className="w-full p-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full p-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[var(--btn-bg)]"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
@@ -123,14 +123,14 @@ const NewClientForm: FC = ({}) => {
                 <input
               type="text"
               placeholder="Company name (optional)"
-              className="w-full p-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full p-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[var(--btn-bg)]"
               value={company}
               onChange={(e) => setCompany(e.target.value)}
             />
                 <input
               type="text"
               placeholder="Phone Number (optional)"
-              className="w-full p-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full p-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[var(--btn-bg)]"
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
             />
@@ -142,7 +142,7 @@ const NewClientForm: FC = ({}) => {
                   value={notes}
                   onChange={(e) => setNotes(e.target.value)}
                   rows={3}
-                  className="w-full border px-3 py-2 rounded-md resize-y max-h-48 border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full border px-3 py-2 rounded-md resize-y max-h-48 border-gray-300 focus:outline-none focus:ring-2 focus:ring-[var(--btn-bg)]"
                   placeholder="Description (optional)"
                 />
              
@@ -150,7 +150,7 @@ const NewClientForm: FC = ({}) => {
                 {!btnStatus ? (
               <button
                 type="submit"
-                className="w-full bg-blue-600 text-white py-3 rounded-md hover:bg-blue-700 transition cursor-pointer"
+                className="w-full bg-[var(--btn-bg)] text-white py-3 rounded-md hover:bg-[var(--btn-hover)] transition cursor-pointer"
               >
                 Create
               </button>

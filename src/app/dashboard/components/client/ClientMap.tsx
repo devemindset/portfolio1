@@ -8,7 +8,7 @@ const ClientMap: FC = ({}) => {
      const {userData} = useAuthState();
         return (
             <section className='mt-10'>
-            <h3 className='text-center my-5 font-bold text-2xl'>Clients</h3>
+            <h3 className='text-center my-5 font-bold text-2xl b border-b border-gray-300 bg-[var(--title-bg)] text-white py-1 rounded-b-2xl'>Clients</h3>
             <div className=" flex gap-6 overflow-x-auto  p-5">
                         {userData?.clients && userData?.clients.map((client,index) => (
                                 <div key={index}>

@@ -1,7 +1,7 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import NProgress from "nprogress";
 import "nprogress/nprogress.css";
 import "@/styles/nprogress.css"; // adapte selon ton chemin
@@ -10,20 +10,15 @@ NProgress.configure({ showSpinner: false, trickleSpeed: 100 });
 
 export default function ProgressBar() {
   const pathname = usePathname();
-  const timer = useRef<NodeJS.Timeout | null>(null);
+  // const timer = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
-    // Démarre le chargement
-    NProgress.start();
+    // Termine la progress bar
+  const timeout = setTimeout(() => {
+    NProgress.done();
+  }, 300); // ajoute un petit délai pour plus de fluidité
 
-    // Petit délai pour simuler une attente si c'est très rapide
-    timer.current = setTimeout(() => {
-      NProgress.done();
-    }, 500); // ajuste si nécessaire
-
-    return () => {
-      if (timer.current) clearTimeout(timer.current);
-    };
+  return () => clearTimeout(timeout);
   }, [pathname]);
 
   return null;

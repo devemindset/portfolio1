@@ -1,18 +1,18 @@
 "use client";
 import api, { userAction } from "@/lib/api";
 import {LimitBrowserPostData, UserData} from "@/types";
-import { signIn, signOut, useSession } from "next-auth/react";
+import { signIn,useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
 import { createContext, Dispatch, ReactNode,  SetStateAction,  useContext, useEffect, useState } from "react";
-import toast from "react-hot-toast";
+
 
 interface AuthContextProps{
     userData : UserData;
     setUserData : Dispatch<SetStateAction<UserData>>;
     siteLogin : (email: string,password: string) => Promise<boolean>;
     socialLogin : (auth: string,redirect : string) => Promise<void>;
-    logout : () => Promise<void>;
+ 
     getUserInfo : () => Promise<void>;
     userAction : (action : string, object : string) => Promise<void>;
     register : (email: string, username:string, password:string) => Promise<string | boolean | undefined>;
@@ -33,6 +33,11 @@ interface AuthContextProps{
     setLoadingBackground : Dispatch<SetStateAction<boolean>>;
     backgroundPopup : boolean;
     setBackgroundPopup : Dispatch<SetStateAction<boolean>>;
+    setIsAuthenticated : Dispatch<SetStateAction<boolean>>;
+    isAuthAuthenticated : boolean;
+    setIsAuthAuthenticated : Dispatch<SetStateAction<boolean>>;
+    setPopBranding : Dispatch<SetStateAction<boolean>>;
+    popbranding : boolean;
     
 
 
@@ -60,6 +65,9 @@ export const AuthProvider = ({ children } : { children : ReactNode}) => {
     const [browserLimitValue, setBrowserLimitValue] = useState<LimitBrowserPostData | null>(null);
     const [backgroundPopup,setBackgroundPopup] = useState(false);
     const todayDateWithoutTime = new Date().toISOString().split("T")[0];
+    // pup info 
+    const [popbranding,setPopBranding] = useState(false);
+
     
 
 
@@ -288,45 +296,7 @@ const socialLogin = async (auth: string, redirectPath?: string) => {
 };
 
 // logout 
-const logout = async () => {
 
-  try {
-      
-          // Déconnexion Django (session, csrftoken)
-            const response = await api.post("/user/logout/");
-
-            if(response.status === 200){
-
-              document.cookie = "auth_status=; path=/; max-age=0";
-              // Supprime l'état local
-              localStorage.removeItem("isAuthenticated")
-              setIsAuthenticated(false);
-          
-              // Déconnexion NextAuth (Google)
-              if(isAuthAuthenticated === true){
-                localStorage.removeItem("isGoogleAuthenticated"); // Reset Google authentication state
-              setIsAuthAuthenticated(false);
-                await signOut({ callbackUrl: "/login" });
-              }
-
-
-               toast.success("Successfully logged out")
-               router.push("/login")
-            }
-            
-
-      
-  }catch(error){
-      console.log("Error during logout", error);
-      toast.error("Logout error");
-      throw error; // Throw error for better error handling
-  }
-  
-  
-
-  
-  
-}
 
 // user information 
 const getUserInfo = async () => {
@@ -371,13 +341,18 @@ const authenticatedAndLocalStorage = () => {
         userAction,
         browserLimitValue, 
         setBrowserLimitValue,
-        logout,
+
         loadingBtn,
         setLoadingBtn,
         loadingBackground,
         setLoadingBackground,
         backgroundPopup,
         setBackgroundPopup,
+        setIsAuthenticated,
+        isAuthAuthenticated,
+        setIsAuthAuthenticated,
+         popbranding,
+        setPopBranding
         
         }} >
             { children }

@@ -53,12 +53,12 @@ const ProjectSessionsPopup: FC<Props> = ({ onClose, project }) => {
 
         {/* Action buttons (hidden in print mode) */}
         <div className="mt-6 flex justify-center gap-4 print:hidden">
-          <button
+         {project.time_entries.length !== 0 ? <button
             onClick={() => router.push(`/reports/new?project_id=${project.id}`)}
             className="px-5 py-2 bg-[var(--btn-bg)] text-white rounded-md hover:bg-[var(--btn-hover)] transition cursor-pointer"
           >
             Create Report
-          </button>
+          </button> : "Empty"}
           {/* <button
             onClick={() => window.print()}
             className="px-5 py-2 bg-gray-200 text-gray-800 rounded-md hover:bg-[var(--btn-hover)] transition cursor-pointer hover:text-white"

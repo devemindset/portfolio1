@@ -38,7 +38,7 @@ const HeroSection: FC = () => {
             href="/register"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="bg-[var(--btn-bg)] text-white font-semibold px-6 py-3 rounded-lg shadow hover:bg-[var(--btn-hover)] transition"
+            className="bg-[var(--btn-bg)] text-white font-semibold px-6 py-3 rounded-lg shadow hover:bg-[var(--btn-hover)] transition "
           >
             Get Started for Free
           </motion.a>

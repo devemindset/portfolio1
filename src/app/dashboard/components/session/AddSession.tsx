@@ -34,7 +34,7 @@ const AddSession: FC = () => {
           setSelectedProjectId(id);
           handleSession(id);
         }}
-        className="bg-[var(--btn-bg)] text-white px-4 py-2 rounded-md border border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 mr-5"
+        className="bg-[var(--btn-bg)] text-white px-4 py-2 rounded-md border border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
       >
         <option value="">+ Add new session</option>
         {userData?.projects?.map((project, index) => (

@@ -5,12 +5,13 @@
   --background-element : white ; 
   --text-element : white;
   --btn-text : white;
-  --btn-bg: rgb(114, 35, 187);
-  --color-foreground: #ededed;
+  --btn-bg: #7223bb;
+  --color-foreground: #ebe7e7;
   --btn-hover : green;
   --text-hover : rgb(114, 35, 187);
   --text-span : rgb(114, 35, 187);
-  --icon-color : #364153
+  --icon-color : #364153;
+  --title-bg : #1c0641;
 
 }
 
