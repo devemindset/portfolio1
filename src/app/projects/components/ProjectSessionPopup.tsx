@@ -15,8 +15,8 @@ const ProjectSessionsPopup: FC<Props> = ({ onClose, project }) => {
   const router = useRouter();
 
   return (
-    <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex justify-center items-center px-4">
-      <div className="relative bg-white w-full max-w-3xl max-h-[90vh] overflow-y-auto rounded-xl shadow-xl p-6 print:p-10 print:shadow-none print:max-h-none">
+    <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[999] flex justify-center items-center px-4">
+      <div className="relative bg-white w-full max-w-3xl max-h-[90vh]  rounded-xl shadow-xl p-6 print:p-10 print:shadow-none print:max-h-none">
         
         {/* Close button (hidden in print mode) */}
         <button
@@ -35,7 +35,7 @@ const ProjectSessionsPopup: FC<Props> = ({ onClose, project }) => {
         </div>
 
         {/* Sessions list */}
-        <div className="divide-y divide-slate-200 border border-slate-200 rounded-lg overflow-hidden">
+        <div className="divide-y divide-slate-200 border border-slate-200 rounded-lg ">
           {project.time_entries.map((entry) => (
             <div key={entry.id} className="p-4 grid grid-cols-1 sm:grid-cols-3 gap-4 text-sm">
               <div><span className="font-semibold">Date:</span> {entry.date}</div>

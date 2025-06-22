@@ -12,7 +12,7 @@ export function useClients() {
         .then(res => setClients(res.data))
         .catch(() => setClients(null))
         .finally(() => setLoading(false));
-    
+        
   }, []);
 
   return { clients, loading };

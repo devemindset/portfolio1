@@ -9,8 +9,8 @@ import ParallaxProviderWrapper from './providers/ParallaxProviderWrapper';
 import { Toaster } from 'react-hot-toast';
 import RecaptchaProviderWrapper from './providers/RecaptchaProviderWrapper';
 import Footer from '@/components/Footer';
-import ProgressBar from '@/components/ui/ProgressBar';
-import RouteChangeIndicator from '@/components/ui/RouteChangeIndicator';
+import PageLoader from '@/components/ui/PageLoader';
+
 
 const roboto = Roboto({
   subsets: ["latin"],       // You can also use ["latin", "cyrillic", etc.] if needed
@@ -58,8 +58,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           duration: 5000,
         }}
       />
-      <ProgressBar />
-      <RouteChangeIndicator />
+          <PageLoader />
           {children}
           <Footer />
           

@@ -1,32 +1,32 @@
-"use client"
 import { useAuthState } from '@/context/AuthContext';
 import api from '@/lib/api';
 import { isValidEmail } from '@/tools/utils';
-import Link from 'next/link';
-import React, { useState, type FC } from 'react';
+import { Client } from '@/types';
+import { X } from 'lucide-react';
+import { useState, type FC } from 'react';
 
-// interface NewClientFormProps {}
+interface EditClientProps {
+    client : Client | undefined;
+    onClose : () => void;
+}
 
-const NewClientForm: FC = ({}) => {
-    const [name,setname] = useState("");
-    const [email,setEmail] = useState("");
-    const [company,setCompany] = useState("");
-    const [phone,setPhone] = useState("");
-    const [notes,setNotes] = useState("");
-    const [btnStatus,setBtnStatus] = useState(false);
-    const [error, setError] = useState("");
-    const [success,setSuccess] = useState("");
-    const {getUserInfo} = useAuthState();
-
-
+const EditClient: FC<EditClientProps> = ({client,onClose}) => {
+    const [name,setname] = useState(client!.name);
+        const [email,setEmail] = useState(client!.email);
+        const [company,setCompany] = useState(client!.company);
+        const [phone,setPhone] = useState(client!.phone);
+        const [notes,setNotes] = useState(client!.notes);
+        const [btnStatus,setBtnStatus] = useState(false);
+        const [error, setError] = useState("");
+        const [success,setSuccess] = useState("");
+        const {getUserInfo} = useAuthState();
     
-
-    const handleCreateClient = async (e: React.FormEvent) => {
+        const handleUpdateClient = async (e: React.FormEvent) => {
         setBtnStatus(true)
         e.preventDefault();
         setError("");
 
-        if(!isValidEmail(email) && email.length !== 0){
+        if(!isValidEmail(email)){
             setError("Please enter a valid email address.")
             setBtnStatus(false)
             return;
@@ -42,7 +42,7 @@ const NewClientForm: FC = ({}) => {
             return;
         }
         try {
-                const response = await api.post("clients/create_client/",{
+                const response = await api.patch(`clients/client/${client?.id}/update_client_view/`,{
                     name,
                     email,
                     company,
@@ -50,14 +50,10 @@ const NewClientForm: FC = ({}) => {
                     notes,
 
                 })
-                if(response.status === 201){
-                    setSuccess("Client Created Successfully");
+                if(response.status === 200){
+                    setSuccess("Client Updated Successfully");
                     setBtnStatus(false)
                     setError("");
-                    setNotes("")
-                    setCompany("")
-                    setname("")
-                    setEmail("")
                     getUserInfo()
                 }
         }catch (err: unknown) {
@@ -101,8 +97,18 @@ const NewClientForm: FC = ({}) => {
           } 
 
     }
+
         return (
-            <form onSubmit={handleCreateClient} className="space-y-4">
+            <div className="fixed inset-0 bg-gradient-to-br from-[var(--btn-bg)]/70 to-slate-900/70 backdrop-blur-sm flex justify-center items-center px-4 w-screen h-auto z-[997]">
+                <div className="relative bg-white w-full max-w-md mx-auto rounded-xl shadow-2xl p-8 animate-fade-in overflow-y-auto">
+                    <button
+          className="absolute top-4 right-4 text-gray-500 hover:text-gray-800 cursor-pointer"
+          onClick={onClose}
+        >
+          <X className="w-6 h-6" />
+        </button>
+
+                <form onSubmit={handleUpdateClient} className="space-y-4 mt-2">
 
                 <input
               type="text"
@@ -152,7 +158,7 @@ const NewClientForm: FC = ({}) => {
                 type="submit"
                 className="w-full bg-[var(--btn-bg)] text-white py-3 rounded-md hover:bg-[var(--btn-hover)] transition cursor-pointer"
               >
-                Create
+                Update
               </button>
             ) : (
               <span className="flex justify-center items-center gap-2 text-sm font-medium text-blue-700">
@@ -178,8 +184,11 @@ const NewClientForm: FC = ({}) => {
 
                 {error && <p className="text-red-500 text-sm text-center">{error}</p>}
                 {success && <p className="text-green-600 text-sm text-center">{success}</p>}
-                {success && <Link href="/dashboard" className="text-blue-500 underline block italic text-sm text-center mt-5">go to the dashboard</Link>}
+                
             </form>
+
+                </div>
+            </div>
         );
 }
-export default NewClientForm;
+export default EditClient;

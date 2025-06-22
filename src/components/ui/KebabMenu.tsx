@@ -1,14 +1,17 @@
 import { MoreHorizontal } from 'lucide-react';
 import { useState,useEffect,useRef, type FC } from 'react';
 import ContextualMenu from './ContextualMenu';
-import { Project } from '@/types';
+import { Client, Project, TimeEntry } from '@/types';
 
 interface KebabMenuProps {
     project : Project |undefined;
     source : string
+    session : TimeEntry | undefined ;
+    client : Client | undefined;
+
 }
 
-const KebabMenu: FC<KebabMenuProps> = ({project,source}) => {
+const KebabMenu: FC<KebabMenuProps> = ({project,source,session,client}) => {
     const [showMenu,setShowMenu] = useState(false);
     
     const menuRef = useRef<HTMLDivElement>(null)
@@ -36,7 +39,7 @@ const KebabMenu: FC<KebabMenuProps> = ({project,source}) => {
                 className='cursor-pointer absolute top-1 right-2 text-gray-700'
                 onClick={ () => setShowMenu(!showMenu)}
             />
-            { showMenu && <ContextualMenu elements={{ project : project, source : source, onCloseMenu : setShowMenu}}  />}
+            { showMenu && <ContextualMenu elements={{ project : project, source : source, onCloseMenu : setShowMenu ,session : session ,client : client}}  />}
             </div>
         );
 }

@@ -18,7 +18,7 @@ const DeleteAccount: FC = () => {
                     Delete the Account
                 </button>
             </div>
-            {deleteAccount && <DeletePopup source='user' path={`/user/delete/${userData.id}/delete_user_view`} message='Are you sure you want to delete your account?' deletePop={setDeleteAccount} />}
+            {deleteAccount && <DeletePopup source='user' path={`/user/delete/${userData.id}/delete_user_view`} message='Are you sure you want to delete your account?' deletePop={setDeleteAccount} showContextualMenu={setDeleteAccount}/>}
             </>
 
         );

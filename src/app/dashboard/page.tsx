@@ -97,7 +97,7 @@ const Page: NextPage = () => {
         </section>
         )}
 
-        {userData.clients?.length !== 0 && userData.projects?.length === 0 && (
+        {userData.clients?.length !== 0 &&  userData.projects?.length === 0 && (
           <section className="text-center mt-20">
           <h3 className="font-semibold text-2xl italic  ">Create your first project</h3>
           <div
@@ -114,10 +114,10 @@ const Page: NextPage = () => {
        {userData?.projects.length !== 0 && <ProjectMap />}
 
         {/* ------------my session------ */}
-        {userData?.projects.length !== 0 && sessions?.length !== 0 && <SessionMap />}
+        {userData?.projects.length !== 0 && sessions !== null && <SessionMap />}
 
         {/* clients section  */}
-        {userData?.projects.length !== 0 && userData.clients?.length !== 0 && <ClientMap />}
+        {userData.clients?.length !== 0 && <ClientMap />}
 
         {/* report section  */}
         {userData?.projects.length !== 0 && reports?.length !== 0 && <MapReport />}

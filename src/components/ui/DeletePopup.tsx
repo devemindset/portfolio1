@@ -1,5 +1,6 @@
 "use client"
 import { useAuthState } from '@/context/AuthContext';
+import { useTimeEntry } from '@/hook/useTimeEntry';
 import api from '@/lib/api';
 import { signOut } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
@@ -10,11 +11,12 @@ interface DeletePopupProps {
     message : string;
     deletePop : Dispatch<SetStateAction<boolean>>;
     source : string;
+    showContextualMenu : Dispatch<SetStateAction<boolean>>;
 }
 
-const DeletePopup: FC<DeletePopupProps> = ({path,message,deletePop,source}) => {
+const DeletePopup: FC<DeletePopupProps> = ({path,message,deletePop,source,showContextualMenu}) => {
     const {getUserInfo,setIsAuthAuthenticated,isAuthAuthenticated,setIsAuthenticated} = useAuthState();
-    
+    const { refreshSessions } = useTimeEntry()    
 
     const router = useRouter();
 
@@ -27,7 +29,7 @@ const DeletePopup: FC<DeletePopupProps> = ({path,message,deletePop,source}) => {
         try{
             const res = await api.delete(`${path}`)
           
-            if(res.status === 204 && source === "user"){
+            if(res.status === 200 && source === "user"){
                 document.cookie = "auth_status=; path=/; max-age=0";
                               // Supprime l'état local
                 localStorage.removeItem("isAuthenticated")
@@ -42,13 +44,27 @@ const DeletePopup: FC<DeletePopupProps> = ({path,message,deletePop,source}) => {
                 router.push("/login")
                 setLoading(false)
                
+               
             }else if(res.status === 204){
                 if(source === "project"){
                     getUserInfo()
+                    setLoading(false)
+                    
+                }
+                else if(source === "session"){
+                    getUserInfo()
+                    refreshSessions()
+                    setLoading(false)
+                    
+                }
+                else if(source === "client"){
+                    getUserInfo()
+                    setLoading(false)
                 }
             }
             
-            deletePop(false)
+             deletePop(false)
+             showContextualMenu(false)
 
         }catch{
             console.log("error")
@@ -63,7 +79,7 @@ const DeletePopup: FC<DeletePopupProps> = ({path,message,deletePop,source}) => {
             <div className='text-center font-bold p'>{message}</div>
 
             <div className='flex '>
-                <button onClick={() => deletePop(false)}  className='mr-5 cursor-pointer hover:text-[var(--text-hover)]'>
+                <button onClick={() => {deletePop(false); showContextualMenu(false)}}  className='mr-5 cursor-pointer hover:text-[var(--text-hover)]'>
                 cancel
             </button>
           <button

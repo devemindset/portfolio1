@@ -2,7 +2,7 @@
 import type { FC } from 'react';
 import { useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { CalendarDays, Link } from "lucide-react";
+import { CalendarDays } from "lucide-react";
 import DatePicker from "react-datepicker";
 import { format } from "date-fns";
 
@@ -36,7 +36,7 @@ const CreateReport: FC = ({}) => {
 
     if (!project || !startDate || !endDate) return;
 
-     if(userData.subscription?.method === "credits" && userData.subscription?.credits === 0){
+     if(userData.subscription?.method === "credits" && (userData.subscription?.credits && userData.subscription?.credits < 5) ){
       setError("Insufficient credit. Please upgrade!")
       return;
      }
@@ -135,7 +135,7 @@ const CreateReport: FC = ({}) => {
         {error === "Insufficient credit. Please upgrade!" ? (
             <>
             <p className="text-red-500 text-sm text-center">{error}</p>
-            <Link href="/pricing" className="text-sm text-center text-blue-600 underline">Upgrade plan</Link>
+            <div onClick={() => router.push("/pricing")} className="text-sm text-center text-blue-600 underline">Upgrade plan</div>
             </>
           ) : error && <p className="text-red-500 text-sm text-center">{error}</p>}
         {success && (

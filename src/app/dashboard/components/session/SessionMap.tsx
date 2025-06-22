@@ -40,9 +40,8 @@ const SessionMap: FC = () => {
           {selectedProject?.time_entries.length ? (selectedProject?.time_entries?.map((session, index) => (
             <div key={index}>
               <SessionCard
-                sessionDate={session.date}
-                sessionHour={session.hours}
-                sessionNote={session.note}
+                session={session}
+               
               />
             </div>
           )) ) :

@@ -60,7 +60,7 @@ const ProjectCard: FC<ProjectCardProps> = ({ project }) => {
       {showReportPop && (
         <ProjectSessionsPopup onClose={() => setShowReportPop(false)} project={project} />
       )}
-      <KebabMenu source="project" project={project} />
+      <KebabMenu source="project" project={project} session={undefined} client={undefined} />
     </section>
   );
 };
