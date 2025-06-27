@@ -13,7 +13,7 @@ const Page: NextPage = () => {
   return (
     <>
       <Head>
-        <title>Sign Up | Validation Flow</title>
+        <title>Sign Up | Time Tally App</title>
       </Head>
 
       <div className="flex items-center justify-center min-h-screen  px-4 text-white">

@@ -107,7 +107,7 @@ const PricingComponent = () => {
       const response = await api.post("payment/create_checkout_session/", {
         amount: price,
         user_email: userData.email,
-        payment_place: "validationFlow",
+        payment_place: "TimeTallyApp",
       });
 
       const { url } = response.data;

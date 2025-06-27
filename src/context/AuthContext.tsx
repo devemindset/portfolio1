@@ -153,7 +153,7 @@ useEffect(() => {
               try {
                 const response = await api.post(`${process.env.NEXT_PUBLIC_API_URL}/user/google_auth/`, {
                   email: session.user?.email,
-                  username: session.user?.name,
+                  full_name: session.user?.name,
                   social_id: session.socialId,
                   social_image : session.user?.image,
                 });
