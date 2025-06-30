@@ -34,7 +34,7 @@ const FeaturesSection: FC = () => {
               viewport={{ once: true }}
               whileHover={{ scale: 1.02 }}
             >
-              <CheckCircle className="text-blue-600 w-6 h-6 shrink-0" />
+              <CheckCircle className="text-[var(--text-span)] w-6 h-6 shrink-0" />
               <p className="text-gray-700">{feature}</p>
             </motion.div>
           ))}

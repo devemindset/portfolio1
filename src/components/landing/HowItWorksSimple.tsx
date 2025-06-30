@@ -28,13 +28,13 @@ const HowItWorksSimple: FC<HowItWorksSimpleProps> = ({ InSimples,title }) => {
           {InSimples.map((step, index) => (
             <motion.div
               key={index}
-              className="bg-gray-50 rounded-lg shadow-sm p-6 border-l-4 border-blue-600"
+              className="bg-gray-50 rounded-lg shadow-sm p-6 border-l-4 border-[var(--text-span)]"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.2, duration: 0.6, ease: "easeOut" }}
               viewport={{ once: true }}
             >
-              <h3 className="text-blue-600 font-semibold text-lg mb-2">
+              <h3 className="text-[var(--text-span)] font-semibold text-lg mb-2">
                 {step.title}
               </h3>
               <p className="text-gray-700 text-sm leading-relaxed">{step.description}</p>

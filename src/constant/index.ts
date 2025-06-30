@@ -89,7 +89,7 @@ export const testimonials = [
     name: "Claire",
     role: "Project Manager",
     img: "/testimonials/claire.png",
-    text: "With TimeTally, I get a clear view of the time spent on each project. The reports are clean, professional, and super easy to share.",
+    text: "With TimeTallyApp, I get a clear view of the time spent on each project. The reports are clean, professional, and super easy to share.",
   },
 ];
 

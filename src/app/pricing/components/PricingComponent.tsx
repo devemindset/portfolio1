@@ -13,6 +13,7 @@ const creditOptions = [
     price: 0,
     credits: 5,
     label: "Free",
+    name : "free plan",
     popular: false,
     features: [
       "1 client, 1 project",
@@ -25,6 +26,7 @@ const creditOptions = [
   {
     price: 9,
     credits: 50,
+    name : "Starter Pack",
     label: "Starter",
     popular: false,
     features: [
@@ -33,10 +35,12 @@ const creditOptions = [
       "No TimeTally branding",
     ],
     note: "For occasional freelancers",
+    
   },
   {
     price: 19,
     credits: 120,
+    name : "Pro Pack",
     label: "Pro",
     popular: true,
     features: [
@@ -45,6 +49,7 @@ const creditOptions = [
       "No TimeTally branding",
     ],
     note: "Best for regular time tracking needs",
+    
   },
 ];
 const subscriptionOptions = [
@@ -52,6 +57,7 @@ const subscriptionOptions = [
     price: 0,
     credits: 0,
     label: "Free",
+     name : "free plan",
     popular: false,
     features: [
       "1 client, 1 project",
@@ -59,10 +65,12 @@ const subscriptionOptions = [
       "5 free credits (1 report = 5 credits)",
     ],
     note: "Explore the platform for free",
+   
   },
   {
     price: 9,
     credits: 0,
+     name : "Monthly Subscription",
     label: "Monthly",
     popular: false,
     features: [
@@ -71,10 +79,12 @@ const subscriptionOptions = [
       "No TimeTally branding",
     ],
     note: "Ideal for frequent users",
+   
   },
   {
     price: 90,
     credits: 0,
+    name : "Annual Subscription",
     label: "Annual",
     popular: true,
     features: [
@@ -84,6 +94,7 @@ const subscriptionOptions = [
       "No TimeTally branding",
     ],
     note: "Save 20% with yearly billing",
+    
   },
 ];
 
@@ -95,17 +106,17 @@ const PricingComponent = () => {
   const [mode, setMode] = useState<"credits" | "subscription">("credits");
   const [loading, setLoading] = useState(false);
 
-  const handleCheckout = async (price: number) => {
+  const handleCheckout = async (name:string) => {
     userAction("click","pay")
     if (!userData.full_name) {
       window.location.href = "/register";
       return;
     }
-
+    console.log(name)
     setLoading(true);
     try {
       const response = await api.post("payment/create_checkout_session/", {
-        amount: price,
+        name :name,
         user_email: userData.email,
         payment_place: "TimeTallyApp",
       });
@@ -166,7 +177,7 @@ const PricingComponent = () => {
         {/* Dynamic Plans */}
         <div className={`grid  md:grid-cols-3  grid-cols-1 gap-6`}>
           {(mode === "credits" ? creditOptions : subscriptionOptions).map(
-            ({ price, label, credits, features, popular }) => (
+            ({ price, label, credits, features, popular,name }) => (
               <motion.div
                   key={label}
                   className={`rounded-lg shadow p-6 bg-white border-2 ${
@@ -201,7 +212,7 @@ const PricingComponent = () => {
                   </ul>
                 </div>
                 {price !== 0 && <button
-                  onClick={() => handleCheckout(price)}
+                  onClick={() => handleCheckout(name)}
                   className="mt-4 bg-[var(--btn-bg)] hover:bg-[var(--btn-hover)] text-white text-center py-2 rounded transition cursor-pointer"
                   disabled={loading}
                 >

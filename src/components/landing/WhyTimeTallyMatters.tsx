@@ -25,7 +25,7 @@ const WhyTimeTallyMatters: FC = () => {
           viewport={{ once: true }}
         >
           Time is money — and proof of work matters. <br className="hidden sm:inline" />
-          <span className="text-blue-600 font-medium">TimeTallyApp</span> helps freelancers and remote workers stay organized, build trust, and send stunning reports in seconds. <br className="hidden sm:inline" />
+          <span className="text-[var(--text-span)] font-medium">TimeTallyApp</span> helps freelancers and remote workers stay organized, build trust, and send stunning reports in seconds. <br className="hidden sm:inline" />
           Track smarter. Share with style. Get paid faster.
         </motion.p>
       </div>
