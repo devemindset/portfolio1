@@ -26,7 +26,6 @@ const LogoutUser: FC = () => {
 
             if(response.status === 200){
 
-              document.cookie = "auth_status=; path=/; max-age=0";
               // Supprime l'état local
               localStorage.removeItem("isAuthenticated")
               setIsAuthenticated(false);
