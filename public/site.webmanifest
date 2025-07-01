@@ -1,6 +1,6 @@
 {
-  "name": "Validation Flow",
-  "short_name": "ValidationFlow",
+  "name": "Time Tally App",
+  "short_name": "Time Tally App",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
