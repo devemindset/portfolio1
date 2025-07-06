@@ -21,7 +21,7 @@ const roboto = Roboto({
 
 export const metadata: Metadata = {
   // 👇 Obligatoire pour les URLs absolues (ex: og:image, og:url)
-  metadataBase: new URL('https://timetallyapp.devmona.com'),
+  metadataBase: new URL('https://timetallyapp.site'),
 
   // 🧠 Titre global SEO (max ~70 caractères)
   title: 'TimeTally — Simple & Clear Time Tracking for Freelancers',
@@ -42,6 +42,7 @@ export const metadata: Metadata = {
     'project time tracking',
     'track time with client',
     'create client reports',
+    "time tally app"
   ],
 
   // 🌐 Open Graph (Facebook, LinkedIn, Slack...)
