@@ -94,3 +94,21 @@ export interface FullProject {
   client: Client;
   time_entries: TimeEntry[];
 }
+
+export interface ClientAgreement {
+  id : number;
+  client : string;
+  project : string;
+  project_id : string;
+  content : string;
+  title : string;
+  version : number;
+  created_at : string;
+  modification_request  : string;
+  status : "pending" | "accepted" | "rejected";
+  validated_at : string;
+  validated_email : string;
+  is_active : boolean;
+  validate_ip : string;
+  uuid : string;
+}

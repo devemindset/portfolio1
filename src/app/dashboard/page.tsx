@@ -20,6 +20,8 @@ import { useReports } from '@/hook/useReport';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import InfoPopup from '@/components/ui/InfoPopup';
+import { useClientAgreements } from '@/hook/useClient';
+import AgreementMap from './components/client/clientAgreement/AgreementMap';
 
 
 
@@ -33,7 +35,9 @@ const Page: NextPage = () => {
   
   const {sessions} = useTimeEntry()
   const {reports} = useReports()
+  const {agreements} = useClientAgreements()
 
+ 
   // -----------popup info------------ 
   const [showInfoPop,setShowInfoPop] = useState(false);
   const [close,setClose] = useState(false)
@@ -122,6 +126,7 @@ const Page: NextPage = () => {
         {/* report section  */}
         {userData?.projects.length !== 0 && reports?.length !== 0 && <MapReport />}
 
+        { agreements && <AgreementMap />}
         
         {showInfoPop && !popbranding && <InfoPopup info="Complete your branding information" value="Complete" cancel="Later" link="account/edit_branding" closePop={closePop} />} 
 
