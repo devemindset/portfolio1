@@ -27,7 +27,7 @@ const AgreementCard: FC<AgreementCardProps> = ({clientAgreement}) => {
         return (
             <div className='relative bg-[var(--background-element)] shadow-lg rounded-xl p-6 border border-gray-200 flex flex-col justify-between space-y-2 w-72 text-center'>
                 <p className='text-lg font-semibold text-gray-800 text-center'>{clientAgreement.client}</p>
-                <span className='text-sm text-gray-600 mt-1'>{clientAgreement.status}</span>
+                <span className='text-sm text-gray-600 mt-1'>{clientAgreement.status === "modification_requested" ? "Modification request" : clientAgreement.status}</span>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
                     <button
                         onClick={() => setShowDetailPop(true)}

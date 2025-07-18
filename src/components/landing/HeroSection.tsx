@@ -28,10 +28,10 @@ const HeroSection: FC = () => {
         className="relative z-10 max-w-3xl px-6"
       >
         <h1 className="text-3xl md:text-5xl font-semibold mb-4 leading-snug text-white">
-  Track Time Effortlessly.<br className="hidden md:block" /> Impress Every Client.
+   Log Time. Stay Pro. <br className="hidden md:block" /> Avoid Toxic Clients.
 </h1>
         <p className="text-base md:text-lg text-gray-400 mb-8 italic">
-  A sleek and simple time-tracking tool built for freelancers on the move. Desktop or mobile, stay in control and deliver reports that feel premium.
+  TimeTallyApp helps you log every session, generate clean reports, and detect problematic clients. before they drain your time and energy.
 </p>
         <div className="flex flex-col sm:flex-row justify-center gap-4">
           <motion.a

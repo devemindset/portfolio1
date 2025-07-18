@@ -105,7 +105,7 @@ export interface ClientAgreement {
   version : number;
   created_at : string;
   modification_request  : string;
-  status : "pending" | "accepted" | "rejected";
+  status : "pending" | "accepted" | "rejected" | "modification_requested";
   validated_at : string;
   validated_email : string;
   is_active : boolean;

@@ -1,3 +1,4 @@
+"use client"
 import LogoutUser from '@/app/logout/LogoutUser';
 import {  CreditCard, HelpCircle, Home, LogOut, Menu,  X } from 'lucide-react';
 import Link from 'next/link';
