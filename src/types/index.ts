@@ -112,3 +112,8 @@ export interface ClientAgreement {
   validate_ip : string;
   uuid : string;
 }
+export interface UserRegister {
+  full_name :string;
+  password : string;
+  email : string;
+}

@@ -2,7 +2,7 @@ import type { FC } from 'react';
 import { useState } from "react";
 
 import { useAuthState } from "@/context/AuthContext";
-import { isValidEmail } from '@/tools/utils';
+import { generateRandomCaractere, isValidEmail } from '@/tools/utils';
 import { useRouter } from 'next/navigation';
 import BackgroundLoader from '@/components/BackgroundLoader';
 
@@ -10,7 +10,7 @@ import BackgroundLoader from '@/components/BackgroundLoader';
 
 const RegisterComponent: FC = ({}) => {
         const { register,setBackgroundPopup,
-    backgroundPopup } = useAuthState();
+    backgroundPopup,setUserRegister } = useAuthState();
         const [email,setEmail] = useState("");
         const [fullname,setFullname] = useState("");
         const [password,setPassword] = useState("");
@@ -20,6 +20,7 @@ const RegisterComponent: FC = ({}) => {
         const [btnStatus,setBtnStatus] = useState(false);
 
         const router = useRouter();
+        const randomCaractere = generateRandomCaractere(100);
 
   const handleRegister = async () => {
     setBtnStatus(true)
@@ -55,7 +56,12 @@ const RegisterComponent: FC = ({}) => {
         setError("");
         setSuccess("Successfully registered!");
         setBackgroundPopup(true)
-        router.push(`/dashboard`)
+        setUserRegister({
+          full_name : fullname,
+          email: email,
+          password : password,
+        })
+        router.push(`/verify?email=${randomCaractere}`)
       } else if (response === "Email is already in use") {
         setError("Email is already in use.");
         setBtnStatus(false)

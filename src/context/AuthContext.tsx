@@ -1,6 +1,6 @@
 "use client";
 import api, { userAction } from "@/lib/api";
-import {LimitBrowserPostData, UserData} from "@/types";
+import {LimitBrowserPostData, UserData, UserRegister} from "@/types";
 import { signIn,useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
@@ -38,6 +38,9 @@ interface AuthContextProps{
     setIsAuthAuthenticated : Dispatch<SetStateAction<boolean>>;
     setPopBranding : Dispatch<SetStateAction<boolean>>;
     popbranding : boolean;
+    userRegister : UserRegister;
+    authenticatedAndLocalStorage : () => void;
+    setUserRegister : Dispatch<SetStateAction<UserRegister>>;
     
 
 
@@ -61,6 +64,7 @@ export const AuthProvider = ({ children } : { children : ReactNode}) => {
     
     const [loginRegisterForm,setLoginRegisterForm] = useState(false);
     const [isAuthenticated,setIsAuthenticated] = useState<boolean>(false);
+    const [userRegister,setUserRegister] = useState<UserRegister>({} as UserRegister)
     const [isAuthAuthenticated,setIsAuthAuthenticated] =useState<boolean>(false);
     const [browserLimitValue, setBrowserLimitValue] = useState<LimitBrowserPostData | null>(null);
     const [backgroundPopup,setBackgroundPopup] = useState(false);
@@ -200,14 +204,14 @@ const register = async (email: string, full_name: string,password:string) => {
   
   try{
 
-      const response = await api.post("/user/register_user/", {
+      const response = await api.post("/user/before_register/", {
           full_name,
           email,
           password,
       });
-      if (response.status === 200) {
+      if (response.status === 201) {
 
-        authenticatedAndLocalStorage()
+
           
           setBtnStatus("");
           return true
@@ -352,7 +356,11 @@ const authenticatedAndLocalStorage = () => {
         isAuthAuthenticated,
         setIsAuthAuthenticated,
          popbranding,
-        setPopBranding
+        setPopBranding,
+        authenticatedAndLocalStorage,
+         userRegister,
+        setUserRegister,
+
         
         }} >
             { children }

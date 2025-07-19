@@ -20,66 +20,61 @@ const roboto = Roboto({
 });
 
 export const metadata: Metadata = {
-  // 👇 Obligatoire pour les URLs absolues (ex: og:image, og:url)
   metadataBase: new URL('https://timetallyapp.site'),
 
-  // 🧠 Titre global SEO (max ~70 caractères)
-  title: 'TimeTally — Simple & Clear Time Tracking for Freelancers',
+  title: 'TimeTallyApp Track Time. Prove Your Work. Stay in Control.',
 
-  // ✍️ Description courte pour Google (~160 caractères)
   description:
-    'Track your time, generate beautiful PDF reports, and impress your clients — all in one lightweight tool, made for freelancers and solo workers.',
+    'Track your time, generate clear reports, and protect your professional image. TimeTally helps freelancers and small teams handle even the toughest clients.',
 
   keywords: [
-    'TimeTally',
-    'time tracking for freelancers',
-    'freelance time reports',
-    'client reports PDF',
-    'generate reports',
-    'track sessions',
-    'freelance productivity',
-    'freelance tools',
-    'project time tracking',
-    'track time with client',
-    'create client reports',
-    "time tally app"
+    'TimeTallyApp',
+    'timetallyapp',
+    "time tally app",
+    'time tracking',
+    'generate time reports',
+    'PDF client report',
+    'track project work',
+    'proof of work',
+    'handle toxic clients',
+    'freelancer tools',
+    'work session tracker',
+    'reporting app',
+    'client transparency',
+    'professional time tracker'
   ],
 
-  // 🌐 Open Graph (Facebook, LinkedIn, Slack...)
   openGraph: {
-    title: 'TimeTally — Simple & Clear Time Tracking for Freelancers',
+    title: 'TimeTallyApp Track Time. Prove Your Work. Stay in Control.',
     description:
-      'Stop wasting time. Track your sessions, create clear client-ready reports, and boost your professional image.',
-    url: 'https://timetallyapp.devmona.com',
+      'Whether your client is great or hard to deal with — TimeTally helps you track sessions, log effort, and stay protected with transparent reports.',
+    url: 'https://timetallyapp.site',
     siteName: 'TimeTally',
     images: [
       {
-        url: '/og-image.png', // ✅ fichier à placer en prod
+        url: '/og-image.png',
         width: 1200,
         height: 630,
-        alt: 'TimeTally — Clean Time Reports for Freelancers',
+        alt: 'TimeTallyApp Clean Time Reports for Professionals',
       },
     ],
     locale: 'en_US',
     type: 'website',
   },
 
-  // 🐦 Twitter Card
   twitter: {
     card: 'summary_large_image',
-    title: 'TimeTally — Simple & Clear Time Tracking for Freelancers',
+    title: 'TimeTallyApp Track Time. Prove Your Work. Stay in Control.',
     description:
-      'Track your work, log sessions, and generate professional reports — without the complexity. Try TimeTally now.',
+      'A time tracker made for freelancers and professionals. Generate transparent reports, avoid misunderstandings, and handle even toxic clients with confidence.',
     images: ['/og-image.png'],
   },
 
-  // 🧩 Favicon et icônes
   icons: {
     icon: '/favicon.ico',
     apple: '/apple-touch-icon.png',
   },
 };
-
 export default function RootLayout({ children }: { children: React.ReactNode }) {
 
   return (

@@ -44,6 +44,15 @@ const ProblemSolutionSection: FC = () => {
       </div>
 
         {/* title  */}
+        <motion.h2 className="text-2xl font-bold text-center text-gray-800 mb-6"
+          whileHover={{ scale: 1.03 }}
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          viewport={{ once: true }}
+        >
+          Why most time trackers fail freelancers — and how TimeTallyApp solves it
+        </motion.h2>
         <motion.h3 className="text-xl font-semibold text-gray-900 mb-10 text-center italic"
           whileHover={{ scale: 1.03 }}
           initial={{ opacity: 0, y: 40 }}
@@ -68,12 +77,13 @@ const ProblemSolutionSection: FC = () => {
           </h3>
           <ul className="space-y-3 text-gray-700 text-base leading-relaxed text-left">
             {[
-              " Too many clicks just to log a simple session.",
-              " Clunky tools built for teams — not for freelancers like you.",
-              "Clients doubting your work: you spend hours justifying your time.",
-              "Embarrassing reports: messy, unclear, or just plain ugly.",
-              "Generating a decent report can take 2 hours… or a whole day.",
-            ].map((text, i) => (
+            "Too many clicks just to log a simple session.",
+            "Clunky tools built for teams — not for freelancers like you.",
+            "Clients doubting your work: you spend hours justifying your time.",
+            "Embarrassing reports: messy, unclear, or just plain ugly.",
+            "You can't detect toxic clients until it's too late.",
+            "Generating a decent report can take 2 hours… or a whole day.",
+          ].map((text, i) => (
               <li key={i} className="flex items-start gap-2">
                 <motion.span
                   variants={bulletVariants}
@@ -107,15 +117,15 @@ const ProblemSolutionSection: FC = () => {
           </h3>
          
           <ul className="space-y-3 text-gray-700 text-base leading-relaxed text-left">
-            {[
-              " You focus on work. We handle clean, stylish reports.",
-              "PDF reports that impress — no more client doubts.",
-              "Fast, frictionless UX: track your time in seconds.",
-              "Beautiful, minimal design that elevates your work.",
-              "Share your report instantly with a public link or copy it for email",
-              "Save time for what truly matters: creating, not reporting.",
-              
-            ].map((text, i) => (
+                      {[
+            "You focus on work. We handle clean, stylish reports.",
+            "PDF reports that impress — no more client doubts.",
+            "Fast, frictionless UX: track your time in seconds.",
+            "Beautiful, minimal design that elevates your work.",
+            "Spot toxic clients early with smart time pattern alerts.",
+            "Save time for what truly matters: creating, not reporting.",
+            "Share your reports instantly with public links or emails.",
+          ].map((text, i) => (
               <li key={i} className="flex items-start gap-2">
                 <motion.span
                   variants={bulletVariants}
