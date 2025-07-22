@@ -1,13 +1,13 @@
 {
-  "name": "front_time_tally",
+  "name": "front_makeay_flow",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "postbuild": "next-sitemap"
+    "lint": "next lint"
+   
   },
   "dependencies": {
     "@heroicons/react": "^2.2.0",
@@ -19,7 +19,6 @@
     "lucide-react": "^0.511.0",
     "next": "15.3.2",
     "next-auth": "^4.24.11",
-    "next-sitemap": "^4.2.3",
     "nprogress": "^0.2.0",
     "react": "^19.0.0",
     "react-datepicker": "^8.4.0",
