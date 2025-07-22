@@ -1,16 +1,9 @@
-"use client";
-import { useAuthState } from "@/context/AuthContext";
+
 import type { NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
-import { useEffect } from "react";
 
 const NotFoundPage : NextPage = () => {
-  const {userAction} = useAuthState();
-
-  useEffect(() => {
-    userAction("visite","not found page")
-  },[])
 
   return (
     <>
