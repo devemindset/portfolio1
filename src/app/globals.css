@@ -1,9 +1,11 @@
 @import "tailwindcss";
+/* @import 'bootstrap-icons/font/bootstrap-icons.css'; */
 
 :root {
   --background: #ededed;
   --background-element : white ; 
   --text-element : white;
+  --text-element-small : #999393;
   --btn-text : white;
   --btn-bg: #7223bb;
   --color-foreground: #ebe7e7;
@@ -12,6 +14,7 @@
   --text-span : rgb(114, 35, 187);
   --icon-color : #364153;
   --title-bg : #1c0641;
+  --bg-header : rgb(114, 35, 187);
 
 }
 

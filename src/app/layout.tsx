@@ -2,6 +2,7 @@
 import './globals.css';
 import { Inter, Poppins } from 'next/font/google';
 import type { Metadata } from 'next';
+import "bootstrap-icons/font/bootstrap-icons.css"
 
 // --- Fonts ---
 const inter = Inter({
@@ -25,9 +26,6 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${inter.variable} ${poppins.variable}`}>
-      <head>
-        <meta charSet="UTF-8" />
-      </head>
       <body >
         {children}
       </body>

@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      bootstrap-icons:
+        specifier: ^1.13.1
+        version: 1.13.1
       framer-motion:
         specifier: ^12.15.0
         version: 12.15.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
@@ -678,6 +681,9 @@ packages:
 
   bezier-easing@2.1.0:
     resolution: {integrity: sha512-gbIqZ/eslnUFC1tjEvtz0sgx+xTK20wDnYMIA27VA04R7w6xxXQPZDbibjA9DTWZRA2CXtwHykkVzlCaAJAZig==}
+
+  bootstrap-icons@1.13.1:
+    resolution: {integrity: sha512-ijombt4v6bv5CLeXvRWKy7CuM3TRTuPEuGaGKvTV5cz65rQSY8RQ2JcHt6b90cBBAC7s8fsf2EkQDldzCoXUjw==}
 
   brace-expansion@1.1.11:
     resolution: {integrity: sha512-iCuPHDFgrHX7H2vEI/5xpz07zSHB00TpugqhmYtVmMO6518mCuRMoOYFldEBl0g187ufozdaHgWKcYFb61qGiA==}
@@ -2403,6 +2409,8 @@ snapshots:
   balanced-match@1.0.2: {}
 
   bezier-easing@2.1.0: {}
+
+  bootstrap-icons@1.13.1: {}
 
   brace-expansion@1.1.11:
     dependencies:
