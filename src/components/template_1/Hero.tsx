@@ -18,7 +18,7 @@ const Hero: FC = () => {
                 </div>
         <div className="absolute inset-0 bg-black/50" />
 
-                <div className="fixed flex flex-col space-y-5 text-4xl  h-screen text-[var(--text-element-small)] justify-end left-5 pb-10 z-50 items-end">
+                <div className="absolute flex flex-col space-y-5 text-4xl  h-screen text-[var(--text-element-small)] justify-end left-5 pb-10 z-50 items-end">
                     <a href="#"><i className="bi bi-twitter-x"  /></a>
                     <a href="#"><i className="bi bi-facebook" /></a>
                     <a href="#"><i className="bi bi-instagram" /></a>

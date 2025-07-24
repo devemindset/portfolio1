@@ -3,7 +3,9 @@
 
 :root {
   --background: #ededed;
-  --background-element : white ; 
+  --background-element : rgb(114, 35, 187); 
+  --background-element-2 : #999393; 
+  --background-element-3 : white;
   --text-element : white;
   --text-element-small : #999393;
   --btn-text : white;
@@ -12,6 +14,7 @@
   --btn-hover : green;
   --text-hover : rgb(114, 35, 187);
   --text-span : rgb(114, 35, 187);
+  --text-span-2 : #364153;
   --icon-color : #364153;
   --title-bg : #1c0641;
   --bg-header : rgb(114, 35, 187);
