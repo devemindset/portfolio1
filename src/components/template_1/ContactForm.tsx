@@ -8,7 +8,7 @@ const ContactForm: FC = () => {
             <div className=' bg-[var(--background-element-3)] pb-10'>
 
             
-            <section className='bg-[var(--background-element-3)] flex flex-col items-center mx-24 rounded-2xl shadow-2xl space-y-5 p-10'>
+            <section className='bg-[var(--background-element-3)] flex flex-col items-center mx-1 sm:mx-24 rounded-2xl shadow-2xl space-y-5 p-2 sm:p-10'>
                 <div className='grid grid-cols-2 gap-5 w-full border-[var(--text-element-small)]'>
                     <input type="email" className='border p-2 border-[var(--text-element-small)] focus:outline-none focus:ring-2 focus:ring-[var(--btn-bg)] bg-[var(--input-bg)]' placeholder='Email' />
                     <input type="text" className='border p-2 border-[var(--text-element-small)] focus:outline-none focus:ring-2 focus:ring-[var(--btn-bg)] bg-[var(--input-bg)]' placeholder='Name' />

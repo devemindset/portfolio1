@@ -4,7 +4,7 @@ import ProductCard from './ProductCard';
 const productList = [
     {
     imageSrc : "/product1.jpg",
-    description : "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores, deserunt.Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores, deserunt.",
+    description : "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores, deserunt.Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores, deserunt. Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores, deserunt.Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores, deserunt.",
     path : "/"
     },
     {
@@ -33,11 +33,11 @@ const ProductList: FC = () => {
         return (
             <section className='my-5 sm:my-20 py-10' >
                 <div className=' text-center'>
-                    <h2 className='text-center py-5 my-5  text-3xl sm:py-10 font-bold sm:text-4xl'>Portfolio</h2>
-                    <p className='text-sm sm:text-2xl md:text-4xl px-5'>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
+                    <h2 className='text-center py-5 my-5  text-3xl sm:py-10 font-bold sm:text-4xl md:text-6xl'>Portfolio</h2>
+                    <p className='text-xl px-5 text-[var(--text-element-small-black)]'>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
                 </div>
                 {/* list  */}
-                <div className='mt-20 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5  sm:px-20  justify-items-center'>
+                <div className='mt-20 grid grid-cols-1  md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-5  sm:px-20  justify-items-center'>
 
                 
                 {productList.map((product,index) => (

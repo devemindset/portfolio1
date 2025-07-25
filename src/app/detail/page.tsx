@@ -29,8 +29,8 @@ const Page: NextPage = () => {
     <Header />
     <main className="min-h-screen">
                 <div className='text-center bg-[var(--background-element)] text-[var(--text-element)] py-20'>
-                <h3 className=' font-bold text-6xl py-5'>Service Details</h3>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex quod dolore totam.</p>
+                <h3 className=' font-bold text-2xl sm:text-4xl  py-5'>Service Details</h3>
+                <p className="text-sm sm:text-xl px-5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex quod dolore totam.</p>
                 </div>
                 {/* list  */}
                 <div>

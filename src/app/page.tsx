@@ -20,8 +20,8 @@ const Page: NextPage = () => {
     <ServiceList />
     <TestimonialList />
     <ProductList />
-    {/* <Contact /> */}
-    {/* <ContactForm /> */}
+    <Contact />
+    <ContactForm />
 
     <Footer />
     

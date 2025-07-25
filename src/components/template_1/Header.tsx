@@ -9,9 +9,9 @@ const Header: FC = () => {
 
 
         return (
-            <header className='fixed w-full h-20 bg-[var(--bg-header)]/30 flex justify-between items-center px-5 sm:px-10 md:px-20 text-[var(--text-element-small)] z-10'>
-                <div className='font-bold text-[var(--text-element)]'>James</div>
-                <nav className='hidden md:flex space-x-2'>
+            <header className='fixed w-full h-20 2xl:h-30 bg-[var(--bg-header)]/30 flex justify-between items-center px-5 sm:px-10 md:px-20 text-[var(--text-element-small)] z-10'>
+                <div className='font-bold text-[var(--text-element)] 2xl:text-5xl'>James</div>
+                <nav className='hidden lg:flex space-x-2 2xl:text-2xl 2xl:space-x-4'>
                     <div id='#hero' className='cursor-pointer'>Home</div>
                     <div id='#about' className='cursor-pointer'>About</div>
                     <div id='#service' className='cursor-pointer'>Services</div>
@@ -20,13 +20,13 @@ const Header: FC = () => {
                 </nav>
 
                 {/* Mobile toggle */}
-                <button onClick={() => setOpen(!open)} className="md:hidden">
+                <button onClick={() => setOpen(!open)} className="lg:hidden cursor-pointer">
                 {open ? <X size={24} /> : <Menu size={24} />}
                 </button>
 
                 {/* Mobile Nav */}
       {open && (
-        <div className="md:hidden fixed top-5 right-1 bg-white mt-10 rounded-lg shadow px-20 py-3 text-sm text-gray-700 space-y-2 ">
+        <div className="lg:hidden fixed top-5 right-1 bg-white mt-10 rounded-lg shadow px-20 py-3 text-sm text-gray-700 space-y-2 ">
           <a href="#features" className="block hover:text-[var(--text-hover)]">
             Home
           </a>
