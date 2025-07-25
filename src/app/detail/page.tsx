@@ -1,9 +1,13 @@
 import type { NextPage } from "next";
 import Header from "../../components/template_1/Header";
 import Details from "./components/Details";
+import Footer from "../../components/template_1/Footer";
+import Contact from "../../components/template_1/Contact";
+import ContactForm from "../../components/template_1/ContactForm";
+import ServiceList from "../../components/template_1/ServiceList";
 
 const detail = {
-    imageSrc : "/picture1.png",
+    imageSrc : "/product1.jpg",
     title : "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quaerat, laborum!",
     detail : `
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos labore similique tenetur maiores? Aut hic blanditiis laborum nesciunt earum nam magni explicabo odit vitae aliquid, voluptatibus eligendi velit magnam at.
@@ -23,8 +27,8 @@ const Page: NextPage = () => {
   return (
     <>
     <Header />
-    <main>
-                <div className='text-center bg-[var(--background-element)] text-[var(--text-element)] py-10'>
+    <main className="min-h-screen">
+                <div className='text-center bg-[var(--background-element)] text-[var(--text-element)] py-20'>
                 <h3 className=' font-bold text-6xl py-5'>Service Details</h3>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex quod dolore totam.</p>
                 </div>
@@ -33,8 +37,12 @@ const Page: NextPage = () => {
                             <Details  detail={detail.detail} title={detail.title} imageSrc={detail.imageSrc}  />
               
                 </div>
-                
+    <ServiceList />
+    <Contact />
+    <ContactForm />            
     </main>
+    
+    <Footer />
     </>
   )
 }

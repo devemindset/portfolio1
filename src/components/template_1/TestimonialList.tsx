@@ -5,10 +5,10 @@ import type { FC } from 'react';
 
 const TestimonialList: FC = () => {
         return (
-            <section className='my-20 bg-[var(--background-element-2)]/30 py-10'>
+            <section className='my-5 sm:my-20 bg-[var(--background-element-2)]/30 py-10'>
                 <div className=' text-center'>
-                    <h2 className='font-bold text-6xl py-5'>Testimonials</h2>
-                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
+                    <h2 className='text-center py-5 my-5  text-3xl sm:py-10 font-bold sm:text-4xl md:text-6xl'>Testimonials</h2>
+                    <p className='text-sm sm:text-2xl md:text-4xl px-5'>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
                 </div>
                 {/* list  */}
                 <div className='flex items-center flex-col my-10 '>
@@ -31,10 +31,10 @@ const TestimonialList: FC = () => {
                         <i className="bi bi-star-fill" />
                         <i className="bi bi-star-fill" />
                     </div>
-                    <p className='text-center px-20'>
-                        <i className="bi bi-quote quote-icon-left text-5xl text-[var(--text-span)]" />
-                        <span>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Maiores iure adipisci distinctio iste dignissimos quibusdam. Quisquam soluta minima consequuntur sed.iste dignissimos quibusdam. Quisquam soluta minima consequuntur sed.</span>
-                        <i className="bi bi-quote quote-icon-right text-5xl text-[var(--text-span)]" />
+                    <p className='text-center px-3 italic sm:px-20'>
+                        <i className="bi bi-quote quote-icon-left text-xl sm:text-3xl md:text-5xl text-[var(--text-span)]" />
+                        <span className='text-sm'>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Maiores iure adipisci distinctio iste dignissimos quibusdam. Quisquam soluta minima consequuntur sed.iste dignissimos quibusdam. Quisquam soluta minima consequuntur sed.</span>
+                        <i className="bi bi-quote quote-icon-right text-xl sm:text-3xl md:text-5xl text-[var(--text-span)]" />
                     </p>
                     
                 </div>

@@ -1,53 +1,53 @@
-import { Folder } from 'lucide-react';
 import type { FC } from 'react';
 import Service from './Service';
+import OkIcon from '../ui/OkIcon';
 
 
 const serviceList = [
     {
-        icon : <Folder size={45} className='text-[var(--text-span)]'/>,
+        icon : <OkIcon className='w-8 h-8 text-[var(--text-span)]' />,
         title : "Lorem ipsum",
         description : "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repudiandae, doloremque.",
         path : "/",
     },
     {
-        icon : <Folder size={45} className='text-[var(--text-span)]'/>,
+        icon : <OkIcon className='w-8 h-8 text-[var(--text-span)]' />,
         title : "Lorem ipsum",
         description : "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repudiandae, doloremque.",
         path : "/",
     },
     {
-        icon : <Folder size={45} className='text-[var(--text-span)]'/>,
+        icon : <OkIcon className='w-8 h-8 text-[var(--text-span)]' />,
         title : "Lorem ipsum",
         description : "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repudiandae, doloremque.",
         path : "/",
     },
     {
-        icon : <Folder size={45} className='text-[var(--text-span)]'/>,
+        icon : <OkIcon className='w-8 h-8 text-[var(--text-span)]' />,
         title : "Lorem ipsum",
         description : "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repudiandae, doloremque.",
         path : "/",
     },
     {
-        icon : <Folder size={45} className='text-[var(--text-span)]'/>,
+        icon : <OkIcon className='w-8 h-8 text-[var(--text-span)]' />,
         title : "Lorem ipsum",
         description : "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repudiandae, doloremque.",
         path : "/",
     },
     {
-        icon : <Folder size={45} className='text-[var(--text-span)]'/>,
+        icon : <OkIcon className='w-8 h-8 text-[var(--text-span)]' />,
         title : "Lorem ipsum",
         description : "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repudiandae, doloremque.",
         path : "/",
     },
     {
-        icon : <Folder size={45} className='text-[var(--text-span)]'/>,
+        icon : <OkIcon className='w-8 h-8 text-[var(--text-span)]' />,
         title : "Lorem ipsum",
         description : "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repudiandae, doloremque.",
         path : "/",
     },
     {
-        icon : <Folder size={45} className='text-[var(--text-span)]'/>,
+        icon : <OkIcon className='w-8 h-8 text-[var(--text-span)]' />,
         title : "Lorem ipsum",
         description : "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repudiandae, doloremque.",
         path : "/",
@@ -56,13 +56,13 @@ const serviceList = [
 
 const ServiceList: FC = () => {
         return (
-            <section className='my-20'>
+            <section className='my-5 sm:my-20'>
                 <div className=' text-center'>
-                    <h2 className='font-bold text-6xl py-5'>Services</h2>
-                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
+                    <h2 className='text-center py-5 my-5  text-3xl sm:py-10 font-bold sm:text-4xl'>Services</h2>
+                    <p className='text-sm sm:text-2xl md:text-4xl px-5'>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
                 </div>
                 {/* lists  */}
-                <div className='mt-20 grid grid-cols-3 gap-5 px-20 mx-auto'>
+                <div className='mt-20 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5  sm:px-20  justify-items-center'>
                     {serviceList.map((service,index) => (
                         <Service key={index} icon={service.icon} title={service.title} description={service.description} path={service.path} />
                     ))
