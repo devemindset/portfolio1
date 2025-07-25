@@ -23,7 +23,7 @@ const Hero: FC = () => {
                     <a href="#"><i className="bi bi-facebook" /></a>
                     <a href="#"><i className="bi bi-instagram" /></a>
                     <a href="#"><i className="bi bi-linkedin" /></a>
-        </div>
+                </div>
                 <div className='absolute flex justify-center flex-col h-screen left-44 text-[var(--text-element)]'>
                 <h1 className='text-6xl font-black'>James Smith</h1>
                 <h3 className='mt-4 text-2xl'>{"I'm"} a freelancer</h3>

@@ -9,6 +9,8 @@ import Contact from "../components/template_1/Contact";
 import ContactForm from "../components/template_1/ContactForm";
 import Footer from "../components/template_1/Footer";
 
+
+
 const Page: NextPage = () => {
   return (
     <>
@@ -20,6 +22,7 @@ const Page: NextPage = () => {
     <ProductList />
     <Contact />
     <ContactForm />
+
     <Footer />
     
     </>
