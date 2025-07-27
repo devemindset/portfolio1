@@ -23,7 +23,7 @@ const siteInfo = [
 
 const Contact: FC = () => {
         return (
-            <section id='contact' className='mt-20 flex flex-col items-center bg-[var(--background-element-3)]'>
+            <section className='mt-20 flex flex-col items-center bg-[var(--background-element-3)]'>
                 <div className=' text-center'>
                     <motion.h2 className='text-center py-5 my-5  text-3xl sm:py-10 font-bold sm:text-4xl '
                     initial= {{ opacity:0, y: 40 }}

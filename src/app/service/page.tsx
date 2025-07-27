@@ -1,10 +1,10 @@
 import type { NextPage } from "next";
-import Header from "../../components/template_1/Header";
 import Details from "./components/Details";
 import Footer from "../../components/template_1/Footer";
 import Contact from "../../components/template_1/Contact";
 import ContactForm from "../../components/template_1/ContactForm";
 import ServiceList from "../../components/template_1/ServiceList";
+import Header from "./components/Header";
 
 const detail = {
     imageSrc : "/product1.jpg",

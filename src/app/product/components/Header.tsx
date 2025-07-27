@@ -2,7 +2,7 @@
 import { Menu, X } from 'lucide-react';
 import { useEffect, useState, type FC } from 'react';
 
-const sections = ['hero', 'about', 'service', 'products', 'contact'];
+const sections = ['hero','products', 'contact'];
 
 const Header: FC = () => {
     const [open,setOpen] = useState(false);
@@ -45,7 +45,7 @@ const Header: FC = () => {
         {sections.map((section) => (
           <a
             key={section}
-            href={`#${section}`}
+            href={section === "hero" ? "/" : `#${section}`}
             className={linkClass(section)}
           >
             {section.charAt(0).toUpperCase() + section.slice(1)}
@@ -64,7 +64,7 @@ const Header: FC = () => {
           {sections.map((section) => (
             <a
               key={section}
-              href={`#${section}`}
+            href={section === "hero" ? "/" : `#${section}`}
               className={`block ${linkClass(section)}`}
               onClick={() => setOpen(false)} // Close menu after click
             >

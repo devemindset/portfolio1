@@ -7,11 +7,11 @@ import {motion} from "framer-motion"
 const List: FC = () => {
         return (
             <motion.div className='flex my-2'
-            initial= {{ opacity:0, y: 40 }}
-            transition={{ duration:1, delay:0.3}}
-            whileInView={{ opacity: 1, y: 0 }}
-            whileHover={{ scale: 1.03 }}
-            viewport={{ once: true }}
+                initial= {{ opacity:0, y: 40 }}
+                transition={{ duration:1, delay:0.3}}
+                whileInView={{ opacity: 1, y: 0 }}
+                whileHover={{ scale: 1.03 }}
+                viewport={{ once: true }}
             
             >
                             <OkIcon className='w-6 h-6 text-[var(--text-span)]' />

@@ -1,0 +1,27 @@
+/* styles/nprogress.css */
+#nprogress {
+  pointer-events: none;
+}
+
+#nprogress .bar {
+  background: #10B981; /* violet Tailwind */
+  position: fixed;
+  z-index: 1031;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 10px;
+  
+}
+
+#nprogress .peg {
+  display: flex;
+  position: absolute;
+  right: 0px;
+  width: 100px;
+  height: 100%;
+  box-shadow: 0 0 10px #10B981, 0 0 5px #06f1a3;
+  opacity: 1.0;
+  z-index: 1031;
+  transform: rotate(3deg) translate(0px, -4px);
+}

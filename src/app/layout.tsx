@@ -3,6 +3,8 @@ import './globals.css';
 import { Inter, Poppins } from 'next/font/google';
 import type { Metadata } from 'next';
 import "bootstrap-icons/font/bootstrap-icons.css"
+import PageLoader from '../components/ui/PageLoader';
+
 
 // --- Fonts ---
 const inter = Inter({
@@ -27,6 +29,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${inter.variable} ${poppins.variable}`}>
       <body >
+        <PageLoader />
         {children}
       </body>
     </html>
