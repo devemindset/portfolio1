@@ -52,7 +52,7 @@ const TestimonialList: FC = () => {
     return (
         <section className="relative overflow-hidden bg-[var(--background-element-2)]/30 py-10">
             <div className=' text-center'>
-                <motion.h2 className='text-center py-5 my-5 text-3xl sm:py-10 font-bold sm:text-4xl md:text-6xl'
+                <motion.h2 className='text-center py-5 my-5 text-3xl sm:py-10 font-bold sm:text-4xl '
                 initial= {{ opacity:0, y: 40 }}
               
                 transition={{ duration:1, delay:0.3}}
