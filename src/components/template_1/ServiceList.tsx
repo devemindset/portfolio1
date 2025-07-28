@@ -3,59 +3,23 @@ import type { FC } from 'react';
 import Service from './Service';
 import OkIcon from '../ui/OkIcon';
 import {motion} from 'framer-motion'
+import { ServiceType } from '../../types';
 
-const serviceList = [
-    {
-        icon : <OkIcon className='w-8 h-8 text-[var(--text-span)]' />,
-        title : "Lorem ipsum",
-        description : "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repudiandae, doloremque.",
-        path : "/service",
-    },
-    {
-        icon : <OkIcon className='w-8 h-8 text-[var(--text-span)]' />,
-        title : "Lorem ipsum",
-        description : "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repudiandae, doloremque.",
-        path : "/service",
-    },
-    {
-        icon : <OkIcon className='w-8 h-8 text-[var(--text-span)]' />,
-        title : "Lorem ipsum",
-        description : "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repudiandae, doloremque.",
-        path : "/service",
-    },
-    {
-        icon : <OkIcon className='w-8 h-8 text-[var(--text-span)]' />,
-        title : "Lorem ipsum",
-        description : "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repudiandae, doloremque.",
-        path : "/service",
-    },
-    {
-        icon : <OkIcon className='w-8 h-8 text-[var(--text-span)]' />,
-        title : "Lorem ipsum",
-        description : "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repudiandae, doloremque.",
-        path : "/service",
-    },
-    {
-        icon : <OkIcon className='w-8 h-8 text-[var(--text-span)]' />,
-        title : "Lorem ipsum",
-        description : "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repudiandae, doloremque.",
-        path : "/service",
-    },
-    {
-        icon : <OkIcon className='w-8 h-8 text-[var(--text-span)]' />,
-        title : "Lorem ipsum",
-        description : "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repudiandae, doloremque.",
-        path : "/service",
-    },
-    {
-        icon : <OkIcon className='w-8 h-8 text-[var(--text-span)]' />,
-        title : "Lorem ipsum",
-        description : "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repudiandae, doloremque.",
-        path : "/service",
-    },
-]
+// const serviceList = [
+//     {
+//         icon : <OkIcon className='w-8 h-8 text-[var(--text-span)]' />,
+//         title : "Lorem ipsum",
+//         description : "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repudiandae, doloremque.",
+//         path : "/service",
+//     },
+   
+// ]
+interface ServiceListProps {
+    services : ServiceType[] ;
 
-const ServiceList: FC = () => {
+} 
+
+const ServiceList: FC<ServiceListProps> = ({ services}) => {
         return (
             <section id="service" className='my-5 sm:my-20'>
                 <div className=' text-center'>
@@ -76,8 +40,8 @@ const ServiceList: FC = () => {
                 </div>
                 {/* lists  */}
                 <div className='mt-20 grid grid-cols-1  md:grid-cols-2  2xl:grid-cols-4 gap-5  sm:px-20  justify-items-center'>
-                    {serviceList.map((service,index) => (
-                        <Service key={index} icon={service.icon} title={service.title} description={service.description} path={service.path} />
+                    {services.map((service) => (
+                        <Service key={service.id} icon={<OkIcon className='w-8 h-8 text-[var(--text-span)]' />} service={service} />
                     ))
                     }
                 </div>

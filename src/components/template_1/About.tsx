@@ -1,12 +1,15 @@
 "use client"
 import Image from 'next/image';
 import type { FC } from 'react';
-import List from './List';
+// import List from './List';
 import {motion} from "framer-motion"
+import { AboutType } from '../../types';
 
+interface AboutProps{
+    about : AboutType;
+}
 
-
-const About: FC = () => {
+const About: FC<AboutProps> = ({ about }) => {
         return (
             <section id="about" className='bg-[var(--background)] my-5 sm:my-20'>
                 <motion.h2 className='text-center py-5 my-5  text-3xl sm:py-10 font-bold sm:text-4xl '
@@ -34,8 +37,8 @@ const About: FC = () => {
                 viewport={{ once: true }}
                     >
                         <Image
-                            src="/hero-bg.jpg"
-                            alt="About picture"
+                            src={about.image}
+                            alt={about.head}
                             fill
                             className="rounded-xl object-cover"
                             sizes="(max-width: 768px) 100vw, 33vw"
@@ -55,7 +58,7 @@ const About: FC = () => {
                 whileHover={{ scale: 1.03 }}
                 viewport={{ once: true }}
                     >
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet at, expedita minus voluptatum tempore corporis ratione aut ea nulla animi ex quod autem quaerat tempora asperiores
+                        {about.head}
                     </motion.div>
                     <motion.p className='text-[var(--text-element-small-black)] text-sm'
                     initial= {{ opacity:0, y: 40 }}
@@ -63,13 +66,13 @@ const About: FC = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 whileHover={{ scale: 1.03 }}
                 viewport={{ once: true }}
-                    >Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit, enim maxime laboriosam corrupti esse architecto?</motion.p>
-                    <div className='my-5'>
+                    >{about.description}</motion.p>
+                    {/* <div className='my-5'>
                         <List />
                         <List />
                         <List />
                         <List />
-                    </div>
+                    </div> */}
                 </div>
                 </div>
                 

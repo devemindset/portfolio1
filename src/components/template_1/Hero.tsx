@@ -2,10 +2,20 @@
 import type { FC } from 'react';
 import { motion } from "framer-motion";
 import { TypeAnimation } from "react-type-animation";
+import { BackgroundImageType, SocialNetworkType } from '../../types';
 
+interface HeroProps {
+    background : BackgroundImageType;
+    social : SocialNetworkType[];
+}
 
+const Hero: FC<HeroProps> = ({background,social}) => {
+    const socialLinks = social.reduce((acc,curr) => {
+        acc[curr.type.toLowerCase()] = curr.url
+        return acc
+    },{} as Record<string, string>);
 
-const Hero: FC = () => {
+    
         return (
             <>
 
@@ -18,7 +28,7 @@ const Hero: FC = () => {
                 transition={{ duration:1, delay:0.3}}
 
                 style={{
-                    backgroundImage : "url('./hero-bg.jpg')"
+                    backgroundImage : `url(${background.background_image})`
                 }}
                 >
                     
@@ -30,10 +40,33 @@ const Hero: FC = () => {
                     animate = {{opacity : 1, y: 0}}
                     transition={{ duration:1, delay:0.5}}
                 >
-                    <a href="#"><i className="bi bi-twitter-x"  /></a>
-                    <a href="#"><i className="bi bi-facebook" /></a>
-                    <a href="#"><i className="bi bi-instagram" /></a>
-                    <a href="#"><i className="bi bi-linkedin" /></a>
+                    {socialLinks.twitter && <a href={socialLinks.twitter} target='_blank'><i className="bi bi-twitter-x"  /></a>}
+
+                    {socialLinks.facebook && <a href={socialLinks.facebook} target='_blank'><i className="bi bi-facebook" /></a>}
+
+                    {socialLinks.instagram && <a href={socialLinks.instagram} target='_blank'><i className="bi bi-instagram" /></a>}
+
+                    {socialLinks.linkedin && <a href={socialLinks.linkedin} target='_blank'><i className="bi bi-linkedin" /></a>}
+
+                    {socialLinks.tiktok && <a href={socialLinks.tiktok} target='_blank'><i className="bi bi-tiktok" /></a>}
+
+                    {socialLinks.github && <a href={socialLinks.github} target='_blank'><i className="bi bi-github" /></a>}
+
+                    {socialLinks.youtube && <a href={socialLinks.youtube} target='_blank'><i className="bi bi-youtube" /></a>}
+
+                    {socialLinks.pinterest && <a href={socialLinks.pinterest} target='_blank'><i className="bi bi-pinterest" /></a>}
+
+                    {socialLinks.discord && <a href={socialLinks.discord} target='_blank'><i className="bi bi-discord" /></a>}
+
+                    {socialLinks.whatsapp && <a href={socialLinks.whatsapp} target='_blank'><i className="bi bi-whatsapp" /></a>}
+
+                    {socialLinks.snapchat && <a href={socialLinks.snapchat} target='_blank'><i className="bi bi-snapchat" /></a>}
+
+                    {socialLinks.reddit && <a href={socialLinks.reddit} target='_blank'><i className="bi bi-reddit" /></a>}
+
+                    {socialLinks.telegram && <a href={socialLinks.telegram} target='_blank'><i className="bi bi-telegram" /></a>}
+                    {socialLinks.other && <a href={socialLinks.other} target='_blank'><i className="bi bi-other" /></a>}
+                    
                 </motion.div>
                 <div className='absolute flex justify-center flex-col h-screen left-12 md:left-44 bg text-[var(--text-element)]'>
                 <motion.h1 className='text-3xl sm:text-4xl md:text-6xl font-black 2xl:text-9xl'

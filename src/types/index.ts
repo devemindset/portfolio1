@@ -1,6 +1,6 @@
 // types/apiTypes.ts
 
-export interface Testimonial {
+export interface TestimonialType {
   id: number;
   image: string;
   name: string;
@@ -8,22 +8,37 @@ export interface Testimonial {
   text: string;
 }
 
-export interface Service {
+export interface ServiceType {
   id: number;
   service_name: string;
   description: string;
+  slug : string;
+  content: string;
+}
+export interface ServiceDetailType {
+  id: number;
+  service_name: string;
+  slug : string;
   content: string;
 }
 
-export interface Product {
+export interface ProductType {
   id: number;
   image: string;
   product_name: string;
   description: string;
+  slug : string;
+  content: string;
+}
+export interface ProductDetailType {
+  id: number;
+  image: string;
+  product_name: string;
+  slug : string;
   content: string;
 }
 
-export interface Project {
+export interface ProjectType {
   id: number;
   image: string;
   project_name: string;
@@ -32,20 +47,27 @@ export interface Project {
   external_link: string;
 }
 
-export interface About {
+export interface AboutType {
   id: number;
   image: string;
+  head : string
   description: string;
 }
 
-export interface BackgroundImage {
+export interface BackgroundImageType {
   id: number;
   background_image: string;
 }
 
-export interface Contact {
+export interface ContactType {
   id: number;
   address: string;
   phonenumber: string;
   email: string;
+}
+
+export interface SocialNetworkType {
+  id: number;
+  type: 'facebook' | 'twitter' | 'linkedin' | 'instagram' | 'tiktok' | 'github' | 'youtube' | 'pinterest' | 'whatsapp' | 'discord' | 'snapchat' | 'reddit' | 'telegram' | 'other';
+  url: string;
 }

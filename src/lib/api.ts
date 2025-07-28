@@ -1,5 +1,8 @@
 // lib/api.ts
 
+import { SocialNetworkType } from "../types";
+import axios from "axios";
+
 const API_BASE = process.env.NEXT_PUBLIC_API_URL; 
 
 export async function fetchAbout() {
@@ -30,4 +33,9 @@ export async function fetchServices() {
 export async function fetchProducts() {
   const res = await fetch(`${API_BASE}/data_control/products/`);
   return res.json();
+}
+
+export async function fetchSocialNetworks(): Promise<SocialNetworkType[]> {
+  const response = await axios.get(`${API_BASE}/data_control/social-networks/`);
+  return response.data;
 }
