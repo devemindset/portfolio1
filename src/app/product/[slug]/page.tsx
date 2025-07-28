@@ -1,49 +1,61 @@
-import type { NextPage } from "next";
+import type { Metadata, NextPage } from "next";
 import Product from "./components/Product";
-import Footer from "../../components/template_1/Footer";
-import Contact from "../../components/template_1/Contact";
-import ContactForm from "../../components/template_1/ContactForm";
-
-import ProductList from "../../components/template_1/ProductList";
 import Header from "./components/Header";
+import { fetchContact, fetchProductBySlug, fetchProducts, fetchSocialNetworks } from "../../../lib/api";
+import ProductList from "../../../components/template_1/ProductList";
+import Contact from "../../../components/template_1/Contact";
+import ContactForm from "../../../components/template_1/ContactForm";
+import Footer from "../../../components/template_1/Footer";
 
-const product = {
-    imageSrc : "/product1.jpg",
-    title : "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quaerat, laborum!",
-    detail : `
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos labore similique tenetur maiores? Aut hic blanditiis laborum nesciunt earum nam magni explicabo odit vitae aliquid, voluptatibus eligendi velit magnam at.
-
-        nesciunt earum nam magni explicabo odit vitae aliquid, voluptatibus eligendi velit magnam at.
-
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos labore similique tenetur maiores? Aut hic blanditiis laborum nesciunt earum nam magni explicabo odit vitae aliquid, voluptatibus eligendi velit magnam at.
-
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos labore similique tenetur maiores? Aut hic blanditiis laborum nesciunt earum nam magni explicabo odit vitae aliquid, voluptatibus eligendi velit magnam at.
-
-        blanditiis laborum nesciunt earum nam magni explicabo odit vitae aliquid, voluptatibus eligendi velit magnam at.
-
-        blanditiis laborum nesciunt earum nam magni explicabo odit vitae aliquid, voluptatibus eligendi velit magnam at.
-    `
+interface Props {
+  params: {
+    slug : string;
+  }
 }
-const Page: NextPage = () => {
+
+export async function generateMetadata({ params} : Props): Promise<Metadata> {
+  const product = await fetchProductBySlug(params.slug)
+
+  if(!product){
+    return {
+      title: "Product Not Found",
+    }
+  }
+  return {
+    title : product.product_name,
+    description : product.description.slice(0,160),
+    openGraph : {
+      title: product.product_name,
+      description : product.description.slice(0,160),
+      type : 'article',
+    },
+  }
+}
+const Page: NextPage = async ( { params } : Props) => {
+  const product = await fetchProductBySlug(params.slug);
+  const products = await fetchProducts();
+  const contact = await fetchContact();
+  const social = await fetchSocialNetworks();
+
   return (
     <>
     <Header />
     <main className="min-h-screen">
                 <div className='text-center bg-[var(--background-element)] text-[var(--text-element)] py-20'>
                 <h3 className=' font-bold text-2xl sm:text-4xl  py-5'>Product Details</h3>
-                <p className="text-sm sm:text-xl px-5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex quod dolore totam.</p>
+                <p className="text-sm sm:text-xl px-5">{product.description}</p>
                 </div>
                 {/* list  */}
                 <div>
-                            <Product  detail={product.detail} title={product.title} imageSrc={product.imageSrc}  />
+                            <Product  detail={product.content} title={product.product_name} imageSrc={product.image}  />
               
                 </div>
-    <ProductList />
-    <Contact />
+    <ProductList products={products} />
+    <Contact contact={contact} />
     <ContactForm />            
     </main>
     
-    <Footer />
+    <Footer social={social} />
     </>
   )
 }

@@ -3,47 +3,20 @@
 import { FC, useEffect, useState } from 'react';
 import TestimonialCard from './TestimonialCard';
 import {motion} from "framer-motion"
+import { TestimonialType } from '../../types';
 
-const testimonialList = [
-    {
-        imageSrc: "/picture1.png",
-        occupation: "Designer",
-        name: "Matt Larson",
-        quote: "Lorem ipsum dolor sit amet consectetur adipisicing elit..."
-    },
-    {
-        imageSrc: "/picture1.png",
-        occupation: "Freelancer",
-        name: "James Amy",
-        quote: "Lorem ipsum dolor sit amet consectetur adipisicing elit..."
-    },
-    {
-        imageSrc: "/picture1.png",
-        occupation: "SaaS builder",
-        name: "Max Moly",
-        quote: "Lorem ipsum dolor sit amet consectetur adipisicing elit..."
-    },
-    {
-        imageSrc: "/picture1.png",
-        occupation: "Designer",
-        name: "Harry James",
-        quote: "Lorem ipsum dolor sit amet consectetur adipisicing elit..."
-    },
-    {
-        imageSrc: "/picture1.png",
-        occupation: "Freelancer",
-        name: "Rose Thory",
-        quote: "Lorem ipsum dolor sit amet consectetur adipisicing elit..."
-    },
-];
 
-const TestimonialList: FC = () => {
+interface TestimonialListProps {
+    testimonials : TestimonialType[];
+} 
+
+const TestimonialList: FC<TestimonialListProps> = ({ testimonials }) => {
     const [currentIndex, setCurrentIndex] = useState(0);
 
     useEffect(() => {
         const interval = setInterval(() => {
             setCurrentIndex((prevIndex) =>
-                prevIndex === testimonialList.length - 1 ? 0 : prevIndex + 1
+                prevIndex === testimonials.length - 1 ? 0 : prevIndex + 1
             );
         }, 3000); // Slide every 3 seconds
         return () => clearInterval(interval);
@@ -84,16 +57,16 @@ const TestimonialList: FC = () => {
                     className="flex transition-transform duration-700 ease-in-out"
                     style={{ transform: `translateX(-${currentIndex * 100}%)` }}
                 >
-                    {testimonialList.map((testimonial, idx) => (
-                        <div key={idx} className="min-w-full flex justify-center">
-                            <TestimonialCard {...testimonial} />
+                    {testimonials.map((testimonial) => (
+                        <div key={testimonial.id} className="min-w-full flex justify-center">
+                            <TestimonialCard testimonial={testimonial} />
                         </div>
                     ))}
                 </div>
 
                 {/* Dots */}
                 <div className="flex justify-center space-x-2 mt-6">
-                    {testimonialList.map((_, index) => (
+                    {testimonials.map((_, index) => (
                         <div
                             key={index}
                             className={`w-3 h-3 rounded-full transition-all duration-300 ${

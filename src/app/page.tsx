@@ -1,71 +1,104 @@
 "use client"
-import type { NextPage } from "next";
-import Header from "../components/template_1/Header";
-import Hero from "../components/template_1/Hero";
-import About from "../components/template_1/About";
-import ServiceList from "../components/template_1/ServiceList";
-import TestimonialList from "../components/template_1/TestimonialList";
-import ProductList from "../components/template_1/ProductList";
-import Contact from "../components/template_1/Contact";
-import ContactForm from "../components/template_1/ContactForm";
-import Footer from "../components/template_1/Footer";
-import { useEffect, useState } from "react";
-import BackgroundLoader from "../components/BackgroundLoader";
-import { AboutType, BackgroundImageType, ContactType, ProductType, ServiceType, TestimonialType } from "../types";
-import { fetchAbout, fetchBackgroundImage, fetchContact, fetchProducts, fetchServices, fetchTestimonials } from "../lib/api";
-// import ResumeList from "../components/template_2/ResumeList";
 
+import type { NextPage } from "next"
+import { useEffect, useState } from "react"
 
+import Header from "../components/template_1/Header"
+import Hero from "../components/template_1/Hero"
+import About from "../components/template_1/About"
+import ServiceList from "../components/template_1/ServiceList"
+import TestimonialList from "../components/template_1/TestimonialList"
+import ProductList from "../components/template_1/ProductList"
+import Contact from "../components/template_1/Contact"
+import ContactForm from "../components/template_1/ContactForm"
+import Footer from "../components/template_1/Footer"
+import BackgroundLoader from "../components/BackgroundLoader"
+
+import {
+  AboutType,
+  BackgroundImageType,
+  ContactType,
+  ProductType,
+  ServiceType,
+  SocialNetworkType,
+  TestimonialType,
+} from "../types"
+
+import {
+  fetchAbout,
+  fetchBackgroundImage,
+  fetchContact,
+  fetchProducts,
+  fetchServices,
+  fetchSocialNetworks,
+  fetchTestimonials,
+} from "../lib/api"
 
 const Page: NextPage = () => {
-  const [loading, setLoading] = useState(true);
-  const [about, setAbout] = useState<AboutType | null>(null);
-  const [contact, setContact] = useState<ContactType | null>(null);
-  const [services, setServices] = useState<ServiceType[]>([]);
-  const [products, setProducts] = useState<ProductType[]>([]);
-  const [testimonials, setTestimonials] = useState<TestimonialType[]>([]);
-  const [background, setBackground] = useState<BackgroundImageType | null>(null);
+  const [loading, setLoading] = useState(true)
 
+  const [about, setAbout] = useState<AboutType | null>(null)
+  const [contact, setContact] = useState<ContactType | null>(null)
+  const [services, setServices] = useState<ServiceType[]>([])
+  const [products, setProducts] = useState<ProductType[]>([])
+  const [testimonials, setTestimonials] = useState<TestimonialType[]>([])
+  const [background, setBackground] = useState<BackgroundImageType | null>(null)
+  const [social,setSocial] = useState<SocialNetworkType[]>([])
+
+  // Chargement des données
   useEffect(() => {
-    // Simule le chargement ou attends que le composant soit monté
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 1500); // 1.5s
+    const fetchAll = async () => {
+      try {
+        const [
+          aboutData,
+          contactData,
+          serviceData,
+          productData,
+          testimonialData,
+          backgroundData,
+          socialData,
+        ] = await Promise.all([
+          fetchAbout(),
+          fetchContact(),
+          fetchServices(),
+          fetchProducts(),
+          fetchTestimonials(),
+          fetchBackgroundImage(),
+          fetchSocialNetworks(),
+        ])
 
-    return () => clearTimeout(timer);
-  }, []);
-
-  useEffect(() => {
-
-    if(loading || !about || !contact || services.length === 0 || products.length === 0 || testimonials.length === 0 || !background ) {
-
-    fetchAbout().then(setAbout);
-    fetchContact().then(setContact);
-    fetchServices().then(setServices);
-    fetchProducts().then(setProducts);
-    fetchTestimonials().then(setTestimonials);
-    fetchBackgroundImage().then(setBackground);
-    setLoading(false)
+        setAbout(aboutData)
+        setContact(contactData)
+        setServices(serviceData)
+        setProducts(productData)
+        setTestimonials(testimonialData)
+        setBackground(backgroundData)
+        setSocial(socialData)
+      } catch (error) {
+        console.error("Error loading data:", error)
+      } finally {
+        setLoading(false)
+      }
     }
 
-  }, [loading]);
+    fetchAll()
+  }, [])
 
-  if (loading) return <BackgroundLoader />
+  if (loading || !about || !contact || !background) {
+    return <BackgroundLoader />
+  }
 
   return (
     <>
-    <Header />
-    <Hero />
-    <About />
-    {/* <ResumeList /> */}
-    <ServiceList />
-    <TestimonialList />
-    <ProductList />
-    <Contact />
-    <ContactForm />
-
-    <Footer />
-    
+      <Header />
+      <Hero background={background} social={social} />
+      <About about={about} />
+      <ServiceList services={services} />
+      <TestimonialList testimonials={testimonials} />
+      <ProductList products={products} />
+      <Contact contact={contact} />
+      <ContactForm />
+      <Footer social={social} />
     </>
   )
 }

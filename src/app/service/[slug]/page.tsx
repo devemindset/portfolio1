@@ -1,6 +1,5 @@
 import type { NextPage } from "next";
 import Details from "./components/Details";
-import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import Header from "./components/Header";
 import ServiceList from "../../../components/template_1/ServiceList";

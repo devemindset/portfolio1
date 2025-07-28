@@ -2,26 +2,13 @@
 import type { FC } from 'react';
 import Info from './Info';
 import {motion} from "framer-motion"
+import { ContactType } from '../../types';
 
-const siteInfo = [
-    {
-        icon : <i className="bi bi-geo-alt flex-shrink-0" />,
-        title : "Address",
-        description : "A108 Adam Street, New York, NY 535022",
-    },
-    {
-        title : "Call",
-        description : "+1 5589 55488 55",
-        icon : <i className="bi bi-telephone flex-shrink-0" />
-    },
-    {
-        title : "Email",
-        description : "info@example.com",
-        icon : <i className="bi bi-envelope flex-shrink-0" />
-    }
-]
+interface ContactProps {
+    contact : ContactType;
+}
 
-const Contact: FC = () => {
+const Contact: FC<ContactProps> = ({ contact }) => {
         return (
             <section id='contact' className='mt-20 flex flex-col items-center bg-[var(--background-element-3)]'>
                 <div className=' text-center'>
@@ -43,11 +30,10 @@ const Contact: FC = () => {
                     >Lorem, ipsum dolor sit amet consectetur adipisicing elit.</motion.p>
                 </div>
                 <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 my-10 gap-5 bg-[var(--background-element-3)]  p-10 rounded-2xl shadow-2xl'>
-                    {siteInfo.map((info,index) => (
-                        <Info key={ index} title={info.title} description={info.description} icon={info.icon} />
-                    ))
+                        <Info contact={contact} />
+                   
 
-                    }
+                 
                 </div>
             </section>
         );

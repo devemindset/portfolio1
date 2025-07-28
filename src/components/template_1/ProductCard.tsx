@@ -2,13 +2,14 @@
 import Image from 'next/image'
 import {motion} from "framer-motion"
 import SmartLink from '../ui/SmartLink'
+import { ProductType } from '../../types'
 interface ProductCardProps {
-  imageSrc: string
-  description: string
-  path: string
+  product : ProductType;
 }
 
-const ProductCard: React.FC<ProductCardProps> = ({ imageSrc, description, path }) => {
+const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
+    const productDetailBaseUrl = process.env.NEXT_PUBLIC_APP_URL + "/product/"
+
   return (
     <motion.div className="bg-[var(--background-element-3)] flex flex-col justify-between rounded-3xl shadow-2xl overflow-hidden mx-3 max-w-[300px] w-full sm:max-w-[320px] md:max-w-[340px] xl:max-w-[400px] 2xl:max-w-[450px] h-[350px]"
     initial= {{ opacity:0, y: 40 }}
@@ -20,8 +21,8 @@ const ProductCard: React.FC<ProductCardProps> = ({ imageSrc, description, path }
       {/* Image */}
       <div className="w-full h-[250px] relative">
         <Image
-          src={imageSrc}
-          alt="product"
+          src={product.image}
+          alt={product.product_name}
           fill
           className="object-cover"
           sizes="(max-width: 768px) 100vw, 33vw"
@@ -30,12 +31,12 @@ const ProductCard: React.FC<ProductCardProps> = ({ imageSrc, description, path }
 
       {/* Description */}
       <div className="p-4 flex-1">
-        <p className="text-sm text-[var(--text-element-small-black)]">{description.length > 45 ? `${description.slice(0,150)}...` : description}</p>
+        <p className="text-sm text-[var(--text-element-small-black)]">{product.description.length > 150 ? `${product.description.slice(0,150)}...` : product.description}</p>
       </div>
 
       {/* Button */}
       <div className="bg-[var(--btn-bg)] py-2 text-[var(--btn-text)] text-center font-bold w-full">
-        <SmartLink href={path}>Learn More</SmartLink>
+        <SmartLink href={ productDetailBaseUrl + product.slug }>Learn More</SmartLink>
       </div>
     </motion.div>
   )
