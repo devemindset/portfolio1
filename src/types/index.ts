@@ -18,7 +18,9 @@ export interface ServiceType {
 export interface ServiceDetailType {
   id: number;
   service_name: string;
+  image: string;
   slug : string;
+  description : string;
   content: string;
 }
 
@@ -33,6 +35,7 @@ export interface ProductType {
 export interface ProductDetailType {
   id: number;
   image: string;
+  description : string;
   product_name: string;
   slug : string;
   content: string;
