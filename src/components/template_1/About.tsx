@@ -58,7 +58,7 @@ const About: FC<AboutProps> = ({ about }) => {
                 whileHover={{ scale: 1.03 }}
                 viewport={{ once: true }}
                     >
-                        {about.head}
+                        
                     </motion.div>
                     <motion.p className='text-[var(--text-element-small-black)] text-sm'
                     initial= {{ opacity:0, y: 40 }}

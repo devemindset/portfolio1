@@ -36,7 +36,7 @@ const ServiceList: FC<ServiceListProps> = ({ services}) => {
                 whileInView={{ opacity: 1, y: 0 }}
                 whileHover={{ scale: 1.03 }}
                 viewport={{ once: true }}
-                    >Lorem, ipsum dolor sit amet consectetur adipisicing elit.</motion.p>
+                    >Explore the list of available services.</motion.p>
                 </div>
                 {/* lists  */}
                 <div className='mt-20 grid grid-cols-1  md:grid-cols-2  2xl:grid-cols-4 gap-5  sm:px-20  justify-items-center'>

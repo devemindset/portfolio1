@@ -26,32 +26,32 @@ const Footer: FC<FooterProps> = ({ social }) => {
                 <h2 className='font-bold text-3xl'>James</h2>
                 <p className='text-sm px-5 text-[var(--text-element-small-black)]'>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Inventore, eum.</p>
                 <div className="space-x-2 text-sm sm:space-x-5 sm:text-2xl text-[var(--text-element-small)] ">
-                    {socialLinks.twitter && <a href={socialLinks.twitter} target='_blank'><i className="bi bi-twitter-x"  /></a>}
+                    {socialLinks.twitter && <a href={socialLinks.twitter} target='_blank'  rel="noopener noreferrer"><i className="bi bi-twitter-x"  /></a>}
 
-                    {socialLinks.facebook && <a href={socialLinks.facebook} target='_blank'><i className="bi bi-facebook" /></a>}
+                    {socialLinks.facebook && <a href={socialLinks.facebook} target='_blank'  rel="noopener noreferrer"><i className="bi bi-facebook" /></a>}
 
-                    {socialLinks.instagram && <a href={socialLinks.instagram} target='_blank'><i className="bi bi-instagram" /></a>}
+                    {socialLinks.instagram && <a href={socialLinks.instagram} target='_blank'  rel="noopener noreferrer"><i className="bi bi-instagram" /></a>}
 
-                    {socialLinks.linkedin && <a href={socialLinks.linkedin} target='_blank'><i className="bi bi-linkedin" /></a>}
+                    {socialLinks.linkedin && <a href={socialLinks.linkedin} target='_blank'  rel="noopener noreferrer"><i className="bi bi-linkedin" /></a>}
 
-                    {socialLinks.tiktok && <a href={socialLinks.tiktok} target='_blank'><i className="bi bi-tiktok" /></a>}
+                    {socialLinks.tiktok && <a href={socialLinks.tiktok} target='_blank'  rel="noopener noreferrer"><i className="bi bi-tiktok" /></a>}
 
-                    {socialLinks.github && <a href={socialLinks.github} target='_blank'><i className="bi bi-github" /></a>}
+                    {socialLinks.github && <a href={socialLinks.github} target='_blank'  rel="noopener noreferrer"><i className="bi bi-github" /></a>}
 
-                    {socialLinks.youtube && <a href={socialLinks.youtube} target='_blank'><i className="bi bi-youtube" /></a>}
+                    {socialLinks.youtube && <a href={socialLinks.youtube} target='_blank'  rel="noopener noreferrer"><i className="bi bi-youtube" /></a>}
 
-                    {socialLinks.pinterest && <a href={socialLinks.pinterest} target='_blank'><i className="bi bi-pinterest" /></a>}
+                    {socialLinks.pinterest && <a href={socialLinks.pinterest} target='_blank'  rel="noopener noreferrer"><i className="bi bi-pinterest" /></a>}
 
-                    {socialLinks.discord && <a href={socialLinks.discord} target='_blank'><i className="bi bi-discord" /></a>}
+                    {socialLinks.discord && <a href={socialLinks.discord} target='_blank'  rel="noopener noreferrer"><i className="bi bi-discord" /></a>}
 
-                    {socialLinks.whatsapp && <a href={socialLinks.whatsapp} target='_blank'><i className="bi bi-whatsapp" /></a>}
+                    {socialLinks.whatsapp && <a href={socialLinks.whatsapp} target='_blank'  rel="noopener noreferrer"><i className="bi bi-whatsapp" /></a>}
 
-                    {socialLinks.snapchat && <a href={socialLinks.snapchat} target='_blank'><i className="bi bi-snapchat" /></a>}
+                    {socialLinks.snapchat && <a href={socialLinks.snapchat} target='_blank'  rel="noopener noreferrer"><i className="bi bi-snapchat" /></a>}
 
-                    {socialLinks.reddit && <a href={socialLinks.reddit} target='_blank'><i className="bi bi-reddit" /></a>}
+                    {socialLinks.reddit && <a href={socialLinks.reddit} target='_blank'  rel="noopener noreferrer"><i className="bi bi-reddit" /></a>}
 
-                    {socialLinks.telegram && <a href={socialLinks.telegram} target='_blank'><i className="bi bi-telegram" /></a>}
-                    {socialLinks.other && <a href={socialLinks.other} target='_blank'><i className="bi bi-other" /></a>}
+                    {socialLinks.telegram && <a href={socialLinks.telegram} target='_blank'  rel="noopener noreferrer"><i className="bi bi-telegram" /></a>}
+                    {socialLinks.other && <a href={socialLinks.other} target='_blank'  rel="noopener noreferrer"><i className="bi bi-other" /></a>}
                 </div>
             </div>
             <div className='border-t py-5 border-[var(--text-element-small)] text-sm text-[var(--text-element-small-black)]'>Copyright <span className='italic font-bold'>James</span> All Rights Reserved</div>

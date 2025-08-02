@@ -2,35 +2,13 @@
 import type { FC } from 'react';
 import ProductCard from './ProductCard';
 import {motion} from "framer-motion"
-const productList = [
-    {
-    imageSrc : "/product1.jpg",
-    description : "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores, deserunt.Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores, deserunt. Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores, deserunt.Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores, deserunt.",
-    path : "/product"
-    },
-    {
-    imageSrc : "/product2.jpg",
-    description : "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores, deserunt.",
-    path : "/product"
-    },
-    {
-    imageSrc : "/hero-bg.jpg",
-    description : "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores, deserunt.",
-    path : "/product"
-    },
-    {
-    imageSrc : "/hero-bg.jpg",
-    description : "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores, deserunt.",
-    path : "/product"
-    },
-    {
-    imageSrc : "/hero-bg.jpg",
-    description : "Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores, deserunt.",
-    path : "/product"
-    },
-]
+import { ProductType } from '../../types';
 
-const ProductList: FC = () => {
+interface ProductListProps {
+    products : ProductType[]
+}
+
+const ProductList: FC<ProductListProps> = ({products }) => {
         return (
             <section id='products' className='my-5 sm:my-20 py-10' >
                 <div className=' text-center'>
@@ -53,8 +31,8 @@ const ProductList: FC = () => {
                 <div className='mt-20 grid grid-cols-1  md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-5  sm:px-20  justify-items-center'>
 
                 
-                {productList.map((product,index) => (
-                    <ProductCard key={ index} imageSrc={product.imageSrc} description={product.description} path={product.path} />
+                {products.map((product) => (
+                    <ProductCard key={product.id} product={product} />
                 ))
 
                 }
