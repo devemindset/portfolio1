@@ -24,11 +24,6 @@ const config: Config = {
           '50%': { transform: 'scaleX(1.3)', opacity: 1 },
         },
       },
-      colors: {
-      'header-bg': 'var(--background-element)',
-      'icon-active': 'var(--text-active)',
-      'avatar-border': 'var(--border-color)',
-    }
       
     },
   },
