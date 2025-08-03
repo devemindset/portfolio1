@@ -1,18 +1,12 @@
 "use client"
 
 import type { NextPage } from "next"
-import {  useEffect, useState } from "react"
 
-import Header from "../components/template_4/Header"
-import Hero from "../components/template_4/Hero"
-import Footer from "../components/template_4/Footer"
+import Header from "../components/blog_1/Header"
+import Footer from "../components/blog_1/Footer"
 import BackgroundLoader from "../components/BackgroundLoader"
-import About from "../components/template_4/About"
-import ServiceList from "../components/template_4/ServiceList"
-import TestimonialList from "../components/template_4/TestimonialList"
-import ProductList from "../components/template_4/ProductList"
-import Contact from "../components/template_4/Contact"
-import ContactForm from "../components/template_4/ContactForm"
+import Hero from "../components/blog_1/Hero"
+
 
 // import {
 //   AboutType,
@@ -35,7 +29,6 @@ import ContactForm from "../components/template_4/ContactForm"
 // } from "../lib/api"
 
 const Page: NextPage = () => {
-  const [loading, setLoading] = useState(true)
 
   // const [about, setAbout] = useState<AboutType | null>(null)
   // const [contact, setContact] = useState<ContactType | null>(null)
@@ -87,28 +80,14 @@ const Page: NextPage = () => {
   // if (loading || !about || !contact || !background) {
   //   return <BackgroundLoader />
   // }
-  useEffect(() => {
-    // Simule le chargement ou attends que le composant soit monté
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 1500); // 1.5s
 
-    return () => clearTimeout(timer);
-  }, []);
-
-  if (loading) return <BackgroundLoader />
 
   return (
     <>
       
       <Header />
-      <Hero  />
-      <About  />
-      <ServiceList  />
-      <TestimonialList  />
-      <ProductList  />
-      <Contact  />
-      <ContactForm />
+      <Hero />
+      {/* <RecentPost /> */}
       <Footer  />
       {/* <Header />
       <Hero background={background} social={social} />
@@ -119,6 +98,7 @@ const Page: NextPage = () => {
       <Contact contact={contact} />
       <ContactForm />
       <Footer social={social} /> */}
+      <BackgroundLoader />
     </>
   )
 }

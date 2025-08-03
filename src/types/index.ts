@@ -74,3 +74,13 @@ export interface SocialNetworkType {
   type: 'facebook' | 'twitter' | 'linkedin' | 'instagram' | 'tiktok' | 'github' | 'youtube' | 'pinterest' | 'whatsapp' | 'discord' | 'snapchat' | 'reddit' | 'telegram' | 'other';
   url: string;
 }
+
+// blog 
+export interface BlogCardInfo {
+   date :string;
+      category: string;
+      title :string;
+      link : string;
+      author : string;
+      cover :string;
+}
