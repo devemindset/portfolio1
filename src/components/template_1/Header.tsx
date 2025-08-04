@@ -54,7 +54,7 @@ const Header: FC = () => {
       </nav>
 
       {/* Toggle button */}
-      <button onClick={() => setOpen(!open)} className="lg:hidden cursor-pointer">
+      <button onClick={() => setOpen(!open)} className="lg:hidden cursor-pointer text-[var(--text-element)]">
         {open ? <X size={24} /> : <Menu size={24} />}
       </button>
 

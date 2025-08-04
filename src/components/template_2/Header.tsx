@@ -27,22 +27,22 @@ const Header: FC = () => {
                 {/* Mobile Nav */}
       {open && (
         <div className="lg:hidden fixed top-5 right-1 bg-white mt-10 rounded-lg shadow px-20 py-3 text-sm text-gray-700 space-y-2 ">
-          <a href="#features" className="block hover:text-[var(--text-hover)]">
+          <a href="#hero" className="block hover:text-[var(--text-hover)]">
             Home
           </a>
           <a
-            href="#how-it-works"
+            href="#about"
             className="block hover:text-[var(--text-hover)]"
           >
             About
           </a>
-          <a href="#pricing" className="block hover:text-[var(--text-hover)]">
+          <a href="#service" className="block hover:text-[var(--text-hover)]">
             Services
           </a>
-          <a href="#faq" className="block hover:text-[var(--text-hover)]">
+          <a href="#portfolio" className="block hover:text-[var(--text-hover)]">
             Portfolio
           </a>
-          <a href="#faq" className="block hover:text-[var(--text-hover)]">
+          <a href="#contact" className="block hover:text-[var(--text-hover)]">
             Contact
           </a>
             
