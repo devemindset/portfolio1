@@ -45,12 +45,12 @@ const Hero: FC = () => {
                 initial= {{ opacity:0, y: -100 }}
                 animate = {{opacity : 1, y: 0}}
                 transition={{ duration:1, delay:0.7}}
-                >{"I'm"} <TypeAnimation
+                >{"I'm "} <TypeAnimation
                 
                 
                     sequence={
                         [
-                            " freelancer",1000,"",400
+                            "a freelancer",1000,"",400
                         ]
                     }
                     wrapper='span'
