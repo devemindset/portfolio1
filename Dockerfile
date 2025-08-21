@@ -1,47 +1,51 @@
-# Use the official Node.js 23-alpine base image
-FROM node:23-alpine AS base
-
-# Install system dependencies
+# Étape 1 : Dépendances
+FROM node:23-alpine AS deps
 RUN apk add --no-cache libc6-compat git
 
-# Setup pnpm environment
+# Setup pnpm
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
 RUN corepack enable && corepack prepare pnpm@9.15.1 --activate
 
 WORKDIR /app
 
-# Copy dependency files
-COPY package.json pnpm-lock.yaml ./
+# Copier uniquement les fichiers de dépendances
+COPY package.json pnpm-lock.yaml* ./
 
-# Install production dependencies only
-RUN pnpm install --frozen-lockfile --production
-
-# Build stage
-FROM base AS builder
-WORKDIR /app
-
-# Copy all source files
-COPY . .
-
-# Install all dependencies (production + dev)
+# Installer toutes les dépendances (prod + dev)
 RUN pnpm install --frozen-lockfile
 
-# Build the Next.js application
+# Étape 2 : Build
+FROM node:23-alpine AS builder
+WORKDIR /app
+
+# Copier node_modules depuis l’étape deps
+COPY --from=deps /app/node_modules ./node_modules
+COPY --from=deps /app/package.json ./package.json
+
+# Copier le reste du code
+COPY . .
+
+# Builder l’app Next.js
 RUN pnpm build
 
-# Production runner
-FROM base AS runner
+# Étape 3 : Runner
+FROM node:23-alpine AS runner
+WORKDIR /app
 
-# Set environment variables
-ENV NODE_ENV production
-ENV NEXT_TELEMETRY_DISABLED 1
+ENV NODE_ENV=production
+ENV NEXT_TELEMETRY_DISABLED=1
+ENV PNPM_HOME="/pnpm"
+ENV PATH="$PNPM_HOME:$PATH"
+RUN corepack enable && corepack prepare pnpm@9.15.1 --activate
 
-# Copy built application files
+# Installer uniquement les deps de prod
+COPY package.json pnpm-lock.yaml* ./
+RUN pnpm install --frozen-lockfile --prod
+
+# Copier les fichiers buildés
 COPY --from=builder /app/.next ./.next
 COPY --from=builder /app/public ./public
-COPY --from=builder /app/package.json ./package.json
 
-# Expose port and run the application
 EXPOSE 3000
 CMD ["pnpm", "start"]
